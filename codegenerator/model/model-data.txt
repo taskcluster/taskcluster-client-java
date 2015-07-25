@@ -1659,7 +1659,7 @@ Items
   SourceURL              = ''
 Title                  = 'List Worker Types'
 Type                   = 'array'
-TypeName               = 'ListWorkerTypes'
+TypeName               = 'String'
 IsInputSchema          = 'false'
 IsOutputSchema         = 'true'
 SourceURL              = 'http://schemas.taskcluster.net/aws-provisioner/v1/list-worker-types-response.json#'

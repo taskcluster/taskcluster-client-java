@@ -122,11 +122,13 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(topLevel bool, fromArray bool
 	case "array":
 		if jsonType := jsonSubSchema.Items.Type; jsonType != nil {
 			var newType string
-			newType, extraPackages, rawMessageTypes, _ = jsonSubSchema.Items.TypeDefinition(topLevel, true, extraPackages, rawMessageTypes)
-			typ = ""
+			newType, extraPackages, rawMessageTypes, typ = jsonSubSchema.Items.TypeDefinition(topLevel, true, extraPackages, rawMessageTypes)
 			if topLevel {
-				content += newType
+				if typ == "" {
+					content += newType
+				}
 			} else {
+				typ = ""
 				content += newType + "[]"
 			}
 		}
