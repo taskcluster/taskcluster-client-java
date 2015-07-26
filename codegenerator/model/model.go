@@ -210,7 +210,6 @@ func GenerateCode(goOutputDir, modelData string) {
 	for i := range apiDefs {
 		apiDefs[i].PackageName = strings.ToLower(apiDefs[i].Name)
 		apiDefs[i].PackagePath = filepath.Join(goOutputDir, "src", "main", "java", "org", "mozilla", "taskcluster", "client", apiDefs[i].PackageName)
-		fmt.Println("1: " + apiDefs[i].PackagePath)
 		err = os.MkdirAll(apiDefs[i].PackagePath, 0755)
 		utils.ExitOnFail(err)
 		content := `// The following code is AUTO-GENERATED. Please DO NOT edit.
@@ -222,7 +221,6 @@ func GenerateCode(goOutputDir, modelData string) {
 		content += apiDefs[i].generateAPICode()
 		className := strings.Title(apiDefs[i].Name)
 		sourceFile := filepath.Join(apiDefs[i].PackagePath, className+".java")
-		fmt.Println("2: " + apiDefs[i].PackagePath)
 		fmt.Println("Formatting source code " + sourceFile + "...")
 		// formattedContent, err := format.Source([]byte(content))
 		// in case of formatting failure, let's keep the unformatted version so
@@ -272,7 +270,6 @@ func generatePayloadTypes(apiDef *APIDefinition) {
 			content += typeContent
 			utils.WriteStringToFile(content, filepath.Join(apiDef.PackagePath, apiDef.schemas[i].TypeName+".java"))
 		} else {
-			fmt.Println("Not writing " + apiDef.schemas[i].TypeName + ".java" + " because simpleType is '" + simpleType + "'")
 			apiDef.schemas[i].TypeName = simpleType
 		}
 	}
