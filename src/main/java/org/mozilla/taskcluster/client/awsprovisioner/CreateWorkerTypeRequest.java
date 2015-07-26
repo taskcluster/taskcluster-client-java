@@ -1,7 +1,5 @@
 package org.mozilla.taskcluster.client.awsprovisioner;
 
-import java.util.Date;
-
 /**
 * A worker launchSpecification and required metadata
 *

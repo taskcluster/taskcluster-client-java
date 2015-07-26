@@ -1,7 +1,5 @@
 package org.mozilla.taskcluster.client.scheduler;
 
-import java.util.Date;
-
 /**
 * A representation of **task-graph status** as known by the scheduler, without the state of all individual tasks.
 *

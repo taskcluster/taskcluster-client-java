@@ -1,7 +1,5 @@
 package org.mozilla.taskcluster.client.scheduler;
 
-import java.util.Date;
-
 /**
 * Definition of a task-graph that can be scheduled
 *

@@ -1,7 +1,5 @@
 package org.mozilla.taskcluster.client.queue;
 
-import java.util.Date;
-
 /**
 * Response to a request for the number of pending tasks for a given
 * `provisionerId` and `workerType`.

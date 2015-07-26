@@ -1,7 +1,5 @@
 package org.mozilla.taskcluster.client.scheduler;
 
-import java.util.Date;
-
 /**
 * Information about a **task** in a task-graph as known by the scheduler.
 *

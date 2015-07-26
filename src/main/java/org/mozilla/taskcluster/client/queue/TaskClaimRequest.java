@@ -1,7 +1,5 @@
 package org.mozilla.taskcluster.client.queue;
 
-import java.util.Date;
-
 /**
 * Request to claim (or reclaim) a task
 *

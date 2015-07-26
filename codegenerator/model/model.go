@@ -255,14 +255,13 @@ func GenerateCode(goOutputDir, modelData string) {
 // a generated type might use time.Time, so if not imported, this would have to be added.
 // using a map of strings -> bool to simulate a set - true => include
 func generatePayloadTypes(apiDef *APIDefinition) {
-	extraPackages := make(map[string]bool)
-	rawMessageTypes := make(map[string]bool)
 	for _, i := range apiDef.schemaURLs {
+		extraPackages := make(map[string]bool)
 		content := "package org.mozilla.taskcluster.client." + strings.ToLower(apiDef.PackageName) + ";\n"
 		content += "\n"
 		var typeContent string
 		var simpleType string
-		typeContent, extraPackages, rawMessageTypes, simpleType = apiDef.schemas[i].TypeDefinition(0, false, extraPackages, rawMessageTypes)
+		typeContent, extraPackages, simpleType = apiDef.schemas[i].TypeDefinition(0, false, extraPackages)
 		if simpleType == "" {
 			if len(extraPackages) > 0 {
 				for pckage := range extraPackages {

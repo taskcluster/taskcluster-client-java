@@ -1,7 +1,5 @@
 package org.mozilla.taskcluster.client.scheduler;
 
-import java.util.Date;
-
 /**
 * Response containing the status structure for a task-graph
 *

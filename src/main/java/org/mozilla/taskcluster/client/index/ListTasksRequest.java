@@ -1,7 +1,5 @@
 package org.mozilla.taskcluster.client.index;
 
-import java.util.Date;
-
 /**
 * Request to list tasks within a given namespace.
 *

@@ -93,7 +93,7 @@ func (subSchema JsonSubSchema) String() string {
 	return result
 }
 
-func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, extraPackages map[string]bool, rawMessageTypes map[string]bool) (string, map[string]bool, map[string]bool, string) {
+func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, extraPackages map[string]bool) (string, map[string]bool, string) {
 	content := ""
 	if level == 0 && !fromArray {
 		content += "/**\n"
@@ -121,7 +121,7 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, ex
 	case "array":
 		if jsonType := jsonSubSchema.Items.Type; jsonType != nil {
 			var newType string
-			newType, extraPackages, rawMessageTypes, typ = jsonSubSchema.Items.TypeDefinition(level, true, extraPackages, rawMessageTypes)
+			newType, extraPackages, typ = jsonSubSchema.Items.TypeDefinition(level, true, extraPackages)
 			if level == 0 {
 				if typ == "" {
 					content += newType
@@ -139,7 +139,7 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, ex
 			for _, j := range s.SortedPropertyNames {
 				// recursive call to build go types inside structs
 				var subType string
-				subType, extraPackages, rawMessageTypes, _ = s.Properties[j].TypeDefinition(level+1, false, extraPackages, rawMessageTypes)
+				subType, extraPackages, _ = s.Properties[j].TypeDefinition(level+1, false, extraPackages)
 				// comment the struct member with the description from the json
 				if d := s.Properties[j].Description; d != nil {
 					def += "\n" + utils.Comment(*d, strings.Repeat("    ", level+1))
@@ -181,7 +181,7 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, ex
 		extraPackages["encoding/json"] = true
 	}
 	content += typ
-	return content, extraPackages, rawMessageTypes, typ
+	return content, extraPackages, typ
 }
 
 func (p Properties) String() string {

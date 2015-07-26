@@ -1,7 +1,5 @@
 package org.mozilla.taskcluster.client.awsprovisioner;
 
-import java.util.Date;
-
 /**
 * Secrets from the provisioner
 *

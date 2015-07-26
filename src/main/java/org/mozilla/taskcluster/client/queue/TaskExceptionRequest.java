@@ -1,7 +1,5 @@
 package org.mozilla.taskcluster.client.queue;
 
-import java.util.Date;
-
 /**
 * Request for a run of a task to be resolved with an exception
 *
