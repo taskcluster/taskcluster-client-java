@@ -213,12 +213,10 @@ func GenerateCode(goOutputDir, modelData string) {
 		fmt.Println("1: " + apiDefs[i].PackagePath)
 		err = os.MkdirAll(apiDefs[i].PackagePath, 0755)
 		utils.ExitOnFail(err)
-		content := `
-// The following code is AUTO-GENERATED. Please DO NOT edit.
+		content := `// The following code is AUTO-GENERATED. Please DO NOT edit.
 //
 // This package was generated from the schema defined at
 // ` + apiDefs[i].URL + `
-
 `
 		generatePayloadTypes(&apiDefs[i])
 		content += apiDefs[i].generateAPICode()
