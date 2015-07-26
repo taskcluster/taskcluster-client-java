@@ -61,30 +61,31 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 `
 	comment := "/**\n"
 	if api.Description != "" {
-		comment += utils.Indent(api.Description, "* ")
+		comment += utils.Indent(api.Description, " * ")
 	}
 	if len(comment) >= 1 && comment[len(comment)-1:] != "\n" {
 		comment += "\n"
 	}
-	comment += "*\n"
-	comment += fmt.Sprintf("* See: %v\n", api.apiDef.DocRoot)
-	comment += "*/\n"
+	comment += " *\n"
+	comment += fmt.Sprintf(" * See: %v\n", api.apiDef.DocRoot)
+	comment += " */\n"
 	content += comment
 	content += "public class " + className + ` extends TaskClusterRequestHandler {
-	protected static final String defaultBaseURL = "` + api.BaseURL + `";
 
-	public ` + className + `(String clientId, String accessToken) {
-	        super(clientId, accessToken, defaultBaseURL);
-	}
+    protected static final String defaultBaseURL = "` + api.BaseURL + `";
 
-	public ` + className + `(String clientId, String accessToken, String certificate) {
-	        super(clientId, accessToken, certificate, defaultBaseURL);
-	}
+    public ` + className + `(String clientId, String accessToken) {
+        super(clientId, accessToken, defaultBaseURL);
+    }
 
-	public ` + className + `(String baseURL) {
-	        super(baseURL);
-	}
-	`
+    public ` + className + `(String clientId, String accessToken, String certificate) {
+        super(clientId, accessToken, certificate, defaultBaseURL);
+    }
+
+    public ` + className + `(String baseURL) {
+        super(baseURL);
+    }
+`
 	for _, entry := range api.Entries {
 		content += entry.generateAPICode(apiName)
 	}
@@ -141,16 +142,16 @@ func (entry *APIEntry) String() string {
 }
 
 func (entry *APIEntry) generateAPICode(apiName string) string {
-	comment := "/**\n"
+	comment := "\n    /**\n"
 	if entry.Description != "" {
-		comment += utils.Indent(entry.Description, "* ")
+		comment += utils.Indent(entry.Description, "     * ")
 	}
 	if len(comment) >= 1 && comment[len(comment)-1:] != "\n" {
 		comment += "\n"
 	}
-	comment += "*\n"
-	comment += fmt.Sprintf("* See %v/#%v\n", entry.Parent.apiDef.DocRoot, entry.Name)
-	comment += "*/\n"
+	comment += "     *\n"
+	comment += fmt.Sprintf("     * See %v/#%v\n", entry.Parent.apiDef.DocRoot, entry.Name)
+	comment += "     */\n"
 	inputParams := ""
 	if len(entry.Args) > 0 {
 		inputParams += "String " + strings.Join(entry.Args, ", String ")
@@ -181,9 +182,8 @@ func (entry *APIEntry) generateAPICode(apiName string) string {
 	returnType := "CallSummary<" + requestType + "," + responseType + ">"
 
 	content := comment
-	content += "public " + returnType + " " + entry.MethodName + "(" + inputParams + ") throws APICallFailure {\n"
-	content += "\treturn apiCall(" + apiArgsPayload + ", \"" + strings.ToUpper(entry.Method) + "\", \"" + strings.Replace(strings.Replace(entry.Route, "<", "\" + ", -1), ">", " + \"", -1) + "\", " + responseType + ".class);\n"
-	content += "}\n"
-	content += "\n"
+	content += "    public " + returnType + " " + entry.MethodName + "(" + inputParams + ") throws APICallFailure {\n"
+	content += "        return apiCall(" + apiArgsPayload + ", \"" + strings.ToUpper(entry.Method) + "\", \"" + strings.Replace(strings.Replace(entry.Route, "<", "\" + ", -1), ">", " + \"", -1) + "\", " + responseType + ".class);\n"
+	content += "    }\n"
 	return content
 }

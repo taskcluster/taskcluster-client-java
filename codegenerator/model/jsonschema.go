@@ -96,7 +96,6 @@ func (subSchema JsonSubSchema) String() string {
 func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, extraPackages map[string]bool, rawMessageTypes map[string]bool) (string, map[string]bool, map[string]bool, string) {
 	content := ""
 	if level == 0 && !fromArray {
-		content += "\n"
 		content += "/**\n"
 		if d := jsonSubSchema.Description; d != nil {
 			if desc := *d; desc != "" {
@@ -142,26 +141,17 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, ex
 				var subType string
 				subType, extraPackages, rawMessageTypes, _ = s.Properties[j].TypeDefinition(level+1, false, extraPackages, rawMessageTypes)
 				// comment the struct member with the description from the json
-				comment := ""
 				if d := s.Properties[j].Description; d != nil {
-					comment = "\n\t/**\n"
-					comment += utils.Indent(*d, "\t* ")
+					def += "\n" + utils.Comment(*d, strings.Repeat("    ", level+1))
 				}
-				if len(comment) >= 1 {
-					if comment[len(comment)-1:] != "\n" {
-						comment += "\n"
-					}
-					comment += "\t*/\n"
-				}
-				def += comment
 				// struct member name and type, as part of struct definition
-				def += fmt.Sprintf("\tpublic %v %v;\n", subType, s.Properties[j].TypeName)
+				def += fmt.Sprintf(strings.Repeat("    ", level+1)+"public %v %v;\n", subType, s.Properties[j].TypeName)
 			}
-			def += "}"
+			def += strings.Repeat("    ", level) + "}"
 			if level == 0 {
 				def = "public " + def
 			} else {
-				def += "\npublic " + strings.Title(jsonSubSchema.TypeName)
+				def += "\n\n" + strings.Repeat("    ", level) + "public " + strings.Title(jsonSubSchema.TypeName)
 			}
 			content += def
 		} else {
@@ -191,9 +181,6 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, ex
 		extraPackages["encoding/json"] = true
 	}
 	content += typ
-	if level == 0 {
-		content += "\n"
-	}
 	return content, extraPackages, rawMessageTypes, typ
 }
 

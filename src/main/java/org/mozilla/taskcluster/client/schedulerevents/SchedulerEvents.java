@@ -3,3 +3,4 @@
 //
 // This package was generated from the schema defined at
 // http://references.taskcluster.net/scheduler/v1/exchanges.json
+
