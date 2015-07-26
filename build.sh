@@ -6,7 +6,7 @@ GENERATE=true
 while getopts ":n" opt; do
     case "${opt}" in
         n)  GENERATE=false
-            ;;  
+            ;;
     esac
 done
 

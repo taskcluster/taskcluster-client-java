@@ -264,7 +264,7 @@ func generatePayloadTypes(apiDef *APIDefinition) {
 		content += "\n"
 		var typeContent string
 		var simpleType string
-		typeContent, extraPackages, rawMessageTypes, simpleType = apiDef.schemas[i].TypeDefinition(true, false, extraPackages, rawMessageTypes)
+		typeContent, extraPackages, rawMessageTypes, simpleType = apiDef.schemas[i].TypeDefinition(0, false, extraPackages, rawMessageTypes)
 		if simpleType == "" {
 			if len(extraPackages) > 0 {
 				for pckage := range extraPackages {

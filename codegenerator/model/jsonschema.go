@@ -93,9 +93,9 @@ func (subSchema JsonSubSchema) String() string {
 	return result
 }
 
-func (jsonSubSchema *JsonSubSchema) TypeDefinition(topLevel bool, fromArray bool, extraPackages map[string]bool, rawMessageTypes map[string]bool) (string, map[string]bool, map[string]bool, string) {
+func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, extraPackages map[string]bool, rawMessageTypes map[string]bool) (string, map[string]bool, map[string]bool, string) {
 	content := ""
-	if topLevel && !fromArray {
+	if level == 0 && !fromArray {
 		content += "\n"
 		content += "/**\n"
 		if d := jsonSubSchema.Description; d != nil {
@@ -122,8 +122,8 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(topLevel bool, fromArray bool
 	case "array":
 		if jsonType := jsonSubSchema.Items.Type; jsonType != nil {
 			var newType string
-			newType, extraPackages, rawMessageTypes, typ = jsonSubSchema.Items.TypeDefinition(topLevel, true, extraPackages, rawMessageTypes)
-			if topLevel {
+			newType, extraPackages, rawMessageTypes, typ = jsonSubSchema.Items.TypeDefinition(level, true, extraPackages, rawMessageTypes)
+			if level == 0 {
 				if typ == "" {
 					content += newType
 				}
@@ -140,7 +140,7 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(topLevel bool, fromArray bool
 			for _, j := range s.SortedPropertyNames {
 				// recursive call to build go types inside structs
 				var subType string
-				subType, extraPackages, rawMessageTypes, _ = s.Properties[j].TypeDefinition(false, false, extraPackages, rawMessageTypes)
+				subType, extraPackages, rawMessageTypes, _ = s.Properties[j].TypeDefinition(level+1, false, extraPackages, rawMessageTypes)
 				// comment the struct member with the description from the json
 				comment := ""
 				if d := s.Properties[j].Description; d != nil {
@@ -158,7 +158,7 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(topLevel bool, fromArray bool
 				def += fmt.Sprintf("\tpublic %v %v;\n", subType, s.Properties[j].TypeName)
 			}
 			def += "}"
-			if topLevel {
+			if level == 0 {
 				def = "public " + def
 			} else {
 				def += "\npublic " + strings.Title(jsonSubSchema.TypeName)
@@ -187,20 +187,11 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(topLevel bool, fromArray bool
 		extraPackages["java.util.Date"] = true
 	case "json.RawMessage":
 		extraPackages["encoding/json"] = true
-		if topLevel {
-			// Special case: we have here a top level RawMessage such as
-			// queue.PostArtifactRequest - therefore need to implement
-			// Marhsal and Unmarshal methods. See:
-			// http://play.golang.org/p/FKHSUmWVFD vs
-			// http://play.golang.org/p/erjM6ptIYI
-			extraPackages["errors"] = true
-			rawMessageTypes[jsonSubSchema.TypeName] = true
-		}
 	case "map[string]json.RawMessage":
 		extraPackages["encoding/json"] = true
 	}
 	content += typ
-	if topLevel {
+	if level == 0 {
 		content += "\n"
 	}
 	return content, extraPackages, rawMessageTypes, typ
