@@ -261,12 +261,18 @@ func generatePayloadTypes(apiDef *APIDefinition) {
 	rawMessageTypes := make(map[string]bool)
 	for _, i := range apiDef.schemaURLs {
 		content := "package org.mozilla.taskcluster.client." + strings.ToLower(apiDef.PackageName) + ";\n"
-		content += "import java.util.Date;"
+		content += "\n"
 		var typeContent string
 		var simpleType string
 		typeContent, extraPackages, rawMessageTypes, simpleType = apiDef.schemas[i].TypeDefinition(true, false, extraPackages, rawMessageTypes)
-		content += typeContent
 		if simpleType == "" {
+			if len(extraPackages) > 0 {
+				for pckage := range extraPackages {
+					content += "import " + pckage + ";\n"
+				}
+				content += "\n"
+			}
+			content += typeContent
 			utils.WriteStringToFile(content, filepath.Join(apiDef.PackagePath, apiDef.schemas[i].TypeName+".java"))
 		} else {
 			fmt.Println("Not writing " + apiDef.schemas[i].TypeName + ".java" + " because simpleType is '" + simpleType + "'")
