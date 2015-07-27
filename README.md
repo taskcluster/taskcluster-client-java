@@ -6,9 +6,7 @@ A java port of taskcluster-client.
 
 Complete javadoc documentation [here](http://taskcluster.github.io/taskcluster-client-java/apidocs).
 
-This library provides the following 6 packages to interface with TaskCluster:
-
-### HTTP APIs
+## HTTP APIs
 
 * [Auth](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/auth/Auth.html)  
   Authentication related API end-points for taskcluster.
