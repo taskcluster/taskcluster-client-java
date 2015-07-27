@@ -52,12 +52,51 @@ In order to use this library from your maven project, simply include it as a pro
 
 The taskcluster-client artifacts should be available from the [maven central repository](http://central.sonatype.org/) from August 2015 onwards. Until then, it is recommended to clone this repository and run `mvn clean install` in order to have it available for your project(s).
 
-## Example programs
+## Calling API End-Points
 
-Have a look at the following test to see how you can interact with Taskcluster using the Taskcluster Client.
+To invoke an API end-point, instantiate one of the HTTP API classes (from section [HTTP APIs](#http-apis)).
+In the following example we instantiate an instance of the `Queue` client class and use it to create a task.
 
-* https://github.com/taskcluster/taskcluster-client-java/blob/master/src/test/java/org/mozilla/taskcluster/APITest.java#L21
+```java
+import org.mozilla.taskcluster.client.*;
+import org.mozilla.taskcluster.client.queue.*;
 
+...
+
+    // Instantiate the Queue Client class
+    Queue queue = new Queue(System.getenv("TASKCLUSTER_CLIENT_ID"), System.getenv("TASKCLUSTER_ACCESS_TOKEN"));
+
+    // Certificate must also be provided if using temporary credentials
+    // Queue queue = new Queue(System.getenv("TASKCLUSTER_CLIENT_ID"), System.getenv("TASKCLUSTER_ACCESS_TOKEN"), System.getenv("TASKCLUSTER_CERTIFICATE"));
+
+    // Supply a unique task name
+    String taskId = "...";
+
+    // Define the task
+    TaskDefinition td = new TaskDefinition();
+
+    // Set properties, as required...
+    td.created = new Date();
+    td.provisionerId = "...";
+    td.routes = new String[] { "...", "...", "..." };
+    td.XYZ = ...
+
+    // Execute the API call
+    try {
+        CallSummary<TaskDefinition, TaskStatusResponse> cs = queue.defineTask(taskId, td);
+
+        // Process API response
+        String state = cs.ResponsePayload.status.state;
+        System.out.println("State is " + state);
+
+    } catch (APICallFailure e) {
+        // handle exception ...
+    }
+
+...
+```
+
+See the [HTTP API javadocs](#http-apis) for more information, or browse the [unit tests](https://github.com/taskcluster/taskcluster-client-java/tree/master/src/test/java/org/mozilla/taskcluster) for further examples.
 ## Building
 
 The libraries provided by this client are auto-generated based on the schemas listed under
