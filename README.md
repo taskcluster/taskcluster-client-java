@@ -74,7 +74,7 @@ import org.mozilla.taskcluster.client.queue.*;
     TaskDefinition td = new TaskDefinition();
 
     // Set properties, as required...
-    td.created = new Date();
+    td.created = new java.util.Date();
     td.provisionerId = "...";
     td.routes = new String[] { "...", "...", "..." };
     td.XYZ = ...
