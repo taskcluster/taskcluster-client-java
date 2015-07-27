@@ -1,7 +1,6 @@
 # taskcluster-client-java
 
 <img hspace="20" align="left" src="https://tools.taskcluster.net/lib/assets/taskcluster-120.png" />
-[Java docs](http://taskcluster.github.io/taskcluster-client-java/apidocs)
 
 A java port of taskcluster-client.
 
