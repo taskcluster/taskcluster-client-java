@@ -22,9 +22,9 @@ This library provides the following 6 packages to interface with TaskCluster:
 
 Currently AMQP APIs are not supported in the java client.
 
-### Using
+## Using
 
-## Maven
+### Maven
 
 In order to use this library from your maven project, simply include it as a project dependency:
 
@@ -44,13 +44,13 @@ In order to use this library from your maven project, simply include it as a pro
 
 The taskcluster-client artifacts should be available from the [maven central repository](http://central.sonatype.org/) from August 2015 onwards. Until then, it is recommended to clone this repository and run `mvn clean install` in order to have it available for your project(s).
 
-### Example programs
+## Example programs
 
 Have a look at the following test to see how you can interact with Taskcluster using the Taskcluster Client.
 
 * https://github.com/taskcluster/taskcluster-client-java/blob/master/src/test/java/org/mozilla/taskcluster/APITest.java#L21
 
-### Building
+## Building
 
 The libraries provided by this client are auto-generated based on the schemas listed under
 http://references.taskcluster.net/manifest.json combined with the supplementary information stored in
