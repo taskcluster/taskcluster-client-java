@@ -1,11 +1,8 @@
 # taskcluster-client-java
 
-<img hspace="20" align="left" src="https://tools.taskcluster.net/lib/assets/taskcluster-120.png" />
+<img src="https://tools.taskcluster.net/lib/assets/taskcluster-120.png" />
+
 A java port of taskcluster-client.
-
- 
-
-Complete javadoc documentation [here](http://taskcluster.github.io/taskcluster-client-java/apidocs).
 
 ## HTTP APIs
 
