@@ -748,7 +748,7 @@ Utility factor is a relative measure of performance between two instance types.
 We multiply the utility factor by the spot price to compare instance types and
 regions when making the bidding choices.
 '
-Base URL    = 'https://taskcluster-aws-provisioner2.herokuapp.com/v1'
+Base URL    = 'https://aws-provisioner.taskcluster.net/v1'
 Entry 0     =
     Entry Type        = 'function'
     Entry Method      = 'put'
