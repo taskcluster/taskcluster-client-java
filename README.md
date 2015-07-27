@@ -1,4 +1,5 @@
 # taskcluster-client-java
+
 <img hspace="20" align="left" src="https://tools.taskcluster.net/lib/assets/taskcluster-120.png" />
 [Java docs](http://taskcluster.github.io/taskcluster-client-java/apidocs)
 
@@ -9,6 +10,7 @@ Complete javadoc documentation [here](http://taskcluster.github.io/taskcluster-c
 This library provides the following 6 packages to interface with TaskCluster:
 
 ### HTTP APIs
+
 * http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/auth/Auth.html
 * http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/awsprovisioner/AwsProvisioner.html
 * http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/index/Index.html
@@ -20,13 +22,36 @@ This library provides the following 6 packages to interface with TaskCluster:
 
 Currently AMQP APIs are not supported in the java client.
 
-## Example programs
+### Using
 
-To get you started quickly, see the test:
+## Maven
+
+In order to use this library from your maven project, simply include it as a project dependency:
+
+```
+<project>
+  ...
+  <dependencies>
+    ...
+    <dependency>
+      <groupId>org.mozilla.taskcluster</groupId>
+      <artifactId>taskcluster-client</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+</project>
+```
+
+The taskcluster-client artifacts should be available from the [maven central repository](http://central.sonatype.org/) from August 2015 onwards. Until then, it is recommended to clone this repository and run `mvn clean install` in order to have it available for your project(s).
+
+### Example programs
+
+Have a look at the following test to see how you can interact with Taskcluster using the Taskcluster Client.
 
 * https://github.com/taskcluster/taskcluster-client-java/blob/master/src/test/java/org/mozilla/taskcluster/APITest.java#L21
 
-## Building
+### Building
+
 The libraries provided by this client are auto-generated based on the schemas listed under
 http://references.taskcluster.net/manifest.json combined with the supplementary information stored in
 [apis.json](https://github.com/taskcluster/taskcluster-client-java/blob/master/codegenerator/model/apis.json).
@@ -39,7 +64,5 @@ The code which generates the library can all be found under the top level [codeg
 directory.
 
 ## Contributing
-Contributions are welcome. Please fork, and issue a Pull Request back with an explanation of your changes.
 
-## Bugs
-Rebuilding isn't entirely working yet (code formatting problems, one minor bug still to fix). Therefore if you rebuild, you might need to hand tweak a couple of files afterwards.
+Contributions are welcome. Please fork, and issue a Pull Request back with an explanation of your changes.
