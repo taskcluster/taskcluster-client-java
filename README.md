@@ -101,7 +101,7 @@ import org.mozilla.taskcluster.client.queue.*;
 See the [HTTP API javadocs](#http-apis) for more information, or browse the [unit tests](https://github.com/taskcluster/taskcluster-client-java/tree/master/src/test/java/org/mozilla/taskcluster) for further examples.
 ## Building
 
-[![GoDoc](https://godoc.org/github.com/taskcluster/taskcluster-client-go?status.png)](https://godoc.org/github.com/taskcluster/taskcluster-client-go)
+[![GoDoc](https://godoc.org/github.com/taskcluster/taskcluster-client-java?status.png)](https://godoc.org/github.com/taskcluster/taskcluster-client-java)
 
 The java libraries provided by this client are auto-generated in
 [go](https://golang.org/) using the schemas defined in
