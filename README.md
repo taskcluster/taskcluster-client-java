@@ -42,7 +42,7 @@ In order to use this library from your maven project, simply include it as a pro
     <dependency>
       <groupId>org.mozilla.taskcluster</groupId>
       <artifactId>taskcluster-client</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
     </dependency>
   </dependencies>
 </project>
@@ -51,7 +51,7 @@ In order to use this library from your maven project, simply include it as a pro
 The taskcluster-client artifacts are now available from the [maven central repository](http://central.sonatype.org/):
 
 * [Search Results](http://search.maven.org/#search|gav|1|g%3A%22org.mozilla.taskcluster%22%20AND%20a%3A%22taskcluster-client%22)
-* [Directory Listing](https://repo1.maven.org/maven2/org/mozilla/taskcluster/taskcluster-client/1.0.0)
+* [Directory Listing](https://repo1.maven.org/maven2/org/mozilla/taskcluster/taskcluster-client/1.0.1)
 
 ## Calling API End-Points
 
