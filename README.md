@@ -101,15 +101,24 @@ import org.mozilla.taskcluster.client.queue.*;
 See the [HTTP API javadocs](#http-apis) for more information, or browse the [unit tests](https://github.com/taskcluster/taskcluster-client-java/tree/master/src/test/java/org/mozilla/taskcluster) for further examples.
 ## Building
 
-The libraries provided by this client are auto-generated based on the schemas listed under
-http://references.taskcluster.net/manifest.json combined with the supplementary information stored in
+[![GoDoc](https://godoc.org/github.com/taskcluster/taskcluster-client-go?status.png)](https://godoc.org/github.com/taskcluster/taskcluster-client-go)
+
+The libraries provided by this client are auto-generated based on the schemas
+listed under http://references.taskcluster.net/manifest.json combined with the
+supplementary information stored in
 [apis.json](https://github.com/taskcluster/taskcluster-client-java/blob/master/codegenerator/model/apis.json).
 
-In order to completely regenerate all of the HTTP and AMQP libraries, please run [build.sh](https://github.com/taskcluster/taskcluster-client-java/blob/master/build.sh)
-found in the top level directory. This will completely regenerate the library. Please note you will need an active internet connection as the build process must
-download several json files and schemas in order to build the library. The code generation requires go (golang) is installed on your system, and java, and apache maven. All three need to be setup and configured correctly.
+The java code generation is written in go. In order to completely regenerate
+all of the HTTP and AMQP libraries, please run
+[build.sh](https://github.com/taskcluster/taskcluster-client-java/blob/master/build.sh)
+found in the top level directory. This will completely regenerate the library.
+Please note you will need an active internet connection as the build process
+must download several json files and schemas in order to build the library. The
+code generation requires go (golang) is installed on your system, and java, and
+apache maven. All three need to be setup and configured correctly.
 
-The code which generates the library can all be found under the top level [codegenerator](https://github.com/taskcluster/taskcluster-client-java/tree/master/codegenerator)
+The code which generates the library can all be found under the top level
+[codegenerator](https://github.com/taskcluster/taskcluster-client-java/tree/master/codegenerator)
 directory.
 
 ## Contributing
