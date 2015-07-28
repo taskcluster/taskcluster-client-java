@@ -1,7 +1,6 @@
 package org.mozilla.taskcluster;
 
 import java.nio.ByteBuffer;
-import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,7 +16,23 @@ import org.mozilla.taskcluster.client.queue.Queue;
 import org.mozilla.taskcluster.client.queue.TaskDefinition;
 import org.mozilla.taskcluster.client.queue.TaskStatusResponse;
 
+import net.iharder.Base64;
+
 public class APITest {
+
+    /**
+     * Generates a 22 character random slugId that is url-safe ([0-9a-zA-Z_\-]*)
+     */
+    public static String slug() {
+        UUID uuid = UUID.randomUUID();
+        long hi = uuid.getMostSignificantBits();
+        long lo = uuid.getLeastSignificantBits();
+        ByteBuffer raw = ByteBuffer.allocate(16);
+        raw.putLong(hi);
+        raw.putLong(lo);
+        byte[] rawBytes = raw.array();
+        return Base64.encodeBytes(rawBytes).replace('+', '-').replace('/', '_').substring(0, 22);
+    }
 
     /**
      * Tests whether it is possible to define a task against the production
@@ -35,12 +50,7 @@ public class APITest {
         } else {
             queue = new Queue(clientId, accessToken, certificate);
         }
-        UUID uuid = UUID.randomUUID();
-        long hi = uuid.getMostSignificantBits();
-        long lo = uuid.getLeastSignificantBits();
-        String taskId = Base64.getEncoder().withoutPadding()
-                .encodeToString(ByteBuffer.allocate(16).putLong(hi).putLong(lo).array()).replace('+', '-')
-                .replace('/', '_');
+        String taskId = slug();
         TaskDefinition td = new TaskDefinition();
         td.created = new Date();
         Calendar c = Calendar.getInstance();
@@ -84,8 +94,8 @@ public class APITest {
             Assert.assertEquals(cs.responsePayload.status.retriesLeft, 5);
             Assert.assertEquals(cs.responsePayload.status.state, "unscheduled");
         } catch (APICallFailure e) {
-            Assert.fail("Exception thrown");
             e.printStackTrace();
+            Assert.fail("Exception thrown");
         }
     }
 }
