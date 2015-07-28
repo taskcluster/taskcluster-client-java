@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -7,14 +8,41 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>taskcluster-client</name>
+	<name>Taskcluster Client (java port)</name>
+	<description>Taskcluster is a job execution framework supporting multiple platforms, enabling cross-platform continuous integration and other arbitrary job scheduling. The Taskcluster Client is a runtime library for interacting with Taskcluster. It exists for several languages; this is the java implementation.</description>
 	<url>http://docs.taskcluster.net</url>
+	<inceptionYear>2014</inceptionYear>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<scm.branch>master</scm.branch>
 	</properties>
+
+	<scm>
+		<url>http://github.com/taskcluster/taskcluster-client-java/tree/${scm.branch}</url>
+		<connection>scm:git:git://github.com/taskcluster/taskcluster-client-java.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/taskcluster/taskcluster-client-java.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<issueManagement>
+		<system>Bugzilla</system>
+		<url>https://bugzilla.mozilla.org/buglist.cgi?product=Taskcluster&amp;component=Client%20Libraries&amp;resolution=---&amp;list_id=12426780</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>Travis</system>
+		<url>https://travis-ci.org/taskcluster/taskcluster-client-java</url>
+	</ciManagement>
+
+	<licenses>
+		<license>
+			<name>Mozilla Public License, version 2.0</name>
+			<url>https://www.mozilla.org/MPL/2.0</url>
+		</license>
+	</licenses>
 
 	<distributionManagement>
 		<snapshotRepository>
@@ -22,6 +50,31 @@
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
+
+	<developers>
+		<developer>
+			<name>Pete Moore</name>
+			<email>pmoore@mozilla.com</email>
+			<url>https://github.com/petemoore</url>
+			<organization>Mozilla</organization>
+			<organizationUrl>https://www.mozilla.org</organizationUrl>
+			<properties>
+				<ircNick>pmoore</ircNick>
+			</properties>
+		</developer>
+	</developers>
+
+	<mailingLists>
+		<mailingList>
+			<name>Taskcluster Tools</name>
+			<archive>https://groups.google.com/forum/#!forum/mozilla.tools.taskcluster</archive>
+		</mailingList>
+	</mailingLists>
+
+	<organization>
+		<name>Mozilla</name>
+		<url>https://www.mozilla.org</url>
+	</organization>
 
 	<dependencies>
 		<dependency>
