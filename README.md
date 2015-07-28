@@ -103,13 +103,13 @@ See the [HTTP API javadocs](#http-apis) for more information, or browse the [uni
 
 [![GoDoc](https://godoc.org/github.com/taskcluster/taskcluster-client-go?status.png)](https://godoc.org/github.com/taskcluster/taskcluster-client-go)
 
-The libraries provided by this client are auto-generated based on the schemas
-listed under http://references.taskcluster.net/manifest.json combined with the
-supplementary information stored in
+The java libraries provided by this client are auto-generated in
+[go](https://golang.org/) using the schemas defined in
+http://references.taskcluster.net/manifest.json combined with supplementary
+information stored in
 [apis.json](https://github.com/taskcluster/taskcluster-client-java/blob/master/codegenerator/model/apis.json).
 
-The java code generation is written in go. In order to completely regenerate
-all of the HTTP and AMQP libraries, please run
+In order to completely regenerate all of the HTTP and AMQP libraries, please run
 [build.sh](https://github.com/taskcluster/taskcluster-client-java/blob/master/build.sh)
 found in the top level directory. This will completely regenerate the library.
 Please note you will need an active internet connection as the build process
