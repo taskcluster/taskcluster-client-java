@@ -8,32 +8,33 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.junit.Assert;
+import org.junit.Assume;
+import org.junit.Test;
 import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.queue.Queue;
 import org.mozilla.taskcluster.client.queue.TaskDefinition;
 import org.mozilla.taskcluster.client.queue.TaskStatusResponse;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
-public class APITest extends TestCase {
-
-    public APITest(String testName) {
-        super(testName);
-    }
-
-    public static Test suite() {
-        return new TestSuite(APITest.class);
-    }
+public class APITest {
 
     /**
      * Tests whether it is possible to define a task against the production
      * Queue.
      */
+    @Test
     public void testDefineTask() {
-        Queue queue = new Queue(System.getenv("TASKCLUSTER_CLIENT_ID"), System.getenv("TASKCLUSTER_ACCESS_TOKEN"));
+    	String clientId = System.getenv("TASKCLUSTER_CLIENT_ID");
+    	String accessToken = System.getenv("TASKCLUSTER_ACCESS_TOKEN");
+    	String certificate = System.getenv("TASKCLUSTER_CERTIFICATE");
+    	Assume.assumeFalse(clientId == null || clientId == "" || accessToken == null || accessToken == "");
+    	Queue queue;
+    	if (certificate == null || certificate == "") {
+    		queue = new Queue(clientId, accessToken);
+    	} else {
+    		queue = new Queue(clientId, accessToken, certificate);
+    	}
         UUID uuid = UUID.randomUUID();
         long hi = uuid.getMostSignificantBits();
         long lo = uuid.getLeastSignificantBits();
@@ -78,12 +79,12 @@ public class APITest extends TestCase {
 
         try {
             CallSummary<TaskDefinition, TaskStatusResponse> cs = queue.defineTask(taskId, td);
-            assertEquals(cs.requestPayload.provisionerId, "win-provisioner");
-            assertEquals(cs.responsePayload.status.schedulerId, "junit-test-scheduler");
-            assertEquals(cs.responsePayload.status.retriesLeft, 5);
-            assertEquals(cs.responsePayload.status.state, "unscheduled");
+            Assert.assertEquals(cs.requestPayload.provisionerId, "win-provisioner");
+            Assert.assertEquals(cs.responsePayload.status.schedulerId, "junit-test-scheduler");
+            Assert.assertEquals(cs.responsePayload.status.retriesLeft, 5);
+            Assert.assertEquals(cs.responsePayload.status.state, "unscheduled");
         } catch (APICallFailure e) {
-            fail("Exception thrown");
+            Assert.fail("Exception thrown");
             e.printStackTrace();
         }
     }
