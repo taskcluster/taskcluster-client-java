@@ -38,6 +38,10 @@ public class Queue extends TaskClusterRequestHandler {
         super(baseURL);
     }
 
+    public Queue() {
+        super(defaultBaseURL);
+    }
+
     /**
      * This end-point will return the task-definition. Notice that the task
      * definition may have been modified by queue, if an optional property isn't

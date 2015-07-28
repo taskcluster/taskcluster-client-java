@@ -85,6 +85,10 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
     public ` + className + `(String baseURL) {
         super(baseURL);
     }
+
+    public ` + className + `() {
+        super(defaultBaseURL);
+    }
 `
 	for _, entry := range api.Entries {
 		content += entry.generateAPICode(apiName)

@@ -39,6 +39,10 @@ public class Scheduler extends TaskClusterRequestHandler {
         super(baseURL);
     }
 
+    public Scheduler() {
+        super(defaultBaseURL);
+    }
+
     /**
      * Create a new task-graph, the `status` of the resulting JSON is a
      * task-graph status structure, you can find the `taskGraphId` in this

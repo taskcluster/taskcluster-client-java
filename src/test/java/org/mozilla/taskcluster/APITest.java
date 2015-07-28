@@ -1,6 +1,7 @@
 package org.mozilla.taskcluster;
 
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import org.junit.Assume;
 import org.junit.Test;
 import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
+import org.mozilla.taskcluster.client.index.Index;
 import org.mozilla.taskcluster.client.queue.Queue;
 import org.mozilla.taskcluster.client.queue.TaskDefinition;
 import org.mozilla.taskcluster.client.queue.TaskStatusResponse;
@@ -32,6 +34,44 @@ public class APITest {
         raw.putLong(lo);
         byte[] rawBytes = raw.array();
         return Base64.encodeBytes(rawBytes).replace('+', '-').replace('/', '_').substring(0, 22);
+    }
+
+    /**
+     * This is a silly test that looks for the latest mozilla-central buildbot linux64 l10n build
+     * and asserts that it must have a created time between a year ago and an hour in the future.
+     *
+     * Could easily break at a point in the future, at which point we can change to something else.
+     */
+    @Test
+    public void findLatestBuildbotTask() {
+        Index index = new Index();
+        Queue queue = new Queue();
+        try {
+            String taskId = index.findTask("buildbot.branches.mozilla-central.linux64.l10n").responsePayload.taskId;
+            Date created = queue.task(taskId).responsePayload.created;
+
+            // calculate time an hour in the future to allow for clock drift
+            Date now = new Date();
+            Calendar c = Calendar.getInstance();
+            c.setTime(now);
+            c.add(Calendar.HOUR, 1);
+            Date inAnHour = c.getTime();
+            c.setTime(now);;
+            c.add(Calendar.YEAR, -1);
+            Date aYearAgo = c.getTime();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy 'at' HH:mm:ss Z");
+            System.out.println();
+            System.out.println("  => Task " + taskId + " was created on " + sdf.format(created));
+            System.out.println();
+            Assert.assertTrue(created.before(inAnHour));
+            Assert.assertTrue(created.after(aYearAgo));
+
+        } catch (APICallFailure e) {
+            e.printStackTrace();
+            Assert.fail("Exception thrown");
+        }
+
     }
 
     /**

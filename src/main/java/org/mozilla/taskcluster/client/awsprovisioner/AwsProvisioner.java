@@ -49,6 +49,10 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
         super(baseURL);
     }
 
+    public AwsProvisioner() {
+        super(defaultBaseURL);
+    }
+
     /**
      * Create a worker type and ensure that all EC2 regions have the required
      * KeyPair

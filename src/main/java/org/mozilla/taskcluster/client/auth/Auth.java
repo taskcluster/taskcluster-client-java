@@ -30,6 +30,10 @@ public class Auth extends TaskClusterRequestHandler {
         super(baseURL);
     }
 
+    public Auth() {
+        super(defaultBaseURL);
+    }
+
     /**
      * Returns the scopes the client is authorized to access and the date-time
      * when the clients authorization is set to expire.
