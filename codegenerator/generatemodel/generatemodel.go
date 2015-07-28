@@ -1,4 +1,4 @@
-// generatemodel is the command invoked by go generate in order to generate the go client library.
+// generatemodel is the command invoked by go generate in order to generate the java client library.
 package main
 
 import (
