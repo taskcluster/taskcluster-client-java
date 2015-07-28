@@ -179,7 +179,7 @@ func (entry *APIEntry) generateAPICode(apiName string) string {
 			responseType += "[]"
 		}
 	}
-	returnType := "CallSummary<" + requestType + "," + responseType + ">"
+	returnType := "CallSummary<" + requestType + ", " + responseType + ">"
 
 	content := comment
 	content += "    public " + returnType + " " + entry.MethodName + "(" + inputParams + ") throws APICallFailure {\n"

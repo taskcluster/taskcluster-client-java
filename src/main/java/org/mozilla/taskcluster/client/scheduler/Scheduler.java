@@ -105,7 +105,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/scheduler/api-docs/#createTaskGraph
      */
-    public CallSummary<TaskGraphDefinition1,TaskGraphStatusResponse> createTaskGraph(String taskGraphId, TaskGraphDefinition1 payload) throws APICallFailure {
+    public CallSummary<TaskGraphDefinition1, TaskGraphStatusResponse> createTaskGraph(String taskGraphId, TaskGraphDefinition1 payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/task-graph/" + taskGraphId + "", TaskGraphStatusResponse.class);
     }
 
@@ -126,7 +126,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/scheduler/api-docs/#extendTaskGraph
      */
-    public CallSummary<TaskGraphDefinition,TaskGraphStatusResponse> extendTaskGraph(String taskGraphId, TaskGraphDefinition payload) throws APICallFailure {
+    public CallSummary<TaskGraphDefinition, TaskGraphStatusResponse> extendTaskGraph(String taskGraphId, TaskGraphDefinition payload) throws APICallFailure {
         return apiCall(payload, "POST", "/task-graph/" + taskGraphId + "/extend", TaskGraphStatusResponse.class);
     }
 
@@ -139,7 +139,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/scheduler/api-docs/#status
      */
-    public CallSummary<EmptyPayload,TaskGraphStatusResponse> status(String taskGraphId) throws APICallFailure {
+    public CallSummary<EmptyPayload, TaskGraphStatusResponse> status(String taskGraphId) throws APICallFailure {
         return apiCall(null, "GET", "/task-graph/" + taskGraphId + "/status", TaskGraphStatusResponse.class);
     }
 
@@ -153,7 +153,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/scheduler/api-docs/#info
      */
-    public CallSummary<EmptyPayload,TaskGraphInfoResponse> info(String taskGraphId) throws APICallFailure {
+    public CallSummary<EmptyPayload, TaskGraphInfoResponse> info(String taskGraphId) throws APICallFailure {
         return apiCall(null, "GET", "/task-graph/" + taskGraphId + "/info", TaskGraphInfoResponse.class);
     }
 
@@ -173,7 +173,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/scheduler/api-docs/#inspect
      */
-    public CallSummary<EmptyPayload,InspectTaskGraphResponse> inspect(String taskGraphId) throws APICallFailure {
+    public CallSummary<EmptyPayload, InspectTaskGraphResponse> inspect(String taskGraphId) throws APICallFailure {
         return apiCall(null, "GET", "/task-graph/" + taskGraphId + "/inspect", InspectTaskGraphResponse.class);
     }
 
@@ -193,7 +193,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/scheduler/api-docs/#inspectTask
      */
-    public CallSummary<EmptyPayload,InspectTaskGraphTaskResponse> inspectTask(String taskGraphId, String taskId) throws APICallFailure {
+    public CallSummary<EmptyPayload, InspectTaskGraphTaskResponse> inspectTask(String taskGraphId, String taskId) throws APICallFailure {
         return apiCall(null, "GET", "/task-graph/" + taskGraphId + "/inspect/" + taskId + "", InspectTaskGraphTaskResponse.class);
     }
 
@@ -204,7 +204,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/scheduler/api-docs/#ping
      */
-    public CallSummary<EmptyPayload,EmptyPayload> ping() throws APICallFailure {
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }

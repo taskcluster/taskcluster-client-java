@@ -8,7 +8,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Base64;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -35,6 +34,8 @@ import com.google.gson.JsonSerializer;
 import com.wealdtech.hawk.HawkClient;
 import com.wealdtech.hawk.HawkCredentials;
 import com.wealdtech.hawk.HawkCredentials.Algorithm;
+
+import net.iharder.Base64;
 
 public abstract class TaskClusterRequestHandler {
 
@@ -132,12 +133,11 @@ public abstract class TaskClusterRequestHandler {
                 messageDigest.update(callSummary.requestBody.getBytes());
                 // We don't validate the hash, so no point in setting it...
                 // String hash =
-                // Base64.getEncoder().withoutPadding().encodeToString(messageDigest.digest());
+                // Base64.encodeBytes(messageDigest.digest());
                 String hash = null;
                 String ext = null;
                 if (certificate != null) {
-                    ext = Base64.getEncoder().withoutPadding()
-                            .encodeToString(("{\"certificate\":" + certificate + "}").getBytes());
+                    ext = Base64.encodeBytes(("{\"certificate\":" + certificate + "}").getBytes());
                 }
 
                 URI uri = new URI(baseURL + route);

@@ -39,7 +39,7 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/auth/api-docs/#scopes
      */
-    public CallSummary<EmptyPayload,GetClientScopesResponse> scopes(String clientId) throws APICallFailure {
+    public CallSummary<EmptyPayload, GetClientScopesResponse> scopes(String clientId) throws APICallFailure {
         return apiCall(null, "GET", "/client/" + clientId + "/scopes", GetClientScopesResponse.class);
     }
 
@@ -54,7 +54,7 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/auth/api-docs/#getCredentials
      */
-    public CallSummary<EmptyPayload,GetClientCredentialsResponse> getCredentials(String clientId) throws APICallFailure {
+    public CallSummary<EmptyPayload, GetClientCredentialsResponse> getCredentials(String clientId) throws APICallFailure {
         return apiCall(null, "GET", "/client/" + clientId + "/credentials", GetClientCredentialsResponse.class);
     }
 
@@ -65,7 +65,7 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/auth/api-docs/#client
      */
-    public CallSummary<EmptyPayload,GetClientResponse> client(String clientId) throws APICallFailure {
+    public CallSummary<EmptyPayload, GetClientResponse> client(String clientId) throws APICallFailure {
         return apiCall(null, "GET", "/client/" + clientId + "", GetClientResponse.class);
     }
 
@@ -79,7 +79,7 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/auth/api-docs/#createClient
      */
-    public CallSummary<GetClientCredentialsResponse1,GetClientResponse> createClient(String clientId, GetClientCredentialsResponse1 payload) throws APICallFailure {
+    public CallSummary<GetClientCredentialsResponse1, GetClientResponse> createClient(String clientId, GetClientCredentialsResponse1 payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/client/" + clientId + "", GetClientResponse.class);
     }
 
@@ -93,7 +93,7 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/auth/api-docs/#modifyClient
      */
-    public CallSummary<GetClientCredentialsResponse1,GetClientResponse> modifyClient(String clientId, GetClientCredentialsResponse1 payload) throws APICallFailure {
+    public CallSummary<GetClientCredentialsResponse1, GetClientResponse> modifyClient(String clientId, GetClientCredentialsResponse1 payload) throws APICallFailure {
         return apiCall(payload, "POST", "/client/" + clientId + "/modify", GetClientResponse.class);
     }
 
@@ -102,7 +102,7 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/auth/api-docs/#removeClient
      */
-    public CallSummary<EmptyPayload,EmptyPayload> removeClient(String clientId) throws APICallFailure {
+    public CallSummary<EmptyPayload, EmptyPayload> removeClient(String clientId) throws APICallFailure {
         return apiCall(null, "DELETE", "/client/" + clientId + "", EmptyPayload.class);
     }
 
@@ -112,7 +112,7 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/auth/api-docs/#resetCredentials
      */
-    public CallSummary<EmptyPayload,GetClientResponse> resetCredentials(String clientId) throws APICallFailure {
+    public CallSummary<EmptyPayload, GetClientResponse> resetCredentials(String clientId) throws APICallFailure {
         return apiCall(null, "POST", "/client/" + clientId + "/reset-credentials", GetClientResponse.class);
     }
 
@@ -121,7 +121,7 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/auth/api-docs/#listClients
      */
-    public CallSummary<EmptyPayload,ListClientsResponse[]> listClients() throws APICallFailure {
+    public CallSummary<EmptyPayload, ListClientsResponse[]> listClients() throws APICallFailure {
         return apiCall(null, "GET", "/list-clients", ListClientsResponse[].class);
     }
 
@@ -132,7 +132,7 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/auth/api-docs/#azureTableSAS
      */
-    public CallSummary<EmptyPayload,AzureSharedAccessSignatureResponse> azureTableSAS(String account, String table) throws APICallFailure {
+    public CallSummary<EmptyPayload, AzureSharedAccessSignatureResponse> azureTableSAS(String account, String table) throws APICallFailure {
         return apiCall(null, "GET", "/azure/" + account + "/table/" + table + "/read-write", AzureSharedAccessSignatureResponse.class);
     }
 
@@ -159,7 +159,7 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/auth/api-docs/#awsS3Credentials
      */
-    public CallSummary<EmptyPayload,AWSS3CredentialsResponse> awsS3Credentials(String level, String bucket, String prefix) throws APICallFailure {
+    public CallSummary<EmptyPayload, AWSS3CredentialsResponse> awsS3Credentials(String level, String bucket, String prefix) throws APICallFailure {
         return apiCall(null, "GET", "/aws/s3/" + level + "/" + bucket + "/" + prefix + "", AWSS3CredentialsResponse.class);
     }
 
@@ -169,7 +169,7 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/auth/api-docs/#exportClients
      */
-    public CallSummary<EmptyPayload,ExportedClients[]> exportClients() throws APICallFailure {
+    public CallSummary<EmptyPayload, ExportedClients[]> exportClients() throws APICallFailure {
         return apiCall(null, "GET", "/export-clients", ExportedClients[].class);
     }
 
@@ -179,7 +179,7 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/auth/api-docs/#importClients
      */
-    public CallSummary<ExportedClients,ExportedClients[]> importClients(ExportedClients payload) throws APICallFailure {
+    public CallSummary<ExportedClients, ExportedClients[]> importClients(ExportedClients payload) throws APICallFailure {
         return apiCall(payload, "POST", "/import-clients", ExportedClients[].class);
     }
 
@@ -190,7 +190,7 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/auth/api-docs/#ping
      */
-    public CallSummary<EmptyPayload,EmptyPayload> ping() throws APICallFailure {
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }

@@ -42,7 +42,7 @@ public class PurgeCache extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/services/purge-cache/#purgeCache
      */
-    public CallSummary<PurgeCacheRequest,EmptyPayload> purgeCache(String provisionerId, String workerType, PurgeCacheRequest payload) throws APICallFailure {
+    public CallSummary<PurgeCacheRequest, EmptyPayload> purgeCache(String provisionerId, String workerType, PurgeCacheRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/purge-cache/" + provisionerId + "/" + workerType + "", EmptyPayload.class);
     }
 
@@ -53,7 +53,7 @@ public class PurgeCache extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/services/purge-cache/#ping
      */
-    public CallSummary<EmptyPayload,EmptyPayload> ping() throws APICallFailure {
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }

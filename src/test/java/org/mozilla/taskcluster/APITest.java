@@ -25,16 +25,16 @@ public class APITest {
      */
     @Test
     public void testDefineTask() {
-    	String clientId = System.getenv("TASKCLUSTER_CLIENT_ID");
-    	String accessToken = System.getenv("TASKCLUSTER_ACCESS_TOKEN");
-    	String certificate = System.getenv("TASKCLUSTER_CERTIFICATE");
-    	Assume.assumeFalse(clientId == null || clientId == "" || accessToken == null || accessToken == "");
-    	Queue queue;
-    	if (certificate == null || certificate == "") {
-    		queue = new Queue(clientId, accessToken);
-    	} else {
-    		queue = new Queue(clientId, accessToken, certificate);
-    	}
+        String clientId = System.getenv("TASKCLUSTER_CLIENT_ID");
+        String accessToken = System.getenv("TASKCLUSTER_ACCESS_TOKEN");
+        String certificate = System.getenv("TASKCLUSTER_CERTIFICATE");
+        Assume.assumeFalse(clientId == null || clientId == "" || accessToken == null || accessToken == "");
+        Queue queue;
+        if (certificate == null || certificate == "") {
+            queue = new Queue(clientId, accessToken);
+        } else {
+            queue = new Queue(clientId, accessToken, certificate);
+        }
         UUID uuid = UUID.randomUUID();
         long hi = uuid.getMostSignificantBits();
         long lo = uuid.getLeastSignificantBits();
