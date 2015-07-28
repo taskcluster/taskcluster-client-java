@@ -34,6 +34,11 @@ public class InspectTaskGraphResponse {
     }
 
     public Metadata metadata;
+
+    /**
+     * List of scopes (or scope-patterns) that tasks of the task-graph is authorized to use.
+     */
+    public String[] scopes;
     public TaskGraphStatusStructure status;
 
     /**

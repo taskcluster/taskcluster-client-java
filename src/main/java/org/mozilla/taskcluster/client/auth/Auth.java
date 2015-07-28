@@ -32,10 +32,10 @@ public class Auth extends TaskClusterRequestHandler {
 
     /**
      * Returns the scopes the client is authorized to access and the date-time
-     * where the clients authorization is set to expire.
+     * when the clients authorization is set to expire.
      * 
      * This API end-point allows you inspect clients without getting access to
-     * credentials, as provide by the `getCredentials` request below.
+     * credentials, as provided by the `getCredentials` request below.
      *
      * See http://docs.taskcluster.net/auth/api-docs/#scopes
      */
@@ -44,7 +44,7 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
-     * Returns the clients `accessToken` as needed for verifying signatures.
+     * Returns the client's `accessToken` as needed for verifying signatures.
      * This API end-point also returns the list of scopes the client is
      * authorized for and the date-time where the client authorization expires
      * 
@@ -59,9 +59,9 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
-     * Returns all information about a given client. This end-point is mostly
+     * Returns all information about a given client. This end-point is mostly for
      * building tools to administrate clients. Do not use if you only want to
-     * authenticate a request, see `getCredentials` for this purpose.
+     * authenticate a request; see `getCredentials` for this purpose.
      *
      * See http://docs.taskcluster.net/auth/api-docs/#client
      */
@@ -70,13 +70,12 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
-     * Create client with given `clientId`, `name`, `expires`, `scopes` and
+     * Create a client with given `clientId`, `name`, `expires`, `scopes` and
      * `description`. The `accessToken` will always be generated server-side,
      * and will be returned from this request.
      * 
-     * **Required scopes**, in addition the scopes listed
-     * above, the caller must also posses the all the scopes that is given to
-     * the client that is created.
+     * **Required scopes**: in addition the scopes listed above, the 
+     * `scopes` property must be satisfied by the caller's scopes.
      *
      * See http://docs.taskcluster.net/auth/api-docs/#createClient
      */
@@ -88,9 +87,9 @@ public class Auth extends TaskClusterRequestHandler {
      * Modify client `name`, `expires`, `scopes` and
      * `description`.
      * 
-     * **Required scopes**, in addition the scopes listed
-     * above, the caller must also posses the all the scopes that is given to
-     * the client that is updated.
+     * **Required scopes**: in addition the scopes listed
+     * above, the `scopes` property must be satisfied by the caller's
+     * scopes.  The client's existing scopes are not considered.
      *
      * See http://docs.taskcluster.net/auth/api-docs/#modifyClient
      */
@@ -109,7 +108,7 @@ public class Auth extends TaskClusterRequestHandler {
 
     /**
      * Reset credentials for a client. This will generate a new `accessToken`.
-     * as always the `accessToken` will be generated server-side and returned.
+     * As always, the `accessToken` will be generated server-side and returned.
      *
      * See http://docs.taskcluster.net/auth/api-docs/#resetCredentials
      */
@@ -118,7 +117,7 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
-     * Return list with all clients
+     * Return a list of all clients, not including their access tokens.
      *
      * See http://docs.taskcluster.net/auth/api-docs/#listClients
      */
@@ -127,8 +126,9 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
-     * Get an SAS string for use with a specific Azure Table Storage table.
-     * Note, this will create the table, if it doesn't already exists.
+     * Get a shared access signature (SAS) string for use with a specific Azure
+     * Table Storage table.  Note, this will create the table, if it doesn't
+     * already exist.
      *
      * See http://docs.taskcluster.net/auth/api-docs/#azureTableSAS
      */
@@ -140,21 +140,22 @@ public class Auth extends TaskClusterRequestHandler {
      * Get temporary AWS credentials for `read-write` or `read-only` access to
      * a given `bucket` and `prefix` within that bucket.
      * The `level` parameter can be `read-write` or `read-only` and determines
-     * which type of credentials is returned. Please note that the `level`
+     * which type of credentials are returned. Please note that the `level`
      * parameter is required in the scope guarding access.
      * 
-     * The credentials are set of expire after an hour, but this behavior may be
+     * The credentials are set to expire after an hour, but this behavior is
      * subject to change. Hence, you should always read the `expires` property
-     * from the response, if you intent to maintain active credentials in your
+     * from the response, if you intend to maintain active credentials in your
      * application.
      * 
-     * Please notice that your `prefix` may not start with slash `/`, it is
-     * allowed on S3, but we forbid it here to discourage bad behavior.
-     * Also note that if your `prefix` doesn't end in a slash `/` the STS
-     * credentials will not require one to be to inserted. This is mainly a
-     * concern when assigning scopes to users and doing this right will prevent
-     * poor behavior. After we often want the `prefix` to be a folder in a
-     * `/` delimited folder structure.
+     * Please note that your `prefix` may not start with slash `/`. Such a prefix
+     * is allowed on S3, but we forbid it here to discourage bad behavior.
+     * 
+     * Also note that if your `prefix` doesn't end in a slash `/`, the STS
+     * credentials may allow access to unexpected keys, as S3 does not treat
+     * slashes specially.  For example, a prefix of `my-folder` will allow
+     * access to `my-folder/file.txt` as expected, but also to `my-folder.txt`,
+     * which may not be intended.
      *
      * See http://docs.taskcluster.net/auth/api-docs/#awsS3Credentials
      */
