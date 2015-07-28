@@ -1,6 +1,7 @@
 # taskcluster-client-java
 
 <img src="https://tools.taskcluster.net/lib/assets/taskcluster-120.png" />
+[![Build Status](https://secure.travis-ci.org/taskcluster/taskcluster-client-java.png)](http://travis-ci.org/taskcluster/taskcluster-client-java)
 
 A java port of taskcluster-client.
 
