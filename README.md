@@ -48,7 +48,7 @@ In order to use this library from your maven project, simply include it as a pro
 </project>
 ```
 
-The taskcluster-client artifacts should be available from the [maven central repository](http://central.sonatype.org/) from August 2015 onwards. Until then, it is recommended to clone this repository and run `mvn clean install` in order to have it available for your project(s).
+The taskcluster-client artifacts will shortly be available from the [maven central repository](http://search.maven.org/#search|gav|1|g%3A%22org.mozilla.taskcluster%22%20AND%20a%3A%22taskcluster-client%22). Until then, it is recommended to clone this repository and run `mvn clean install` to build them, in order to have them available for your project(s).
 
 ## Calling API End-Points
 
