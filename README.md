@@ -85,11 +85,10 @@ import org.mozilla.taskcluster.client.queue.*;
 
     // Execute the API call
     try {
-        CallSummary<TaskDefinition, TaskStatusResponse> cs = queue.defineTask(taskId, td);
+        TaskStatusResponse tsr = queue.defineTask(taskId, td).responsePayload;
 
         // Process API response
-        String state = cs.ResponsePayload.status.state;
-        System.out.println("State is " + state);
+        System.out.println("State is " + tsr.status.state);
 
     } catch (APICallFailure e) {
         // handle exception ...
