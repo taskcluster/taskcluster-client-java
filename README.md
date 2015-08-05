@@ -1,8 +1,8 @@
 # taskcluster-client-java
-
-<img src="https://tools.taskcluster.net/lib/assets/taskcluster-120.png" />
+<img hspace="20" align="left" src="https://tools.taskcluster.net/lib/assets/taskcluster-120.png" />
 [![Build Status](https://secure.travis-ci.org/taskcluster/taskcluster-client-java.png)](http://travis-ci.org/taskcluster/taskcluster-client-java)
 [![JavaDoc](https://img.shields.io/badge/javadoc-reference-blue.svg)](http://taskcluster.github.io/taskcluster-client-java/apidocs)
+[![Coverage Status](https://coveralls.io/repos/taskcluster/taskcluster-client-java/badge.svg?branch=master&service=github)](https://coveralls.io/github/taskcluster/taskcluster-client-java?branch=master)
 [![License](https://img.shields.io/badge/license-MPL%202.0-orange.svg)](http://mozilla.org/MPL/2.0)
 
 A java port of taskcluster-client.
