@@ -13,7 +13,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  * The AWS Provisioner is responsible for provisioning instances on EC2 for use in
  * TaskCluster.  The provisioner maintains a set of worker configurations which
  * can be managed with an API that is typically available at
- * aws-provisioner.taskcluster.net.  This API can also perform basic instance
+ * aws-provisioner.taskcluster.net/v1.  This API can also perform basic instance
  * management tasks in addition to maintaining the internal state of worker type
  * configuration information.
  * 
@@ -61,8 +61,15 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
-     * Create a worker type and ensure that all EC2 regions have the required
-     * KeyPair
+     * Create a worker type.  A worker type contains all the configuration
+     * needed for the provisioner to manage the instances.  Each worker type
+     * knows which regions and which instance types are allowed for that
+     * worker type.  Remember that Capacity is the number of concurrent tasks
+     * that can be run on a given EC2 resource and that Utility is the relative
+     * performance rate between different instance types.  There is no way to
+     * configure different regions to have different sets of instance types
+     * so ensure that all instance types are available in all regions.
+     * This function is idempotent.
      *
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#createWorkerType
      */
