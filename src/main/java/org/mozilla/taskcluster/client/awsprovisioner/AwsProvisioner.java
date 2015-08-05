@@ -30,6 +30,13 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  * Utility factor is a relative measure of performance between two instance types.
  * We multiply the utility factor by the spot price to compare instance types and
  * regions when making the bidding choices.
+ * 
+ * When a new EC2 instance is instantiated, its user data contains a token in
+ * `securityToken` that can be used with the `getSecret` method to retrieve
+ * the worker's credentials and any needed passwords or other restricted
+ * information.  The worker is responsible for deleting the secret after
+ * retrieving it, to prevent dissemination of the secret to other proceses
+ * which can read the instance user data.
  *
  * See: http://docs.taskcluster.net/aws-provisioner/api-docs
  */
@@ -102,9 +109,12 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
-     * Insert a secret into the secret storage.  This should not
-     * normally be done through this API, but is provided for testing
-     * and completeness
+     * Insert a secret into the secret storage.  The supplied secrets will
+     * be provided verbatime via `getSecret`, while the supplied scopes will
+     * be converted into credentials by `getSecret`.
+     * 
+     * This method is not ordinarily used in production; instead, the provisioner
+     * creates a new secret directly for each spot bid.
      *
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#createSecret
      */
@@ -113,9 +123,13 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
-     * Retreive a secret from storage.  It is important that this secret is
-     * deleted by the consumer, or else the secrets will be visible to any
-     * process which can read HTTP on the worker localhost interface.
+     * Retrieve a secret from storage.  The result contains any passwords or
+     * other restricted information verbatim as well as a temporary credential
+     * based on the scopes specified when the secret was created.
+     * 
+     * It is important that this secret is deleted by the consumer (`removeSecret`),
+     * or else the secrets will be visible to any process which can access the
+     * user data associated with the instance.
      *
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#getSecret
      */
@@ -137,10 +151,12 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
-     * Remove a secret.  It is very important that the consumer of a 
+     * Remove a secret.  After this call, a call to `getSecret` with the given
+     * token will return no information.
+     * 
+     * It is very important that the consumer of a 
      * secret delete the secret from storage before handing over control
-     * to another process or else it could read the HTTP UserData endpoint
-     * and use the getSecrete() api here to get the secrets
+     * to untrusted processes to prevent credential and/or secret leakage.
      *
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#removeSecret
      */
