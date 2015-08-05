@@ -2,6 +2,8 @@
 
 <img src="https://tools.taskcluster.net/lib/assets/taskcluster-120.png" />
 [![Build Status](https://secure.travis-ci.org/taskcluster/taskcluster-client-java.png)](http://travis-ci.org/taskcluster/taskcluster-client-java)
+[![JavaDoc](https://img.shields.io/badge/javadoc-reference-blue.svg)](http://taskcluster.github.io/taskcluster-client-java/apidocs)
+[![License](https://img.shields.io/badge/license-Mozilla%20Public%20License%202.0-orange.svg)](http://mozilla.org/MPL/2.0)
 
 A java port of taskcluster-client.
 
