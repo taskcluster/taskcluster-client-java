@@ -1,7 +1,7 @@
 # taskcluster-client-java
 <img hspace="20" align="left" src="https://tools.taskcluster.net/lib/assets/taskcluster-120.png" />
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.mozilla.taskcluster/taskcluster-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.mozilla.taskcluster/taskcluster-client/)
-[![Build Status](https://secure.travis-ci.org/taskcluster/taskcluster-client-java.png)](http://travis-ci.org/taskcluster/taskcluster-client-java)
+[![Build Status](https://travis-ci.org/taskcluster/taskcluster-client-java.svg?branch=master)](http://travis-ci.org/taskcluster/taskcluster-client-java)
 [![JavaDoc](https://img.shields.io/badge/javadoc-reference-blue.svg)](http://taskcluster.github.io/taskcluster-client-java/apidocs)
 [![Coverage Status](https://coveralls.io/repos/taskcluster/taskcluster-client-java/badge.svg?branch=master&service=github)](https://coveralls.io/github/taskcluster/taskcluster-client-java?branch=master)
 [![License](https://img.shields.io/badge/license-MPL%202.0-orange.svg)](http://mozilla.org/MPL/2.0)
@@ -103,7 +103,7 @@ import org.mozilla.taskcluster.client.queue.*;
 See the [HTTP API javadocs](#http-apis) for more information, or browse the [unit tests](https://github.com/taskcluster/taskcluster-client-java/tree/master/src/test/java/org/mozilla/taskcluster) for further examples.
 ## Building
 
-[![GoDoc](https://godoc.org/github.com/taskcluster/taskcluster-client-java?status.png)](https://godoc.org/github.com/taskcluster/taskcluster-client-java)
+[![GoDoc](https://godoc.org/github.com/taskcluster/taskcluster-client-java?status.svg)](https://godoc.org/github.com/taskcluster/taskcluster-client-java)
 
 The java libraries provided by this client are auto-generated in
 [go](https://golang.org/) using the schemas defined in
