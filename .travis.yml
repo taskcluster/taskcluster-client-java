@@ -6,6 +6,9 @@ go:
 script:
   - ./build.sh
 
+after_success:
+  - mvn clean cobertura:cobertura coveralls:report
+
 # currently cannot customise per user fork, see:
 # https://github.com/travis-ci/travis-ci/issues/1094
 notifications:
