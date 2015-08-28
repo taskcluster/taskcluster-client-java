@@ -16,7 +16,8 @@ public class TaskClaimResponse {
     public TaskStatusStructure status;
 
     /**
-     * Time at which the run expires and is resolved as `failed`, if the run isn't reclaimed.
+     * Time at which the run expires and is resolved as `failed`,
+     * if the run isn't reclaimed.
      */
     public Date takenUntil;
 

@@ -28,8 +28,10 @@ public class PollTaskUrlsResponse {
          * message again.
          * To use this URL you must substitute `{{messageId}}` and
          * `{{popReceipt}}` with `MessageId` and `PopReceipt` from the XML
-         * response the `signedPollUrl` gave you. Note this URL only works
-         * with `DELETE` request.
+         * response the `signedPollUrl` gave you. It is important that you
+         * `encodeURIComponent` both `MessageId` and `PopReceipt` prior to
+         * substitution, otherwise you will experience intermittent failures!
+         * Note this URL only works with `DELETE` request.
          */
         public String signedDeleteUrl;
 
