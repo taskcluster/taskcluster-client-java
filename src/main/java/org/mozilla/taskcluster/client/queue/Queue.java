@@ -221,11 +221,17 @@ public class Queue extends TaskClusterRequestHandler {
 
     /**
      * Resolve a run as _exception_. Generally, you will want to report tasks as
-     * failed instead of exception. But if the payload is malformed, or
-     * dependencies referenced does not exists you should also report exception.
-     * However, do not report exception if an external resources is unavailable
-     * because of network failure, etc. Only if you can validate that the
-     * resource does not exist.
+     * failed instead of exception. You should `reportException` if,
+     * 
+     *   * The `task.payload` is invalid,
+     *   * Non-existent resources are referenced,
+     *   * Declared actions cannot be executed due to unavailable resources,
+     *   * The worker had to shutdown prematurely, or,
+     *   * The worker experienced an unknown error.
+     * 
+     * Do not use this to signal that some user-specified code crashed for any
+     * reason specific to this code. If user-specific code hits a resource that
+     * is temporarily unavailable worker should report task _failed_.
      *
      * See http://docs.taskcluster.net/queue/api-docs/#reportException
      */
