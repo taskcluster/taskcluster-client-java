@@ -36,7 +36,7 @@ public class Auth extends TaskClusterRequestHandler {
 
     /**
      * Returns the scopes the client is authorized to access and the date-time
-     * when the clients authorization is set to expire.
+     * when the client's authorization is set to expire.
      * 
      * This API end-point allows you inspect clients without getting access to
      * credentials, as provided by the `getCredentials` request below.
@@ -185,6 +185,20 @@ public class Auth extends TaskClusterRequestHandler {
      */
     public CallSummary<ExportedClients, ExportedClients[]> importClients(ExportedClients payload) throws APICallFailure {
         return apiCall(payload, "POST", "/import-clients", ExportedClients[].class);
+    }
+
+    /**
+     * Validate the request signature given on input and return list of scopes
+     * that the authenticating client has.
+     * 
+     * This method is used by other services that wish rely on TaskCluster
+     * credentials for authentication. This way we can use Hawk without having
+     * the secret credentials leave this service.
+     *
+     * See http://docs.taskcluster.net/auth/api-docs/#authenticateHawk
+     */
+    public CallSummary<HawkSignatureAuthenticationRequest, Object> authenticateHawk(HawkSignatureAuthenticationRequest payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/authenticate-hawk", Object.class);
     }
 
     /**
