@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Taskcluster-client-java by taskcluster</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Taskcluster-client-java</h1>
+      <h2 class="project-tagline">A java client for interfacing with taskcluster server components</h2>
+      <a href="https://github.com/taskcluster/taskcluster-client-java" class="btn">View on GitHub</a>
+      <a href="https://github.com/taskcluster/taskcluster-client-java/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/taskcluster/taskcluster-client-java/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="taskcluster-client-java" class="anchor" href="#taskcluster-client-java" aria-hidden="true"><span class="octicon octicon-link"></span></a>taskcluster-client-java</h1>
+
+<p><img hspace="20" align="left" src="https://tools.taskcluster.net/lib/assets/taskcluster-120.png">
+<a href="https://maven-badges.herokuapp.com/maven-central/org.mozilla.taskcluster/taskcluster-client/"><img src="https://maven-badges.herokuapp.com/maven-central/org.mozilla.taskcluster/taskcluster-client/badge.svg" alt="Maven Central"></a>
+<a href="http://travis-ci.org/taskcluster/taskcluster-client-java"><img src="https://travis-ci.org/taskcluster/taskcluster-client-java.svg?branch=master" alt="Build Status"></a>
+<a href="http://taskcluster.github.io/taskcluster-client-java/apidocs"><img src="https://img.shields.io/badge/javadoc-reference-blue.svg" alt="JavaDoc"></a>
+<a href="https://coveralls.io/github/taskcluster/taskcluster-client-java?branch=master"><img src="https://coveralls.io/repos/taskcluster/taskcluster-client-java/badge.svg?branch=master&amp;service=github" alt="Coverage Status"></a>
+<a href="http://mozilla.org/MPL/2.0"><img src="https://img.shields.io/badge/license-MPL%202.0-orange.svg" alt="License"></a></p>
+
+<p>A java port of taskcluster-client.</p>
+
+<h2>
+<a id="http-apis" class="anchor" href="#http-apis" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTTP APIs</h2>
+
+<ul>
+<li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/auth/Auth.html">Auth</a><br>
+Authentication related API end-points for taskcluster.</p></li>
+<li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/awsprovisioner/AwsProvisioner.html">AWS Provisioner</a><br>
+The AWS Provisioner is responsible for provisioning instances on EC2 for use in TaskCluster.</p></li>
+<li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/index/Index.html">Index</a><br>
+The task index is responsible for indexing tasks.</p></li>
+<li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/purgecache/PurgeCache.html">Purge Cache</a><br>
+The purge-cache service is responsible for publishing a pulse message for workers, so they can purge cache upon request.</p></li>
+<li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/queue/Queue.html">Queue</a><br>
+The queue is responsible for accepting tasks and track their state as they are executed by workers.</p></li>
+<li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/scheduler/Scheduler.html">Scheduler</a><br>
+The task-graph scheduler is responsible for accepting task-graphs and scheduling tasks for evaluation by the queue as their dependencies are satisfied.</p></li>
+</ul>
+
+<h3>
+<a id="amqp-apis" class="anchor" href="#amqp-apis" aria-hidden="true"><span class="octicon octicon-link"></span></a>AMQP APIs</h3>
+
+<p>Currently AMQP APIs are not supported in the java client.</p>
+
+<h2>
+<a id="using" class="anchor" href="#using" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using</h2>
+
+<h3>
+<a id="maven" class="anchor" href="#maven" aria-hidden="true"><span class="octicon octicon-link"></span></a>Maven</h3>
+
+<p>In order to use this library from your maven project, simply include it as a project dependency:</p>
+
+<pre><code>&lt;project&gt;
+  ...
+  &lt;dependencies&gt;
+    ...
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.mozilla.taskcluster&lt;/groupId&gt;
+      &lt;artifactId&gt;taskcluster-client&lt;/artifactId&gt;
+      &lt;version&gt;1.0.1&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>The taskcluster-client artifacts are now available from the <a href="http://central.sonatype.org/">maven central repository</a>:</p>
+
+<ul>
+<li><a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.mozilla.taskcluster%22%20AND%20a%3A%22taskcluster-client%22">Search Results</a></li>
+<li><a href="https://repo1.maven.org/maven2/org/mozilla/taskcluster/taskcluster-client/1.0.1/">Directory Listing</a></li>
+</ul>
+
+<h2>
+<a id="calling-api-end-points" class="anchor" href="#calling-api-end-points" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calling API End-Points</h2>
+
+<p>To invoke an API end-point, instantiate one of the HTTP API classes (from section <a href="#http-apis">HTTP APIs</a>).
+In the following example we instantiate an instance of the <code>Queue</code> client class and use it to create a task.</p>
+
+<div class="highlight highlight-java"><pre><span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.*</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.queue.*</span>;
+
+<span class="pl-c1">...</span>
+
+    <span class="pl-c">// Instantiate the Queue Client class</span>
+    <span class="pl-smi">Queue</span> queue <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Queue</span>(<span class="pl-smi">System</span><span class="pl-k">.</span>getenv(<span class="pl-s"><span class="pl-pds">"</span>TASKCLUSTER_CLIENT_ID<span class="pl-pds">"</span></span>), <span class="pl-smi">System</span><span class="pl-k">.</span>getenv(<span class="pl-s"><span class="pl-pds">"</span>TASKCLUSTER_ACCESS_TOKEN<span class="pl-pds">"</span></span>));
+
+    <span class="pl-c">// Certificate must also be provided if using temporary credentials</span>
+    <span class="pl-c">// Queue queue = new Queue(System.getenv("TASKCLUSTER_CLIENT_ID"), System.getenv("TASKCLUSTER_ACCESS_TOKEN"), System.getenv("TASKCLUSTER_CERTIFICATE"));</span>
+
+    <span class="pl-c">// Supply a unique task name</span>
+    <span class="pl-smi">String</span> taskId <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>...<span class="pl-pds">"</span></span>;
+
+    <span class="pl-c">// Define the task</span>
+    <span class="pl-smi">TaskDefinition</span> td <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">TaskDefinition</span>();
+
+    <span class="pl-c">// Set properties, as required...</span>
+    td<span class="pl-k">.</span>created <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">java.util<span class="pl-k">.</span>Date</span>();
+    td<span class="pl-k">.</span>provisionerId <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>...<span class="pl-pds">"</span></span>;
+    td<span class="pl-k">.</span>routes <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">String</span>[] { <span class="pl-s"><span class="pl-pds">"</span>...<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>...<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>...<span class="pl-pds">"</span></span> };
+    <span class="pl-smi">td<span class="pl-k">.</span>XYZ</span> <span class="pl-k">=</span> <span class="pl-c1">...</span>
+
+    <span class="pl-c">// Execute the API call</span>
+    <span class="pl-k">try</span> {
+        <span class="pl-smi">TaskStatusResponse</span> tsr <span class="pl-k">=</span> queue<span class="pl-k">.</span>defineTask(taskId, td)<span class="pl-k">.</span>responsePayload;
+
+        <span class="pl-c">// Process API response</span>
+        <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>State is <span class="pl-pds">"</span></span> <span class="pl-k">+</span> tsr<span class="pl-k">.</span>status<span class="pl-k">.</span>state);
+
+    } <span class="pl-k">catch</span> (<span class="pl-smi">APICallFailure</span> e) {
+        <span class="pl-c">// handle exception ...</span>
+    }
+
+<span class="pl-c1">...</span></pre></div>
+
+<p>See the <a href="#http-apis">HTTP API javadocs</a> for more information, or browse the <a href="https://github.com/taskcluster/taskcluster-client-java/tree/master/src/test/java/org/mozilla/taskcluster">unit tests</a> for further examples.</p>
+
+<h2>
+<a id="building" class="anchor" href="#building" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building</h2>
+
+<p><a href="https://godoc.org/github.com/taskcluster/taskcluster-client-java"><img src="https://godoc.org/github.com/taskcluster/taskcluster-client-java?status.svg" alt="GoDoc"></a></p>
+
+<p>The java libraries provided by this client are auto-generated in
+<a href="https://golang.org/">go</a> using the schemas defined in
+<a href="http://references.taskcluster.net/manifest.json">http://references.taskcluster.net/manifest.json</a> combined with supplementary
+information stored in
+<a href="https://github.com/taskcluster/taskcluster-client-java/blob/master/codegenerator/model/apis.json">apis.json</a>.</p>
+
+<p>In order to completely regenerate all of the HTTP and AMQP libraries, please run
+<a href="https://github.com/taskcluster/taskcluster-client-java/blob/master/build.sh">build.sh</a>
+found in the top level directory. This will completely regenerate the library.
+Please note you will need an active internet connection as the build process
+must download several json files and schemas in order to build the library. The
+code generation requires go (golang) is installed on your system, and java, and
+apache maven. All three need to be setup and configured correctly.</p>
+
+<p>The code which generates the library can all be found under the top level
+<a href="https://github.com/taskcluster/taskcluster-client-java/tree/master/codegenerator">codegenerator</a>
+directory.</p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Contributions are welcome. Please fork, and issue a Pull Request back with an explanation of your changes.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/taskcluster/taskcluster-client-java">Taskcluster-client-java</a> is maintained by <a href="https://github.com/taskcluster">taskcluster</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
