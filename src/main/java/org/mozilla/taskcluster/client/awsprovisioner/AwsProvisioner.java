@@ -88,7 +88,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#createWorkerType
      */
     public CallSummary<CreateWorkerTypeRequest, GetWorkerTypeRequest> createWorkerType(String workerType, CreateWorkerTypeRequest payload) throws APICallFailure {
-        return apiCall(payload, "PUT", "/worker-type/" + workerType + "", GetWorkerTypeRequest.class);
+        return apiCall(payload, "PUT", "/worker-type/" + uriEncode(workerType), GetWorkerTypeRequest.class);
     }
 
     /**
@@ -107,7 +107,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#updateWorkerType
      */
     public CallSummary<CreateWorkerTypeRequest, GetWorkerTypeRequest> updateWorkerType(String workerType, CreateWorkerTypeRequest payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/worker-type/" + workerType + "/update", GetWorkerTypeRequest.class);
+        return apiCall(payload, "POST", "/worker-type/" + uriEncode(workerType) + "/update", GetWorkerTypeRequest.class);
     }
 
     /**
@@ -120,7 +120,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#workerType
      */
     public CallSummary<EmptyPayload, GetWorkerTypeRequest> workerType(String workerType) throws APICallFailure {
-        return apiCall(null, "GET", "/worker-type/" + workerType + "", GetWorkerTypeRequest.class);
+        return apiCall(null, "GET", "/worker-type/" + uriEncode(workerType), GetWorkerTypeRequest.class);
     }
 
     /**
@@ -138,7 +138,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#removeWorkerType
      */
     public CallSummary<EmptyPayload, EmptyPayload> removeWorkerType(String workerType) throws APICallFailure {
-        return apiCall(null, "DELETE", "/worker-type/" + workerType + "", EmptyPayload.class);
+        return apiCall(null, "DELETE", "/worker-type/" + uriEncode(workerType), EmptyPayload.class);
     }
 
     /**
@@ -164,7 +164,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#createSecret
      */
     public CallSummary<GetSecretRequest, EmptyPayload> createSecret(String token, GetSecretRequest payload) throws APICallFailure {
-        return apiCall(payload, "PUT", "/secret/" + token + "", EmptyPayload.class);
+        return apiCall(payload, "PUT", "/secret/" + uriEncode(token), EmptyPayload.class);
     }
 
     /**
@@ -179,7 +179,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#getSecret
      */
     public CallSummary<EmptyPayload, GetSecretResponse> getSecret(String token) throws APICallFailure {
-        return apiCall(null, "GET", "/secret/" + token + "", GetSecretResponse.class);
+        return apiCall(null, "GET", "/secret/" + uriEncode(token), GetSecretResponse.class);
     }
 
     /**
@@ -192,7 +192,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#instanceStarted
      */
     public CallSummary<EmptyPayload, EmptyPayload> instanceStarted(String instanceId, String token) throws APICallFailure {
-        return apiCall(null, "GET", "/instance-started/" + instanceId + "/" + token + "", EmptyPayload.class);
+        return apiCall(null, "GET", "/instance-started/" + uriEncode(instanceId) + "/" + uriEncode(token), EmptyPayload.class);
     }
 
     /**
@@ -206,7 +206,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#removeSecret
      */
     public CallSummary<EmptyPayload, EmptyPayload> removeSecret(String token) throws APICallFailure {
-        return apiCall(null, "DELETE", "/secret/" + token + "", EmptyPayload.class);
+        return apiCall(null, "DELETE", "/secret/" + uriEncode(token), EmptyPayload.class);
     }
 
     /**
@@ -219,7 +219,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#getLaunchSpecs
      */
     public CallSummary<EmptyPayload, Object> getLaunchSpecs(String workerType) throws APICallFailure {
-        return apiCall(null, "GET", "/worker-type/" + workerType + "/launch-specifications", Object.class);
+        return apiCall(null, "GET", "/worker-type/" + uriEncode(workerType) + "/launch-specifications", Object.class);
     }
 
     /**
@@ -243,7 +243,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#state
      */
     public CallSummary<EmptyPayload, EmptyPayload> state(String workerType) throws APICallFailure {
-        return apiCall(null, "GET", "/state/" + workerType + "", EmptyPayload.class);
+        return apiCall(null, "GET", "/state/" + uriEncode(workerType), EmptyPayload.class);
     }
 
     /**

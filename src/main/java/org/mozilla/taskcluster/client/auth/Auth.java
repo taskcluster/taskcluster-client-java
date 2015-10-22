@@ -92,7 +92,7 @@ public class Auth extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/auth/api-docs/#client
      */
     public CallSummary<EmptyPayload, GetClientResponse> client(String clientId) throws APICallFailure {
-        return apiCall(null, "GET", "/clients/" + clientId + "", GetClientResponse.class);
+        return apiCall(null, "GET", "/clients/" + uriEncode(clientId), GetClientResponse.class);
     }
 
     /**
@@ -110,7 +110,7 @@ public class Auth extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/auth/api-docs/#createClient
      */
     public CallSummary<CreateClientRequest, CreateClientResponse> createClient(String clientId, CreateClientRequest payload) throws APICallFailure {
-        return apiCall(payload, "PUT", "/clients/" + clientId + "", CreateClientResponse.class);
+        return apiCall(payload, "PUT", "/clients/" + uriEncode(clientId), CreateClientResponse.class);
     }
 
     /**
@@ -124,7 +124,7 @@ public class Auth extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/auth/api-docs/#resetAccessToken
      */
     public CallSummary<EmptyPayload, CreateClientResponse> resetAccessToken(String clientId) throws APICallFailure {
-        return apiCall(null, "POST", "/clients/" + clientId + "/reset", CreateClientResponse.class);
+        return apiCall(null, "POST", "/clients/" + uriEncode(clientId) + "/reset", CreateClientResponse.class);
     }
 
     /**
@@ -135,7 +135,7 @@ public class Auth extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/auth/api-docs/#updateClient
      */
     public CallSummary<CreateClientRequest, GetClientResponse> updateClient(String clientId, CreateClientRequest payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/clients/" + clientId + "", GetClientResponse.class);
+        return apiCall(payload, "POST", "/clients/" + uriEncode(clientId), GetClientResponse.class);
     }
 
     /**
@@ -145,7 +145,7 @@ public class Auth extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/auth/api-docs/#deleteClient
      */
     public CallSummary<EmptyPayload, EmptyPayload> deleteClient(String clientId) throws APICallFailure {
-        return apiCall(null, "DELETE", "/clients/" + clientId + "", EmptyPayload.class);
+        return apiCall(null, "DELETE", "/clients/" + uriEncode(clientId), EmptyPayload.class);
     }
 
     /**
@@ -165,7 +165,7 @@ public class Auth extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/auth/api-docs/#role
      */
     public CallSummary<EmptyPayload, GetRoleResponse> role(String roleId) throws APICallFailure {
-        return apiCall(null, "GET", "/roles/" + roleId + "", GetRoleResponse.class);
+        return apiCall(null, "GET", "/roles/" + uriEncode(roleId), GetRoleResponse.class);
     }
 
     /**
@@ -175,7 +175,7 @@ public class Auth extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/auth/api-docs/#createRole
      */
     public CallSummary<CreateRoleRequest, GetRoleResponse> createRole(String roleId, CreateRoleRequest payload) throws APICallFailure {
-        return apiCall(payload, "PUT", "/roles/" + roleId + "", GetRoleResponse.class);
+        return apiCall(payload, "PUT", "/roles/" + uriEncode(roleId), GetRoleResponse.class);
     }
 
     /**
@@ -184,7 +184,7 @@ public class Auth extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/auth/api-docs/#updateRole
      */
     public CallSummary<CreateRoleRequest, GetRoleResponse> updateRole(String roleId, CreateRoleRequest payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/roles/" + roleId + "", GetRoleResponse.class);
+        return apiCall(payload, "POST", "/roles/" + uriEncode(roleId), GetRoleResponse.class);
     }
 
     /**
@@ -194,7 +194,7 @@ public class Auth extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/auth/api-docs/#deleteRole
      */
     public CallSummary<EmptyPayload, EmptyPayload> deleteRole(String roleId) throws APICallFailure {
-        return apiCall(null, "DELETE", "/roles/" + roleId + "", EmptyPayload.class);
+        return apiCall(null, "DELETE", "/roles/" + uriEncode(roleId), EmptyPayload.class);
     }
 
     /**
@@ -221,7 +221,7 @@ public class Auth extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/auth/api-docs/#awsS3Credentials
      */
     public CallSummary<EmptyPayload, AWSS3CredentialsResponse> awsS3Credentials(String level, String bucket, String prefix) throws APICallFailure {
-        return apiCall(null, "GET", "/aws/s3/" + level + "/" + bucket + "/" + prefix + "", AWSS3CredentialsResponse.class);
+        return apiCall(null, "GET", "/aws/s3/" + uriEncode(level) + "/" + uriEncode(bucket) + "/" + uriEncode(prefix), AWSS3CredentialsResponse.class);
     }
 
     /**
@@ -232,7 +232,7 @@ public class Auth extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/auth/api-docs/#azureTableSAS
      */
     public CallSummary<EmptyPayload, AzureSharedAccessSignatureResponse> azureTableSAS(String account, String table) throws APICallFailure {
-        return apiCall(null, "GET", "/azure/" + account + "/table/" + table + "/read-write", AzureSharedAccessSignatureResponse.class);
+        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/table/" + uriEncode(table) + "/read-write", AzureSharedAccessSignatureResponse.class);
     }
 
     /**
