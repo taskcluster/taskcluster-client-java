@@ -10,7 +10,50 @@ import org.mozilla.taskcluster.client.EmptyPayload;
 import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 
 /**
- * Authentication related API end-points for taskcluster.
+ * Authentication related API end-points for TaskCluster and related
+ * services. These API end-points are of interest if you wish to:
+ *   * Authenticate request signed with TaskCluster credentials,
+ *   * Manage clients and roles,
+ *   * Inspect or audit clients and roles,
+ *   * Gain access to various services guarded by this API.
+ * 
+ * ### Clients
+ * The authentication service manages _clients_, at a high-level each client
+ * consists of a `clientId`, an `accessToken`, expiration and description.
+ * The `clientId` and `accessToken` can be used for authentication when
+ * calling TaskCluster APIs.
+ * 
+ * Each client is assigned a single scope on the form:
+ * `assume:client-id:<clientId>`, this scope doesn't really do much on its
+ * own. But when you dive into the roles section you'll see that you can
+ * create a role: `client-id:<clientId>` that assigns scopes to the client.
+ * This way it's easy to audit all scope assignments, by only listing roles.
+ * 
+ * ### Roles
+ * A _role_ consists of a `roleId`, a set of scopes and a description.
+ * Each role constitutes a simple _expansion rule_ that says if you have
+ * the scope: `assume:<roleId>` you get the set of scopes the role has.
+ * Think of the `assume:<roleId>` as a scope that allows a client to assume
+ * a role.
+ * 
+ * As in scopes the `*` kleene star also have special meaning if it is
+ * located at the end of a `roleId`. If you have a role with the following
+ * `roleId`: `my-prefix*`, then any client which has a scope staring with
+ * `assume:my-prefix` will be allowed to assume the role.
+ * 
+ * As previously mentioned each client gets the scope:
+ * `assume:client-id:<clientId>`, it trivially follows that you can create a
+ * role with the `roleId`: `client-id:<clientId>` to assign additional
+ * scopes to a client. You can also create a role `client-id:user-*`
+ * if you wish to assign a set of scopes to all clients whose `clientId`
+ * starts with `user-`.
+ * 
+ * ### Guarded Services
+ * The authentication service also has API end-points for delegating access
+ * to some guarded service such as AWS S3, or Azure Table Storage.
+ * Generally, we add API end-points to this server when we wish to use
+ * TaskCluster credentials to grant access to a third-party service used
+ * by many TaskCluster components.
  *
  * See: http://docs.taskcluster.net/auth/api-docs
  */
@@ -35,109 +78,123 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
-     * Returns the scopes the client is authorized to access and the date-time
-     * when the client's authorization is set to expire.
-     * 
-     * This API end-point allows you inspect clients without getting access to
-     * credentials, as provided by the `getCredentials` request below.
+     * Get a list of all clients.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#scopes
+     * See http://docs.taskcluster.net/auth/api-docs/#listClients
      */
-    public CallSummary<EmptyPayload, GetClientScopesResponse> scopes(String clientId) throws APICallFailure {
-        return apiCall(null, "GET", "/client/" + clientId + "/scopes", GetClientScopesResponse.class);
+    public CallSummary<EmptyPayload, GetClientResponse[]> listClients() throws APICallFailure {
+        return apiCall(null, "GET", "/clients/", GetClientResponse[].class);
     }
 
     /**
-     * Returns the client's `accessToken` as needed for verifying signatures.
-     * This API end-point also returns the list of scopes the client is
-     * authorized for and the date-time where the client authorization expires
-     * 
-     * Remark, **if you don't need** the `accessToken` but only want to see what
-     * scopes a client is authorized for, you should use the `getScopes`
-     * function described above.
-     *
-     * See http://docs.taskcluster.net/auth/api-docs/#getCredentials
-     */
-    public CallSummary<EmptyPayload, GetClientCredentialsResponse> getCredentials(String clientId) throws APICallFailure {
-        return apiCall(null, "GET", "/client/" + clientId + "/credentials", GetClientCredentialsResponse.class);
-    }
-
-    /**
-     * Returns all information about a given client. This end-point is mostly for
-     * building tools to administrate clients. Do not use if you only want to
-     * authenticate a request; see `getCredentials` for this purpose.
+     * Get information about a single client.
      *
      * See http://docs.taskcluster.net/auth/api-docs/#client
      */
     public CallSummary<EmptyPayload, GetClientResponse> client(String clientId) throws APICallFailure {
-        return apiCall(null, "GET", "/client/" + clientId + "", GetClientResponse.class);
+        return apiCall(null, "GET", "/clients/" + clientId + "", GetClientResponse.class);
     }
 
     /**
-     * Create a client with given `clientId`, `name`, `expires`, `scopes` and
-     * `description`. The `accessToken` will always be generated server-side,
-     * and will be returned from this request.
+     * Create a new client and get the `accessToken` for this client.
+     * You should store the `accessToken` from this API call as there is no
+     * other way to retrieve it.
      * 
-     * **Required scopes**: in addition the scopes listed above, the 
-     * `scopes` property must be satisfied by the caller's scopes.
+     * If you loose the `accessToken` you can call `resetAccessToken` to reset
+     * it, and a new `accessToken` will be returned, but you cannot retrieve the
+     * current `accessToken`.
+     * 
+     * If a client with the same `clientId` already exists this operation will
+     * fail. Use `updateClient` if you wish to update an existing client.
      *
      * See http://docs.taskcluster.net/auth/api-docs/#createClient
      */
-    public CallSummary<GetClientCredentialsResponse1, GetClientResponse> createClient(String clientId, GetClientCredentialsResponse1 payload) throws APICallFailure {
-        return apiCall(payload, "PUT", "/client/" + clientId + "", GetClientResponse.class);
+    public CallSummary<CreateClientRequest, CreateClientResponse> createClient(String clientId, CreateClientRequest payload) throws APICallFailure {
+        return apiCall(payload, "PUT", "/clients/" + clientId + "", CreateClientResponse.class);
     }
 
     /**
-     * Modify client `name`, `expires`, `scopes` and
-     * `description`.
+     * Reset a clients `accessToken`, this will revoke the existing
+     * `accessToken`, generate a new `accessToken` and return it from this
+     * call.
      * 
-     * **Required scopes**: in addition the scopes listed
-     * above, the `scopes` property must be satisfied by the caller's
-     * scopes.  The client's existing scopes are not considered.
+     * There is no way to retrieve an existing `accessToken`, so if you loose it
+     * you must reset the accessToken to acquire it again.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#modifyClient
+     * See http://docs.taskcluster.net/auth/api-docs/#resetAccessToken
      */
-    public CallSummary<GetClientCredentialsResponse1, GetClientResponse> modifyClient(String clientId, GetClientCredentialsResponse1 payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/client/" + clientId + "/modify", GetClientResponse.class);
+    public CallSummary<EmptyPayload, CreateClientResponse> resetAccessToken(String clientId) throws APICallFailure {
+        return apiCall(null, "POST", "/clients/" + clientId + "/reset", CreateClientResponse.class);
     }
 
     /**
-     * Delete a client with given `clientId`.
+     * Update an exisiting client. This is really only useful for changing the
+     * description and expiration, as you won't be allowed to the `clientId`
+     * or `accessToken`.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#removeClient
+     * See http://docs.taskcluster.net/auth/api-docs/#updateClient
      */
-    public CallSummary<EmptyPayload, EmptyPayload> removeClient(String clientId) throws APICallFailure {
-        return apiCall(null, "DELETE", "/client/" + clientId + "", EmptyPayload.class);
+    public CallSummary<CreateClientRequest, GetClientResponse> updateClient(String clientId, CreateClientRequest payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/clients/" + clientId + "", GetClientResponse.class);
     }
 
     /**
-     * Reset credentials for a client. This will generate a new `accessToken`.
-     * As always, the `accessToken` will be generated server-side and returned.
+     * Delete a client, please note that any roles related to this client must
+     * be deleted independently.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#resetCredentials
+     * See http://docs.taskcluster.net/auth/api-docs/#deleteClient
      */
-    public CallSummary<EmptyPayload, GetClientResponse> resetCredentials(String clientId) throws APICallFailure {
-        return apiCall(null, "POST", "/client/" + clientId + "/reset-credentials", GetClientResponse.class);
+    public CallSummary<EmptyPayload, EmptyPayload> deleteClient(String clientId) throws APICallFailure {
+        return apiCall(null, "DELETE", "/clients/" + clientId + "", EmptyPayload.class);
     }
 
     /**
-     * Return a list of all clients, not including their access tokens.
+     * Get a list of all roles, each role object also includes the list of
+     * scopes it expands to.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#listClients
+     * See http://docs.taskcluster.net/auth/api-docs/#listRoles
      */
-    public CallSummary<EmptyPayload, ListClientsResponse[]> listClients() throws APICallFailure {
-        return apiCall(null, "GET", "/list-clients", ListClientsResponse[].class);
+    public CallSummary<EmptyPayload, GetRoleResponse[]> listRoles() throws APICallFailure {
+        return apiCall(null, "GET", "/roles/", GetRoleResponse[].class);
     }
 
     /**
-     * Get a shared access signature (SAS) string for use with a specific Azure
-     * Table Storage table.  Note, this will create the table, if it doesn't
-     * already exist.
+     * Get information about a single role, including the set of scopes that the
+     * role expands to.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#azureTableSAS
+     * See http://docs.taskcluster.net/auth/api-docs/#role
      */
-    public CallSummary<EmptyPayload, AzureSharedAccessSignatureResponse> azureTableSAS(String account, String table) throws APICallFailure {
-        return apiCall(null, "GET", "/azure/" + account + "/table/" + table + "/read-write", AzureSharedAccessSignatureResponse.class);
+    public CallSummary<EmptyPayload, GetRoleResponse> role(String roleId) throws APICallFailure {
+        return apiCall(null, "GET", "/roles/" + roleId + "", GetRoleResponse.class);
+    }
+
+    /**
+     * Create a new role. If there already exists a role with the same `roleId`
+     * this operation will fail. Use `updateRole` to modify an existing role
+     *
+     * See http://docs.taskcluster.net/auth/api-docs/#createRole
+     */
+    public CallSummary<CreateRoleRequest, GetRoleResponse> createRole(String roleId, CreateRoleRequest payload) throws APICallFailure {
+        return apiCall(payload, "PUT", "/roles/" + roleId + "", GetRoleResponse.class);
+    }
+
+    /**
+     * Update existing role.
+     *
+     * See http://docs.taskcluster.net/auth/api-docs/#updateRole
+     */
+    public CallSummary<CreateRoleRequest, GetRoleResponse> updateRole(String roleId, CreateRoleRequest payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/roles/" + roleId + "", GetRoleResponse.class);
+    }
+
+    /**
+     * Delete a role. This operation will succeed regardless of whether or not
+     * the role exists.
+     *
+     * See http://docs.taskcluster.net/auth/api-docs/#deleteRole
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> deleteRole(String roleId) throws APICallFailure {
+        return apiCall(null, "DELETE", "/roles/" + roleId + "", EmptyPayload.class);
     }
 
     /**
@@ -168,23 +225,14 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
-     * Export all clients except the root client, as a JSON list.
-     * This list can be imported later using `importClients`.
+     * Get a shared access signature (SAS) string for use with a specific Azure
+     * Table Storage table.  Note, this will create the table, if it doesn't
+     * already exist.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#exportClients
+     * See http://docs.taskcluster.net/auth/api-docs/#azureTableSAS
      */
-    public CallSummary<EmptyPayload, ExportedClients[]> exportClients() throws APICallFailure {
-        return apiCall(null, "GET", "/export-clients", ExportedClients[].class);
-    }
-
-    /**
-     * Import client from JSON list, overwriting any clients that already
-     * exists. Returns a list of all clients imported.
-     *
-     * See http://docs.taskcluster.net/auth/api-docs/#importClients
-     */
-    public CallSummary<ExportedClients, ExportedClients[]> importClients(ExportedClients payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/import-clients", ExportedClients[].class);
+    public CallSummary<EmptyPayload, AzureSharedAccessSignatureResponse> azureTableSAS(String account, String table) throws APICallFailure {
+        return apiCall(null, "GET", "/azure/" + account + "/table/" + table + "/read-write", AzureSharedAccessSignatureResponse.class);
     }
 
     /**
@@ -199,6 +247,16 @@ public class Auth extends TaskClusterRequestHandler {
      */
     public CallSummary<HawkSignatureAuthenticationRequest, Object> authenticateHawk(HawkSignatureAuthenticationRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/authenticate-hawk", Object.class);
+    }
+
+    /**
+     * Import client from JSON list, overwriting any clients that already
+     * exists. Returns a list of all clients imported.
+     *
+     * See http://docs.taskcluster.net/auth/api-docs/#importClients
+     */
+    public CallSummary<ExportedClients, EmptyPayload> importClients(ExportedClients payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/import-clients", EmptyPayload.class);
     }
 
     /**

@@ -130,6 +130,10 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, ex
 				typ = ""
 				content += newType + "[]"
 			}
+		} else {
+			if refSubSchema := jsonSubSchema.Items.RefSubSchema; refSubSchema != nil {
+				typ = refSubSchema.TypeName
+			}
 		}
 
 	case "object":
@@ -175,10 +179,6 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, ex
 	switch typ {
 	case "Date":
 		extraPackages["java.util.Date"] = true
-	case "json.RawMessage":
-		extraPackages["encoding/json"] = true
-	case "map[string]json.RawMessage":
-		extraPackages["encoding/json"] = true
 	}
 	content += typ
 	return content, extraPackages, typ

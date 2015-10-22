@@ -3,14 +3,20 @@ package org.mozilla.taskcluster.client.auth;
 import java.util.Date;
 
 /**
-* Get all details about a client, useful for tools modifying a client
+* All details about a client including the `accessToken`
 *
-* See http://schemas.taskcluster.net/auth/v1/get-client-response.json#
+* See http://schemas.taskcluster.net/auth/v1/create-client-response.json#
 */
-public class GetClientResponse {
+public class CreateClientResponse {
 
     /**
-     * ClientId of the client scopes is requested about
+     * AccessToken used for authenticating requests, you should store this
+     * you won't be able to retrive it again!
+     */
+    public String accessToken;
+
+    /**
+     * ClientId of the client
      */
     public String clientId;
 
