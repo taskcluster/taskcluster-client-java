@@ -28,6 +28,9 @@ A java port of taskcluster-client.
 * [Scheduler](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/scheduler/Scheduler.html)  
   The task-graph scheduler is responsible for accepting task-graphs and scheduling tasks for evaluation by the queue as their dependencies are satisfied.
 
+* [Secrets](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/secrets/Secrets.html)
+  The secrets service is responsible for managing secure data in TaskCluster.
+
 ### AMQP APIs
 
 Currently AMQP APIs are not supported in the java client.
