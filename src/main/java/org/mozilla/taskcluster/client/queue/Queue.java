@@ -50,7 +50,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#task
      */
     public CallSummary<EmptyPayload, TaskDefinition1> task(String taskId) throws APICallFailure {
-        return apiCall(null, "GET", "/task/" + taskId + "", TaskDefinition1.class);
+        return apiCall(null, "GET", "/task/" + uriEncode(taskId), TaskDefinition1.class);
     }
 
     /**
@@ -59,7 +59,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#status
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> status(String taskId) throws APICallFailure {
-        return apiCall(null, "GET", "/task/" + taskId + "/status", TaskStatusResponse.class);
+        return apiCall(null, "GET", "/task/" + uriEncode(taskId) + "/status", TaskStatusResponse.class);
     }
 
     /**
@@ -85,7 +85,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#createTask
      */
     public CallSummary<TaskDefinition, TaskStatusResponse> createTask(String taskId, TaskDefinition payload) throws APICallFailure {
-        return apiCall(payload, "PUT", "/task/" + taskId + "", TaskStatusResponse.class);
+        return apiCall(payload, "PUT", "/task/" + uriEncode(taskId), TaskStatusResponse.class);
     }
 
     /**
@@ -107,7 +107,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#defineTask
      */
     public CallSummary<TaskDefinition, TaskStatusResponse> defineTask(String taskId, TaskDefinition payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/task/" + taskId + "/define", TaskStatusResponse.class);
+        return apiCall(payload, "POST", "/task/" + uriEncode(taskId) + "/define", TaskStatusResponse.class);
     }
 
     /**
@@ -123,7 +123,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#scheduleTask
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> scheduleTask(String taskId) throws APICallFailure {
-        return apiCall(null, "POST", "/task/" + taskId + "/schedule", TaskStatusResponse.class);
+        return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/schedule", TaskStatusResponse.class);
     }
 
     /**
@@ -143,7 +143,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#rerunTask
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> rerunTask(String taskId) throws APICallFailure {
-        return apiCall(null, "POST", "/task/" + taskId + "/rerun", TaskStatusResponse.class);
+        return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/rerun", TaskStatusResponse.class);
     }
 
     /**
@@ -163,7 +163,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#cancelTask
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> cancelTask(String taskId) throws APICallFailure {
-        return apiCall(null, "POST", "/task/" + taskId + "/cancel", TaskStatusResponse.class);
+        return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/cancel", TaskStatusResponse.class);
     }
 
     /**
@@ -174,7 +174,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#pollTaskUrls
      */
     public CallSummary<EmptyPayload, PollTaskUrlsResponse> pollTaskUrls(String provisionerId, String workerType) throws APICallFailure {
-        return apiCall(null, "GET", "/poll-task-url/" + provisionerId + "/" + workerType + "", PollTaskUrlsResponse.class);
+        return apiCall(null, "GET", "/poll-task-url/" + uriEncode(provisionerId) + "/" + uriEncode(workerType), PollTaskUrlsResponse.class);
     }
 
     /**
@@ -183,7 +183,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#claimTask
      */
     public CallSummary<TaskClaimRequest, TaskClaimResponse> claimTask(String taskId, String runId, TaskClaimRequest payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/task/" + taskId + "/runs/" + runId + "/claim", TaskClaimResponse.class);
+        return apiCall(payload, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/claim", TaskClaimResponse.class);
     }
 
     /**
@@ -192,7 +192,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#reclaimTask
      */
     public CallSummary<EmptyPayload, TaskClaimResponse> reclaimTask(String taskId, String runId) throws APICallFailure {
-        return apiCall(null, "POST", "/task/" + taskId + "/runs/" + runId + "/reclaim", TaskClaimResponse.class);
+        return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/reclaim", TaskClaimResponse.class);
     }
 
     /**
@@ -201,7 +201,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#reportCompleted
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> reportCompleted(String taskId, String runId) throws APICallFailure {
-        return apiCall(null, "POST", "/task/" + taskId + "/runs/" + runId + "/completed", TaskStatusResponse.class);
+        return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/completed", TaskStatusResponse.class);
     }
 
     /**
@@ -216,7 +216,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#reportFailed
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> reportFailed(String taskId, String runId) throws APICallFailure {
-        return apiCall(null, "POST", "/task/" + taskId + "/runs/" + runId + "/failed", TaskStatusResponse.class);
+        return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/failed", TaskStatusResponse.class);
     }
 
     /**
@@ -236,7 +236,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#reportException
      */
     public CallSummary<TaskExceptionRequest, TaskStatusResponse> reportException(String taskId, String runId, TaskExceptionRequest payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/task/" + taskId + "/runs/" + runId + "/exception", TaskStatusResponse.class);
+        return apiCall(payload, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/exception", TaskStatusResponse.class);
     }
 
     /**
@@ -302,7 +302,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#createArtifact
      */
     public CallSummary<Object, Object> createArtifact(String taskId, String runId, String name, Object payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/task/" + taskId + "/runs/" + runId + "/artifacts/" + name + "", Object.class);
+        return apiCall(payload, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/artifacts/" + uriEncode(name), Object.class);
     }
 
     /**
@@ -321,7 +321,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#getArtifact
      */
     public CallSummary<EmptyPayload, EmptyPayload> getArtifact(String taskId, String runId, String name) throws APICallFailure {
-        return apiCall(null, "GET", "/task/" + taskId + "/runs/" + runId + "/artifacts/" + name + "", EmptyPayload.class);
+        return apiCall(null, "GET", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/artifacts/" + uriEncode(name), EmptyPayload.class);
     }
 
     /**
@@ -344,7 +344,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#getLatestArtifact
      */
     public CallSummary<EmptyPayload, EmptyPayload> getLatestArtifact(String taskId, String name) throws APICallFailure {
-        return apiCall(null, "GET", "/task/" + taskId + "/artifacts/" + name + "", EmptyPayload.class);
+        return apiCall(null, "GET", "/task/" + uriEncode(taskId) + "/artifacts/" + uriEncode(name), EmptyPayload.class);
     }
 
     /**
@@ -353,7 +353,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#listArtifacts
      */
     public CallSummary<EmptyPayload, ListArtifactsResponse> listArtifacts(String taskId, String runId) throws APICallFailure {
-        return apiCall(null, "GET", "/task/" + taskId + "/runs/" + runId + "/artifacts", ListArtifactsResponse.class);
+        return apiCall(null, "GET", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/artifacts", ListArtifactsResponse.class);
     }
 
     /**
@@ -363,7 +363,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#listLatestArtifacts
      */
     public CallSummary<EmptyPayload, ListArtifactsResponse> listLatestArtifacts(String taskId) throws APICallFailure {
-        return apiCall(null, "GET", "/task/" + taskId + "/artifacts", ListArtifactsResponse.class);
+        return apiCall(null, "GET", "/task/" + uriEncode(taskId) + "/artifacts", ListArtifactsResponse.class);
     }
 
     /**
@@ -374,7 +374,7 @@ public class Queue extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/queue/api-docs/#pendingTasks
      */
     public CallSummary<EmptyPayload, CountPendingTasksResponse> pendingTasks(String provisionerId, String workerType) throws APICallFailure {
-        return apiCall(null, "GET", "/pending/" + provisionerId + "/" + workerType + "", CountPendingTasksResponse.class);
+        return apiCall(null, "GET", "/pending/" + uriEncode(provisionerId) + "/" + uriEncode(workerType), CountPendingTasksResponse.class);
     }
 
     /**

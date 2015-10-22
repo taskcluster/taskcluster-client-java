@@ -187,7 +187,8 @@ func (entry *APIEntry) generateAPICode(apiName string) string {
 
 	content := comment
 	content += "    public " + returnType + " " + entry.MethodName + "(" + inputParams + ") throws APICallFailure {\n"
-	content += "        return apiCall(" + apiArgsPayload + ", \"" + strings.ToUpper(entry.Method) + "\", \"" + strings.Replace(strings.Replace(entry.Route, "<", "\" + ", -1), ">", " + \"", -1) + "\", " + responseType + ".class);\n"
+	content += "        return apiCall(" + apiArgsPayload + ", \"" + strings.ToUpper(entry.Method) + "\", \"" + strings.Replace(strings.Replace(entry.Route, "<", "\" + uriEncode(", -1), ">", ") + \"", -1) + "\", " + responseType + ".class);\n"
 	content += "    }\n"
-	return content
+	// can remove any code that added an empty string to another string
+	return strings.Replace(content, ` + ""`, "", -1)
 }

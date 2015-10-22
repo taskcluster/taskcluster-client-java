@@ -129,7 +129,7 @@ public class Index extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/services/index/#findTask
      */
     public CallSummary<EmptyPayload, IndexedTaskResponse> findTask(String namespace) throws APICallFailure {
-        return apiCall(null, "GET", "/task/" + namespace + "", IndexedTaskResponse.class);
+        return apiCall(null, "GET", "/task/" + uriEncode(namespace), IndexedTaskResponse.class);
     }
 
     /**
@@ -145,7 +145,7 @@ public class Index extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/services/index/#listNamespaces
      */
     public CallSummary<ListNamespacesRequest, ListNamespacesResponse> listNamespaces(String namespace, ListNamespacesRequest payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/namespaces/" + namespace + "", ListNamespacesResponse.class);
+        return apiCall(payload, "POST", "/namespaces/" + uriEncode(namespace), ListNamespacesResponse.class);
     }
 
     /**
@@ -161,7 +161,7 @@ public class Index extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/services/index/#listTasks
      */
     public CallSummary<ListTasksRequest, ListTasksResponse> listTasks(String namespace, ListTasksRequest payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/tasks/" + namespace + "", ListTasksResponse.class);
+        return apiCall(payload, "POST", "/tasks/" + uriEncode(namespace), ListTasksResponse.class);
     }
 
     /**
@@ -171,7 +171,7 @@ public class Index extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/services/index/#insertTask
      */
     public CallSummary<InsertTaskRequest, IndexedTaskResponse> insertTask(String namespace, InsertTaskRequest payload) throws APICallFailure {
-        return apiCall(payload, "PUT", "/task/" + namespace + "", IndexedTaskResponse.class);
+        return apiCall(payload, "PUT", "/task/" + uriEncode(namespace), IndexedTaskResponse.class);
     }
 
     /**
@@ -182,7 +182,7 @@ public class Index extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/services/index/#findArtifactFromTask
      */
     public CallSummary<EmptyPayload, EmptyPayload> findArtifactFromTask(String namespace, String name) throws APICallFailure {
-        return apiCall(null, "GET", "/task/" + namespace + "/artifacts/" + name + "", EmptyPayload.class);
+        return apiCall(null, "GET", "/task/" + uriEncode(namespace) + "/artifacts/" + uriEncode(name), EmptyPayload.class);
     }
 
     /**

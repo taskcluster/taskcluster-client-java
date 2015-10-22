@@ -1,9 +1,11 @@
 package org.mozilla.taskcluster.client;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -164,5 +166,19 @@ public abstract class TaskClusterRequestHandler {
             throw new APICallFailure(e);
         }
         return callSummary;
+    }
+
+    /**
+     * Utility method to uri encode a parameter for using in url
+     */
+    protected static String uriEncode(String param) {
+        try {
+            return URLEncoder.encode(param, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // This should not be possible since we specify UTF-8
+            e.printStackTrace();
+            System.exit(64);
+        }
+        return null;
     }
 }
