@@ -47,6 +47,8 @@ The purge-cache service is responsible for publishing a pulse message for worker
 The queue is responsible for accepting tasks and track their state as they are executed by workers.</p></li>
 <li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/scheduler/Scheduler.html">Scheduler</a><br>
 The task-graph scheduler is responsible for accepting task-graphs and scheduling tasks for evaluation by the queue as their dependencies are satisfied.</p></li>
+<li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/secrets/Secrets.html">Secrets</a><br>
+The secrets service is responsible for managing secure data in TaskCluster.</p></li>
 </ul>
 
 <h3>
@@ -88,7 +90,7 @@ The task-graph scheduler is responsible for accepting task-graphs and scheduling
 <p>To invoke an API end-point, instantiate one of the HTTP API classes (from section <a href="#http-apis">HTTP APIs</a>).
 In the following example we instantiate an instance of the <code>Queue</code> client class and use it to create a task.</p>
 
-<div class="highlight highlight-java"><pre><span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.*</span>;
+<div class="highlight highlight-source-java"><pre><span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.*</span>;
 <span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.queue.*</span>;
 
 <span class="pl-c1">...</span>
