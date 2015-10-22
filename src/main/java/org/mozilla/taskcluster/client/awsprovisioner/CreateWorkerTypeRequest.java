@@ -39,7 +39,8 @@ public class CreateWorkerTypeRequest {
         public Object launchSpec;
 
         /**
-         * Scopes which should be included for this InstanceType
+         * Scopes which should be included for this InstanceType.  Scopes must
+         * be composed of printable ASCII characters and spaces.
          */
         public String[] scopes;
 
@@ -116,7 +117,8 @@ public class CreateWorkerTypeRequest {
         public String region;
 
         /**
-         * Scopes which should be included for this Region
+         * Scopes which should be included for this Region.  Scopes must be
+         * composed of printable ASCII characters and spaces.
          */
         public String[] scopes;
 
@@ -148,7 +150,8 @@ public class CreateWorkerTypeRequest {
     public int scalingRatio;
 
     /**
-     * Scopes to issue credentials to for all regions
+     * Scopes to issue credentials to for all regions Scopes must be composed of
+     * printable ASCII characters and spaces.
      */
     public String[] scopes;
 

@@ -16,7 +16,8 @@ public class GetSecretRequest {
 
     /**
      * List of strings which are scopes for temporary credentials to give
-     * to the worker through the secret system
+     * to the worker through the secret system.  Scopes must be composed of
+     * printable ASCII characters and spaces.
      */
     public String[] scopes;
 
