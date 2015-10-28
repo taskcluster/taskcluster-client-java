@@ -11,5 +11,5 @@ public class NewTaskGraphMessage {
     /**
      * Message version
      */
-    public Object version;
+    public int version;
 }

@@ -11,5 +11,5 @@ public class TaskGraphFinishedMessage {
     /**
      * Message version
      */
-    public Object version;
+    public int version;
 }

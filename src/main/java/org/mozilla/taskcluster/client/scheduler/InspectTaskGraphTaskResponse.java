@@ -45,7 +45,7 @@ public class InspectTaskGraphTaskResponse {
     /**
      * State of the task as considered by the scheduler
      */
-    public Object state;
+    public String state;
 
     /**
      * Unique task identifier, this is UUID encoded as [URL-safe base64](http://tools.ietf.org/html/rfc4648#section-5) and stripped of `=` padding.

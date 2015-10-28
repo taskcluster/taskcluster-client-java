@@ -22,7 +22,7 @@ public class PurgeCacheMessage {
     /**
      * Message version
      */
-    public Object version;
+    public int version;
 
     /**
      * `workerType` we wish to purge cache for.

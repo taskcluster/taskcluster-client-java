@@ -11,5 +11,5 @@ public class TaskGraphExtendedMessage {
     /**
      * Message version
      */
-    public Object version;
+    public int version;
 }

@@ -16,5 +16,5 @@ public class BlockedTaskGraphMessage {
     /**
      * Message version
      */
-    public Object version;
+    public int version;
 }

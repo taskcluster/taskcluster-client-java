@@ -30,7 +30,7 @@ public class ListNamespacesResponse {
         /**
          * Name of namespace within it's parent namespace.
          */
-        public Object name;
+        public String name;
 
         /**
          * Fully qualified name of the namespace, you can use this to list

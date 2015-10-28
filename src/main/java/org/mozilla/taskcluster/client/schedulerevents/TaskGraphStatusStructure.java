@@ -15,7 +15,7 @@ public class TaskGraphStatusStructure {
     /**
      * Task-graph state, this enum is **frozen** new values will **not** be added.
      */
-    public Object state;
+    public String state;
 
     /**
      * Unique task-graph identifier, this is UUID encoded as [URL-safe base64](http://tools.ietf.org/html/rfc4648#section-5) and stripped of `=` padding.
