@@ -85,7 +85,7 @@ public class TaskDefinition1 {
      * `queue:task-priority:high` is required to define a task with `priority`
      * set to `high`. Additional priority levels may be added later.
      */
-    public Object priority;
+    public String priority;
 
     /**
      * Unique identifier for a provisioner, that can supply specified

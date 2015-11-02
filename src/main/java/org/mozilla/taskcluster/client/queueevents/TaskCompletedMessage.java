@@ -16,7 +16,7 @@ public class TaskCompletedMessage {
     /**
      * Message version
      */
-    public Object version;
+    public int version;
 
     /**
      * Identifier for the worker-group within which this run ran.

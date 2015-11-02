@@ -16,5 +16,5 @@ public class TaskPendingMessage {
     /**
      * Message version
      */
-    public Object version;
+    public int version;
 }

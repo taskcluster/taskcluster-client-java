@@ -35,5 +35,5 @@ public class TaskExceptionRequest {
      * resolved with this reason, but you are clearly signaling that this is a
      * bug in the worker code.
      */
-    public Object reason;
+    public String reason;
 }

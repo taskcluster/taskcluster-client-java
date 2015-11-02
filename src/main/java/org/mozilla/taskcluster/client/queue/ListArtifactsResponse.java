@@ -35,7 +35,7 @@ public class ListArtifactsResponse {
          * This is the `storageType` for the request that was used to create
          * the artifact.
          */
-        public Object storageType;
+        public String storageType;
     }
 
     public Artifacts[] artifacts;

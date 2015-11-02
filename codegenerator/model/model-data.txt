@@ -3346,6 +3346,7 @@ Properties
           '
           Enum                   = '[s3 azure reference error]'
           Title                  = 'Artifact Storage-Type'
+          Type                   = 'string'
           TypeName               = 'storageType'
           IsInputSchema          = 'false'
           IsOutputSchema         = 'false'
@@ -3736,6 +3737,7 @@ OneOf
     SourceURL              = ''
 Schema                 = 'http://json-schema.org/draft-04/schema#'
 Title                  = 'Post Artifact Request'
+Type                   = 'object'
 TypeName               = 'Object'
 IsInputSchema          = 'true'
 IsOutputSchema         = 'false'
@@ -4048,6 +4050,7 @@ Properties
     bug in the worker code.
     '
     Enum                   = '[worker-shutdown malformed-payload resource-unavailable internal-error]'
+    Type                   = 'string'
     TypeName               = 'reason'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
@@ -4143,10 +4146,11 @@ Properties
       Properties
         Property 'reasonCreated' =
           Description            = 'Reason for the creation of this run,
-          **more reasons may be added in the future**."
+          **more reasons may be added in the future**.
           '
           Enum                   = '[scheduled retry rerun exception]'
           Title                  = 'Reason Created'
+          Type                   = 'string'
           TypeName               = 'reasonCreated'
           IsInputSchema          = 'false'
           IsOutputSchema         = 'false'
@@ -4159,6 +4163,7 @@ Properties
           '
           Enum                   = '[completed failed deadline-exceeded canceled claim-expired worker-shutdown malformed-payload resource-unavailable internal-error]'
           Title                  = 'Reason Resolved'
+          Type                   = 'string'
           TypeName               = 'reasonResolved'
           IsInputSchema          = 'false'
           IsOutputSchema         = 'false'
@@ -4214,6 +4219,7 @@ Properties
           '
           Enum                   = '[pending running completed failed exception]'
           Title                  = 'Run State'
+          Type                   = 'string'
           TypeName               = 'state'
           IsInputSchema          = 'false'
           IsOutputSchema         = 'false'
@@ -4289,6 +4295,7 @@ Properties
     '
     Enum                   = '[unscheduled pending running completed failed exception]'
     Title                  = 'State'
+    Type                   = 'string'
     TypeName               = 'state'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
@@ -4472,6 +4479,7 @@ Properties
     '
     Enum                   = '[high normal]'
     Title                  = 'Task Priority'
+    Type                   = 'string'
     TypeName               = 'priority'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
@@ -4550,8 +4558,10 @@ Properties
       Description            = 'A scope (or scope-patterns) which the task is
       authorized to use. This can be a string or a string
       ending with `*` which will authorize all scopes for
-      which the string is a prefix.
+      which the string is a prefix.  Scopes must be composed of
+      printable ASCII characters and spaces.
       '
+      Pattern                = '^[\x20-\x7e]*$'
       Title                  = 'Scope'
       Type                   = 'string'
       TypeName               = 'scopes'
@@ -5242,12 +5252,14 @@ Properties
         '
         Enum                   = '[s3 azure reference error]'
         Title                  = 'Artifact Storage-Type'
+        Type                   = 'string'
         TypeName               = 'storageType'
         IsInputSchema          = 'false'
         IsOutputSchema         = 'false'
         SourceURL              = ''
     Required               = '[storageType name expires contentType]'
     Title                  = 'Artifact Created'
+    Type                   = 'object'
     TypeName               = 'artifact'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
@@ -5271,6 +5283,7 @@ Properties
   Property 'version' =
     Description            = 'Message version'
     Enum                   = '[1]'
+    Type                   = 'integer'
     TypeName               = 'version'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
@@ -5335,6 +5348,7 @@ Properties
   Property 'version' =
     Description            = 'Message version'
     Enum                   = '[1]'
+    Type                   = 'integer'
     TypeName               = 'version'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
@@ -5388,6 +5402,7 @@ Properties
   Property 'version' =
     Description            = 'Message version'
     Enum                   = '[1]'
+    Type                   = 'integer'
     TypeName               = 'version'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
@@ -5429,6 +5444,7 @@ Properties
   Property 'version' =
     Description            = 'Message version'
     Enum                   = '[1]'
+    Type                   = 'integer'
     TypeName               = 'version'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
@@ -5494,6 +5510,7 @@ Properties
   Property 'version' =
     Description            = 'Message version'
     Enum                   = '[1]'
+    Type                   = 'integer'
     TypeName               = 'version'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
@@ -5556,6 +5573,7 @@ Properties
   Property 'version' =
     Description            = 'Message version'
     Enum                   = '[1]'
+    Type                   = 'integer'
     TypeName               = 'version'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
@@ -5606,6 +5624,7 @@ Properties
   Property 'version' =
     Description            = 'Message version'
     Enum                   = '[1]'
+    Type                   = 'integer'
     TypeName               = 'version'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
@@ -5700,10 +5719,11 @@ Properties
       Properties
         Property 'reasonCreated' =
           Description            = 'Reason for the creation of this run,
-          **more reasons may be added in the future**."
+          **more reasons may be added in the future**.
           '
           Enum                   = '[scheduled retry rerun exception]'
           Title                  = 'Reason Created'
+          Type                   = 'string'
           TypeName               = 'reasonCreated'
           IsInputSchema          = 'false'
           IsOutputSchema         = 'false'
@@ -5716,6 +5736,7 @@ Properties
           '
           Enum                   = '[completed failed deadline-exceeded canceled claim-expired worker-shutdown malformed-payload resource-unavailable internal-error]'
           Title                  = 'Reason Resolved'
+          Type                   = 'string'
           TypeName               = 'reasonResolved'
           IsInputSchema          = 'false'
           IsOutputSchema         = 'false'
@@ -5771,6 +5792,7 @@ Properties
           '
           Enum                   = '[pending running completed failed exception]'
           Title                  = 'Run State'
+          Type                   = 'string'
           TypeName               = 'state'
           IsInputSchema          = 'false'
           IsOutputSchema         = 'false'
@@ -5846,6 +5868,7 @@ Properties
     '
     Enum                   = '[unscheduled pending running completed failed exception]'
     Title                  = 'State'
+    Type                   = 'string'
     TypeName               = 'state'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'

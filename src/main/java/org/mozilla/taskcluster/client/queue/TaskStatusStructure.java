@@ -36,9 +36,9 @@ public class TaskStatusStructure {
 
         /**
          * Reason for the creation of this run,
-         * **more reasons may be added in the future**."
+         * **more reasons may be added in the future**.
          */
-        public Object reasonCreated;
+        public String reasonCreated;
 
         /**
          * Reason that run was resolved, this is mainly
@@ -46,7 +46,7 @@ public class TaskStatusStructure {
          * Note, **more reasons may be added in the future**, also this
          * property is only available after the run is resolved.
          */
-        public Object reasonResolved;
+        public String reasonResolved;
 
         /**
          * Date-time at which this run was resolved, ie. when the run changed
@@ -76,7 +76,7 @@ public class TaskStatusStructure {
         /**
          * State of this run
          */
-        public Object state;
+        public String state;
 
         /**
          * Time at which the run expires and is resolved as `failed`, if the
@@ -111,7 +111,7 @@ public class TaskStatusStructure {
      * State of this task. This is just an auxiliary property derived from state
      * of latests run, or `unscheduled` if none.
      */
-    public Object state;
+    public String state;
 
     /**
      * Identifier for a group of tasks scheduled together with this task, by

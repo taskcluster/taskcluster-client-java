@@ -12,5 +12,5 @@ public class TaskDefinedMessage {
     /**
      * Message version
      */
-    public Object version;
+    public int version;
 }
