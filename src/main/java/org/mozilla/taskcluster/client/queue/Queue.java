@@ -191,8 +191,8 @@ public class Queue extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/queue/api-docs/#reclaimTask
      */
-    public CallSummary<EmptyPayload, TaskClaimResponse> reclaimTask(String taskId, String runId) throws APICallFailure {
-        return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/reclaim", TaskClaimResponse.class);
+    public CallSummary<EmptyPayload, TaskClaimResponse1> reclaimTask(String taskId, String runId) throws APICallFailure {
+        return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/reclaim", TaskClaimResponse1.class);
     }
 
     /**

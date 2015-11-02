@@ -5,9 +5,9 @@ import java.util.Date;
 /**
 * Response to a successful task claim
 *
-* See http://schemas.taskcluster.net/queue/v1/task-claim-response.json#
+* See http://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#
 */
-public class TaskClaimResponse {
+public class TaskClaimResponse1 {
 
     /**
      * Temporary credentials granting `task.scopes` and the scope:
@@ -58,7 +58,6 @@ public class TaskClaimResponse {
      * with reason `claim-expired` if the run haven't been reclaimed.
      */
     public Date takenUntil;
-    public TaskDefinition1 task;
 
     /**
      * Identifier for the worker-group within which this run started.
