@@ -118,12 +118,12 @@ public class APITest {
         td.routes = new String[] { "tc-treeherder.mozilla-inbound.bcf29c305519d6e120b2e4d3b8aa33baaf5f0163",
                 "tc-treeherder-stage.mozilla-inbound.bcf29c305519d6e120b2e4d3b8aa33baaf5f0163" };
         td.schedulerId = "junit-test-scheduler";
-        td.scopes = new String[] { "docker-worker:image:taskcluster/builder:0.5.6",
-                "queue:define-task:aws-provisioner-v1/build-c4-2xlarge" };
+        td.scopes = new String[] { "test-worker:image:toastposter/pumpkin:0.5.6" };
 
         Map<String, Object> tags = new HashMap<String, Object>();
         tags.put("createdForUser", "cbook@mozilla.com");
         td.tags = tags;
+        td.priority = "high";
         td.taskGroupId = "dtwuF2n9S-i83G37V9eBuQ";
         td.workerType = "win2008-worker";
 
