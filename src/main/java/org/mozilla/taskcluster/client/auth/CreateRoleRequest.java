@@ -14,7 +14,8 @@ public class CreateRoleRequest {
     public String description;
 
     /**
-     * List of scopes the role grants access to
+     * List of scopes the role grants access to.  Scopes must be composed of
+     * printable ASCII characters and spaces.
      */
     public String[] scopes;
 }

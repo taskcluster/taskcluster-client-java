@@ -38,7 +38,8 @@ public class ExportedClients {
     public String name;
 
     /**
-     * List of scopes the client is authorized to access
+     * List of scopes the client is authorized to access.  Scopes must be
+     * composed of printable ASCII characters and spaces.
      */
     public String[] scopes;
 }
