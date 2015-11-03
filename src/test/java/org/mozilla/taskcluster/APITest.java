@@ -137,5 +137,9 @@ public class APITest {
             e.printStackTrace();
             Assert.fail("Exception thrown");
         }
+
+        System.out.println();
+        System.out.println("Task https://queue.taskcluster.net/v1/task/" + taskId + " created successfully");
+        System.out.println();
     }
 }
