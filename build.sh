@@ -31,4 +31,4 @@ go test -v ./...
 git status
 [ $(git status --porcelain | wc -l) == 0 ]
 
-mvn -e -X clean install
+mvn -e clean install
