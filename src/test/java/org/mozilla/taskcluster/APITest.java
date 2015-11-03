@@ -61,9 +61,7 @@ public class APITest {
             Date aYearAgo = c.getTime();
 
             SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy 'at' HH:mm:ss Z");
-            System.out.println();
-            System.out.println("  => Task " + taskId + " was created on " + sdf.format(created));
-            System.out.println();
+            System.out.println("=> Task " + taskId + " was created on " + sdf.format(created));
             Assert.assertTrue(created.before(inAnHour));
             Assert.assertTrue(created.after(aYearAgo));
 
@@ -138,8 +136,6 @@ public class APITest {
             Assert.fail("Exception thrown");
         }
 
-        System.out.println();
-        System.out.println("Task https://queue.taskcluster.net/v1/task/" + taskId + " created successfully");
-        System.out.println();
+        System.out.println("=> Task https://queue.taskcluster.net/v1/task/" + taskId + " created successfully");
     }
 }
