@@ -2202,6 +2202,286 @@ IsOutputSchema         = 'false'
 SourceURL              = 'http://schemas.taskcluster.net/aws-provisioner/v1/worker-type-message.json#'
 
 
+http://references.taskcluster.net/hooks/v1/api.json
+===================================================
+Version     = '0'
+Title       = 'Hooks API Documentation'
+Description = 'Hooks are a mechanism for creating tasks in response to events.
+
+Hooks are identified with a `hookGroupId` and a `hookId`.
+
+When an event occurs, the resulting task is automatically created.  The
+task is created using the scope `assume:hook-id:<hookGroupId>/<hookId>`,
+which must have scopes to make the createTask call, including satisfying all
+scopes in `task.scopes`.
+
+Hooks can have a 'schedule' indicating specific times that new tasks should
+be created.  Each schedule is in a simple cron format, per 
+https://www.npmjs.com/package/cron-parser.  For example:
+ * `["0 0 1 * * *"]` -- daily at 1:00 UTC
+ * `["0 0 9,21 * * 1-5", "0 0 12 * * 0,6"]` -- weekdays at 9:00 and 21:00 UTC, weekends at noon'
+Base URL    = 'https://hooks.taskcluster.net/v1'
+Entry 0     =
+    Entry Type        = 'function'
+    Entry Method      = 'get'
+    Entry Route       = '/hooks'
+    Entry Args        = '[]'
+    Entry Name        = 'listHookGroups'
+    Entry Scopes      = '[]'
+    Entry Input       = ''
+    Entry Output      = 'http://schemas.taskcluster.net/hooks/v1/list-hook-groups-response.json#'
+    Entry Title       = 'List hook groups'
+    Entry Description = 'This endpoint will return a list of all hook groups with at least one hook.'
+Entry 1     =
+    Entry Type        = 'function'
+    Entry Method      = 'get'
+    Entry Route       = '/hooks/<hookGroupId>'
+    Entry Args        = '[hookGroupId]'
+    Entry Name        = 'listHooks'
+    Entry Scopes      = '[]'
+    Entry Input       = ''
+    Entry Output      = 'http://schemas.taskcluster.net/hooks/v1/list-hooks-response.json#'
+    Entry Title       = 'List hooks in a given group'
+    Entry Description = 'This endpoint will return a list of all the hook definitions within a
+given hook group.'
+Entry 2     =
+    Entry Type        = 'function'
+    Entry Method      = 'get'
+    Entry Route       = '/hooks/<hookGroupId>/<hookId>'
+    Entry Args        = '[hookGroupId hookId]'
+    Entry Name        = 'hook'
+    Entry Scopes      = '[]'
+    Entry Input       = ''
+    Entry Output      = 'http://schemas.taskcluster.net/hooks/v1/hook-definition.json#'
+    Entry Title       = 'Get hook definition'
+    Entry Description = 'This endpoint will return the hook defintion for the given `hookGroupId`
+and hookId.'
+Entry 3     =
+    Entry Type        = 'function'
+    Entry Method      = 'get'
+    Entry Route       = '/hooks/<hookGroupId>/<hookId>/schedule'
+    Entry Args        = '[hookGroupId hookId]'
+    Entry Name        = 'getHookSchedule'
+    Entry Scopes      = '[]'
+    Entry Input       = ''
+    Entry Output      = 'http://schemas.taskcluster.net/hooks/v1/hook-schedule.json#'
+    Entry Title       = 'Get hook schedule'
+    Entry Description = 'This endpoint will return the schedule and next scheduled creation time
+for the given hook.'
+Entry 4     =
+    Entry Type        = 'function'
+    Entry Method      = 'put'
+    Entry Route       = '/hooks/<hookGroupId>/<hookId>'
+    Entry Args        = '[hookGroupId hookId]'
+    Entry Name        = 'createHook'
+    Entry Scopes      = '[[hooks:modify-hook:<hookGroupId>/<hookId> assume:hook-id:<hookGroupId>/<hookId>]]'
+    Entry Input       = 'http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#'
+    Entry Output      = 'http://schemas.taskcluster.net/hooks/v1/hook-definition.json#'
+    Entry Title       = 'Create a hook'
+    Entry Description = 'This endpoint will create a new hook.
+
+The caller's credentials must include the role that will be used to
+create the task.  That role must satisfy task.scopes as well as the
+necessary scopes to add the task to the queue.'
+Entry 5     =
+    Entry Type        = 'function'
+    Entry Method      = 'post'
+    Entry Route       = '/hooks/<hookGroupId>/<hookId>'
+    Entry Args        = '[hookGroupId hookId]'
+    Entry Name        = 'updateHook'
+    Entry Scopes      = '[[hooks:modify-hook:<hookGroupId>/<hookId> assume:hook-id:<hookGroupId>/<hookId>]]'
+    Entry Input       = 'http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#'
+    Entry Output      = 'http://schemas.taskcluster.net/hooks/v1/hook-definition.json#'
+    Entry Title       = 'Update a hook'
+    Entry Description = 'This endpoint will update an existing hook.  All fields except
+`hookGroupId` and `hookId` can be modified.'
+Entry 6     =
+    Entry Type        = 'function'
+    Entry Method      = 'delete'
+    Entry Route       = '/hooks/<hookGroupId>/<hookId>'
+    Entry Args        = '[hookGroupId hookId]'
+    Entry Name        = 'removeHook'
+    Entry Scopes      = '[[hooks:modify-hook:<hookGroupId>/<hookId>]]'
+    Entry Input       = ''
+    Entry Output      = ''
+    Entry Title       = 'Delete a hook'
+    Entry Description = 'This endpoint will remove a hook definition.'
+
+
+http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#
+=================================================================
+Additional Properties  = 'false'
+Description            = 'Definition of a hook that can create tasks at defined times.
+'
+ID                     = 'http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#'
+Properties
+  %!v(PANIC=reflect: call of reflect.Value.IsNil on string Value)Required               = '[metadata task deadline]'
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'Hook creation request'
+Type                   = 'object'
+TypeName               = 'HookCreationRequest'
+IsInputSchema          = 'true'
+IsOutputSchema         = 'false'
+SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#'
+
+
+http://schemas.taskcluster.net/hooks/v1/hook-definition.json#
+=============================================================
+Additional Properties  = 'false'
+Description            = 'Definition of a hook that will create tasks when defined events occur.
+'
+ID                     = 'http://schemas.taskcluster.net/hooks/v1/hook-definition.json#'
+Properties
+  %!v(PANIC=reflect: call of reflect.Value.IsNil on string Value)Required               = '[hookGroupId hookId metadata task schedule expires deadline]'
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'Hook definition'
+Type                   = 'object'
+TypeName               = 'HookDefinition'
+IsInputSchema          = 'false'
+IsOutputSchema         = 'true'
+SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/hook-definition.json#'
+
+
+http://schemas.taskcluster.net/hooks/v1/hook-schedule.json#
+===========================================================
+Additional Properties  = 'false'
+Description            = 'A description of when a hook's task will be created, and the next scheduled time
+'
+ID                     = 'http://schemas.taskcluster.net/hooks/v1/hook-schedule.json#'
+Properties
+  Property 'nextScheduledDate' =
+    Description            = 'The next time this hook's task is scheduled to be created. This property
+    is only present if there is a scheduled next time. Some hooks don't have
+    any schedules.
+    '
+    Format                 = 'date-time'
+    Type                   = 'string'
+    TypeName               = 'nextScheduledDate'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+  Property 'schedule' =
+    Ref                    = 'http://schemas.taskcluster.net/hooks/v1/schedule.json#'
+    TypeName               = 'schedule'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+Required               = '[schedule]'
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'Hook schedule'
+Type                   = 'object'
+TypeName               = 'HookSchedule'
+IsInputSchema          = 'false'
+IsOutputSchema         = 'true'
+SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/hook-schedule.json#'
+
+
+http://schemas.taskcluster.net/hooks/v1/list-hook-groups-response.json#
+=======================================================================
+Additional Properties  = 'false'
+Description            = 'List of `hookGroupIds`.
+'
+ID                     = 'http://schemas.taskcluster.net/hooks/v1/list-hook-groups-response.json#'
+Properties
+  Property 'groups' =
+    Items
+      Type                   = 'string'
+      TypeName               = 'groups'
+      IsInputSchema          = 'false'
+      IsOutputSchema         = 'false'
+      SourceURL              = ''
+    Title                  = 'Groups'
+    Type                   = 'array'
+    TypeName               = 'groups'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+Required               = '[groups]'
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'Hook groups'
+Type                   = 'object'
+TypeName               = 'HookGroups'
+IsInputSchema          = 'false'
+IsOutputSchema         = 'true'
+SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/list-hook-groups-response.json#'
+
+
+http://schemas.taskcluster.net/hooks/v1/list-hooks-response.json#
+=================================================================
+Additional Properties  = 'false'
+Description            = 'List of hooks
+'
+ID                     = 'http://schemas.taskcluster.net/hooks/v1/list-hooks-response.json#'
+Properties
+  Property 'hooks' =
+    Items
+      Ref                    = 'http://schemas.taskcluster.net/hooks/v1/hook-definition.json#'
+      TypeName               = 'hooks'
+      IsInputSchema          = 'false'
+      IsOutputSchema         = 'false'
+      SourceURL              = ''
+    Title                  = 'Hooks'
+    Type                   = 'array'
+    TypeName               = 'hooks'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+Required               = '[hooks]'
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'Hook list'
+Type                   = 'object'
+TypeName               = 'HookList'
+IsInputSchema          = 'false'
+IsOutputSchema         = 'true'
+SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/list-hooks-response.json#'
+
+
+http://schemas.taskcluster.net/hooks/v1/schedule.json#
+======================================================
+Default                = '[]'
+Description            = 'Definition of the times at which a hook will result in creation of a task.
+If several patterns are specified, tasks will be created at any time
+specified by one or more patterns.
+'
+ID                     = 'http://schemas.taskcluster.net/hooks/v1/schedule.json#'
+Items
+  Description            = 'Cron-like specification for when tasks should be created.  The pattern is
+  parsed in a UTC context.
+  See [cron-parser on npm](https://www.npmjs.com/package/cron-parser).
+  Note that tasks may not be created at exactly the time specified.
+  '
+  Title                  = 'Cron Pattern'
+  Type                   = 'string'
+  TypeName               = 'Hookschedule'
+  IsInputSchema          = 'false'
+  IsOutputSchema         = 'false'
+  SourceURL              = ''
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'Hook schedule'
+Type                   = 'array'
+TypeName               = 'String'
+IsInputSchema          = 'false'
+IsOutputSchema         = 'false'
+SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/schedule.json#'
+
+
+http://schemas.taskcluster.net/queue/v1/create-task-request.json#
+=================================================================
+Additional Properties  = 'false'
+Description            = 'Definition of a task that can be scheduled
+'
+ID                     = 'http://schemas.taskcluster.net/queue/v1/create-task-request.json#'
+Properties
+  %!v(PANIC=reflect: call of reflect.Value.IsNil on string Value)Required               = '[provisionerId workerType created deadline payload metadata]'
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'Task Definition'
+Type                   = 'object'
+TypeName               = 'TaskDefinition'
+IsInputSchema          = 'false'
+IsOutputSchema         = 'false'
+SourceURL              = 'http://schemas.taskcluster.net/queue/v1/create-task-request.json#'
+
+
 http://references.taskcluster.net/index/v1/api.json
 ===================================================
 Version     = '0'
