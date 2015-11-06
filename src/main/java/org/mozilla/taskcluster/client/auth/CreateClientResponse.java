@@ -32,7 +32,8 @@ public class CreateClientResponse {
     public String description;
 
     /**
-     * List of scopes granted to this client by matching roles.
+     * List of scopes granted to this client by matching roles.  Scopes must be
+     * composed of printable ASCII characters and spaces.
      */
     public String[] expandedScopes;
 
