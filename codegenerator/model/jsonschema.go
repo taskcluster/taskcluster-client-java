@@ -3,11 +3,12 @@ package model
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/taskcluster/taskcluster-client-java/codegenerator/utils"
 	"reflect"
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/taskcluster/taskcluster-client-java/codegenerator/utils"
 )
 
 type (
@@ -21,7 +22,7 @@ type (
 		AdditionalProperties *AdditionalProperties `json:"additionalProperties"`
 		AllOf                Items                 `json:"allOf"`
 		AnyOf                Items                 `json:"anyOf"`
-		Default              interface{}           `json:"default"`
+		Default              *interface{}          `json:"default"`
 		Description          *string               `json:"description"`
 		Enum                 interface{}           `json:"enum"`
 		Format               *string               `json:"format"`
@@ -181,6 +182,11 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, ex
 		extraPackages["java.util.Date"] = true
 	}
 	content += typ
+	// horrible hack until I have fixed the bug properly
+	if content == "HookSchedule1" {
+		content = "String[]"
+		typ = ""
+	}
 	return content, extraPackages, typ
 }
 
