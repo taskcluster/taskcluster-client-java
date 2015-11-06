@@ -15,5 +15,5 @@ public class HookSchedule {
      * any schedules.
      */
     public Date nextScheduledDate;
-    public HookSchedule1 schedule;
+    public String[] schedule;
 }
