@@ -2,6 +2,7 @@ org.mozilla.taskcluster.client
 org.mozilla.taskcluster.client.auth
 org.mozilla.taskcluster.client.awsprovisioner
 org.mozilla.taskcluster.client.awsprovisionerevents
+org.mozilla.taskcluster.client.hooks
 org.mozilla.taskcluster.client.index
 org.mozilla.taskcluster.client.purgecache
 org.mozilla.taskcluster.client.purgecacheevents
