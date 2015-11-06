@@ -116,7 +116,13 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, ex
 		typ = *p
 	}
 	if p := jsonSubSchema.RefSubSchema; p != nil {
-		typ = p.TypeName
+		_, _, possSimpleType := p.TypeDefinition(1, true, make(map[string]bool))
+		switch possSimpleType {
+		case "":
+			typ = p.TypeName
+		default:
+			typ = possSimpleType
+		}
 	}
 	switch typ {
 	case "array":
@@ -128,8 +134,7 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, ex
 					content += newType
 				}
 			} else {
-				typ = ""
-				content += newType + "[]"
+				typ = newType + "[]"
 			}
 		} else {
 			if refSubSchema := jsonSubSchema.Items.RefSubSchema; refSubSchema != nil {
@@ -182,11 +187,6 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, fromArray bool, ex
 		extraPackages["java.util.Date"] = true
 	}
 	content += typ
-	// horrible hack until I have fixed the bug properly
-	if content == "HookSchedule1" {
-		content = "String[]"
-		typ = ""
-	}
 	return content, extraPackages, typ
 }
 
