@@ -15,7 +15,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.index.Index;
 import org.mozilla.taskcluster.client.queue.Queue;
-import org.mozilla.taskcluster.client.queue.TaskDefinition;
+import org.mozilla.taskcluster.client.queue.TaskDefinitionRequest;
 import org.mozilla.taskcluster.client.queue.TaskStatusResponse;
 
 import net.iharder.Base64;
@@ -89,7 +89,7 @@ public class APITest {
             queue = new Queue(clientId, accessToken, certificate);
         }
         String taskId = slug();
-        TaskDefinition td = new TaskDefinition();
+        TaskDefinitionRequest td = new TaskDefinitionRequest();
         td.created = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(td.created);
@@ -126,7 +126,7 @@ public class APITest {
         td.workerType = "win2008-worker";
 
         try {
-            CallSummary<TaskDefinition, TaskStatusResponse> cs = queue.defineTask(taskId, td);
+            CallSummary<TaskDefinitionRequest, TaskStatusResponse> cs = queue.defineTask(taskId, td);
             Assert.assertEquals(cs.requestPayload.provisionerId, "win-provisioner");
             Assert.assertEquals(cs.responsePayload.status.schedulerId, "junit-test-scheduler");
             Assert.assertEquals(cs.responsePayload.status.retriesLeft, 5);
