@@ -7,7 +7,7 @@ import java.util.Date;
 *
 * See http://schemas.taskcluster.net/queue/v1/create-task-request.json#
 */
-public class TaskDefinition {
+public class TaskDefinitionRequest {
 
     /**
      * Creation time of task
@@ -81,11 +81,12 @@ public class TaskDefinition {
     public Object payload;
 
     /**
-     * Priority of task, this defaults to `normal` and the scope
-     * `queue:task-priority:high` is required to define a task with `priority`
-     * set to `high`. Additional priority levels may be added later.
+     * Priority of task, this defaults to `normal`. Additional levels may be
+     * added later.
+     * **Task submitter required scopes** `queue:task-priority:high` for high
+     * priority tasks.
      */
-    public Object priority;
+    public String priority;
 
     /**
      * Unique identifier for a provisioner, that can supply specified
@@ -102,15 +103,18 @@ public class TaskDefinition {
 
     /**
      * List of task specific routes, AMQP messages will be CC'ed to these routes.
+     * **Task submitter required scopes** `queue:route:<route>` for
+     * each route given.
      */
     public String[] routes;
 
     /**
      * Identifier for the scheduler that _defined_ this task, this can be an
      * identifier for a user or a service like the `"task-graph-scheduler"`.
-     * Along with the `taskGroupId` this is used to form the permission scope
-     * `queue:assume:scheduler-id:<schedulerId>/<taskGroupId>`,
-     * this scope is necessary to _schedule_ a defined task, or _rerun_ a task.
+     * **Task submitter required scopes**
+     * `queue:assume:scheduler-id:<schedulerId>/<taskGroupId>`.
+     * This scope is also necessary to _schedule_ a defined task, or _rerun_ a
+     * task.
      */
     public String schedulerId;
 

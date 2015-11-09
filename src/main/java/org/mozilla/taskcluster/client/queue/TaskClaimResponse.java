@@ -58,7 +58,7 @@ public class TaskClaimResponse {
      * with reason `claim-expired` if the run haven't been reclaimed.
      */
     public Date takenUntil;
-    public TaskDefinition1 task;
+    public TaskDefinitionResponse task;
 
     /**
      * Identifier for the worker-group within which this run started.

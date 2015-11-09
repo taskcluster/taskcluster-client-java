@@ -1,13 +1,13 @@
-package org.mozilla.taskcluster.client.hooks;
+package org.mozilla.taskcluster.client.queue;
 
 import java.util.Date;
 
 /**
 * Definition of a task that can be scheduled
 *
-* See http://schemas.taskcluster.net/queue/v1/create-task-request.json#
+* See http://schemas.taskcluster.net/queue/v1/task.json#
 */
-public class TaskDefinition {
+public class TaskDefinitionResponse {
 
     /**
      * Creation time of task
@@ -85,7 +85,7 @@ public class TaskDefinition {
      * `queue:task-priority:high` is required to define a task with `priority`
      * set to `high`. Additional priority levels may be added later.
      */
-    public Object priority;
+    public String priority;
 
     /**
      * Unique identifier for a provisioner, that can supply specified

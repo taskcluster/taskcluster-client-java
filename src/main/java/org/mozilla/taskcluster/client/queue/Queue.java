@@ -49,8 +49,8 @@ public class Queue extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/queue/api-docs/#task
      */
-    public CallSummary<EmptyPayload, TaskDefinition1> task(String taskId) throws APICallFailure {
-        return apiCall(null, "GET", "/task/" + uriEncode(taskId), TaskDefinition1.class);
+    public CallSummary<EmptyPayload, TaskDefinitionResponse> task(String taskId) throws APICallFailure {
+        return apiCall(null, "GET", "/task/" + uriEncode(taskId), TaskDefinitionResponse.class);
     }
 
     /**
@@ -76,15 +76,17 @@ public class Queue extends TaskClusterRequestHandler {
      * 
      * **Task specific routing-keys**, using the `task.routes` property you may
      * define task specific routing-keys. If a task has a task specific 
-     * routing-key: `<route>`, then the poster will be required to posses the
-     * scope `queue:route:<route>`. And when the an AMQP message about the task
-     * is published the message will be CC'ed with the routing-key: 
+     * routing-key: `<route>`, then when the AMQP message about the task is
+     * published, the message will be CC'ed with the routing-key: 
      * `route.<route>`. This is useful if you want another component to listen
      * for completed tasks you have posted.
+     * 
+     * **Important** Any scopes the task requires are also required for creating
+     * the task. Please see the Request Payload (Task Definition) for details.
      *
      * See http://docs.taskcluster.net/queue/api-docs/#createTask
      */
-    public CallSummary<TaskDefinition, TaskStatusResponse> createTask(String taskId, TaskDefinition payload) throws APICallFailure {
+    public CallSummary<TaskDefinitionRequest, TaskStatusResponse> createTask(String taskId, TaskDefinitionRequest payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/task/" + uriEncode(taskId), TaskStatusResponse.class);
     }
 
@@ -101,12 +103,15 @@ public class Queue extends TaskClusterRequestHandler {
      * the task by calling `/task/:taskId/schedule`. This eliminates the need to
      * store tasks somewhere else while waiting for dependencies to resolve.
      * 
+     * **Important** Any scopes the task requires are also required for defining
+     * the task. Please see the Request Payload (Task Definition) for details.
+     * 
      * **Note** this operation is **idempotent**, as long as you upload the same
      * task definition as previously defined this operation is safe to retry.
      *
      * See http://docs.taskcluster.net/queue/api-docs/#defineTask
      */
-    public CallSummary<TaskDefinition, TaskStatusResponse> defineTask(String taskId, TaskDefinition payload) throws APICallFailure {
+    public CallSummary<TaskDefinitionRequest, TaskStatusResponse> defineTask(String taskId, TaskDefinitionRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/task/" + uriEncode(taskId) + "/define", TaskStatusResponse.class);
     }
 
@@ -191,8 +196,8 @@ public class Queue extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/queue/api-docs/#reclaimTask
      */
-    public CallSummary<EmptyPayload, TaskClaimResponse1> reclaimTask(String taskId, String runId) throws APICallFailure {
-        return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/reclaim", TaskClaimResponse1.class);
+    public CallSummary<EmptyPayload, TaskReclaimResponse> reclaimTask(String taskId, String runId) throws APICallFailure {
+        return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/reclaim", TaskReclaimResponse.class);
     }
 
     /**

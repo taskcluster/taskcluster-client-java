@@ -47,5 +47,5 @@ public class HookDefinition {
 
     public Metadata metadata;
     public String[] schedule;
-    public TaskDefinition task;
+    public TaskDefinitionRequest task;
 }

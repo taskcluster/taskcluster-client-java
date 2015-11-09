@@ -51,5 +51,5 @@ public class HookCreationRequest {
      * specified by one or more patterns.
      */
     public String[] schedule;
-    public TaskDefinition task;
+    public TaskDefinitionRequest task;
 }

@@ -7,7 +7,7 @@ import java.util.Date;
 *
 * See http://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#
 */
-public class TaskClaimResponse1 {
+public class TaskReclaimResponse {
 
     /**
      * Temporary credentials granting `task.scopes` and the scope:
