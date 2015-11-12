@@ -82,8 +82,8 @@ public class Hooks extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/services/hooks/#getHookSchedule
      */
-    public CallSummary<EmptyPayload, HookSchedule> getHookSchedule(String hookGroupId, String hookId) throws APICallFailure {
-        return apiCall(null, "GET", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/schedule", HookSchedule.class);
+    public CallSummary<EmptyPayload, HookScheduleResponse> getHookSchedule(String hookGroupId, String hookId) throws APICallFailure {
+        return apiCall(null, "GET", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/schedule", HookScheduleResponse.class);
     }
 
     /**

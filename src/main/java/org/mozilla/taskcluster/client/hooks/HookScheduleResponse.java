@@ -7,7 +7,7 @@ import java.util.Date;
 *
 * See http://schemas.taskcluster.net/hooks/v1/hook-schedule.json#
 */
-public class HookSchedule {
+public class HookScheduleResponse {
 
     /**
      * The next time this hook's task is scheduled to be created. This property

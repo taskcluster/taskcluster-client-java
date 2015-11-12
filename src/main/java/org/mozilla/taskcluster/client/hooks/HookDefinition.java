@@ -46,6 +46,14 @@ public class HookDefinition {
     }
 
     public Metadata metadata;
-    public String[] schedule;
+
+    /**
+     * Definition of the times at which a hook will result in creation of a task.
+     * If several patterns are specified, tasks will be created at any time
+     * specified by one or more patterns.  Note that tasks may not be created
+     * at exactly the time specified.
+     *                     {$ref: "http://schemas.taskcluster.net/hooks/v1/schedule.json"}
+     */
+    public Object schedule;
     public TaskDefinitionRequest task;
 }
