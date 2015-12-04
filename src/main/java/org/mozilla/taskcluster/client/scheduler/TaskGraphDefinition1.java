@@ -8,7 +8,7 @@ package org.mozilla.taskcluster.client.scheduler;
 public class TaskGraphDefinition1 {
 
     /**
-     * Required task metadata"
+     * Required task metadata
      */
     public class Metadata {
 
