@@ -34,6 +34,11 @@ public class TaskExceptionRequest {
      * error from which it couldn't recover. The queue will not retry runs
      * resolved with this reason, but you are clearly signaling that this is a
      * bug in the worker code.
+     * **Report `superseded`** if the task was determined to have been
+     * superseded by another task, and its results are no longer needed.  It is
+     * convention in this case to create an artifact entitled
+     * `public/superseded-by` containing the taskId of the task that superseded
+     * this one.
      */
     public String reason;
 }
