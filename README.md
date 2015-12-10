@@ -16,6 +16,9 @@ A java port of taskcluster-client.
 * [AWS Provisioner](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/awsprovisioner/AwsProvisioner.html)  
   The AWS Provisioner is responsible for provisioning instances on EC2 for use in TaskCluster.
 
+* [Github](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/github/Github.html)  
+  The Github service is responsible for publishing pulse messages for supported Github events.
+
 * [Hooks](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/hooks/Hooks.html)  
   Hooks are a mechanism for creating tasks in response to events.
 
