@@ -55,5 +55,5 @@ public class HookDefinition {
      *                     {$ref: "http://schemas.taskcluster.net/hooks/v1/schedule.json"}
      */
     public Object schedule;
-    public TaskDefinitionRequest task;
+    public TaskTemplate task;
 }
