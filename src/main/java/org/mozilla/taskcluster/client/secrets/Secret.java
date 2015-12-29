@@ -7,7 +7,7 @@ import java.util.Date;
 *
 * See http://schemas.taskcluster.net/secrets/v1/secret.json#
 */
-public class ATaskClusterSecret {
+public class Secret {
 
     /**
      * An expiration date for this secret.

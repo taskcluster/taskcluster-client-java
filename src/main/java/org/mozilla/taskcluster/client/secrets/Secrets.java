@@ -41,7 +41,7 @@ public class Secrets extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/services/secrets/#set
      */
-    public CallSummary<ATaskClusterSecret, EmptyPayload> set(String name, ATaskClusterSecret payload) throws APICallFailure {
+    public CallSummary<Secret, EmptyPayload> set(String name, Secret payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/secrets/" + uriEncode(name), EmptyPayload.class);
     }
 
@@ -50,7 +50,7 @@ public class Secrets extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/services/secrets/#update
      */
-    public CallSummary<ATaskClusterSecret, EmptyPayload> update(String name, ATaskClusterSecret payload) throws APICallFailure {
+    public CallSummary<Secret, EmptyPayload> update(String name, Secret payload) throws APICallFailure {
         return apiCall(payload, "POST", "/secrets/" + uriEncode(name), EmptyPayload.class);
     }
 
@@ -68,8 +68,8 @@ public class Secrets extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/services/secrets/#get
      */
-    public CallSummary<EmptyPayload, ATaskClusterSecret> get(String name) throws APICallFailure {
-        return apiCall(null, "GET", "/secrets/" + uriEncode(name), ATaskClusterSecret.class);
+    public CallSummary<EmptyPayload, Secret> get(String name) throws APICallFailure {
+        return apiCall(null, "GET", "/secrets/" + uriEncode(name), Secret.class);
     }
 
     /**
