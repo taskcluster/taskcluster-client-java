@@ -10,9 +10,9 @@ import org.mozilla.taskcluster.client.EmptyPayload;
 import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 
 /**
- * The secrets service, typically available at
- * `tools.taskcluster.net`, is responsible for managing
- * secure data in TaskCluster.
+ * The secrets service, is a simple key/value store for secret data
+ * guarded by TaskCluster scopes.  It is typically available at
+ * `secrets.taskcluster.net`.
  *
  * See: http://docs.taskcluster.net/services/secrets
  */
@@ -70,6 +70,15 @@ public class Secrets extends TaskClusterRequestHandler {
      */
     public CallSummary<EmptyPayload, Secret> get(String name) throws APICallFailure {
         return apiCall(null, "GET", "/secrets/" + uriEncode(name), Secret.class);
+    }
+
+    /**
+     * List the names of all visible secrets.
+     *
+     * See http://docs.taskcluster.net/services/secrets/#list
+     */
+    public CallSummary<EmptyPayload, AListOfTaskClusterSecrets> list() throws APICallFailure {
+        return apiCall(null, "GET", "/secrets", AListOfTaskClusterSecrets.class);
     }
 
     /**
