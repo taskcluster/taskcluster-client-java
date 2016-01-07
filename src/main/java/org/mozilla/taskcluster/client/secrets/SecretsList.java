@@ -5,7 +5,7 @@ package org.mozilla.taskcluster.client.secrets;
 *
 * See http://schemas.taskcluster.net/secrets/v1/secret-list.json#
 */
-public class AListOfTaskClusterSecrets {
+public class SecretsList {
 
     /**
      * Secret names

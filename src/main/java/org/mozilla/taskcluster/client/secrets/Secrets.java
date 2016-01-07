@@ -42,7 +42,7 @@ public class Secrets extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/services/secrets/#set
      */
     public CallSummary<Secret, EmptyPayload> set(String name, Secret payload) throws APICallFailure {
-        return apiCall(payload, "PUT", "/secrets/" + uriEncode(name), EmptyPayload.class);
+        return apiCall(payload, "PUT", "/secret/" + uriEncode(name), EmptyPayload.class);
     }
 
     /**
@@ -51,7 +51,7 @@ public class Secrets extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/services/secrets/#update
      */
     public CallSummary<Secret, EmptyPayload> update(String name, Secret payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/secrets/" + uriEncode(name), EmptyPayload.class);
+        return apiCall(payload, "POST", "/secret/" + uriEncode(name), EmptyPayload.class);
     }
 
     /**
@@ -60,7 +60,7 @@ public class Secrets extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/services/secrets/#remove
      */
     public CallSummary<EmptyPayload, EmptyPayload> remove(String name) throws APICallFailure {
-        return apiCall(null, "DELETE", "/secrets/" + uriEncode(name), EmptyPayload.class);
+        return apiCall(null, "DELETE", "/secret/" + uriEncode(name), EmptyPayload.class);
     }
 
     /**
@@ -69,7 +69,7 @@ public class Secrets extends TaskClusterRequestHandler {
      * See http://docs.taskcluster.net/services/secrets/#get
      */
     public CallSummary<EmptyPayload, Secret> get(String name) throws APICallFailure {
-        return apiCall(null, "GET", "/secrets/" + uriEncode(name), Secret.class);
+        return apiCall(null, "GET", "/secret/" + uriEncode(name), Secret.class);
     }
 
     /**
@@ -77,8 +77,8 @@ public class Secrets extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/services/secrets/#list
      */
-    public CallSummary<EmptyPayload, AListOfTaskClusterSecrets> list() throws APICallFailure {
-        return apiCall(null, "GET", "/secrets", AListOfTaskClusterSecrets.class);
+    public CallSummary<EmptyPayload, SecretsList> list() throws APICallFailure {
+        return apiCall(null, "GET", "/secrets", SecretsList.class);
     }
 
     /**
