@@ -77,6 +77,16 @@ public class Hooks extends TaskClusterRequestHandler {
     }
 
     /**
+     * This endpoint will return the current status of the hook.  This represents a
+     * snapshot in time and may vary from one call to the next.
+     *
+     * See http://docs.taskcluster.net/services/hooks/#getHookStatus
+     */
+    public CallSummary<EmptyPayload, HookStatusResponse> getHookStatus(String hookGroupId, String hookId) throws APICallFailure {
+        return apiCall(null, "GET", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/status", HookStatusResponse.class);
+    }
+
+    /**
      * This endpoint will return the schedule and next scheduled creation time
      * for the given hook.
      *

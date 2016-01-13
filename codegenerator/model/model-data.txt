@@ -2486,6 +2486,18 @@ and hookId.'
 Entry 3     =
     Entry Type        = 'function'
     Entry Method      = 'get'
+    Entry Route       = '/hooks/<hookGroupId>/<hookId>/status'
+    Entry Args        = '[hookGroupId hookId]'
+    Entry Name        = 'getHookStatus'
+    Entry Scopes      = '[]'
+    Entry Input       = ''
+    Entry Output      = 'http://schemas.taskcluster.net/hooks/v1/hook-status.json#'
+    Entry Title       = 'Get hook status'
+    Entry Description = 'This endpoint will return the current status of the hook.  This represents a
+snapshot in time and may vary from one call to the next.'
+Entry 4     =
+    Entry Type        = 'function'
+    Entry Method      = 'get'
     Entry Route       = '/hooks/<hookGroupId>/<hookId>/schedule'
     Entry Args        = '[hookGroupId hookId]'
     Entry Name        = 'getHookSchedule'
@@ -2495,7 +2507,7 @@ Entry 3     =
     Entry Title       = 'Get hook schedule'
     Entry Description = 'This endpoint will return the schedule and next scheduled creation time
 for the given hook.'
-Entry 4     =
+Entry 5     =
     Entry Type        = 'function'
     Entry Method      = 'put'
     Entry Route       = '/hooks/<hookGroupId>/<hookId>'
@@ -2510,7 +2522,7 @@ Entry 4     =
 The caller's credentials must include the role that will be used to
 create the task.  That role must satisfy task.scopes as well as the
 necessary scopes to add the task to the queue.'
-Entry 5     =
+Entry 6     =
     Entry Type        = 'function'
     Entry Method      = 'post'
     Entry Route       = '/hooks/<hookGroupId>/<hookId>'
@@ -2522,7 +2534,7 @@ Entry 5     =
     Entry Title       = 'Update a hook'
     Entry Description = 'This endpoint will update an existing hook.  All fields except
 `hookGroupId` and `hookId` can be modified.'
-Entry 6     =
+Entry 7     =
     Entry Type        = 'function'
     Entry Method      = 'delete'
     Entry Route       = '/hooks/<hookGroupId>/<hookId>'
@@ -2797,6 +2809,133 @@ TypeName               = 'HookScheduleResponse'
 IsInputSchema          = 'false'
 IsOutputSchema         = 'true'
 SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/hook-schedule.json#'
+
+
+http://schemas.taskcluster.net/hooks/v1/hook-status.json#
+=========================================================
+Additional Properties  = 'false'
+Description            = 'A snapshot of the current status of a hook.
+'
+ID                     = 'http://schemas.taskcluster.net/hooks/v1/hook-status.json#'
+Properties
+  Property 'lastFire' =
+    Description            = 'Information about the last time this hook fired.  This property is only present
+    if the hook has fired at least once.
+    '
+    OneOf
+      Item '0' =
+        Additional Properties  = 'false'
+        Description            = 'Information about a successful firing of the hook'
+        Properties
+          Property 'result' =
+            Enum                   = '[success]'
+            Type                   = 'string'
+            TypeName               = 'result'
+            IsInputSchema          = 'false'
+            IsOutputSchema         = 'false'
+            SourceURL              = ''
+          Property 'taskId' =
+            Description            = 'The task created'
+            Pattern                = '^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$'
+            Type                   = 'string'
+            TypeName               = 'taskId'
+            IsInputSchema          = 'false'
+            IsOutputSchema         = 'false'
+            SourceURL              = ''
+          Property 'time' =
+            Description            = 'The time the task was created.  This will not necessarily match `task.created`.
+            '
+            Format                 = 'date-time'
+            Type                   = 'string'
+            TypeName               = 'time'
+            IsInputSchema          = 'false'
+            IsOutputSchema         = 'false'
+            SourceURL              = ''
+        Required               = '[result taskId time]'
+        Title                  = 'Successful Fire'
+        Type                   = 'object'
+        TypeName               = 'SuccessfulFire'
+        IsInputSchema          = 'false'
+        IsOutputSchema         = 'false'
+        SourceURL              = ''
+      Item '1' =
+        Additional Properties  = 'false'
+        Description            = 'Information about an unsuccesful firing of the hook'
+        Properties
+          Property 'error' =
+            Description            = 'The error that occurred when firing the task.  This is typically,
+            but not always, an API error message.
+            '
+            Type                   = 'object'
+            TypeName               = 'error'
+            IsInputSchema          = 'false'
+            IsOutputSchema         = 'false'
+            SourceURL              = ''
+          Property 'result' =
+            Enum                   = '[error]'
+            Type                   = 'string'
+            TypeName               = 'result'
+            IsInputSchema          = 'false'
+            IsOutputSchema         = 'false'
+            SourceURL              = ''
+          Property 'time' =
+            Description            = 'The time the task was created.  This will not necessarily match `task.created`.
+            '
+            Format                 = 'date-time'
+            Type                   = 'string'
+            TypeName               = 'time'
+            IsInputSchema          = 'false'
+            IsOutputSchema         = 'false'
+            SourceURL              = ''
+        Required               = '[result error time]'
+        Title                  = 'Failed Fire'
+        Type                   = 'object'
+        TypeName               = 'FailedFire'
+        IsInputSchema          = 'false'
+        IsOutputSchema         = 'false'
+        SourceURL              = ''
+      Item '2' =
+        Additional Properties  = 'false'
+        Description            = 'Information about no firing of the hook (e.g., a new hook)'
+        Properties
+          Property 'result' =
+            Enum                   = '[no-fire]'
+            Type                   = 'string'
+            TypeName               = 'result'
+            IsInputSchema          = 'false'
+            IsOutputSchema         = 'false'
+            SourceURL              = ''
+        Required               = '[result]'
+        Title                  = 'No Fire'
+        Type                   = 'object'
+        TypeName               = 'NoFire'
+        IsInputSchema          = 'false'
+        IsOutputSchema         = 'false'
+        SourceURL              = ''
+    Type                   = 'object'
+    TypeName               = 'lastFire'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+  Property 'nextScheduledDate' =
+    Description            = 'The next time this hook's task is scheduled to be created. This property
+    is only present if there is a scheduled next time. Some hooks don't have
+    any schedules.
+    '
+    Format                 = 'date-time'
+    Type                   = 'string'
+    TypeName               = 'nextScheduledDate'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+Required               = '[lastFire]'
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'Hook status response'
+Type                   = 'object'
+TypeName               = 'HookStatusResponse'
+IsInputSchema          = 'false'
+IsOutputSchema         = 'true'
+SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/hook-status.json#'
 
 
 http://schemas.taskcluster.net/hooks/v1/list-hook-groups-response.json#
