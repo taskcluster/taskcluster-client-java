@@ -63,6 +63,30 @@ public class Queue extends TaskClusterRequestHandler {
     }
 
     /**
+     * List taskIds of all tasks sharing the same `taskGroupId`.
+     * 
+     * As a task-group main contain an unbounded number of tasks, this end-point
+     * may return a `continuationToken`. To continue listing tasks you must
+     * `listTaskGroup` again with the `continuationToken` as the query-string
+     * option `continuationToken`.
+     * 
+     * By default this end-point will try to return up to 1000 members in one
+     * request. But it **may return less**, even if more tasks are available.
+     * It may also return a `continuationToken` even though there are no more
+     * results. However, you can only be sure to have seen all results if you
+     * keep calling `listTaskGroup` with the last `continationToken` until you
+     * get a result without a `continuationToken`.
+     * 
+     * If you're not interested in listing all the members at once, you may
+     * use the query-string option `limit` to return fewer.
+     *
+     * See http://docs.taskcluster.net/queue/api-docs/#listTaskGroup
+     */
+    public CallSummary<EmptyPayload, ListTaskGroupResponse> listTaskGroup(String taskGroupId) throws APICallFailure {
+        return apiCall(null, "GET", "/task-group/" + uriEncode(taskGroupId) + "/list", ListTaskGroupResponse.class);
+    }
+
+    /**
      * Create a new task, this is an **idempotent** operation, so repeat it if
      * you get an internal server error or network connection is dropped.
      * 
