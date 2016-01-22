@@ -21,7 +21,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  */
 public class Github extends TaskClusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://taskcluster-github.herokuapp.com/v1";
+    protected static final String defaultBaseURL = "https://github.taskcluster.net/v1";
 
     public Github(String clientId, String accessToken) {
         super(clientId, accessToken, defaultBaseURL);
