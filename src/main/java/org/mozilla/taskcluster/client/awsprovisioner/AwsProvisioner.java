@@ -258,6 +258,15 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
+     * **Warning** this api end-point is **not stable**.
+     *
+     * See http://docs.taskcluster.net/aws-provisioner/api-docs/#backendStatus
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> backendStatus() throws APICallFailure {
+        return apiCall(null, "GET", "/backend-status", EmptyPayload.class);
+    }
+
+    /**
      * Get an API reference!
      * 
      * **Warning** this api end-point is **not stable**.
