@@ -396,9 +396,13 @@ public class Queue extends TaskClusterRequestHandler {
     }
 
     /**
-     * Documented later...
-     * This probably the end-point that will remain after rewriting to azure
-     * queue storage...
+     * Get an approximate number of pending tasks for the given `provisionerId`
+     * and `workerType`.
+     * 
+     * The underlying Azure Storage Queues only promises to give us an estimate.
+     * Furthermore, we cache the result in memory for 20 seconds. So consumers
+     * should be no means expect this to be an accurate number.
+     * It is, however, a solid estimate of the number of pending tasks.
      *
      * See http://docs.taskcluster.net/queue/api-docs/#pendingTasks
      */

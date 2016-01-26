@@ -4442,14 +4442,17 @@ Entry 19    =
     Entry Route       = '/pending/<provisionerId>/<workerType>'
     Entry Args        = '[provisionerId workerType]'
     Entry Name        = 'pendingTasks'
-    Entry Scopes      = '[[queue:pending-tasks:<provisionerId>/<workerType>]]'
+    Entry Scopes      = '[]'
     Entry Input       = ''
     Entry Output      = 'http://schemas.taskcluster.net/queue/v1/pending-tasks-response.json#'
     Entry Title       = 'Get Number of Pending Tasks'
-    Entry Description = 'Documented later...
-This probably the end-point that will remain after rewriting to azure
-queue storage...
-'
+    Entry Description = 'Get an approximate number of pending tasks for the given `provisionerId`
+and `workerType`.
+
+The underlying Azure Storage Queues only promises to give us an estimate.
+Furthermore, we cache the result in memory for 20 seconds. So consumers
+should be no means expect this to be an accurate number.
+It is, however, a solid estimate of the number of pending tasks.'
 Entry 20    =
     Entry Type        = 'function'
     Entry Method      = 'get'
