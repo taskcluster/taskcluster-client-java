@@ -19,4 +19,10 @@ public class CreateClientRequest {
      * Date and time where the clients access is set to expire
      */
     public Date expires;
+
+    /**
+     * List of scopes the client has.  Scopes must be composed of
+     * printable ASCII characters and spaces.
+     */
+    public String[] scopes;
 }

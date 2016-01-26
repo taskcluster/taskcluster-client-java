@@ -32,8 +32,14 @@ public class CreateClientResponse {
     public String description;
 
     /**
-     * List of scopes granted to this client by matching roles.  Scopes must be
-     * composed of printable ASCII characters and spaces.
+     * If true, this client is disabled and cannot be used.  This usually occurs when the
+     * scopes avaialble to the user owning the client no longer satisfy the client.
+     */
+    public boolean disabled;
+
+    /**
+     * List of scopes granted to this client by matching roles, including the
+     * client's scopes and the implicit role `client-id:<clientId>`.
      */
     public String[] expandedScopes;
 
@@ -58,4 +64,10 @@ public class CreateClientResponse {
      * Date and time of when the `accessToken` was reset last time.
      */
     public Date lastRotated;
+
+    /**
+     * List of scopes the client has (unexpanded).  Scopes must be composed of
+     * printable ASCII characters and spaces.
+     */
+    public String[] scopes;
 }

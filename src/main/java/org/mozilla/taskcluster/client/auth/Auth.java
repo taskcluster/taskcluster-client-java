@@ -19,15 +19,15 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  * 
  * ### Clients
  * The authentication service manages _clients_, at a high-level each client
- * consists of a `clientId`, an `accessToken`, expiration and description.
+ * consists of a `clientId`, an `accessToken`, scopes, and some metadata.
  * The `clientId` and `accessToken` can be used for authentication when
  * calling TaskCluster APIs.
  * 
- * Each client is assigned a single scope on the form:
- * `assume:client-id:<clientId>`, this scope doesn't really do much on its
- * own. But when you dive into the roles section you'll see that you can
- * create a role: `client-id:<clientId>` that assigns scopes to the client.
- * This way it's easy to audit all scope assignments, by only listing roles.
+ * The client's scopes control the client's access to TaskCluster resources.
+ * The scopes are *expanded* by substituting roles, as defined below.
+ * Every client has an implicit scope named `assume:client-id:<clientId>`,
+ * allowing additional access to be granted to the client without directly
+ * editing the client's scopes.
  * 
  * ### Roles
  * A _role_ consists of a `roleId`, a set of scopes and a description.
@@ -106,6 +106,8 @@ public class Auth extends TaskClusterRequestHandler {
      * 
      * If a client with the same `clientId` already exists this operation will
      * fail. Use `updateClient` if you wish to update an existing client.
+     * 
+     * The caller's scopes must satisfy `scopes`.
      *
      * See http://docs.taskcluster.net/auth/api-docs/#createClient
      */
@@ -128,14 +130,41 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
-     * Update an exisiting client. This is really only useful for changing the
-     * description and expiration, as you won't be allowed to the `clientId`
-     * or `accessToken`.
+     * Update an exisiting client. The `clientId` and `accessToken` cannot be
+     * updated, but `scopes` can be modified.  The caller's scopes must
+     * satisfy all scopes being added to the client in the update operation.
+     * If no scopes are given in the request, the client's scopes remain
+     * unchanged
      *
      * See http://docs.taskcluster.net/auth/api-docs/#updateClient
      */
     public CallSummary<CreateClientRequest, GetClientResponse> updateClient(String clientId, CreateClientRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/clients/" + uriEncode(clientId), GetClientResponse.class);
+    }
+
+    /**
+     * Enable a client that was disabled with `disableClient`.  If the client
+     * is already enabled, this does nothing.
+     * 
+     * This is typically used by identity providers to re-enable clients that
+     * had been disabled when the corresponding identity's scopes changed.
+     *
+     * See http://docs.taskcluster.net/auth/api-docs/#enableClient
+     */
+    public CallSummary<EmptyPayload, GetClientResponse> enableClient(String clientId) throws APICallFailure {
+        return apiCall(null, "POST", "/clients/" + uriEncode(clientId) + "/enable", GetClientResponse.class);
+    }
+
+    /**
+     * Disable a client.  If the client is already disabled, this does nothing.
+     * 
+     * This is typically used by identity providers to disable clients when the
+     * corresponding identity's scopes no longer satisfy the client's scopes.
+     *
+     * See http://docs.taskcluster.net/auth/api-docs/#disableClient
+     */
+    public CallSummary<EmptyPayload, GetClientResponse> disableClient(String clientId) throws APICallFailure {
+        return apiCall(null, "POST", "/clients/" + uriEncode(clientId) + "/disable", GetClientResponse.class);
     }
 
     /**
@@ -254,16 +283,6 @@ public class Auth extends TaskClusterRequestHandler {
      */
     public CallSummary<HawkSignatureAuthenticationRequest, Object> authenticateHawk(HawkSignatureAuthenticationRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/authenticate-hawk", Object.class);
-    }
-
-    /**
-     * Import client from JSON list, overwriting any clients that already
-     * exists. Returns a list of all clients imported.
-     *
-     * See http://docs.taskcluster.net/auth/api-docs/#importClients
-     */
-    public CallSummary<ExportedClients, EmptyPayload> importClients(ExportedClients payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/import-clients", EmptyPayload.class);
     }
 
     /**

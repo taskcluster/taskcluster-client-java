@@ -26,6 +26,12 @@ public class GetClientResponse {
     public String description;
 
     /**
+     * If true, this client is disabled and cannot be used.  This usually occurs when the
+     * scopes avaialble to the user owning the client no longer satisfy the client.
+     */
+    public boolean disabled;
+
+    /**
      * List of scopes granted to this client by matching roles.  Scopes must be
      * composed of printable ASCII characters and spaces.
      */
@@ -52,4 +58,10 @@ public class GetClientResponse {
      * Date and time of when the `accessToken` was reset last time.
      */
     public Date lastRotated;
+
+    /**
+     * List of scopes the client has (unexpanded).  Scopes must be composed of
+     * printable ASCII characters and spaces.
+     */
+    public String[] scopes;
 }
