@@ -78,7 +78,8 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
-     * Get a list of all clients.
+     * Get a list of all clients.  With `prefix`, only clients for which
+     * it is a prefix of the clientId are returned.
      *
      * See http://docs.taskcluster.net/auth/api-docs/#listClients
      */
@@ -231,6 +232,27 @@ public class Auth extends TaskClusterRequestHandler {
      */
     public CallSummary<EmptyPayload, EmptyPayload> deleteRole(String roleId) throws APICallFailure {
         return apiCall(null, "DELETE", "/roles/" + uriEncode(roleId), EmptyPayload.class);
+    }
+
+    /**
+     * Return an expanded copy of the given scopeset, with scopes implied by any
+     * roles included.
+     *
+     * See http://docs.taskcluster.net/auth/api-docs/#expandScopes
+     */
+    public CallSummary<SetOfScopes, SetOfScopes> expandScopes(SetOfScopes payload) throws APICallFailure {
+        return apiCall(payload, "GET", "/scopes/expand", SetOfScopes.class);
+    }
+
+    /**
+     * Return the expanded scopes available in the request, taking into account all sources
+     * of scopes and scope restrictions (temporary credentials, assumeScopes, client scopes,
+     * and roles).
+     *
+     * See http://docs.taskcluster.net/auth/api-docs/#currentScopes
+     */
+    public CallSummary<EmptyPayload, SetOfScopes> currentScopes() throws APICallFailure {
+        return apiCall(null, "GET", "/scopes/current", SetOfScopes.class);
     }
 
     /**

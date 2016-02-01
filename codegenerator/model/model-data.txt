@@ -60,7 +60,8 @@ Entry 0     =
     Entry Input       = ''
     Entry Output      = 'http://schemas.taskcluster.net/auth/v1/list-clients-response.json#'
     Entry Title       = 'List Clients'
-    Entry Description = 'Get a list of all clients.'
+    Entry Description = 'Get a list of all clients.  With `prefix`, only clients for which
+it is a prefix of the clientId are returned.'
 Entry 1     =
     Entry Type        = 'function'
     Entry Method      = 'get'
@@ -235,6 +236,31 @@ the role exists.'
 Entry 13    =
     Entry Type        = 'function'
     Entry Method      = 'get'
+    Entry Route       = '/scopes/expand'
+    Entry Args        = '[]'
+    Entry Name        = 'expandScopes'
+    Entry Scopes      = '[]'
+    Entry Input       = 'http://schemas.taskcluster.net/auth/v1/scopeset.json#'
+    Entry Output      = 'http://schemas.taskcluster.net/auth/v1/scopeset.json#'
+    Entry Title       = 'Expand Scopes'
+    Entry Description = 'Return an expanded copy of the given scopeset, with scopes implied by any
+roles included.'
+Entry 14    =
+    Entry Type        = 'function'
+    Entry Method      = 'get'
+    Entry Route       = '/scopes/current'
+    Entry Args        = '[]'
+    Entry Name        = 'currentScopes'
+    Entry Scopes      = '[]'
+    Entry Input       = ''
+    Entry Output      = 'http://schemas.taskcluster.net/auth/v1/scopeset.json#'
+    Entry Title       = 'Get Current Scopes'
+    Entry Description = 'Return the expanded scopes available in the request, taking into account all sources
+of scopes and scope restrictions (temporary credentials, assumeScopes, client scopes,
+and roles).'
+Entry 15    =
+    Entry Type        = 'function'
+    Entry Method      = 'get'
     Entry Route       = '/aws/s3/<level>/<bucket>/<prefix>'
     Entry Args        = '[level bucket prefix]'
     Entry Name        = 'awsS3Credentials'
@@ -261,7 +287,7 @@ credentials may allow access to unexpected keys, as S3 does not treat
 slashes specially.  For example, a prefix of `my-folder` will allow
 access to `my-folder/file.txt` as expected, but also to `my-folder.txt`,
 which may not be intended.'
-Entry 14    =
+Entry 16    =
     Entry Type        = 'function'
     Entry Method      = 'get'
     Entry Route       = '/azure/<account>/table/<table>/read-write'
@@ -274,7 +300,7 @@ Entry 14    =
     Entry Description = 'Get a shared access signature (SAS) string for use with a specific Azure
 Table Storage table.  Note, this will create the table, if it doesn't
 already exist.'
-Entry 15    =
+Entry 17    =
     Entry Type        = 'function'
     Entry Method      = 'post'
     Entry Route       = '/authenticate-hawk'
@@ -290,7 +316,7 @@ that the authenticating client has.
 This method is used by other services that wish rely on TaskCluster
 credentials for authentication. This way we can use Hawk without having
 the secret credentials leave this service.'
-Entry 16    =
+Entry 18    =
     Entry Type        = 'function'
     Entry Method      = 'get'
     Entry Route       = '/ping'
@@ -1067,6 +1093,37 @@ TypeName               = 'GetRoleResponse'
 IsInputSchema          = 'false'
 IsOutputSchema         = 'true'
 SourceURL              = 'http://schemas.taskcluster.net/auth/v1/list-roles-response.json#'
+
+
+http://schemas.taskcluster.net/auth/v1/scopeset.json#
+=====================================================
+Description            = 'A set of scopes
+'
+ID                     = 'http://schemas.taskcluster.net/auth/v1/scopeset.json#'
+Properties
+  Property 'scopes' =
+    Description            = 'List of scopes.  Scopes must be composed of printable ASCII characters and spaces.
+    '
+    Items
+      Description            = 'Scope'
+      Pattern                = '^[ -~]*$'
+      Type                   = 'string'
+      TypeName               = 'scopes'
+      IsInputSchema          = 'false'
+      IsOutputSchema         = 'false'
+      SourceURL              = ''
+    Type                   = 'array'
+    TypeName               = 'scopes'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'Set of scopes'
+Type                   = 'object'
+TypeName               = 'SetOfScopes'
+IsInputSchema          = 'true'
+IsOutputSchema         = 'true'
+SourceURL              = 'http://schemas.taskcluster.net/auth/v1/scopeset.json#'
 
 
 http://references.taskcluster.net/aws-provisioner/v1/api.json
