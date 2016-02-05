@@ -37,21 +37,12 @@ public class Secrets extends TaskClusterRequestHandler {
     }
 
     /**
-     * Set a secret associated with some key.
+     * Set a secret associated with some key.  If the secret already exists, it is updated instead.
      *
      * See http://docs.taskcluster.net/services/secrets/#set
      */
     public CallSummary<Secret, EmptyPayload> set(String name, Secret payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/secret/" + uriEncode(name), EmptyPayload.class);
-    }
-
-    /**
-     * Update a secret associated with some key.
-     *
-     * See http://docs.taskcluster.net/services/secrets/#update
-     */
-    public CallSummary<Secret, EmptyPayload> update(String name, Secret payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/secret/" + uriEncode(name), EmptyPayload.class);
     }
 
     /**
