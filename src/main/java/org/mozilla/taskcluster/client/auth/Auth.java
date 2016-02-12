@@ -308,6 +308,25 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
+     * Utility method to test client implementations of TaskCluster
+     * authentication.
+     * 
+     * Rather than using real credentials, this endpoint accepts requests with
+     * clientId `tester` and accessToken `no-secret`. That client's scopes are
+     * based on `clientScopes` in the request body.
+     * 
+     * The request is validated, with any certificate, authorizedScopes, etc.
+     * applied, and the resulting scopes are checked against `requiredScopes`
+     * from the request body. On success, the response contains the clientId
+     * and scopes as seen by the API method.
+     *
+     * See http://docs.taskcluster.net/auth/api-docs/#testAuthenticate
+     */
+    public CallSummary<TestAuthenticateRequest, TestAuthenticateResponse> testAuthenticate(TestAuthenticateRequest payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/test-authenticate", TestAuthenticateResponse.class);
+    }
+
+    /**
      * Documented later...
      * 
      * **Warning** this api end-point is **not stable**.

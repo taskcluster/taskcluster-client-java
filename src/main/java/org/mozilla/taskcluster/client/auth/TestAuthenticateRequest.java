@@ -1,0 +1,19 @@
+package org.mozilla.taskcluster.client.auth;
+
+/**
+* Details on how the test request should be authenticated.
+*
+* See http://schemas.taskcluster.net/auth/v1/test-authenticate-request.json#
+*/
+public class TestAuthenticateRequest {
+
+    /**
+     * List of scopes that should be client used should be given.
+     */
+    public String[] clientScopes;
+
+    /**
+     * List of scopes the request should require.
+     */
+    public String[] requiredScopes;
+}
