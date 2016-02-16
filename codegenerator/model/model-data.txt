@@ -340,6 +340,31 @@ and scopes as seen by the API method.'
 Entry 19    =
     Entry Type        = 'function'
     Entry Method      = 'get'
+    Entry Route       = '/test-authenticate-get/'
+    Entry Args        = '[]'
+    Entry Name        = 'testAuthenticateGet'
+    Entry Scopes      = '[]'
+    Entry Input       = ''
+    Entry Output      = 'http://schemas.taskcluster.net/auth/v1/test-authenticate-response.json#'
+    Entry Title       = 'Test Authentication (GET)'
+    Entry Description = 'Utility method similar to `testAuthenticate`, but with the GET method,
+so it can be used with signed URLs (bewits).
+
+Rather than using real credentials, this endpoint accepts requests with
+clientId `tester` and accessToken `no-secret`. That client's scopes are
+`['test:*', 'auth:create-client:test:*']`.  The call fails if the 
+`test:authenticate-get` scope is not available.
+
+The request is validated, with any certificate, authorizedScopes, etc.
+applied, and the resulting scopes are checked, just like any API call.
+On success, the response contains the clientId and scopes as seen by
+the API method.
+
+This method may later be extended to allow specification of client and
+required scopes via query arguments.'
+Entry 20    =
+    Entry Type        = 'function'
+    Entry Method      = 'get'
     Entry Route       = '/ping'
     Entry Args        = '[]'
     Entry Name        = 'ping'

@@ -327,6 +327,29 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
+     * Utility method similar to `testAuthenticate`, but with the GET method,
+     * so it can be used with signed URLs (bewits).
+     * 
+     * Rather than using real credentials, this endpoint accepts requests with
+     * clientId `tester` and accessToken `no-secret`. That client's scopes are
+     * `['test:*', 'auth:create-client:test:*']`.  The call fails if the 
+     * `test:authenticate-get` scope is not available.
+     * 
+     * The request is validated, with any certificate, authorizedScopes, etc.
+     * applied, and the resulting scopes are checked, just like any API call.
+     * On success, the response contains the clientId and scopes as seen by
+     * the API method.
+     * 
+     * This method may later be extended to allow specification of client and
+     * required scopes via query arguments.
+     *
+     * See http://docs.taskcluster.net/auth/api-docs/#testAuthenticateGet
+     */
+    public CallSummary<EmptyPayload, TestAuthenticateResponse> testAuthenticateGet() throws APICallFailure {
+        return apiCall(null, "GET", "/test-authenticate-get/", TestAuthenticateResponse.class);
+    }
+
+    /**
      * Documented later...
      * 
      * **Warning** this api end-point is **not stable**.
