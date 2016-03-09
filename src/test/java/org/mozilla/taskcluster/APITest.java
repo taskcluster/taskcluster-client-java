@@ -116,7 +116,7 @@ public class APITest {
         td.routes = new String[] { "tc-treeherder.mozilla-inbound.bcf29c305519d6e120b2e4d3b8aa33baaf5f0163",
                 "tc-treeherder-stage.mozilla-inbound.bcf29c305519d6e120b2e4d3b8aa33baaf5f0163" };
         td.schedulerId = "junit-test-scheduler";
-        td.scopes = new String[] { "test-worker:image:toastposter/pumpkin:0.5.6" };
+        td.scopes = new String[] {};
 
         Map<String, Object> tags = new HashMap<String, Object>();
         tags.put("createdForUser", "cbook@mozilla.com");
