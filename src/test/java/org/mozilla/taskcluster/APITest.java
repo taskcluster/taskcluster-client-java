@@ -17,6 +17,7 @@ import org.mozilla.taskcluster.client.index.Index;
 import org.mozilla.taskcluster.client.queue.Queue;
 import org.mozilla.taskcluster.client.queue.TaskDefinitionRequest;
 import org.mozilla.taskcluster.client.queue.TaskStatusResponse;
+import org.mozilla.taskcluster.client.TemporaryCredentials;
 
 import net.iharder.Base64;
 
@@ -138,4 +139,27 @@ public class APITest {
 
         System.out.println("=> Task https://queue.taskcluster.net/v1/task/" + taskId + " created successfully");
     }
+
+    /*
+     * This just checks if the TemporaryCredentials works
+     */
+    @Test
+    public void createTemporaryCredentials(){
+      try{
+        String[] tempScopes = new String[2];
+        Date start = new Date();
+        Date expiry = new Date(start.getTime() + 2*24*60*60*1000);
+        tempScopes[0] = "scopeA";
+        tempScopes[1] = "scopeB";
+        String temp = TemporaryCredentials.createCredentials(
+        "clientId","tokenABCDEFGH", tempScopes, start, expiry
+        );
+        //System.out.println("=>unnamed credentials "+temp);
+      }catch(Exception e){
+        e.printStackTrace();
+        Assert.fail("Exception thrown");
+      }
+      System.out.println("=> TemporaryCredentials\n");
+    }
+
 }
