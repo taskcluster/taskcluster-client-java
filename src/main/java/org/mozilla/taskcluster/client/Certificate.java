@@ -42,12 +42,6 @@ public class Certificate {
   public String issuer = null;
   public String clientId = null;
 
-  //constructors
-  public Certificate(){
-    signature = null;
-    generateSeed();
-  }
-
   public Certificate(int version, Date start, Date expiry, String scopes[]){
     this.version = version;
     this.start = start.getTime();

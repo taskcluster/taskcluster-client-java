@@ -14,22 +14,31 @@ import net.iharder.Base64;
 
 import org.mozilla.taskcluster.client.InvalidOptionsException;
 
-/*
-  Temporary Credentials for taskcluster
-  For creating unnamed Temporary credentials :
-    @params
-    clientId :String
-    accessToken :String
-    scopes :String[]
-    start :Date
-    expiry :Date
-*/
+public class Credentials {
+  public final static transient String algo = "HmacSHA256";
+  public String accessToken = "";
+  public String clientId = null;
+  public Certificate certificate = null;
 
-public class TemporaryCredentials{
-  public static final String algo = "HmacSHA256";
+  //Let this just...be there
+  private Credentials(){
+    accessToken = null;
+    clientId = null;
+    certificate = null;
+  }
 
-  public static String createCredentials(String clientId, String accessToken,
-  String[] scopes, Date start, Date expiry ) throws InvalidOptionsException{
+  public Credentials(String accessToken, String clientId, Certificate certificate){
+    this.accessToken = accessToken;
+    this.clientId = clientId;
+    this.certificate = certificate;
+  }
+
+  /*
+    This method is used to generate unnamed temporary
+    credentials
+  */
+  public static Credentials createTemporaryCredentials(String clientId, String accessToken,
+  String[] scopes, Date start, Date expiry) throws InvalidOptionsException {
     //Check dates
     if(start.after(expiry)){
       //throw error
@@ -39,31 +48,16 @@ public class TemporaryCredentials{
       //throw error
       throw new InvalidOptionsException(new Throwable("Cannot exceed 31 days"));
     }
-    Credentials credentials = new Credentials();
     Certificate cert = new Certificate(1,start,expiry,scopes);
     //Create signature;
     cert.generateSignature(accessToken);
-
-    credentials.accessToken = generateTemporaryAccessToken(accessToken, cert.seed);
-    credentials.clientId = clientId;
-    credentials.certificate = cert;
-
-    Gson gson = new Gson();
-    return gson.toJson(credentials);
+    String temporaryAccessToken = generateTemporaryAccessToken(accessToken, cert.seed);
+    return new Credentials(temporaryAccessToken, clientId, cert);
   }
 
-  /*
-    Named temporary credentials
-    params:
-    clientId :String
-    issuer :String
-    accessToken :String
-    scopes :String[]
-    start :Date
-    expiry :Date
-  */
-  public static String createCredentials(String clientId, String issuer, String accessToken,
-  String[] scopes, Date start, Date expiry ) throws InvalidOptionsException{
+  public static Credentials createTemporaryCredentials(String clientId, String issuer,
+  String accessToken, String[] scopes, Date start, Date expiry)
+  throws InvalidOptionsException {
     //Check dates
     if(start.after(expiry)){
       //throw error
@@ -73,22 +67,12 @@ public class TemporaryCredentials{
       //throw error
       throw new InvalidOptionsException(new Throwable("Cannot exceed 31 days"));
     }
-    Credentials credentials = new Credentials();
-    Certificate cert = new Certificate(1,start,expiry,scopes,clientId,issuer);
+    Certificate cert = new Certificate(1,start,expiry,scopes,clientId, issuer);
     //Create signature;
     cert.generateSignature(accessToken);
-
-    credentials.accessToken = generateTemporaryAccessToken(accessToken, cert.seed);
-    credentials.clientId = clientId;
-    credentials.certificate = cert;
-
-    Gson gson = new Gson();
-    return gson.toJson(credentials);
+    String temporaryAccessToken = generateTemporaryAccessToken(accessToken, cert.seed);
+    return new Credentials(temporaryAccessToken, clientId, cert);
   }
-
-  /*
-    Generates the temporary access token
-  */
 
   private static String generateTemporaryAccessToken(String accessToken, String seed){
     try{
