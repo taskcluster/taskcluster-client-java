@@ -14,12 +14,6 @@ import net.iharder.Base64;
 
 import org.mozilla.taskcluster.client.InvalidOptionsException;
 
-class Credentials {
-  public String accessToken = "";
-  public String clientId = null;
-  public String certificate = "";
-}
-
 /*
   Temporary Credentials for taskcluster
   For creating unnamed Temporary credentials :
@@ -52,7 +46,41 @@ public class TemporaryCredentials{
 
     credentials.accessToken = generateTemporaryAccessToken(accessToken, cert.seed);
     credentials.clientId = clientId;
-    credentials.certificate = cert.toString();
+    credentials.certificate = cert;
+
+    Gson gson = new Gson();
+    return gson.toJson(credentials);
+  }
+
+  /*
+    Named temporary credentials
+    params:
+    clientId :String
+    issuer :String
+    accessToken :String
+    scopes :String[]
+    start :Date
+    expiry :Date
+  */
+  public static String createCredentials(String clientId, String issuer, String accessToken,
+  String[] scopes, Date start, Date expiry ) throws InvalidOptionsException{
+    //Check dates
+    if(start.after(expiry)){
+      //throw error
+      throw new InvalidOptionsException(new Throwable("start should be before expiry"));
+    }
+    if((long)(expiry.getTime() - start.getTime()) > (long) 31*24*60*60*1000){
+      //throw error
+      throw new InvalidOptionsException(new Throwable("Cannot exceed 31 days"));
+    }
+    Credentials credentials = new Credentials();
+    Certificate cert = new Certificate(1,start,expiry,scopes,clientId,issuer);
+    //Create signature;
+    cert.generateSignature(accessToken);
+
+    credentials.accessToken = generateTemporaryAccessToken(accessToken, cert.seed);
+    credentials.clientId = clientId;
+    credentials.certificate = cert;
 
     Gson gson = new Gson();
     return gson.toJson(credentials);

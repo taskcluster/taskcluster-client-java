@@ -18,8 +18,10 @@ import org.mozilla.taskcluster.client.queue.Queue;
 import org.mozilla.taskcluster.client.queue.TaskDefinitionRequest;
 import org.mozilla.taskcluster.client.queue.TaskStatusResponse;
 import org.mozilla.taskcluster.client.TemporaryCredentials;
+import org.mozilla.taskcluster.client.Credentials;
 
 import net.iharder.Base64;
+import com.google.gson.Gson;
 
 public class APITest {
 
@@ -154,12 +156,44 @@ public class APITest {
         String temp = TemporaryCredentials.createCredentials(
         "clientId","tokenABCDEFGH", tempScopes, start, expiry
         );
+        Gson gson = new Gson();
+        System.out.println("=> unnamed credentials");
+        Credentials cred = gson.fromJson(temp,Credentials.class);
+        System.out.println("accessToken: "+ cred.accessToken);
+        System.out.println("clientId: "+ cred.clientId);
+        System.out.println("certificate.signature: "+cred.certificate.signature);
+        System.out.println("certificate.seed: "+cred.certificate.seed);
+        System.out.println("certificate.start: "+cred.certificate.start);
+        System.out.println("certificate.expiry: "+cred.certificate.expiry);
+        System.out.print("scopes: ");
+        for(String scope: cred.certificate.scopes){
+          System.out.print(scope + " ");
+        }
+
+        temp = TemporaryCredentials.createCredentials(
+        "clientId","issuer","tokenABCDEFGH", tempScopes, start, expiry
+        );
+
+        System.out.println("=> named credentials");
+        cred = gson.fromJson(temp,Credentials.class);
+        System.out.println("accessToken: "+ cred.accessToken);
+        System.out.println("clientId: "+ cred.clientId);
+        System.out.println("certificate.clientId: "+cred.certificate.clientId);
+        System.out.println("certificate.issuer: "+cred.certificate.issuer);
+        System.out.println("certificate.signature: "+cred.certificate.signature);
+        System.out.println("certificate.seed: "+cred.certificate.seed);
+        System.out.println("certificate.start: "+cred.certificate.start);
+        System.out.println("certificate.expiry: "+cred.certificate.expiry);
+        System.out.print("scopes: ");
+        for(String scope: cred.certificate.scopes){
+          System.out.print(scope + " ");
+        }
         //System.out.println("=>unnamed credentials "+temp);
       }catch(Exception e){
         e.printStackTrace();
         Assert.fail("Exception thrown");
       }
-      System.out.println("=> TemporaryCredentials\n");
+      System.out.println("\n=> TemporaryCredentials\n");
     }
 
 }

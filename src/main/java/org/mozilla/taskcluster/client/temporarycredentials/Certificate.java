@@ -33,8 +33,6 @@ public class Certificate {
 
   public int version = 1;
   public String[] scopes;
-  public transient Date st;
-  public transient Date exp;
   public long start;
   public long expiry;
   public String seed;
@@ -52,8 +50,8 @@ public class Certificate {
 
   public Certificate(int version, Date start, Date expiry, String scopes[]){
     this.version = version;
-    this.st = start;
-    this.exp = expiry;
+    this.start = start.getTime();
+    this.expiry = expiry.getTime();
     this.scopes = scopes;
     issuer = null;
     signature = null;
@@ -63,8 +61,8 @@ public class Certificate {
   public Certificate(int version, Date start, Date expiry,
   String scopes[], String clientId, String issuer){
     this.version = version;
-    this.st = start;
-    this.exp = expiry;
+    this.start = start.getTime();
+    this.expiry = expiry.getTime();
     this.scopes = scopes;
     this.issuer = issuer;
     this.clientId = clientId;
@@ -104,8 +102,8 @@ public class Certificate {
         builder.append("issuer:"+issuer+"\n");
       }
       builder.append("seed:"+seed+"\n");
-      builder.append("start:"+Long.toString(st.getTime())+"\n");
-      builder.append("expiry:"+Long.toString(exp.getTime())+"\n");
+      builder.append("start:"+Long.toString(start)+"\n");
+      builder.append("expiry:"+Long.toString(expiry)+"\n");
       builder.append("scopes:\n");
       //Appending scopes
       String prefix = "";
@@ -127,8 +125,6 @@ public class Certificate {
 
   public String toString(){
     Gson gson = new Gson();
-    this.start = st.getTime();
-    this.expiry = st.getTime();
     return gson.toJson(this);
   }
 }
