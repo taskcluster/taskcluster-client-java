@@ -157,7 +157,6 @@ public class APITest {
         "clientId","tokenABCDEFGH", tempScopes, start, expiry
         );
         System.out.println("=> unnamed credentials");
-        System.out.println("accessToken: "+ cred.accessToken);
         System.out.println("clientId: "+ cred.clientId);
         System.out.println("certificate.signature: "+cred.certificate.signature);
         System.out.println("certificate.seed: "+cred.certificate.seed);
@@ -173,7 +172,6 @@ public class APITest {
         );
 
         System.out.println("=> named credentials");
-        System.out.println("accessToken: "+ cred.accessToken);
         System.out.println("clientId: "+ cred.clientId);
         System.out.println("certificate.clientId: "+cred.certificate.clientId);
         System.out.println("certificate.issuer: "+cred.certificate.issuer);
