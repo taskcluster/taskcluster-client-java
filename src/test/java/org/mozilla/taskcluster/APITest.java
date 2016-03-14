@@ -17,8 +17,10 @@ import org.mozilla.taskcluster.client.index.Index;
 import org.mozilla.taskcluster.client.queue.Queue;
 import org.mozilla.taskcluster.client.queue.TaskDefinitionRequest;
 import org.mozilla.taskcluster.client.queue.TaskStatusResponse;
+import org.mozilla.taskcluster.client.Credentials;
 
 import net.iharder.Base64;
+import com.google.gson.Gson;
 
 public class APITest {
 
@@ -138,4 +140,57 @@ public class APITest {
 
         System.out.println("=> Task https://queue.taskcluster.net/v1/task/" + taskId + " created successfully");
     }
+
+    /*
+     * This just checks if the TemporaryCredentials works
+     */
+    @Test
+    public void createTemporaryCredentials(){
+      try{
+        String[] tempScopes = new String[2];
+        Date start = new Date();
+        Date expiry = new Date(start.getTime() + 2*24*60*60*1000);
+        tempScopes[0] = "scopeA";
+        tempScopes[1] = "scopeB";
+        Credentials cred;
+        cred = Credentials.createTemporaryCredentials(
+        "clientId","tokenABCDEFGH", tempScopes, start, expiry
+        );
+        System.out.println("=> unnamed credentials");
+        System.out.println("accessToken: "+ cred.accessToken);
+        System.out.println("clientId: "+ cred.clientId);
+        System.out.println("certificate.signature: "+cred.certificate.signature);
+        System.out.println("certificate.seed: "+cred.certificate.seed);
+        System.out.println("certificate.start: "+cred.certificate.start);
+        System.out.println("certificate.expiry: "+cred.certificate.expiry);
+        System.out.print("scopes: ");
+        for(String scope: cred.certificate.scopes){
+          System.out.print(scope + " ");
+        }
+
+        cred = Credentials.createTemporaryCredentials(
+        "clientId","issuer","tokenABCDEFGH", tempScopes, start, expiry
+        );
+
+        System.out.println("=> named credentials");
+        System.out.println("accessToken: "+ cred.accessToken);
+        System.out.println("clientId: "+ cred.clientId);
+        System.out.println("certificate.clientId: "+cred.certificate.clientId);
+        System.out.println("certificate.issuer: "+cred.certificate.issuer);
+        System.out.println("certificate.signature: "+cred.certificate.signature);
+        System.out.println("certificate.seed: "+cred.certificate.seed);
+        System.out.println("certificate.start: "+cred.certificate.start);
+        System.out.println("certificate.expiry: "+cred.certificate.expiry);
+        System.out.print("scopes: ");
+        for(String scope: cred.certificate.scopes){
+          System.out.print(scope + " ");
+        }
+        //System.out.println("=>unnamed credentials "+temp);
+      }catch(Exception e){
+        e.printStackTrace();
+        Assert.fail("Exception thrown");
+      }
+      System.out.println("\n=> TemporaryCredentials\n");
+    }
+
 }

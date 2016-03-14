@@ -107,6 +107,36 @@ import org.mozilla.taskcluster.client.queue.*;
 
 ...
 ```
+## Temporary credentials
+```java
+import org.mozilla.taskcluster.client.Credentials;
+
+...
+  //The client's access token
+  String accessToken = "...";
+
+  //client id  
+  String clientId = "...";
+
+  String[] scopes = {...};
+
+  // The credentials are valid for a maximum of 31 days only
+  Date start = new Date(...);
+  Date expiry = new Date(...);
+
+  //Unnamed Credentials
+  Credentials credentials = Credentials.createTemporaryCredentials(
+    clientId , accessToken , scopes , start , expiry
+  );
+
+...
+  //named credentials
+  String issuer = "...";
+
+  credentials = Credentials.createTemporaryCredentials(
+    clientId, issuer, accessToken , scopes , start , expiry
+  );
+```
 
 See the [HTTP API javadocs](#http-apis) for more information, or browse the [unit tests](https://github.com/taskcluster/taskcluster-client-java/tree/master/src/test/java/org/mozilla/taskcluster) for further examples.
 ## Building
