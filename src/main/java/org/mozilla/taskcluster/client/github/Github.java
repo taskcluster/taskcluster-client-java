@@ -6,6 +6,7 @@ package org.mozilla.taskcluster.client.github;
 
 import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
+import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
 import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 
@@ -23,20 +24,12 @@ public class Github extends TaskClusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://github.taskcluster.net/v1";
 
-    public Github(String clientId, String accessToken) {
-        super(clientId, accessToken, defaultBaseURL);
+    public Github(Credentials credentials) {
+        super(credentials, defaultBaseURL);
     }
 
-    public Github(String clientId, String accessToken, String certificate) {
-        super(clientId, accessToken, certificate, defaultBaseURL);
-    }
-
-    public Github(String baseURL) {
-        super(baseURL);
-    }
-
-    public Github() {
-        super(defaultBaseURL);
+    public Github(Credentials credentials, String baseURL) {
+        super(credentials, baseURL);
     }
 
     /**

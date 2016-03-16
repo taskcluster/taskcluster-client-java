@@ -1,28 +1,36 @@
 package org.mozilla.taskcluster;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Assume;
 import org.junit.Test;
 import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
+import org.mozilla.taskcluster.client.Certificate;
+import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.index.Index;
 import org.mozilla.taskcluster.client.queue.Queue;
 import org.mozilla.taskcluster.client.queue.TaskDefinitionRequest;
 import org.mozilla.taskcluster.client.queue.TaskStatusResponse;
-import org.mozilla.taskcluster.client.Credentials;
 
-import net.iharder.Base64;
 import com.google.gson.Gson;
 
+import net.iharder.Base64;
+
 public class APITest {
+
+    private static Logger log = Logger.getGlobal();
 
     /**
      * Generates a 22 character random slugId that is url-safe ([0-9a-zA-Z_\-]*)
@@ -39,15 +47,17 @@ public class APITest {
     }
 
     /**
-     * This is a silly test that looks for the latest mozilla-central buildbot linux64 l10n build
-     * and asserts that it must have a created time between a year ago and an hour in the future.
+     * This is a silly test that looks for the latest mozilla-central buildbot
+     * linux64 l10n build and asserts that it must have a created time between a
+     * year ago and an hour in the future.
      *
-     * Could easily break at a point in the future, at which point we can change to something else.
+     * Could easily break at a point in the future, at which point we can change
+     * to something else.
      */
     @Test
     public void findLatestBuildbotTask() {
-        Index index = new Index();
-        Queue queue = new Queue();
+        Index index = new Index(null);
+        Queue queue = new Queue(null);
         try {
             String taskId = index.findTask("buildbot.branches.mozilla-central.linux64.l10n").responsePayload.taskId;
             Date created = queue.task(taskId).responsePayload.created;
@@ -58,7 +68,7 @@ public class APITest {
             c.setTime(now);
             c.add(Calendar.HOUR, 1);
             Date inAnHour = c.getTime();
-            c.setTime(now);;
+            c.setTime(now);
             c.add(Calendar.YEAR, -1);
             Date aYearAgo = c.getTime();
 
@@ -84,12 +94,7 @@ public class APITest {
         String accessToken = System.getenv("TASKCLUSTER_ACCESS_TOKEN");
         String certificate = System.getenv("TASKCLUSTER_CERTIFICATE");
         Assume.assumeFalse(clientId == null || clientId == "" || accessToken == null || accessToken == "");
-        Queue queue;
-        if (certificate == null || certificate == "") {
-            queue = new Queue(clientId, accessToken);
-        } else {
-            queue = new Queue(clientId, accessToken, certificate);
-        }
+        Queue queue = new Queue(new Credentials(clientId, accessToken, certificate));
         String taskId = slug();
         TaskDefinitionRequest td = new TaskDefinitionRequest();
         td.created = new Date();
@@ -141,54 +146,57 @@ public class APITest {
         System.out.println("=> Task https://queue.taskcluster.net/v1/task/" + taskId + " created successfully");
     }
 
+    public static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+    static {
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+    }
+
     /*
-     * This just checks if the TemporaryCredentials works
+     * This test checks static test cases of generating temporary credentials by
+     * looking up known results for a range of test cases
      */
     @Test
-    public void createTemporaryCredentials(){
-      try{
-        String[] tempScopes = new String[2];
-        Date start = new Date();
-        Date expiry = new Date(start.getTime() + 2*24*60*60*1000);
-        tempScopes[0] = "scopeA";
-        tempScopes[1] = "scopeB";
-        Credentials cred;
-        cred = Credentials.createTemporaryCredentials(
-        "clientId","tokenABCDEFGH", tempScopes, start, expiry
-        );
-        System.out.println("=> unnamed credentials");
-        System.out.println("clientId: "+ cred.clientId);
-        System.out.println("certificate.signature: "+cred.certificate.signature);
-        System.out.println("certificate.seed: "+cred.certificate.seed);
-        System.out.println("certificate.start: "+cred.certificate.start);
-        System.out.println("certificate.expiry: "+cred.certificate.expiry);
-        System.out.print("scopes: ");
-        for(String scope: cred.certificate.scopes){
-          System.out.print(scope + " ");
-        }
+    public void createTemporaryCredentials() {
+        BufferedReader br = null;
+        try {
+            Gson gson = new Gson();
+            br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/testcases.json")));
+            TempCredsTestCase[] testCases = gson.fromJson(br, TempCredsTestCase[].class);
 
-        cred = Credentials.createTemporaryCredentials(
-        "clientId","issuer","tokenABCDEFGH", tempScopes, start, expiry
-        );
+            for (TempCredsTestCase tc : testCases) {
 
-        System.out.println("=> named credentials");
-        System.out.println("clientId: "+ cred.clientId);
-        System.out.println("certificate.clientId: "+cred.certificate.clientId);
-        System.out.println("certificate.issuer: "+cred.certificate.issuer);
-        System.out.println("certificate.signature: "+cred.certificate.signature);
-        System.out.println("certificate.seed: "+cred.certificate.seed);
-        System.out.println("certificate.start: "+cred.certificate.start);
-        System.out.println("certificate.expiry: "+cred.certificate.expiry);
-        System.out.print("scopes: ");
-        for(String scope: cred.certificate.scopes){
-          System.out.print(scope + " ");
+                log.info("Testing " + tc.description);
+                Date start = sdf.parse(tc.start);
+                Date expiry = sdf.parse(tc.expiry);
+
+                Credentials permCreds = new Credentials(tc.permCreds.clientId, tc.permCreds.accessToken, null);
+                Credentials tempCreds = permCreds.createTemporaryCredentials(tc.tempCredsName, tc.tempCredsScopes,
+                        start, expiry);
+                Certificate cert = tempCreds.getCertificate();
+
+                cert.seed = tc.seed;
+                // need to generate access token using fixed seed
+                tempCreds.accessToken = Credentials.generateTemporaryAccessToken(permCreds.accessToken, cert.seed);
+                // need to recalculate signature, as seed was updated
+                cert.generateSignature(permCreds.accessToken, tempCreds.clientId);
+                // update credentials with updated certificate
+                tempCreds.certificate = cert.toString();
+                Assert.assertEquals(tc.expectedTempCreds.clientId, tempCreds.clientId);
+                Assert.assertEquals(tc.expectedTempCreds.accessToken, tempCreds.accessToken);
+                Assert.assertEquals(tc.expectedTempCreds.certificate, tempCreds.certificate);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Exception thrown");
+        } finally {
+            try {
+                br.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        //System.out.println("=>unnamed credentials "+temp);
-      }catch(Exception e){
-        e.printStackTrace();
-        Assert.fail("Exception thrown");
-      }
-      System.out.println("\n=> TemporaryCredentials\n");
     }
 
 }

@@ -6,6 +6,7 @@ package org.mozilla.taskcluster.client.purgecache;
 
 import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
+import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
 import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 
@@ -23,20 +24,12 @@ public class PurgeCache extends TaskClusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://purge-cache.taskcluster.net/v1";
 
-    public PurgeCache(String clientId, String accessToken) {
-        super(clientId, accessToken, defaultBaseURL);
+    public PurgeCache(Credentials credentials) {
+        super(credentials, defaultBaseURL);
     }
 
-    public PurgeCache(String clientId, String accessToken, String certificate) {
-        super(clientId, accessToken, certificate, defaultBaseURL);
-    }
-
-    public PurgeCache(String baseURL) {
-        super(baseURL);
-    }
-
-    public PurgeCache() {
-        super(defaultBaseURL);
+    public PurgeCache(Credentials credentials, String baseURL) {
+        super(credentials, baseURL);
     }
 
     /**

@@ -6,6 +6,7 @@ package org.mozilla.taskcluster.client.auth;
 
 import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
+import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
 import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 
@@ -61,20 +62,12 @@ public class Auth extends TaskClusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://auth.taskcluster.net/v1";
 
-    public Auth(String clientId, String accessToken) {
-        super(clientId, accessToken, defaultBaseURL);
+    public Auth(Credentials credentials) {
+        super(credentials, defaultBaseURL);
     }
 
-    public Auth(String clientId, String accessToken, String certificate) {
-        super(clientId, accessToken, certificate, defaultBaseURL);
-    }
-
-    public Auth(String baseURL) {
-        super(baseURL);
-    }
-
-    public Auth() {
-        super(defaultBaseURL);
+    public Auth(Credentials credentials, String baseURL) {
+        super(credentials, baseURL);
     }
 
     /**

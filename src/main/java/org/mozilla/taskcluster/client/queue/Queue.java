@@ -6,6 +6,7 @@ package org.mozilla.taskcluster.client.queue;
 
 import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
+import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
 import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 
@@ -26,20 +27,12 @@ public class Queue extends TaskClusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://queue.taskcluster.net/v1";
 
-    public Queue(String clientId, String accessToken) {
-        super(clientId, accessToken, defaultBaseURL);
+    public Queue(Credentials credentials) {
+        super(credentials, defaultBaseURL);
     }
 
-    public Queue(String clientId, String accessToken, String certificate) {
-        super(clientId, accessToken, certificate, defaultBaseURL);
-    }
-
-    public Queue(String baseURL) {
-        super(baseURL);
-    }
-
-    public Queue() {
-        super(defaultBaseURL);
+    public Queue(Credentials credentials, String baseURL) {
+        super(credentials, baseURL);
     }
 
     /**

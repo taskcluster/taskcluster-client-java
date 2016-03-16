@@ -55,6 +55,7 @@ func (api *API) generateAPICode(apiName string) string {
 
 import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
+import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
 import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 
@@ -74,20 +75,12 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 
     protected static final String defaultBaseURL = "` + api.BaseURL + `";
 
-    public ` + className + `(String clientId, String accessToken) {
-        super(clientId, accessToken, defaultBaseURL);
+    public ` + className + `(Credentials credentials) {
+        super(credentials, defaultBaseURL);
     }
 
-    public ` + className + `(String clientId, String accessToken, String certificate) {
-        super(clientId, accessToken, certificate, defaultBaseURL);
-    }
-
-    public ` + className + `(String baseURL) {
-        super(baseURL);
-    }
-
-    public ` + className + `() {
-        super(defaultBaseURL);
+    public ` + className + `(Credentials credentials, String baseURL) {
+        super(credentials, baseURL);
     }
 `
 	for _, entry := range api.Entries {

@@ -6,6 +6,7 @@ package org.mozilla.taskcluster.client.index;
 
 import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
+import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
 import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 
@@ -106,20 +107,12 @@ public class Index extends TaskClusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://index.taskcluster.net/v1";
 
-    public Index(String clientId, String accessToken) {
-        super(clientId, accessToken, defaultBaseURL);
+    public Index(Credentials credentials) {
+        super(credentials, defaultBaseURL);
     }
 
-    public Index(String clientId, String accessToken, String certificate) {
-        super(clientId, accessToken, certificate, defaultBaseURL);
-    }
-
-    public Index(String baseURL) {
-        super(baseURL);
-    }
-
-    public Index() {
-        super(defaultBaseURL);
+    public Index(Credentials credentials, String baseURL) {
+        super(credentials, baseURL);
     }
 
     /**

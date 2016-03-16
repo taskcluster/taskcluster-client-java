@@ -6,6 +6,7 @@ package org.mozilla.taskcluster.client.secrets;
 
 import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
+import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
 import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 
@@ -20,20 +21,12 @@ public class Secrets extends TaskClusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://secrets.taskcluster.net/v1";
 
-    public Secrets(String clientId, String accessToken) {
-        super(clientId, accessToken, defaultBaseURL);
+    public Secrets(Credentials credentials) {
+        super(credentials, defaultBaseURL);
     }
 
-    public Secrets(String clientId, String accessToken, String certificate) {
-        super(clientId, accessToken, certificate, defaultBaseURL);
-    }
-
-    public Secrets(String baseURL) {
-        super(baseURL);
-    }
-
-    public Secrets() {
-        super(defaultBaseURL);
+    public Secrets(Credentials credentials, String baseURL) {
+        super(credentials, baseURL);
     }
 
     /**

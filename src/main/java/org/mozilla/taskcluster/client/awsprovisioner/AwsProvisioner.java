@@ -6,6 +6,7 @@ package org.mozilla.taskcluster.client.awsprovisioner;
 
 import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
+import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
 import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 
@@ -44,20 +45,12 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://aws-provisioner.taskcluster.net/v1";
 
-    public AwsProvisioner(String clientId, String accessToken) {
-        super(clientId, accessToken, defaultBaseURL);
+    public AwsProvisioner(Credentials credentials) {
+        super(credentials, defaultBaseURL);
     }
 
-    public AwsProvisioner(String clientId, String accessToken, String certificate) {
-        super(clientId, accessToken, certificate, defaultBaseURL);
-    }
-
-    public AwsProvisioner(String baseURL) {
-        super(baseURL);
-    }
-
-    public AwsProvisioner() {
-        super(defaultBaseURL);
+    public AwsProvisioner(Credentials credentials, String baseURL) {
+        super(credentials, baseURL);
     }
 
     /**

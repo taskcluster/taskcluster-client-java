@@ -12,6 +12,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.api.client.http.ByteArrayContent;
 import com.google.api.client.http.GenericUrl;
@@ -21,6 +23,7 @@ import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpResponse;
+import com.google.api.client.http.HttpResponseException;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.util.ExponentialBackOff;
@@ -33,15 +36,10 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.wealdtech.hawk.HawkClient;
-import com.wealdtech.hawk.HawkCredentials;
-import com.wealdtech.hawk.HawkCredentials.Algorithm;
-
-import net.iharder.Base64;
 
 public abstract class TaskClusterRequestHandler {
 
-    static final Gson gson;
+    static final Gson         gson;
     static HttpRequestFactory requestFactory;
 
     static {
@@ -68,46 +66,23 @@ public abstract class TaskClusterRequestHandler {
         gson = new GsonBuilder().registerTypeAdapter(Date.class, ser).registerTypeAdapter(Date.class, deser).create();
         HttpTransport httpTransport = new NetHttpTransport();
         requestFactory = httpTransport.createRequestFactory();
+        Logger.getLogger(HttpTransport.class.getName()).setLevel(Level.ALL);
     }
 
-    private String accessToken;
-    private boolean authenticate;
-    private String baseURL;
-    private String certificate;
-    private String clientId;
-    private HawkClient hawkClient;
+    private Credentials credentials;
+    private boolean     authenticate;
+    private String      baseURL;
 
-    public void configureHawk() {
-        HawkCredentials hawkCredentials = new HawkCredentials.Builder().keyId(clientId).key(accessToken)
-                .algorithm(Algorithm.SHA256).build();
-        hawkClient = new HawkClient.Builder().credentials(hawkCredentials).build();
-    }
-
-    public TaskClusterRequestHandler(String clientId, String accessToken, String baseURL) {
-        this.accessToken = accessToken;
+    public TaskClusterRequestHandler(Credentials credentials, String baseURL) {
         this.authenticate = true;
         this.baseURL = baseURL;
-        this.certificate = null;
-        this.clientId = clientId;
-        configureHawk();
-    }
-
-    public TaskClusterRequestHandler(String clientId, String accessToken, String certificate, String baseURL) {
-        this.accessToken = accessToken;
-        this.authenticate = true;
-        this.baseURL = baseURL;
-        this.certificate = certificate;
-        this.clientId = clientId;
-        configureHawk();
+        this.credentials = credentials;
     }
 
     public TaskClusterRequestHandler(String baseURL) {
         this.authenticate = false;
         this.baseURL = baseURL;
-        this.clientId = null;
-        this.accessToken = null;
-        this.certificate = null;
-        hawkClient = null;
+        this.credentials = null;
     }
 
     public TaskClusterRequestHandler setBaseURL(String baseURL) {
@@ -137,16 +112,14 @@ public abstract class TaskClusterRequestHandler {
                 // String hash =
                 // Base64.encodeBytes(messageDigest.digest());
                 String hash = null;
-                String ext = null;
-                if (certificate != null) {
-                    ext = Base64.encodeBytes(("{\"certificate\":" + certificate + "}").getBytes());
-                }
 
                 URI uri = new URI(baseURL + route);
-                String authorizationHeader = hawkClient.generateAuthorizationHeader(uri, method, hash, ext, null, null);
-                HttpHeaders headers = new HttpHeaders();
-                headers.setAuthorization(authorizationHeader);
-                request.setHeaders(headers);
+                if (credentials != null && authenticate) {
+                    String authorizationHeader = credentials.generateAuthorizationHeader(uri, method, hash);
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.setAuthorization(authorizationHeader);
+                    request.setHeaders(headers);
+                }
             }
             request.setUnsuccessfulResponseHandler(
                     new HttpBackOffUnsuccessfulResponseHandler(new ExponentialBackOff()));
@@ -162,6 +135,9 @@ public abstract class TaskClusterRequestHandler {
             throw new RuntimeException(e);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
+        } catch (HttpResponseException e) {
+            System.out.println(e.getContent());
+            throw new APICallFailure(e);
         } catch (IOException e) {
             throw new APICallFailure(e);
         }
