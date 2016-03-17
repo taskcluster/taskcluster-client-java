@@ -115,6 +115,22 @@ public class Index extends TaskClusterRequestHandler {
         super(credentials, baseURL);
     }
 
+    public Index(String clientId, String accessToken) {
+        super(new Credentials(clientId, accessToken), defaultBaseURL);
+    }
+
+    public Index(String clientId, String accessToken, String certificate) {
+        super(new Credentials(clientId, accessToken, certificate), defaultBaseURL);
+    }
+
+    public Index(String baseURL) {
+        super(baseURL);
+    }
+
+    public Index() {
+        super(defaultBaseURL);
+    }
+
     /**
      * Find task by namespace, if no task existing for the given namespace, this
      * API end-point respond `404`.

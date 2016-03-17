@@ -56,8 +56,8 @@ public class APITest {
      */
     @Test
     public void findLatestBuildbotTask() {
-        Index index = new Index(null);
-        Queue queue = new Queue(null);
+        Index index = new Index();
+        Queue queue = new Queue();
         try {
             String taskId = index.findTask("buildbot.branches.mozilla-central.linux64.l10n").responsePayload.taskId;
             Date created = queue.task(taskId).responsePayload.created;
@@ -154,7 +154,9 @@ public class APITest {
 
     /*
      * This test checks static test cases of generating temporary credentials by
-     * looking up known results for a range of test cases
+     * looking up known results for a range of test cases.
+     *
+     * TODO: Add tests that call auth endpoints: https://bugzilla.mozilla.org/show_bug.cgi?id=1257520
      */
     @Test
     public void createTemporaryCredentials() {
@@ -170,7 +172,7 @@ public class APITest {
                 Date start = sdf.parse(tc.start);
                 Date expiry = sdf.parse(tc.expiry);
 
-                Credentials permCreds = new Credentials(tc.permCreds.clientId, tc.permCreds.accessToken, null);
+                Credentials permCreds = new Credentials(tc.permCreds.clientId, tc.permCreds.accessToken);
                 Credentials tempCreds = permCreds.createTemporaryCredentials(tc.tempCredsName, tc.tempCredsScopes,
                         start, expiry);
                 Certificate cert = tempCreds.getCertificate();

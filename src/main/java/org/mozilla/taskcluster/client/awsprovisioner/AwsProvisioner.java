@@ -53,6 +53,22 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
         super(credentials, baseURL);
     }
 
+    public AwsProvisioner(String clientId, String accessToken) {
+        super(new Credentials(clientId, accessToken), defaultBaseURL);
+    }
+
+    public AwsProvisioner(String clientId, String accessToken, String certificate) {
+        super(new Credentials(clientId, accessToken, certificate), defaultBaseURL);
+    }
+
+    public AwsProvisioner(String baseURL) {
+        super(baseURL);
+    }
+
+    public AwsProvisioner() {
+        super(defaultBaseURL);
+    }
+
     /**
      * Create a worker type.  A worker type contains all the configuration
      * needed for the provisioner to manage the instances.  Each worker type

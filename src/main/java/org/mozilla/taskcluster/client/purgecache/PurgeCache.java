@@ -32,6 +32,22 @@ public class PurgeCache extends TaskClusterRequestHandler {
         super(credentials, baseURL);
     }
 
+    public PurgeCache(String clientId, String accessToken) {
+        super(new Credentials(clientId, accessToken), defaultBaseURL);
+    }
+
+    public PurgeCache(String clientId, String accessToken, String certificate) {
+        super(new Credentials(clientId, accessToken, certificate), defaultBaseURL);
+    }
+
+    public PurgeCache(String baseURL) {
+        super(baseURL);
+    }
+
+    public PurgeCache() {
+        super(defaultBaseURL);
+    }
+
     /**
      * Publish a purge-cache message to purge caches named `cacheName` with
      * `provisionerId` and `workerType` in the routing-key. Workers should

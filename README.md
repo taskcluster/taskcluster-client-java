@@ -153,14 +153,14 @@ import org.mozilla.taskcluster.client.queue.Queue;
  *
  * Note, the queue.listArtifacts(...) call doesn't require any scopes, the
  * generation of temporary credentials, and limiting via authorized scopes is
- * purely illustrative.
+ * purely illustrative. The TASKCLUSTER_CLIENT_ID must satisfy
+ * auth:create-client:demo-client/taskcluster-client-java, though.
  */
 public class Demo {
     public static void main(String[] args) {
         Credentials permCreds = new Credentials(
             System.getenv("TASKCLUSTER_CLIENT_ID"),
-            System.getenv("TASKCLUSTER_ACCESS_TOKEN"),
-            null
+            System.getenv("TASKCLUSTER_ACCESS_TOKEN")
         );
         Date now = new Date();
         try {

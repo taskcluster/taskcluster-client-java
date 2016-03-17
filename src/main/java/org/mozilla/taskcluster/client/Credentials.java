@@ -32,6 +32,13 @@ public class Credentials {
     private Credentials() {
     }
 
+    public Credentials(String clientId, String accessToken) {
+        this.clientId = clientId;
+        this.accessToken = accessToken;
+        this.certificate = null;
+        configureHawk();
+    }
+
     public Credentials(String clientId, String accessToken, String certificate) {
         this.clientId = clientId;
         this.accessToken = accessToken;

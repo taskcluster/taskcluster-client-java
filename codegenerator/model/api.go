@@ -82,6 +82,22 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
     public ` + className + `(Credentials credentials, String baseURL) {
         super(credentials, baseURL);
     }
+
+    public ` + className + `(String clientId, String accessToken) {
+        super(new Credentials(clientId, accessToken), defaultBaseURL);
+    }
+
+    public ` + className + `(String clientId, String accessToken, String certificate) {
+        super(new Credentials(clientId, accessToken, certificate), defaultBaseURL);
+    }
+
+    public ` + className + `(String baseURL) {
+        super(baseURL);
+    }
+
+    public ` + className + `() {
+        super(defaultBaseURL);
+    }
 `
 	for _, entry := range api.Entries {
 		content += entry.generateAPICode(apiName)

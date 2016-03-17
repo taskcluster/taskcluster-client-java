@@ -36,6 +36,22 @@ public class Scheduler extends TaskClusterRequestHandler {
         super(credentials, baseURL);
     }
 
+    public Scheduler(String clientId, String accessToken) {
+        super(new Credentials(clientId, accessToken), defaultBaseURL);
+    }
+
+    public Scheduler(String clientId, String accessToken, String certificate) {
+        super(new Credentials(clientId, accessToken, certificate), defaultBaseURL);
+    }
+
+    public Scheduler(String baseURL) {
+        super(baseURL);
+    }
+
+    public Scheduler() {
+        super(defaultBaseURL);
+    }
+
     /**
      * Create a new task-graph, the `status` of the resulting JSON is a
      * task-graph status structure, you can find the `taskGraphId` in this

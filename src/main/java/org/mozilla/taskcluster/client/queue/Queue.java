@@ -35,6 +35,22 @@ public class Queue extends TaskClusterRequestHandler {
         super(credentials, baseURL);
     }
 
+    public Queue(String clientId, String accessToken) {
+        super(new Credentials(clientId, accessToken), defaultBaseURL);
+    }
+
+    public Queue(String clientId, String accessToken, String certificate) {
+        super(new Credentials(clientId, accessToken, certificate), defaultBaseURL);
+    }
+
+    public Queue(String baseURL) {
+        super(baseURL);
+    }
+
+    public Queue() {
+        super(defaultBaseURL);
+    }
+
     /**
      * This end-point will return the task-definition. Notice that the task
      * definition may have been modified by queue, if an optional property isn't

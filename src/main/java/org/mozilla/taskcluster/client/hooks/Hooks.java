@@ -40,6 +40,22 @@ public class Hooks extends TaskClusterRequestHandler {
         super(credentials, baseURL);
     }
 
+    public Hooks(String clientId, String accessToken) {
+        super(new Credentials(clientId, accessToken), defaultBaseURL);
+    }
+
+    public Hooks(String clientId, String accessToken, String certificate) {
+        super(new Credentials(clientId, accessToken, certificate), defaultBaseURL);
+    }
+
+    public Hooks(String baseURL) {
+        super(baseURL);
+    }
+
+    public Hooks() {
+        super(defaultBaseURL);
+    }
+
     /**
      * This endpoint will return a list of all hook groups with at least one hook.
      *

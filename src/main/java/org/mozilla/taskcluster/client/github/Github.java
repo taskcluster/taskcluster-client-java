@@ -32,6 +32,22 @@ public class Github extends TaskClusterRequestHandler {
         super(credentials, baseURL);
     }
 
+    public Github(String clientId, String accessToken) {
+        super(new Credentials(clientId, accessToken), defaultBaseURL);
+    }
+
+    public Github(String clientId, String accessToken, String certificate) {
+        super(new Credentials(clientId, accessToken, certificate), defaultBaseURL);
+    }
+
+    public Github(String baseURL) {
+        super(baseURL);
+    }
+
+    public Github() {
+        super(defaultBaseURL);
+    }
+
     /**
      * Capture a GitHub event and publish it via pulse, if it's a push
      * or pull request.

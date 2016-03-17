@@ -29,6 +29,22 @@ public class Secrets extends TaskClusterRequestHandler {
         super(credentials, baseURL);
     }
 
+    public Secrets(String clientId, String accessToken) {
+        super(new Credentials(clientId, accessToken), defaultBaseURL);
+    }
+
+    public Secrets(String clientId, String accessToken, String certificate) {
+        super(new Credentials(clientId, accessToken, certificate), defaultBaseURL);
+    }
+
+    public Secrets(String baseURL) {
+        super(baseURL);
+    }
+
+    public Secrets() {
+        super(defaultBaseURL);
+    }
+
     /**
      * Set a secret associated with some key.  If the secret already exists, it is updated instead.
      *

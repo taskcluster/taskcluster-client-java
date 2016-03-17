@@ -70,6 +70,22 @@ public class Auth extends TaskClusterRequestHandler {
         super(credentials, baseURL);
     }
 
+    public Auth(String clientId, String accessToken) {
+        super(new Credentials(clientId, accessToken), defaultBaseURL);
+    }
+
+    public Auth(String clientId, String accessToken, String certificate) {
+        super(new Credentials(clientId, accessToken, certificate), defaultBaseURL);
+    }
+
+    public Auth(String baseURL) {
+        super(baseURL);
+    }
+
+    public Auth() {
+        super(defaultBaseURL);
+    }
+
     /**
      * Get a list of all clients.  With `prefix`, only clients for which
      * it is a prefix of the clientId are returned.
