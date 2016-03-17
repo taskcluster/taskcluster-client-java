@@ -6,6 +6,7 @@ package org.mozilla.taskcluster.client.scheduler;
 
 import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
+import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
 import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 
@@ -27,12 +28,20 @@ public class Scheduler extends TaskClusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://scheduler.taskcluster.net/v1";
 
+    public Scheduler(Credentials credentials) {
+        super(credentials, defaultBaseURL);
+    }
+
+    public Scheduler(Credentials credentials, String baseURL) {
+        super(credentials, baseURL);
+    }
+
     public Scheduler(String clientId, String accessToken) {
-        super(clientId, accessToken, defaultBaseURL);
+        super(new Credentials(clientId, accessToken), defaultBaseURL);
     }
 
     public Scheduler(String clientId, String accessToken, String certificate) {
-        super(clientId, accessToken, certificate, defaultBaseURL);
+        super(new Credentials(clientId, accessToken, certificate), defaultBaseURL);
     }
 
     public Scheduler(String baseURL) {

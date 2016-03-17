@@ -1,92 +1,133 @@
 package org.mozilla.taskcluster.client;
 
+import java.net.URI;
 import java.util.Date;
-import java.security.NoSuchAlgorithmException;
-import java.security.InvalidKeyException;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
 
 import com.google.gson.Gson;
+import com.wealdtech.hawk.HawkClient;
+import com.wealdtech.hawk.HawkCredentials;
+import com.wealdtech.hawk.HawkCredentials.Algorithm;
 
 import net.iharder.Base64;
 
-import org.mozilla.taskcluster.client.InvalidOptionsException;
-
 public class Credentials {
-  public final static transient String algo = "HmacSHA256";
-  public String accessToken = "";
-  public String clientId = null;
-  public Certificate certificate = null;
+    private transient final static String algo             = "HmacSHA256";
+    public String[]                       authorizedScopes = null;
+    public String                         accessToken      = "";
+    public String                         clientId         = null;
+    public String                         certificate      = null;
+    private transient HawkClient          hawkClient;
 
-  //Let this just...be there
-  private Credentials(){
-    accessToken = null;
-    clientId = null;
-    certificate = null;
-  }
-
-  public Credentials(String accessToken, String clientId, Certificate certificate){
-    this.accessToken = accessToken;
-    this.clientId = clientId;
-    this.certificate = certificate;
-  }
-
-  /*
-    This method is used to generate unnamed temporary
-    credentials
-  */
-  public static Credentials createTemporaryCredentials(String clientId, String accessToken,
-  String[] scopes, Date start, Date expiry) throws InvalidOptionsException {
-    //Check dates
-    if(start.after(expiry)){
-      //throw error
-      throw new InvalidOptionsException(new Throwable("start should be before expiry"));
+    public void configureHawk() {
+        HawkCredentials hawkCredentials = new HawkCredentials.Builder().keyId(clientId).key(accessToken)
+                .algorithm(Algorithm.SHA256).build();
+        hawkClient = new HawkClient.Builder().credentials(hawkCredentials).build();
     }
-    if((long)(expiry.getTime() - start.getTime()) > (long) 31*24*60*60*1000){
-      //throw error
-      throw new InvalidOptionsException(new Throwable("Cannot exceed 31 days"));
-    }
-    Certificate cert = new Certificate(1,start,expiry,scopes);
-    //Create signature;
-    cert.generateSignature(accessToken);
-    String temporaryAccessToken = generateTemporaryAccessToken(accessToken, cert.seed);
-    return new Credentials(temporaryAccessToken, clientId, cert);
-  }
 
-  public static Credentials createTemporaryCredentials(String clientId, String issuer,
-  String accessToken, String[] scopes, Date start, Date expiry)
-  throws InvalidOptionsException {
-    //Check dates
-    if(start.after(expiry)){
-      //throw error
-      throw new InvalidOptionsException(new Throwable("start should be before expiry"));
+    // Hide default constructor
+    @SuppressWarnings("unused")
+    private Credentials() {
     }
-    if((long)(expiry.getTime() - start.getTime()) > (long) 31*24*60*60*1000){
-      //throw error
-      throw new InvalidOptionsException(new Throwable("Cannot exceed 31 days"));
-    }
-    Certificate cert = new Certificate(1,start,expiry,scopes,clientId, issuer);
-    //Create signature;
-    cert.generateSignature(accessToken);
-    String temporaryAccessToken = generateTemporaryAccessToken(accessToken, cert.seed);
-    return new Credentials(temporaryAccessToken, clientId, cert);
-  }
 
-  private static String generateTemporaryAccessToken(String accessToken, String seed){
-    try{
-      SecretKeySpec keySpec = new SecretKeySpec(accessToken.getBytes("utf-8"),algo);
-      Mac mac = Mac.getInstance(algo);
-      mac.init(keySpec);
-
-      return Base64.encodeBytes(mac.doFinal(seed.getBytes("utf-8")))
-      .replace('+','-')
-      .replace('/','_')
-      .replace("=","");
-    }catch (Exception e) {
-      e.printStackTrace();
-      return null;
+    public Credentials(String clientId, String accessToken) {
+        this.clientId = clientId;
+        this.accessToken = accessToken;
+        this.certificate = null;
+        configureHawk();
     }
-  }
+
+    public Credentials(String clientId, String accessToken, String certificate) {
+        this.clientId = clientId;
+        this.accessToken = accessToken;
+        this.certificate = certificate;
+        configureHawk();
+    }
+
+    /*
+     * This method is used to generate unnamed temporary credentials
+     */
+    public Credentials createTemporaryCredentials(String[] scopes, Date start, Date expiry)
+            throws InvalidOptionsException {
+        return this.createTemporaryCredentials("", scopes, start, expiry);
+    }
+
+    public Credentials createTemporaryCredentials(String clientId, String[] scopes, Date start, Date expiry)
+            throws InvalidOptionsException {
+        // Check dates
+        if (start.after(expiry)) {
+            // throw error
+            throw new InvalidOptionsException(new Throwable("start should be before expiry"));
+        }
+        if ((long) (expiry.getTime() - start.getTime()) > (long) 31 * 24 * 60 * 60 * 1000) {
+            // throw error
+            throw new InvalidOptionsException(new Throwable("Cannot exceed 31 days"));
+        }
+        Certificate cert = new Certificate(1, start, expiry, scopes);
+        if (clientId != null && !clientId.equals("")) {
+            cert.issuer = this.clientId;
+        }
+        // Create signature;
+        cert.generateSignature(accessToken, clientId);
+        String temporaryAccessToken = generateTemporaryAccessToken(accessToken, cert.seed);
+        if (clientId != null && !clientId.equals("")) {
+            return new Credentials(clientId, temporaryAccessToken, cert.toString());
+        }
+        return new Credentials(this.clientId, temporaryAccessToken, cert.toString());
+    }
+
+    public static String generateTemporaryAccessToken(String accessToken, String seed) {
+        try {
+            SecretKeySpec keySpec = new SecretKeySpec(accessToken.getBytes("utf-8"), algo);
+            Mac mac = Mac.getInstance(algo);
+            mac.init(keySpec);
+
+            return Base64.encodeBytes(mac.doFinal(seed.getBytes("utf-8"))).replace('+', '-').replace('/', '_')
+                    .replace("=", "");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * GetExtAuthField generates the hawk ext header based on the
+     * authorizedScopes and the certificate used in the case of temporary
+     * credentials. The header is a base64 encoded json object with a
+     * "certificate" property set to the certificate of the temporary
+     * credentials and a "authorizedScopes" property set to the array of
+     * authorizedScopes, if provided. If either "certificate" or
+     * "authorizedScopes" is not supplied, they will be omitted from the json
+     * result. If neither are provided, an empty string is returned, rather than
+     * a base64 encoded representation of "null" or "{}". Hawk interprets the
+     * empty string as meaning the ext header is not needed.
+     *
+     * See: * http://docs.taskcluster.net/auth/authorized-scopes *
+     * http://docs.taskcluster.net/auth/temporary-credentials
+     */
+    private String GetExtAuthField() {
+        ExtAuthField extAuthField = new ExtAuthField(getCertificate(), authorizedScopes);
+        Gson gson = new Gson();
+        String ext = gson.toJson(extAuthField);
+        if (ext.equals("{}")) {
+            return "";
+        }
+        return Base64.encodeBytes(ext.getBytes());
+    }
+
+    public String generateAuthorizationHeader(URI uri, String method, String hash) {
+        return hawkClient.generateAuthorizationHeader(uri, method, hash, GetExtAuthField(), null, null);
+    }
+
+    public Certificate getCertificate() {
+        Gson gson = new Gson();
+        return gson.fromJson(certificate, Certificate.class);
+    }
+
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
 }
