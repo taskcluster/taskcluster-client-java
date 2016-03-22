@@ -20,6 +20,12 @@ public class TaskDefinitionRequest {
     public Date deadline;
 
     /**
+     * List of dependent tasks. These must either be _completed_ or _resolved_
+     * before this task is scheduled. See `requires` for semantics.
+     */
+    public String[] dependencies;
+
+    /**
      * Task expiration, time at which task definition and status is deleted.
      * Notice that all artifacts for the must have an expiration that is no
      * later than this. If this property isn't it will be set to `deadline`
@@ -93,6 +99,16 @@ public class TaskDefinitionRequest {
      * `workerType`
      */
     public String provisionerId;
+
+    /**
+     * The tasks relation to its dependencies. This property specifies the
+     * semantics of the `task.dependencies` property.
+     * If `all-completed` is given the task will be scheduled when all
+     * dependencies are resolved _completed_ (successful resolution).
+     * If `all-resolved` is given the task will be scheduled when all dependencies
+     * have been resolved, regardless of what their resolution is.
+     */
+    public String requires;
 
     /**
      * Number of times to retry the task in case of infrastructure issues.

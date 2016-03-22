@@ -4712,6 +4712,28 @@ Properties
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
+  Property 'dependencies' =
+    Default                = '[]'
+    Description            = 'List of dependent tasks. These must either be _completed_ or _resolved_
+    before this task is scheduled. See `requires` for semantics.
+    '
+    Items
+      Description            = 'The `taskId` of a task that must be resolved before this task is
+      scheduled.
+      '
+      Pattern                = '^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$'
+      Title                  = 'Task Dependency'
+      Type                   = 'string'
+      TypeName               = 'dependencies'
+      IsInputSchema          = 'false'
+      IsOutputSchema         = 'false'
+      SourceURL              = ''
+    Title                  = 'Task Dependencies'
+    Type                   = 'array'
+    TypeName               = 'dependencies'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
   Property 'expires' =
     Description            = 'Task expiration, time at which task definition and status is deleted.
     Notice that all artifacts for the must have an expiration that is no
@@ -4837,6 +4859,22 @@ Properties
     Title                  = 'Provisioner Id'
     Type                   = 'string'
     TypeName               = 'provisionerId'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+  Property 'requires' =
+    Default                = 'all-completed'
+    Description            = 'The tasks relation to its dependencies. This property specifies the
+    semantics of the `task.dependencies` property.
+    If `all-completed` is given the task will be scheduled when all
+    dependencies are resolved _completed_ (successful resolution).
+    If `all-resolved` is given the task will be scheduled when all dependencies
+    have been resolved, regardless of what their resolution is.
+    '
+    Enum                   = '[all-completed all-resolved]'
+    Title                  = 'Dependency Requirement Semantics'
+    Type                   = 'string'
+    TypeName               = 'requires'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
@@ -6294,6 +6332,27 @@ Properties
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
+  Property 'dependencies' =
+    Description            = 'List of dependent tasks. These must either be _completed_ or _resolved_
+    before this task is scheduled. See `requires` for semantics.
+    '
+    Items
+      Description            = 'The `taskId` of a task that must be resolved before this task is
+      scheduled.
+      '
+      Pattern                = '^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$'
+      Title                  = 'Task Dependency'
+      Type                   = 'string'
+      TypeName               = 'dependencies'
+      IsInputSchema          = 'false'
+      IsOutputSchema         = 'false'
+      SourceURL              = ''
+    Title                  = 'Task Dependencies'
+    Type                   = 'array'
+    TypeName               = 'dependencies'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
   Property 'expires' =
     Description            = 'Task expiration, time at which task definition and status is deleted.
     Notice that all artifacts for the must have an expiration that is no
@@ -6420,6 +6479,21 @@ Properties
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
+  Property 'requires' =
+    Description            = 'The tasks relation to its dependencies. This property specifies the
+    semantics of the `task.dependencies` property.
+    If `all-completed` is given the task will be scheduled when all
+    dependencies are resolved _completed_ (successful resolution).
+    If `all-resolved` is given the task will be scheduled when all dependencies
+    have been resolved, regardless of what their resolution is.
+    '
+    Enum                   = '[all-completed all-resolved]'
+    Title                  = 'Dependency Requirement Semantics'
+    Type                   = 'string'
+    TypeName               = 'requires'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
   Property 'retries' =
     Description            = 'Number of times to retry the task in case of infrastructure issues.
     An _infrastructure issue_ is a worker node that crashes or is shutdown,
@@ -6542,7 +6616,7 @@ Properties
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
-Required               = '[provisionerId workerType schedulerId taskGroupId routes priority retries created deadline scopes payload metadata tags extra]'
+Required               = '[provisionerId workerType schedulerId taskGroupId dependencies requires routes priority retries created deadline scopes payload metadata tags extra]'
 Schema                 = 'http://json-schema.org/draft-04/schema#'
 Title                  = 'Task Definition Response'
 Type                   = 'object'
@@ -8068,6 +8142,28 @@ Properties
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
+  Property 'dependencies' =
+    Default                = '[]'
+    Description            = 'List of dependent tasks. These must either be _completed_ or _resolved_
+    before this task is scheduled. See `requires` for semantics.
+    '
+    Items
+      Description            = 'The `taskId` of a task that must be resolved before this task is
+      scheduled.
+      '
+      Pattern                = '^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$'
+      Title                  = 'Task Dependency'
+      Type                   = 'string'
+      TypeName               = 'dependencies'
+      IsInputSchema          = 'false'
+      IsOutputSchema         = 'false'
+      SourceURL              = ''
+    Title                  = 'Task Dependencies'
+    Type                   = 'array'
+    TypeName               = 'dependencies'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
   Property 'expires' =
     Description            = 'Task expiration, time at which task definition and status is deleted.
     Notice that all artifacts for the must have an expiration that is no
@@ -8193,6 +8289,22 @@ Properties
     Title                  = 'Provisioner Id'
     Type                   = 'string'
     TypeName               = 'provisionerId'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+  Property 'requires' =
+    Default                = 'all-completed'
+    Description            = 'The tasks relation to its dependencies. This property specifies the
+    semantics of the `task.dependencies` property.
+    If `all-completed` is given the task will be scheduled when all
+    dependencies are resolved _completed_ (successful resolution).
+    If `all-resolved` is given the task will be scheduled when all dependencies
+    have been resolved, regardless of what their resolution is.
+    '
+    Enum                   = '[all-completed all-resolved]'
+    Title                  = 'Dependency Requirement Semantics'
+    Type                   = 'string'
+    TypeName               = 'requires'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
