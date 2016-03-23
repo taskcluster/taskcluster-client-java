@@ -72,7 +72,7 @@ public class Queue extends TaskClusterRequestHandler {
     }
 
     /**
-     * List taskIds of all tasks sharing the same `taskGroupId`.
+     * List tasks sharing the same `taskGroupId`.
      * 
      * As a task-group may contain an unbounded number of tasks, this end-point
      * may return a `continuationToken`. To continue listing tasks you must
@@ -388,6 +388,14 @@ public class Queue extends TaskClusterRequestHandler {
 
     /**
      * Returns a list of artifacts and associated meta-data for a given run.
+     * 
+     * As a task may have many artifacts paging may be necessary. If this
+     * end-point returns a `continuationToken`, you should call the end-point
+     * again with the `continuationToken` as the query-string option:
+     * `continuationToken`.
+     * 
+     * By default this end-point will list up-to 1000 artifacts in a single page
+     * you may limit this with the query-string parameter `limit`.
      *
      * See http://docs.taskcluster.net/queue/api-docs/#listArtifacts
      */
@@ -398,6 +406,14 @@ public class Queue extends TaskClusterRequestHandler {
     /**
      * Returns a list of artifacts and associated meta-data for the latest run
      * from the given task.
+     * 
+     * As a task may have many artifacts paging may be necessary. If this
+     * end-point returns a `continuationToken`, you should call the end-point
+     * again with the `continuationToken` as the query-string option:
+     * `continuationToken`.
+     * 
+     * By default this end-point will list up-to 1000 artifacts in a single page
+     * you may limit this with the query-string parameter `limit`.
      *
      * See http://docs.taskcluster.net/queue/api-docs/#listLatestArtifacts
      */

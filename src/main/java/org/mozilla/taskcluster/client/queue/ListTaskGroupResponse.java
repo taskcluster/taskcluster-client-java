@@ -8,23 +8,28 @@ package org.mozilla.taskcluster.client.queue;
 public class ListTaskGroupResponse {
 
     /**
-     * Opaque `continuationToken` to be given as query-string option if all the
-     * tasks in the task-group wasn't included in this result.
+     * Opaque `continuationToken` to be given as query-string option to get the
+     * next set of tasks in the task-group.
      * This property is only present if another request is necessary to fetch all
      * results. In practice the next request with a `continuationToken` may not
      * return additional results, but it can. Thus, you can only be sure to have
      * all the results if you've called `listTaskGroup` with `continuationToken`
-     * until you got a result without a `continuationToken`.
+     * until you get a result without a `continuationToken`.
      */
     public String continuationToken;
-
-    /**
-     * List of `taskId` for tasks in this task-group.
-     */
-    public String[] members;
 
     /**
      * Identifier for the task-group being listed.
      */
     public String taskGroupId;
+
+    /**
+     * List of tasks in this task-group.
+     */
+    public class Tasks {
+        public TaskStatusStructure status;
+        public TaskDefinitionResponse task;
+    }
+
+    public Tasks[] tasks;
 }

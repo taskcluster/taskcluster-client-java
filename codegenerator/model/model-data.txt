@@ -4297,7 +4297,7 @@ Entry 2     =
     Entry Input       = ''
     Entry Output      = 'http://schemas.taskcluster.net/queue/v1/list-task-group-response.json#'
     Entry Title       = 'List Task Group'
-    Entry Description = 'List taskIds of all tasks sharing the same `taskGroupId`.
+    Entry Description = 'List tasks sharing the same `taskGroupId`.
 
 As a task-group may contain an unbounded number of tasks, this end-point
 may return a `continuationToken`. To continue listing tasks you must
@@ -4642,7 +4642,15 @@ Entry 17    =
     Entry Input       = ''
     Entry Output      = 'http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#'
     Entry Title       = 'Get Artifacts from Run'
-    Entry Description = 'Returns a list of artifacts and associated meta-data for a given run.'
+    Entry Description = 'Returns a list of artifacts and associated meta-data for a given run.
+
+As a task may have many artifacts paging may be necessary. If this
+end-point returns a `continuationToken`, you should call the end-point
+again with the `continuationToken` as the query-string option:
+`continuationToken`.
+
+By default this end-point will list up-to 1000 artifacts in a single page
+you may limit this with the query-string parameter `limit`.'
 Entry 18    =
     Entry Type        = 'function'
     Entry Method      = 'get'
@@ -4654,7 +4662,15 @@ Entry 18    =
     Entry Output      = 'http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#'
     Entry Title       = 'Get Artifacts from Latest Run'
     Entry Description = 'Returns a list of artifacts and associated meta-data for the latest run
-from the given task.'
+from the given task.
+
+As a task may have many artifacts paging may be necessary. If this
+end-point returns a `continuationToken`, you should call the end-point
+again with the `continuationToken` as the query-string option:
+`continuationToken`.
+
+By default this end-point will list up-to 1000 artifacts in a single page
+you may limit this with the query-string parameter `limit`.'
 Entry 19    =
     Entry Type        = 'function'
     Entry Method      = 'get'
@@ -5092,6 +5108,21 @@ Properties
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
+  Property 'continuationToken' =
+    Description            = 'Opaque `continuationToken` to be given as query-string option to get the
+    next set of artifacts.
+    This property is only present if another request is necessary to fetch all
+    results. In practice the next request with a `continuationToken` may not
+    return additional results, but it can. Thus, you can only be sure to have
+    all the results if you've called with `continuationToken` until you get a
+    result without a `continuationToken`.
+    '
+    Title                  = 'Continuation Token'
+    Type                   = 'string'
+    TypeName               = 'continuationToken'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
 Required               = '[artifacts]'
 Schema                 = 'http://json-schema.org/draft-04/schema#'
 Title                  = 'List Artifacts Response'
@@ -5109,36 +5140,17 @@ Description            = 'Response from a `listTaskGroup` request.
 ID                     = 'http://schemas.taskcluster.net/queue/v1/list-task-group-response.json#'
 Properties
   Property 'continuationToken' =
-    Description            = 'Opaque `continuationToken` to be given as query-string option if all the
-    tasks in the task-group wasn't included in this result.
+    Description            = 'Opaque `continuationToken` to be given as query-string option to get the
+    next set of tasks in the task-group.
     This property is only present if another request is necessary to fetch all
     results. In practice the next request with a `continuationToken` may not
     return additional results, but it can. Thus, you can only be sure to have
     all the results if you've called `listTaskGroup` with `continuationToken`
-    until you got a result without a `continuationToken`.
+    until you get a result without a `continuationToken`.
     '
     Title                  = 'Continuation Token'
     Type                   = 'string'
     TypeName               = 'continuationToken'
-    IsInputSchema          = 'false'
-    IsOutputSchema         = 'false'
-    SourceURL              = ''
-  Property 'members' =
-    Description            = 'List of `taskId` for tasks in this task-group.
-    '
-    Items
-      Description            = '`TaskId` for a task in the task-group being listed.
-      '
-      Pattern                = '^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$'
-      Title                  = 'Task Identifier'
-      Type                   = 'string'
-      TypeName               = 'members'
-      IsInputSchema          = 'false'
-      IsOutputSchema         = 'false'
-      SourceURL              = ''
-    Title                  = 'Members of the Task-Group'
-    Type                   = 'array'
-    TypeName               = 'members'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
@@ -5152,7 +5164,40 @@ Properties
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
-Required               = '[taskGroupId members]'
+  Property 'tasks' =
+    Description            = 'List of tasks in this task-group.
+    '
+    Items
+      Additional Properties  = 'false'
+      Description            = 'Task Definition and task status structure.
+      '
+      Properties
+        Property 'status' =
+          Ref                    = 'http://schemas.taskcluster.net/queue/v1/task-status.json#'
+          TypeName               = 'status'
+          IsInputSchema          = 'false'
+          IsOutputSchema         = 'false'
+          SourceURL              = ''
+        Property 'task' =
+          Ref                    = 'http://schemas.taskcluster.net/queue/v1/task.json#'
+          TypeName               = 'task'
+          IsInputSchema          = 'false'
+          IsOutputSchema         = 'false'
+          SourceURL              = ''
+      Required               = '[task status]'
+      Title                  = 'Task definition and status'
+      Type                   = 'object'
+      TypeName               = 'tasks'
+      IsInputSchema          = 'false'
+      IsOutputSchema         = 'false'
+      SourceURL              = ''
+    Title                  = 'Tasks from the Task-Group'
+    Type                   = 'array'
+    TypeName               = 'tasks'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+Required               = '[taskGroupId tasks]'
 Schema                 = 'http://json-schema.org/draft-04/schema#'
 Title                  = 'List Task-Group Response'
 Type                   = 'object'
