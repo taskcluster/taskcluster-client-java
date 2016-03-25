@@ -15,7 +15,10 @@ public class TaskDefinitionResponse {
     public Date created;
 
     /**
-     * Deadline of the task, `pending` and `running` runs are resolved as **failed** if not resolved by other means before the deadline. Note, deadline cannot be more than5 days into the future
+     * Deadline of the task, `pending` and `running` runs are
+     * resolved as **failed** if not resolved by other means
+     * before the deadline. Note, deadline cannot be more than
+     * 5 days into the future
      */
     public Date deadline;
 

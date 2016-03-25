@@ -387,7 +387,19 @@ Properties
     Description            = 'Host for which the request came in, this is typically the `Host` header
     excluding the port if any.
     '
-    Format                 = 'hostname'
+    OneOf
+      Item '0' =
+        Format                 = 'hostname'
+        TypeName               = 'X'
+        IsInputSchema          = 'false'
+        IsOutputSchema         = 'false'
+        SourceURL              = ''
+      Item '1' =
+        Format                 = 'ipv4'
+        TypeName               = 'X'
+        IsInputSchema          = 'false'
+        IsOutputSchema         = 'false'
+        SourceURL              = ''
     Type                   = 'string'
     TypeName               = 'host'
     IsInputSchema          = 'false'
@@ -4710,7 +4722,11 @@ Properties
     IsOutputSchema         = 'false'
     SourceURL              = ''
   Property 'deadline' =
-    Description            = 'Deadline of the task, `pending` and `running` runs are resolved as **failed** if not resolved by other means before the deadline. Note, deadline cannot be more than5 days into the future'
+    Description            = 'Deadline of the task, `pending` and `running` runs are
+    resolved as **failed** if not resolved by other means
+    before the deadline. Note, deadline cannot be more than
+    5 days into the future
+    '
     Format                 = 'date-time'
     Title                  = 'Deadline'
     Type                   = 'string'
@@ -5293,7 +5309,7 @@ Properties
           substitution, otherwise you will experience intermittent failures!
           Note this URL only works with `DELETE` request.
           '
-          Format                 = 'uri'
+          Pattern                = '^https://'
           Title                  = 'Signed Delete Message URL'
           Type                   = 'string'
           TypeName               = 'signedDeleteUrl'
@@ -5337,7 +5353,7 @@ Properties
     IsOutputSchema         = 'false'
     SourceURL              = ''
 Required               = '[queues expires]'
-Schema                 = 'http://json-schema.org/draft-04/schema#"'
+Schema                 = 'http://json-schema.org/draft-04/schema#'
 Title                  = 'Poll Task Urls Response'
 Type                   = 'object'
 TypeName               = 'PollTaskUrlsResponse'
@@ -5795,10 +5811,12 @@ Properties
     reporting the task `completed`, `failed` or `exception`.
     
     Note, a new set of temporary credentials is issued when the worker
-    reclaims the task.'
+    reclaims the task.
+    '
     Properties
       Property 'accessToken' =
-        Description            = 'The `accessToken` for the temporary credentials.'
+        Description            = 'The `accessToken` for the temporary credentials.
+        '
         MinLength              = '1'
         Type                   = 'string'
         TypeName               = 'accessToken'
@@ -5807,7 +5825,8 @@ Properties
         SourceURL              = ''
       Property 'certificate' =
         Description            = 'The `certificate` for the temporary credentials, these are required
-        for the temporary credentials to work.'
+        for the temporary credentials to work.
+        '
         MinLength              = '1'
         Type                   = 'string'
         TypeName               = 'certificate'
@@ -5815,7 +5834,8 @@ Properties
         IsOutputSchema         = 'false'
         SourceURL              = ''
       Property 'clientId' =
-        Description            = 'The `clientId` for the temporary credentials.'
+        Description            = 'The `clientId` for the temporary credentials.
+        '
         MinLength              = '1'
         Type                   = 'string'
         TypeName               = 'clientId'
@@ -5970,10 +5990,12 @@ Properties
     reporting the task `completed`, `failed` or `exception`.
     
     Note, a new set of temporary credentials is issued when the worker
-    reclaims the task.'
+    reclaims the task.
+    '
     Properties
       Property 'accessToken' =
-        Description            = 'The `accessToken` for the temporary credentials.'
+        Description            = 'The `accessToken` for the temporary credentials.
+        '
         MinLength              = '1'
         Type                   = 'string'
         TypeName               = 'accessToken'
@@ -5982,7 +6004,8 @@ Properties
         SourceURL              = ''
       Property 'certificate' =
         Description            = 'The `certificate` for the temporary credentials, these are required
-        for the temporary credentials to work.'
+        for the temporary credentials to work.
+        '
         MinLength              = '1'
         Type                   = 'string'
         TypeName               = 'certificate'
@@ -5990,7 +6013,8 @@ Properties
         IsOutputSchema         = 'false'
         SourceURL              = ''
       Property 'clientId' =
-        Description            = 'The `clientId` for the temporary credentials.'
+        Description            = 'The `clientId` for the temporary credentials.
+        '
         MinLength              = '1'
         Type                   = 'string'
         TypeName               = 'clientId'
@@ -6092,7 +6116,11 @@ Description            = 'A representation of **task status** as known by the qu
 ID                     = 'http://schemas.taskcluster.net/queue/v1/task-status.json#'
 Properties
   Property 'deadline' =
-    Description            = 'Deadline of the task, `pending` and `running` runs are resolved as **failed** if not resolved by other means before the deadline. Note, deadline cannot be more than5 days into the future'
+    Description            = 'Deadline of the task, `pending` and `running` runs are
+    resolved as **failed** if not resolved by other means
+    before the deadline. Note, deadline cannot be more than
+    5 days into the future
+    '
     Format                 = 'date-time'
     Title                  = 'Deadline'
     Type                   = 'string'
@@ -6101,7 +6129,10 @@ Properties
     IsOutputSchema         = 'false'
     SourceURL              = ''
   Property 'expires' =
-    Description            = 'Task expiration, time at which task definition and status is deleted. Notice that all artifacts for the must have an expiration that is no later than this.'
+    Description            = 'Task expiration, time at which task definition and
+    status is deleted. Notice that all artifacts for the
+    must have an expiration that is no later than this.
+    '
     Format                 = 'date-time'
     Title                  = 'Expiration'
     Type                   = 'string'
@@ -6359,7 +6390,11 @@ Properties
     IsOutputSchema         = 'false'
     SourceURL              = ''
   Property 'deadline' =
-    Description            = 'Deadline of the task, `pending` and `running` runs are resolved as **failed** if not resolved by other means before the deadline. Note, deadline cannot be more than5 days into the future'
+    Description            = 'Deadline of the task, `pending` and `running` runs are
+    resolved as **failed** if not resolved by other means
+    before the deadline. Note, deadline cannot be more than
+    5 days into the future
+    '
     Format                 = 'date-time'
     Title                  = 'Deadline'
     Type                   = 'string'
@@ -7345,7 +7380,7 @@ Properties
     IsOutputSchema         = 'false'
     SourceURL              = ''
 Required               = '[version status runId workerGroup workerId artifact]'
-Schema                 = 'http://json-schema.org/draft-04/schema#"'
+Schema                 = 'http://json-schema.org/draft-04/schema#'
 Title                  = 'Artifact Created Message'
 Type                   = 'object'
 TypeName               = 'ArtifactCreatedMessage'
@@ -7701,7 +7736,11 @@ Description            = 'A representation of **task status** as known by the qu
 ID                     = 'http://schemas.taskcluster.net/queue/v1/task-status.json#'
 Properties
   Property 'deadline' =
-    Description            = 'Deadline of the task, `pending` and `running` runs are resolved as **failed** if not resolved by other means before the deadline. Note, deadline cannot be more than5 days into the future'
+    Description            = 'Deadline of the task, `pending` and `running` runs are
+    resolved as **failed** if not resolved by other means
+    before the deadline. Note, deadline cannot be more than
+    5 days into the future
+    '
     Format                 = 'date-time'
     Title                  = 'Deadline'
     Type                   = 'string'
@@ -7710,7 +7749,10 @@ Properties
     IsOutputSchema         = 'false'
     SourceURL              = ''
   Property 'expires' =
-    Description            = 'Task expiration, time at which task definition and status is deleted. Notice that all artifacts for the must have an expiration that is no later than this.'
+    Description            = 'Task expiration, time at which task definition and
+    status is deleted. Notice that all artifacts for the
+    must have an expiration that is no later than this.
+    '
     Format                 = 'date-time'
     Title                  = 'Expiration'
     Type                   = 'string'
@@ -8169,7 +8211,11 @@ Properties
     IsOutputSchema         = 'false'
     SourceURL              = ''
   Property 'deadline' =
-    Description            = 'Deadline of the task, `pending` and `running` runs are resolved as **failed** if not resolved by other means before the deadline. Note, deadline cannot be more than5 days into the future'
+    Description            = 'Deadline of the task, `pending` and `running` runs are
+    resolved as **failed** if not resolved by other means
+    before the deadline. Note, deadline cannot be more than
+    5 days into the future
+    '
     Format                 = 'date-time'
     Title                  = 'Deadline'
     Type                   = 'string'

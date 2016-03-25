@@ -10,12 +10,17 @@ import java.util.Date;
 public class TaskStatusStructure {
 
     /**
-     * Deadline of the task, `pending` and `running` runs are resolved as **failed** if not resolved by other means before the deadline. Note, deadline cannot be more than5 days into the future
+     * Deadline of the task, `pending` and `running` runs are
+     * resolved as **failed** if not resolved by other means
+     * before the deadline. Note, deadline cannot be more than
+     * 5 days into the future
      */
     public Date deadline;
 
     /**
-     * Task expiration, time at which task definition and status is deleted. Notice that all artifacts for the must have an expiration that is no later than this.
+     * Task expiration, time at which task definition and
+     * status is deleted. Notice that all artifacts for the
+     * must have an expiration that is no later than this.
      */
     public Date expires;
 
