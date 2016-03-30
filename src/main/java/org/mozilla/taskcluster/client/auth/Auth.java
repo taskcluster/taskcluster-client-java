@@ -293,6 +293,21 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
+     * Get temporary DSN (access credentials) for a sentry project.
+     * The credentials returned can be used with any Sentry client for up to
+     * 24 hours, after which the credentials will be automatically disabled.
+     * 
+     * If the project doesn't exist it will be created, and assigned to the
+     * initial team configured for this component. Contact a Sentry admin
+     * to have the project transferred to a team you have access to if needed
+     *
+     * See http://docs.taskcluster.net/auth/api-docs/#sentryDSN
+     */
+    public CallSummary<EmptyPayload, SentryDSNResponse> sentryDSN(String project) throws APICallFailure {
+        return apiCall(null, "GET", "/sentry/" + uriEncode(project) + "/dsn", SentryDSNResponse.class);
+    }
+
+    /**
      * Validate the request signature given on input and return list of scopes
      * that the authenticating client has.
      * 
