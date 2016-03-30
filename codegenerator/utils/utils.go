@@ -45,6 +45,60 @@ func WriteStringToFile(content, file string) {
 	ExitOnFail(err)
 }
 
+// See https://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
+var reservedKeyWords = map[string]bool{
+	"abstract":     true,
+	"assert":       true,
+	"boolean":      true,
+	"break":        true,
+	"byte":         true,
+	"case":         true,
+	"catch":        true,
+	"char":         true,
+	"class":        true,
+	"const":        true,
+	"continue":     true,
+	"default":      true,
+	"do":           true,
+	"double":       true,
+	"else":         true,
+	"enum":         true,
+	"extends":      true,
+	"final":        true,
+	"finally":      true,
+	"float":        true,
+	"for":          true,
+	"goto":         true,
+	"if":           true,
+	"implements":   true,
+	"import":       true,
+	"instanceof":   true,
+	"int":          true,
+	"interface":    true,
+	"long":         true,
+	"native":       true,
+	"new":          true,
+	"package":      true,
+	"private":      true,
+	"protected":    true,
+	"public":       true,
+	"return":       true,
+	"short":        true,
+	"static":       true,
+	"strictfp":     true,
+	"super":        true,
+	"switch":       true,
+	"synchronized": true,
+	"this":         true,
+	"throw":        true,
+	"throws":       true,
+	"transient":    true,
+	"try":          true,
+	"void":         true,
+	"volatile":     true,
+	"while":        true,
+}
+
 func NormaliseLower(name string, dict map[string]bool) string {
 	// Capitalise words, and remove spaces and dashes, to acheive struct names in CamelCase,
 	// but starting with an upper case letter so that the structs are exported...
@@ -54,7 +108,7 @@ func NormaliseLower(name string, dict map[string]bool) string {
 	// , the first instance would be called FooBar, then the next would be FooBar1, the next
 	// FooBar2 and the last would be assigned a name of FooBar3. We do this to guarantee we
 	// don't use duplicate names for different logical entities.
-	for k, baseName := 1, normalisedName; dict[normalisedName]; {
+	for k, baseName := 1, normalisedName; dict[normalisedName] || reservedKeyWords[normalisedName]; {
 		normalisedName = fmt.Sprintf("%v%v", baseName, k)
 		k++
 	}
@@ -71,7 +125,7 @@ func Normalise(name string, dict map[string]bool) string {
 	// , the first instance would be called FooBar, then the next would be FooBar1, the next
 	// FooBar2 and the last would be assigned a name of FooBar3. We do this to guarantee we
 	// don't use duplicate names for different logical entities.
-	for k, baseName := 1, normalisedName; dict[normalisedName]; {
+	for k, baseName := 1, normalisedName; dict[normalisedName] || reservedKeyWords[normalisedName]; {
 		normalisedName = fmt.Sprintf("%v%v", baseName, k)
 		k++
 	}
