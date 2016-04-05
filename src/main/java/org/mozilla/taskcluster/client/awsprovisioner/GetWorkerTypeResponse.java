@@ -7,7 +7,7 @@ import java.util.Date;
 *
 * See http://schemas.taskcluster.net/aws-provisioner/v1/get-worker-type-response.json#
 */
-public class GetWorkerTypeRequest {
+public class GetWorkerTypeResponse {
 
     /**
      * True if this worker type is allowed on demand instances.  Currently

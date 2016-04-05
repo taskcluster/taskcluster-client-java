@@ -96,8 +96,8 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#createWorkerType
      */
-    public CallSummary<CreateWorkerTypeRequest, GetWorkerTypeRequest> createWorkerType(String workerType, CreateWorkerTypeRequest payload) throws APICallFailure {
-        return apiCall(payload, "PUT", "/worker-type/" + uriEncode(workerType), GetWorkerTypeRequest.class);
+    public CallSummary<CreateWorkerTypeRequest, GetWorkerTypeResponse> createWorkerType(String workerType, CreateWorkerTypeRequest payload) throws APICallFailure {
+        return apiCall(payload, "PUT", "/worker-type/" + uriEncode(workerType), GetWorkerTypeResponse.class);
     }
 
     /**
@@ -115,8 +115,8 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#updateWorkerType
      */
-    public CallSummary<CreateWorkerTypeRequest, GetWorkerTypeRequest> updateWorkerType(String workerType, CreateWorkerTypeRequest payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/worker-type/" + uriEncode(workerType) + "/update", GetWorkerTypeRequest.class);
+    public CallSummary<CreateWorkerTypeRequest, GetWorkerTypeResponse> updateWorkerType(String workerType, CreateWorkerTypeRequest payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/worker-type/" + uriEncode(workerType) + "/update", GetWorkerTypeResponse.class);
     }
 
     /**
@@ -128,8 +128,8 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      *
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#workerType
      */
-    public CallSummary<EmptyPayload, GetWorkerTypeRequest> workerType(String workerType) throws APICallFailure {
-        return apiCall(null, "GET", "/worker-type/" + uriEncode(workerType), GetWorkerTypeRequest.class);
+    public CallSummary<EmptyPayload, GetWorkerTypeResponse> workerType(String workerType) throws APICallFailure {
+        return apiCall(null, "GET", "/worker-type/" + uriEncode(workerType), GetWorkerTypeResponse.class);
     }
 
     /**
