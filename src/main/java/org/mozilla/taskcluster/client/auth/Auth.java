@@ -308,6 +308,17 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
+     * Get temporary `token` and `baseUrl` for sending metrics to statsum.
+     * 
+     * The token is valid for 24 hours, clients should refresh after expiration.
+     *
+     * See http://docs.taskcluster.net/auth/api-docs/#statsumToken
+     */
+    public CallSummary<EmptyPayload, StatsumTokenResponse> statsumToken(String project) throws APICallFailure {
+        return apiCall(null, "GET", "/statsum/" + uriEncode(project) + "/token", StatsumTokenResponse.class);
+    }
+
+    /**
      * Validate the request signature given on input and return list of scopes
      * that the authenticating client has.
      * 
