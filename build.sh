@@ -1,4 +1,19 @@
-#!/bin/bash -xveu
+#!/bin/bash -eu
+
+GO_VERSION="$(go version 2>/dev/null | cut -f3 -d' ')"
+GO_MAJ="$(echo "${GO_VERSION}" | cut -f1 -d'.')"
+GO_MIN="$(echo "${GO_VERSION}" | cut -f2 -d'.')"
+if [ -z "${GO_VERSION}" ]; then
+  echo "Have you installed go? I get no result from \`go version\` command." >&2
+  exit 64
+elif [ "${GO_MAJ}" != "go1" ] || [ "${GO_MIN}" -lt 5 ]; then
+  echo "Go version go1.x needed, where x >= 5, but the version I found is: '${GO_VERSION}'" >&2
+  echo "I found it here:" >&2
+  which go >&2
+  echo "The complete output of \`go version\` command is:" >&2
+  go version >&2
+  exit 65
+fi
 
 # call this script with -n to skip code generation
 
@@ -15,15 +30,14 @@ rm -rf src/main/java/org/mozilla/taskcluster/client/*/*.java
 
 rm -rf "${GOPATH}/bin/generatemodel"
 rm -rf "${GOPATH}"/pkg/*/github.com/*/taskcluster-client-java
-go clean -i -x ./...
+go clean -i ./...
 
 go get ./...
-go install -v -x ./codegenerator/generatemodel
+go install -v ./codegenerator/generatemodel
 "${GENERATE}" && go generate -v ./...
-go install -v -x ./...
+go install -v ./...
 go fmt ./...
-go get -d golang.org/x/tools/cmd/vet
-go vet -x ./...
+go vet ./...
 go test -v ./...
 
 # finally check that generated files have been committed, and that
