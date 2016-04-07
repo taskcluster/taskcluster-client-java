@@ -11,9 +11,13 @@ import org.mozilla.taskcluster.client.EmptyPayload;
 import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 
 /**
- * The secrets service, is a simple key/value store for secret data
- * guarded by TaskCluster scopes.  It is typically available at
- * `secrets.taskcluster.net`.
+ * The secrets service provides a simple key/value store for small bits of secret
+ * data.  Access is limited by scopes, so values can be considered secret from
+ * those who do not have the relevant scopes.
+ * 
+ * Secrets also have an expiration date, and once a secret has expired it can no
+ * longer be read.  This is useful for short-term secrets such as a temporary
+ * service credential or a one-time signing key.
  *
  * See: http://docs.taskcluster.net/services/secrets
  */
@@ -46,7 +50,8 @@ public class Secrets extends TaskClusterRequestHandler {
     }
 
     /**
-     * Set a secret associated with some key.  If the secret already exists, it is updated instead.
+     * Set the secret associated with some key.  If the secret already exists, it is
+     * updated instead.
      *
      * See http://docs.taskcluster.net/services/secrets/#set
      */
@@ -55,7 +60,7 @@ public class Secrets extends TaskClusterRequestHandler {
     }
 
     /**
-     * Delete the secret attached to some key.
+     * Delete the secret associated with some key.
      *
      * See http://docs.taskcluster.net/services/secrets/#remove
      */
@@ -64,7 +69,10 @@ public class Secrets extends TaskClusterRequestHandler {
     }
 
     /**
-     * Read the secret attached to some key.
+     * Read the secret associated with some key.  If the secret has recently
+     * expired, the response code 410 is returned.  If the caller lacks the
+     * scope necessary to get the secret, the call will fail with a 403 code
+     * regardless of whether the secret exists.
      *
      * See http://docs.taskcluster.net/services/secrets/#get
      */
@@ -82,9 +90,8 @@ public class Secrets extends TaskClusterRequestHandler {
     }
 
     /**
-     * Documented later...
-     * 
-     * **Warning** this api end-point is **not stable**.
+     * Respond without doing anything.  This endpoint is used to check that
+     * the service is up.
      *
      * See http://docs.taskcluster.net/services/secrets/#ping
      */
