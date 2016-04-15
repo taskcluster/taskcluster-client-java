@@ -18,6 +18,11 @@ public class CreateWorkerTypeRequest {
      * as all instances are Spot
      */
     public boolean canUseSpot;
+
+    /**
+     * A string which describes what this image is for and hints on using it
+     */
+    public String description;
     public class InstanceTypes {
 
         /**
@@ -96,6 +101,11 @@ public class CreateWorkerTypeRequest {
      * used will be $0.25
      */
     public int minPrice;
+
+    /**
+     * A string which identifies the owner of this worker type
+     */
+    public String owner;
     public class Regions {
 
         /**
