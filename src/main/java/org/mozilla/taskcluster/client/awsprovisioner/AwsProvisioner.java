@@ -70,18 +70,6 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
-     * Return a list of worker types, including some summary information about
-     * current capacity for each.  While this list includes all defined worker types,
-     * there may be running EC2 instances for deleted worker types that are not
-     * included here.  The list is unordered.
-     *
-     * See http://docs.taskcluster.net/aws-provisioner/api-docs/#listWorkerTypeSummaries
-     */
-    public CallSummary<EmptyPayload, WorkerTypeSummary[]> listWorkerTypeSummaries() throws APICallFailure {
-        return apiCall(null, "GET", "/list-worker-type-summaries", WorkerTypeSummary[].class);
-    }
-
-    /**
      * Create a worker type.  A worker type contains all the configuration
      * needed for the provisioner to manage the instances.  Each worker type
      * knows which regions and which instance types are allowed for that
@@ -259,8 +247,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * Return the state of a given workertype as stored by the provisioner. 
      * This state is stored as three lists: 1 for all instances, 1 for requests
      * which show in the ec2 api and 1 list for those only tracked internally
-     * in the provisioner.  The `summary` property contains an updated summary
-     * similar to that returned from `listWorkerTypeSummaries`.
+     * in the provisioner.
      *
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#state
      */
