@@ -244,18 +244,6 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
-     * This method is a left over and will be removed as soon as the
-     * tools.tc.net UI is updated to use the per-worker state
-     * 
-     * **DEPRECATED.**
-     *
-     * See http://docs.taskcluster.net/aws-provisioner/api-docs/#awsState
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> awsState() throws APICallFailure {
-        return apiCall(null, "GET", "/aws-state", EmptyPayload.class);
-    }
-
-    /**
      * Return the state of a given workertype as stored by the provisioner. 
      * This state is stored as three lists: 1 for all instances, 1 for requests
      * which show in the ec2 api and 1 list for those only tracked internally

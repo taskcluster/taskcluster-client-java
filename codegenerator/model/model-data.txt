@@ -1665,20 +1665,6 @@ test worker types, nothing more
 Entry 11    =
     Entry Type        = 'function'
     Entry Method      = 'get'
-    Entry Route       = '/aws-state'
-    Entry Args        = '[]'
-    Entry Name        = 'awsState'
-    Entry Scopes      = '[[aws-provisioner:aws-state]]'
-    Entry Input       = ''
-    Entry Output      = ''
-    Entry Title       = 'Get AWS State for all worker types'
-    Entry Description = 'This method is a left over and will be removed as soon as the
-tools.tc.net UI is updated to use the per-worker state
-
-**DEPRECATED.**'
-Entry 12    =
-    Entry Type        = 'function'
-    Entry Method      = 'get'
     Entry Route       = '/state/<workerType>'
     Entry Args        = '[workerType]'
     Entry Name        = 'state'
@@ -1691,7 +1677,7 @@ This state is stored as three lists: 1 for all instances, 1 for requests
 which show in the ec2 api and 1 list for those only tracked internally
 in the provisioner.  The `summary` property contains an updated summary
 similar to that returned from `listWorkerTypeSummaries`.'
-Entry 13    =
+Entry 12    =
     Entry Type        = 'function'
     Entry Method      = 'get'
     Entry Route       = '/ping'
@@ -1704,7 +1690,7 @@ Entry 13    =
     Entry Description = 'Documented later...
 
 **Warning** this api end-point is **not stable**.'
-Entry 14    =
+Entry 13    =
     Entry Type        = 'function'
     Entry Method      = 'get'
     Entry Route       = '/backend-status'
