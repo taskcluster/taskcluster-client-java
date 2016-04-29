@@ -268,11 +268,17 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
+     * This endpoint is used to show when the last time the provisioner
+     * has checked in.  A check in is done through the deadman's snitch
+     * api.  It is done at the conclusion of a provisioning iteration
+     * and used to tell if the background provisioning process is still
+     * running.
+     * 
      * **Warning** this api end-point is **not stable**.
      *
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#backendStatus
      */
-    public CallSummary<EmptyPayload, EmptyPayload> backendStatus() throws APICallFailure {
-        return apiCall(null, "GET", "/backend-status", EmptyPayload.class);
+    public CallSummary<EmptyPayload, BackendStatusResponse> backendStatus() throws APICallFailure {
+        return apiCall(null, "GET", "/backend-status", BackendStatusResponse.class);
     }
 }
