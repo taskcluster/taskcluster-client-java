@@ -2015,6 +2015,7 @@ Properties
         Property 'region' =
           Description            = 'The Amazon AWS Region being configured.  Example: us-west-1
           '
+          Enum                   = '[us-west-2 us-east-1 us-west-1]'
           Type                   = 'string'
           TypeName               = 'region'
           IsInputSchema          = 'false'
