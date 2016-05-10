@@ -81,7 +81,9 @@ public class Secrets extends TaskClusterRequestHandler {
     }
 
     /**
-     * List the names of all visible secrets.
+     * List the names of all secrets that you would have access to read. In
+     * other words, secret name `<X>` will only be returned if a) a secret
+     * with name `<X>` exists, and b) you posses the scope `secrets:get:<X>`.
      *
      * See http://docs.taskcluster.net/services/secrets/#list
      */
