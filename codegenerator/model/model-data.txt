@@ -262,7 +262,40 @@ Entry 15    =
 a given `bucket` and `prefix` within that bucket.
 The `level` parameter can be `read-write` or `read-only` and determines
 which type of credentials are returned. Please note that the `level`
-parameter is required in the scope guarding access.
+parameter is required in the scope guarding access.  The bucket name must
+not contain `.`, as recommended by Amazon.
+
+This method can only allow access to a whitelisted set of buckets.  To add
+a bucket to that whitelist, contact the TaskCluster team, who will add it to
+the appropriate IAM policy.  If the bucket is in a different AWS account, you
+will also need to add a bucket policy allowing access from the TaskCluster
+account.  That policy should look like this:
+
+```js
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "allow-taskcluster-auth-to-delegate-access",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::692406183521:root"
+      },
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject",
+        "s3:GetBucketLocation"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<bucket>",
+        "arn:aws:s3:::<bucket>/*"
+      ]
+    }
+  ]
+}
+```
 
 The credentials are set to expire after an hour, but this behavior is
 subject to change. Hence, you should always read the `expires` property
@@ -1468,6 +1501,20 @@ which can read the instance user data.
 Base URL    = 'https://aws-provisioner.taskcluster.net/v1'
 Entry 0     =
     Entry Type        = 'function'
+    Entry Method      = 'get'
+    Entry Route       = '/list-worker-type-summaries'
+    Entry Args        = '[]'
+    Entry Name        = 'listWorkerTypeSummaries'
+    Entry Scopes      = '[]'
+    Entry Input       = ''
+    Entry Output      = 'http://schemas.taskcluster.net/aws-provisioner/v1/list-worker-types-summaries-response.json#'
+    Entry Title       = 'List worker types with details'
+    Entry Description = 'Return a list of worker types, including some summary information about
+current capacity for each.  While this list includes all defined worker types,
+there may be running EC2 instances for deleted worker types that are not
+included here.  The list is unordered.'
+Entry 1     =
+    Entry Type        = 'function'
     Entry Method      = 'put'
     Entry Route       = '/worker-type/<workerType>'
     Entry Args        = '[workerType]'
@@ -1499,7 +1546,7 @@ If provided, the secrets in the global, region and instance type sections
 are available using the secrets api.  If specified, the scopes provided
 will be used to generate a set of temporary credentials available with
 the other secrets.'
-Entry 1     =
+Entry 2     =
     Entry Type        = 'function'
     Entry Method      = 'post'
     Entry Route       = '/worker-type/<workerType>/update'
@@ -1520,7 +1567,7 @@ the request body for this method
 
 Otherwise, all input requirements and actions are the same as the
 create method.'
-Entry 2     =
+Entry 3     =
     Entry Type        = 'function'
     Entry Method      = 'get'
     Entry Route       = '/worker-type/<workerType>'
@@ -1535,7 +1582,7 @@ This copy contains a lastModified field as well as the worker
 type name.  As such, it will require manipulation to be able to
 use the results of this method to submit date to the update
 method.'
-Entry 3     =
+Entry 4     =
     Entry Type        = 'function'
     Entry Method      = 'delete'
     Entry Route       = '/worker-type/<workerType>'
@@ -1555,7 +1602,7 @@ state.  If you want to gracefully remove a worker type, you must
 either ensure that no tasks are created with that worker type name
 or you could theoretically set maxCapacity to 0, though, this is
 not a supported or tested action'
-Entry 4     =
+Entry 5     =
     Entry Type        = 'function'
     Entry Method      = 'get'
     Entry Route       = '/list-worker-types'
@@ -1569,7 +1616,7 @@ Entry 4     =
 of all managed worker types known to the provisioner.  This does
 not include worker types which are left overs from a deleted worker
 type definition but are still running in AWS.'
-Entry 5     =
+Entry 6     =
     Entry Type        = 'function'
     Entry Method      = 'put'
     Entry Route       = '/secret/<token>'
@@ -1585,7 +1632,7 @@ be converted into credentials by `getSecret`.
 
 This method is not ordinarily used in production; instead, the provisioner
 creates a new secret directly for each spot bid.'
-Entry 6     =
+Entry 7     =
     Entry Type        = 'function'
     Entry Method      = 'get'
     Entry Route       = '/secret/<token>'
@@ -1602,7 +1649,7 @@ based on the scopes specified when the secret was created.
 It is important that this secret is deleted by the consumer (`removeSecret`),
 or else the secrets will be visible to any process which can access the
 user data associated with the instance.'
-Entry 7     =
+Entry 8     =
     Entry Type        = 'function'
     Entry Method      = 'get'
     Entry Route       = '/instance-started/<instanceId>/<token>'
@@ -1617,7 +1664,7 @@ as its security token.  The token is given and checked to ensure
 that it matches a real token that exists to ensure that random
 machines do not check in.  We could generate a different token
 but that seems like overkill'
-Entry 8     =
+Entry 9     =
     Entry Type        = 'function'
     Entry Method      = 'delete'
     Entry Route       = '/secret/<token>'
@@ -1633,7 +1680,7 @@ token will return no information.
 It is very important that the consumer of a 
 secret delete the secret from storage before handing over control
 to untrusted processes to prevent credential and/or secret leakage.'
-Entry 9     =
+Entry 10    =
     Entry Type        = 'function'
     Entry Method      = 'get'
     Entry Route       = '/worker-type/<workerType>/launch-specifications'
@@ -1648,20 +1695,6 @@ that this worker type definition could submit to EC2.  It is used to
 test worker types, nothing more
 
 **This API end-point is experimental and may be subject to change without warning.**'
-Entry 10    =
-    Entry Type        = 'function'
-    Entry Method      = 'get'
-    Entry Route       = '/aws-state'
-    Entry Args        = '[]'
-    Entry Name        = 'awsState'
-    Entry Scopes      = '[[aws-provisioner:aws-state]]'
-    Entry Input       = ''
-    Entry Output      = ''
-    Entry Title       = 'Get AWS State for all worker types'
-    Entry Description = 'This method is a left over and will be removed as soon as the
-tools.tc.net UI is updated to use the per-worker state
-
-**DEPRECATED.**'
 Entry 11    =
     Entry Type        = 'function'
     Entry Method      = 'get'
@@ -1675,7 +1708,8 @@ Entry 11    =
     Entry Description = 'Return the state of a given workertype as stored by the provisioner. 
 This state is stored as three lists: 1 for all instances, 1 for requests
 which show in the ec2 api and 1 list for those only tracked internally
-in the provisioner.'
+in the provisioner.  The `summary` property contains an updated summary
+similar to that returned from `listWorkerTypeSummaries`.'
 Entry 12    =
     Entry Type        = 'function'
     Entry Method      = 'get'
@@ -1697,22 +1731,53 @@ Entry 13    =
     Entry Name        = 'backendStatus'
     Entry Scopes      = '[]'
     Entry Input       = ''
-    Entry Output      = ''
+    Entry Output      = 'http://schemas.taskcluster.net/aws-provisioner/v1/backend-status-response.json#'
     Entry Title       = 'Backend Status'
-    Entry Description = '**Warning** this api end-point is **not stable**.'
-Entry 14    =
-    Entry Type        = 'function'
-    Entry Method      = 'get'
-    Entry Route       = '/api-reference'
-    Entry Args        = '[]'
-    Entry Name        = 'apiReference'
-    Entry Scopes      = '[]'
-    Entry Input       = ''
-    Entry Output      = ''
-    Entry Title       = 'api reference'
-    Entry Description = 'Get an API reference!
+    Entry Description = 'This endpoint is used to show when the last time the provisioner
+has checked in.  A check in is done through the deadman's snitch
+api.  It is done at the conclusion of a provisioning iteration
+and used to tell if the background provisioning process is still
+running.
 
 **Warning** this api end-point is **not stable**.'
+
+
+http://schemas.taskcluster.net/aws-provisioner/v1/backend-status-response.json#
+===============================================================================
+Additional Properties  = 'false'
+Description            = 'Backend Status Response
+'
+ID                     = 'http://schemas.taskcluster.net/aws-provisioner/v1/backend-status-response.json#'
+Properties
+  Property 'lastCheckedIn' =
+    Description            = 'A date when the provisioner backend process last completed an iteration.
+    This does not imply success, rather it is to make sure that the process
+    is alive
+    '
+    Format                 = 'date-time'
+    Type                   = 'string'
+    TypeName               = 'lastCheckedIn'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+  Property 'status' =
+    Description            = 'A string from Deadman's Snitch which describes the status.  See
+    https://deadmanssnitch.com/docs/api/v1#listing-your-snitches for an
+    explanation of this value
+    '
+    Type                   = 'string'
+    TypeName               = 'status'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+Required               = '[status lastCheckedIn]'
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'Backend Status Response'
+Type                   = 'object'
+TypeName               = 'BackendStatusResponse'
+IsInputSchema          = 'false'
+IsOutputSchema         = 'true'
+SourceURL              = 'http://schemas.taskcluster.net/aws-provisioner/v1/backend-status-response.json#'
 
 
 http://schemas.taskcluster.net/aws-provisioner/v1/create-secret-request.json#
@@ -1805,6 +1870,14 @@ Properties
     '
     Type                   = 'boolean'
     TypeName               = 'canUseSpot'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+  Property 'description' =
+    Description            = 'A string which describes what this image is for and hints on using it
+    '
+    Type                   = 'string'
+    TypeName               = 'description'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
@@ -1941,6 +2014,14 @@ Properties
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
+  Property 'owner' =
+    Description            = 'A string which identifies the owner of this worker type
+    '
+    Type                   = 'string'
+    TypeName               = 'owner'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
   Property 'regions' =
     Items
       Additional Properties  = 'false'
@@ -1966,6 +2047,7 @@ Properties
         Property 'region' =
           Description            = 'The Amazon AWS Region being configured.  Example: us-west-1
           '
+          Enum                   = '[us-west-2 us-east-1 us-west-1]'
           Type                   = 'string'
           TypeName               = 'region'
           IsInputSchema          = 'false'
@@ -2063,7 +2145,7 @@ Properties
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
-Required               = '[launchSpec userData secrets scopes maxCapacity scalingRatio minPrice maxPrice instanceTypes regions]'
+Required               = '[launchSpec userData secrets scopes maxCapacity scalingRatio minPrice maxPrice instanceTypes regions description owner]'
 Schema                 = 'http://json-schema.org/draft-04/schema#'
 Title                  = 'Create Worker Type Request'
 Type                   = 'object'
@@ -2160,6 +2242,14 @@ Properties
     '
     Type                   = 'boolean'
     TypeName               = 'canUseSpot'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+  Property 'description' =
+    Description            = 'A string which describes what this image is for and hints on using it
+    '
+    Type                   = 'string'
+    TypeName               = 'description'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
@@ -2306,6 +2396,14 @@ Properties
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
+  Property 'owner' =
+    Description            = 'A string which identifies the owner of this worker type
+    '
+    Type                   = 'string'
+    TypeName               = 'owner'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
   Property 'regions' =
     Items
       Additional Properties  = 'false'
@@ -2437,7 +2535,7 @@ Properties
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
     SourceURL              = ''
-Required               = '[workerType launchSpec userData secrets scopes minCapacity maxCapacity scalingRatio minPrice maxPrice lastModified instanceTypes regions]'
+Required               = '[workerType launchSpec userData secrets scopes minCapacity maxCapacity scalingRatio minPrice maxPrice lastModified instanceTypes regions description owner]'
 Schema                 = 'http://json-schema.org/draft-04/schema#'
 Title                  = 'Get Worker Type Response'
 Type                   = 'object'
@@ -2462,6 +2560,83 @@ TypeName               = 'String'
 IsInputSchema          = 'false'
 IsOutputSchema         = 'true'
 SourceURL              = 'http://schemas.taskcluster.net/aws-provisioner/v1/list-worker-types-response.json#'
+
+
+http://schemas.taskcluster.net/aws-provisioner/v1/list-worker-types-summaries-response.json#
+============================================================================================
+ID                     = 'http://schemas.taskcluster.net/aws-provisioner/v1/list-worker-types-summaries-response.json#'
+Items
+  Ref                    = 'http://schemas.taskcluster.net/aws-provisioner/v1/worker-type-summary.json#'
+  TypeName               = 'ListWorkerTypeSummariesResponse'
+  IsInputSchema          = 'false'
+  IsOutputSchema         = 'false'
+  SourceURL              = ''
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'List Worker Type Summaries Response'
+Type                   = 'array'
+TypeName               = 'WorkerTypeSummary'
+IsInputSchema          = 'false'
+IsOutputSchema         = 'true'
+SourceURL              = 'http://schemas.taskcluster.net/aws-provisioner/v1/list-worker-types-summaries-response.json#'
+
+
+http://schemas.taskcluster.net/aws-provisioner/v1/worker-type-summary.json#
+===========================================================================
+Additional Properties  = 'false'
+Description            = 'A summary of a worker type's current state, expresed in terms of capacity.
+'
+ID                     = 'http://schemas.taskcluster.net/aws-provisioner/v1/worker-type-summary.json#'
+Properties
+  Property 'maxCapacity' =
+    Title                  = 'Maximum capacity of the workerType'
+    Type                   = 'integer'
+    TypeName               = 'maxCapacity'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+  Property 'minCapacity' =
+    Title                  = 'Minimum capacity of the workerType'
+    Type                   = 'integer'
+    TypeName               = 'minCapacity'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+  Property 'pendingCapacity' =
+    Title                  = 'Total pending capacity'
+    Type                   = 'integer'
+    TypeName               = 'pendingCapacity'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+  Property 'requestedCapacity' =
+    Title                  = 'Total requested capacity'
+    Type                   = 'integer'
+    TypeName               = 'requestedCapacity'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+  Property 'runningCapacity' =
+    Title                  = 'Total running capacity'
+    Type                   = 'integer'
+    TypeName               = 'runningCapacity'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+  Property 'workerType' =
+    Title                  = 'Worker type name'
+    Type                   = 'string'
+    TypeName               = 'workerType'
+    IsInputSchema          = 'false'
+    IsOutputSchema         = 'false'
+    SourceURL              = ''
+Required               = '[workerType minCapacity maxCapacity requestedCapacity pendingCapacity runningCapacity]'
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'Worker Type Summary'
+Type                   = 'object'
+TypeName               = 'WorkerTypeSummary'
+IsInputSchema          = 'false'
+IsOutputSchema         = 'false'
+SourceURL              = 'http://schemas.taskcluster.net/aws-provisioner/v1/worker-type-summary.json#'
 
 
 http://references.taskcluster.net/aws-provisioner/v1/exchanges.json
@@ -2639,7 +2814,7 @@ exchange with the designated `organization` and `repository`
 in the routing-key along with event specific metadata in the payload.'
     Routing Key Element 0     = 
         Element Name      = 'routingKeyKind'
-        Element Summary   = 'Identifier for the routing-key kind. This is always `'primary'` for the formalized routing key.'
+        Element Summary   = 'Identifier for the routing-key kind. This is always `"primary"` for the formalized routing key.'
         Element Constant  = 'primary'
         Element M Words   = 'false'
         Element Required  = 'true'
@@ -2672,7 +2847,7 @@ exchange with the designated `organization` and `repository`
 in the routing-key along with event specific metadata in the payload.'
     Routing Key Element 0     = 
         Element Name      = 'routingKeyKind'
-        Element Summary   = 'Identifier for the routing-key kind. This is always `'primary'` for the formalized routing key.'
+        Element Summary   = 'Identifier for the routing-key kind. This is always `"primary"` for the formalized routing key.'
         Element Constant  = 'primary'
         Element M Words   = 'false'
         Element Required  = 'true'
@@ -9957,9 +10132,13 @@ http://references.taskcluster.net/secrets/v1/api.json
 =====================================================
 Version     = '0'
 Title       = 'TaskCluster Secrets API Documentation'
-Description = 'The secrets service, is a simple key/value store for secret data
-guarded by TaskCluster scopes.  It is typically available at
-`secrets.taskcluster.net`.'
+Description = 'The secrets service provides a simple key/value store for small bits of secret
+data.  Access is limited by scopes, so values can be considered secret from
+those who do not have the relevant scopes.
+
+Secrets also have an expiration date, and once a secret has expired it can no
+longer be read.  This is useful for short-term secrets such as a temporary
+service credential or a one-time signing key.'
 Base URL    = 'https://secrets.taskcluster.net/v1'
 Entry 0     =
     Entry Type        = 'function'
@@ -9970,8 +10149,9 @@ Entry 0     =
     Entry Scopes      = '[[secrets:set:<name>]]'
     Entry Input       = 'http://schemas.taskcluster.net/secrets/v1/secret.json#'
     Entry Output      = ''
-    Entry Title       = 'Create Secret'
-    Entry Description = 'Set a secret associated with some key.  If the secret already exists, it is updated instead.'
+    Entry Title       = 'Set Secret'
+    Entry Description = 'Set the secret associated with some key.  If the secret already exists, it is
+updated instead.'
 Entry 1     =
     Entry Type        = 'function'
     Entry Method      = 'delete'
@@ -9982,7 +10162,7 @@ Entry 1     =
     Entry Input       = ''
     Entry Output      = ''
     Entry Title       = 'Delete Secret'
-    Entry Description = 'Delete the secret attached to some key.'
+    Entry Description = 'Delete the secret associated with some key.'
 Entry 2     =
     Entry Type        = 'function'
     Entry Method      = 'get'
@@ -9993,7 +10173,10 @@ Entry 2     =
     Entry Input       = ''
     Entry Output      = 'http://schemas.taskcluster.net/secrets/v1/secret.json#'
     Entry Title       = 'Read Secret'
-    Entry Description = 'Read the secret attached to some key.'
+    Entry Description = 'Read the secret associated with some key.  If the secret has recently
+expired, the response code 410 is returned.  If the caller lacks the
+scope necessary to get the secret, the call will fail with a 403 code
+regardless of whether the secret exists.'
 Entry 3     =
     Entry Type        = 'function'
     Entry Method      = 'get'
@@ -10004,7 +10187,9 @@ Entry 3     =
     Entry Input       = ''
     Entry Output      = 'http://schemas.taskcluster.net/secrets/v1/secret-list.json#'
     Entry Title       = 'List Secrets'
-    Entry Description = 'List the names of all visible secrets.'
+    Entry Description = 'List the names of all secrets that you would have access to read. In
+other words, secret name `<X>` will only be returned if a) a secret
+with name `<X>` exists, and b) you posses the scope `secrets:get:<X>`.'
 Entry 4     =
     Entry Type        = 'function'
     Entry Method      = 'get'
@@ -10015,9 +10200,8 @@ Entry 4     =
     Entry Input       = ''
     Entry Output      = ''
     Entry Title       = 'Ping Server'
-    Entry Description = 'Documented later...
-
-**Warning** this api end-point is **not stable**.'
+    Entry Description = 'Respond without doing anything.  This endpoint is used to check that
+the service is up.'
 
 
 http://schemas.taskcluster.net/secrets/v1/secret-list.json#

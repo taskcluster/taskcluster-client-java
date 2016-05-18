@@ -70,6 +70,18 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
+     * Return a list of worker types, including some summary information about
+     * current capacity for each.  While this list includes all defined worker types,
+     * there may be running EC2 instances for deleted worker types that are not
+     * included here.  The list is unordered.
+     *
+     * See http://docs.taskcluster.net/aws-provisioner/api-docs/#listWorkerTypeSummaries
+     */
+    public CallSummary<EmptyPayload, WorkerTypeSummary[]> listWorkerTypeSummaries() throws APICallFailure {
+        return apiCall(null, "GET", "/list-worker-type-summaries", WorkerTypeSummary[].class);
+    }
+
+    /**
      * Create a worker type.  A worker type contains all the configuration
      * needed for the provisioner to manage the instances.  Each worker type
      * knows which regions and which instance types are allowed for that
@@ -232,22 +244,11 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
-     * This method is a left over and will be removed as soon as the
-     * tools.tc.net UI is updated to use the per-worker state
-     * 
-     * **DEPRECATED.**
-     *
-     * See http://docs.taskcluster.net/aws-provisioner/api-docs/#awsState
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> awsState() throws APICallFailure {
-        return apiCall(null, "GET", "/aws-state", EmptyPayload.class);
-    }
-
-    /**
      * Return the state of a given workertype as stored by the provisioner. 
      * This state is stored as three lists: 1 for all instances, 1 for requests
      * which show in the ec2 api and 1 list for those only tracked internally
-     * in the provisioner.
+     * in the provisioner.  The `summary` property contains an updated summary
+     * similar to that returned from `listWorkerTypeSummaries`.
      *
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#state
      */
@@ -267,22 +268,17 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
+     * This endpoint is used to show when the last time the provisioner
+     * has checked in.  A check in is done through the deadman's snitch
+     * api.  It is done at the conclusion of a provisioning iteration
+     * and used to tell if the background provisioning process is still
+     * running.
+     * 
      * **Warning** this api end-point is **not stable**.
      *
      * See http://docs.taskcluster.net/aws-provisioner/api-docs/#backendStatus
      */
-    public CallSummary<EmptyPayload, EmptyPayload> backendStatus() throws APICallFailure {
-        return apiCall(null, "GET", "/backend-status", EmptyPayload.class);
-    }
-
-    /**
-     * Get an API reference!
-     * 
-     * **Warning** this api end-point is **not stable**.
-     *
-     * See http://docs.taskcluster.net/aws-provisioner/api-docs/#apiReference
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> apiReference() throws APICallFailure {
-        return apiCall(null, "GET", "/api-reference", EmptyPayload.class);
+    public CallSummary<EmptyPayload, BackendStatusResponse> backendStatus() throws APICallFailure {
+        return apiCall(null, "GET", "/backend-status", BackendStatusResponse.class);
     }
 }
