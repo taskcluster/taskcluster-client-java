@@ -46,7 +46,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  * TaskCluster credentials to grant access to a third-party service used
  * by many TaskCluster components.
  *
- * See: http://docs.taskcluster.net/auth/api-docs
+ * See: https://docs.taskcluster.net/reference/platform/auth/api-docs
  */
 public class Auth extends TaskClusterRequestHandler {
 
@@ -80,7 +80,7 @@ public class Auth extends TaskClusterRequestHandler {
      * Get a list of all clients.  With `prefix`, only clients for which
      * it is a prefix of the clientId are returned.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#listClients
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#listClients
      */
     public CallSummary<EmptyPayload, GetClientResponse[]> listClients() throws APICallFailure {
         return apiCall(null, "GET", "/clients/", GetClientResponse[].class);
@@ -89,7 +89,7 @@ public class Auth extends TaskClusterRequestHandler {
     /**
      * Get information about a single client.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#client
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#client
      */
     public CallSummary<EmptyPayload, GetClientResponse> client(String clientId) throws APICallFailure {
         return apiCall(null, "GET", "/clients/" + uriEncode(clientId), GetClientResponse.class);
@@ -109,7 +109,7 @@ public class Auth extends TaskClusterRequestHandler {
      * 
      * The caller's scopes must satisfy `scopes`.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#createClient
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#createClient
      */
     public CallSummary<CreateClientRequest, CreateClientResponse> createClient(String clientId, CreateClientRequest payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/clients/" + uriEncode(clientId), CreateClientResponse.class);
@@ -123,7 +123,7 @@ public class Auth extends TaskClusterRequestHandler {
      * There is no way to retrieve an existing `accessToken`, so if you loose it
      * you must reset the accessToken to acquire it again.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#resetAccessToken
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#resetAccessToken
      */
     public CallSummary<EmptyPayload, CreateClientResponse> resetAccessToken(String clientId) throws APICallFailure {
         return apiCall(null, "POST", "/clients/" + uriEncode(clientId) + "/reset", CreateClientResponse.class);
@@ -136,7 +136,7 @@ public class Auth extends TaskClusterRequestHandler {
      * If no scopes are given in the request, the client's scopes remain
      * unchanged
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#updateClient
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#updateClient
      */
     public CallSummary<CreateClientRequest, GetClientResponse> updateClient(String clientId, CreateClientRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/clients/" + uriEncode(clientId), GetClientResponse.class);
@@ -149,7 +149,7 @@ public class Auth extends TaskClusterRequestHandler {
      * This is typically used by identity providers to re-enable clients that
      * had been disabled when the corresponding identity's scopes changed.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#enableClient
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#enableClient
      */
     public CallSummary<EmptyPayload, GetClientResponse> enableClient(String clientId) throws APICallFailure {
         return apiCall(null, "POST", "/clients/" + uriEncode(clientId) + "/enable", GetClientResponse.class);
@@ -161,7 +161,7 @@ public class Auth extends TaskClusterRequestHandler {
      * This is typically used by identity providers to disable clients when the
      * corresponding identity's scopes no longer satisfy the client's scopes.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#disableClient
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#disableClient
      */
     public CallSummary<EmptyPayload, GetClientResponse> disableClient(String clientId) throws APICallFailure {
         return apiCall(null, "POST", "/clients/" + uriEncode(clientId) + "/disable", GetClientResponse.class);
@@ -171,7 +171,7 @@ public class Auth extends TaskClusterRequestHandler {
      * Delete a client, please note that any roles related to this client must
      * be deleted independently.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#deleteClient
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#deleteClient
      */
     public CallSummary<EmptyPayload, EmptyPayload> deleteClient(String clientId) throws APICallFailure {
         return apiCall(null, "DELETE", "/clients/" + uriEncode(clientId), EmptyPayload.class);
@@ -181,7 +181,7 @@ public class Auth extends TaskClusterRequestHandler {
      * Get a list of all roles, each role object also includes the list of
      * scopes it expands to.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#listRoles
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#listRoles
      */
     public CallSummary<EmptyPayload, GetRoleResponse[]> listRoles() throws APICallFailure {
         return apiCall(null, "GET", "/roles/", GetRoleResponse[].class);
@@ -191,7 +191,7 @@ public class Auth extends TaskClusterRequestHandler {
      * Get information about a single role, including the set of scopes that the
      * role expands to.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#role
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#role
      */
     public CallSummary<EmptyPayload, GetRoleResponse> role(String roleId) throws APICallFailure {
         return apiCall(null, "GET", "/roles/" + uriEncode(roleId), GetRoleResponse.class);
@@ -205,7 +205,7 @@ public class Auth extends TaskClusterRequestHandler {
      * If there already exists a role with the same `roleId` this operation
      * will fail. Use `updateRole` to modify an existing role.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#createRole
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#createRole
      */
     public CallSummary<CreateRoleRequest, GetRoleResponse> createRole(String roleId, CreateRoleRequest payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/roles/" + uriEncode(roleId), GetRoleResponse.class);
@@ -217,7 +217,7 @@ public class Auth extends TaskClusterRequestHandler {
      * The caller's scopes must satisfy all of the new scopes being added, but
      * need not satisfy all of the client's existing scopes.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#updateRole
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#updateRole
      */
     public CallSummary<CreateRoleRequest, GetRoleResponse> updateRole(String roleId, CreateRoleRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/roles/" + uriEncode(roleId), GetRoleResponse.class);
@@ -227,7 +227,7 @@ public class Auth extends TaskClusterRequestHandler {
      * Delete a role. This operation will succeed regardless of whether or not
      * the role exists.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#deleteRole
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#deleteRole
      */
     public CallSummary<EmptyPayload, EmptyPayload> deleteRole(String roleId) throws APICallFailure {
         return apiCall(null, "DELETE", "/roles/" + uriEncode(roleId), EmptyPayload.class);
@@ -237,7 +237,7 @@ public class Auth extends TaskClusterRequestHandler {
      * Return an expanded copy of the given scopeset, with scopes implied by any
      * roles included.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#expandScopes
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#expandScopes
      */
     public CallSummary<SetOfScopes, SetOfScopes> expandScopes(SetOfScopes payload) throws APICallFailure {
         return apiCall(payload, "GET", "/scopes/expand", SetOfScopes.class);
@@ -248,7 +248,7 @@ public class Auth extends TaskClusterRequestHandler {
      * of scopes and scope restrictions (temporary credentials, assumeScopes, client scopes,
      * and roles).
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#currentScopes
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#currentScopes
      */
     public CallSummary<EmptyPayload, SetOfScopes> currentScopes() throws APICallFailure {
         return apiCall(null, "GET", "/scopes/current", SetOfScopes.class);
@@ -308,7 +308,7 @@ public class Auth extends TaskClusterRequestHandler {
      * access to `my-folder/file.txt` as expected, but also to `my-folder.txt`,
      * which may not be intended.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#awsS3Credentials
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#awsS3Credentials
      */
     public CallSummary<EmptyPayload, AWSS3CredentialsResponse> awsS3Credentials(String level, String bucket, String prefix) throws APICallFailure {
         return apiCall(null, "GET", "/aws/s3/" + uriEncode(level) + "/" + uriEncode(bucket) + "/" + uriEncode(prefix), AWSS3CredentialsResponse.class);
@@ -319,7 +319,7 @@ public class Auth extends TaskClusterRequestHandler {
      * Table Storage table.  Note, this will create the table, if it doesn't
      * already exist.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#azureTableSAS
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#azureTableSAS
      */
     public CallSummary<EmptyPayload, AzureSharedAccessSignatureResponse> azureTableSAS(String account, String table) throws APICallFailure {
         return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/table/" + uriEncode(table) + "/read-write", AzureSharedAccessSignatureResponse.class);
@@ -334,7 +334,7 @@ public class Auth extends TaskClusterRequestHandler {
      * initial team configured for this component. Contact a Sentry admin
      * to have the project transferred to a team you have access to if needed
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#sentryDSN
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#sentryDSN
      */
     public CallSummary<EmptyPayload, SentryDSNResponse> sentryDSN(String project) throws APICallFailure {
         return apiCall(null, "GET", "/sentry/" + uriEncode(project) + "/dsn", SentryDSNResponse.class);
@@ -345,7 +345,7 @@ public class Auth extends TaskClusterRequestHandler {
      * 
      * The token is valid for 24 hours, clients should refresh after expiration.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#statsumToken
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#statsumToken
      */
     public CallSummary<EmptyPayload, StatsumTokenResponse> statsumToken(String project) throws APICallFailure {
         return apiCall(null, "GET", "/statsum/" + uriEncode(project) + "/token", StatsumTokenResponse.class);
@@ -359,7 +359,7 @@ public class Auth extends TaskClusterRequestHandler {
      * credentials for authentication. This way we can use Hawk without having
      * the secret credentials leave this service.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#authenticateHawk
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#authenticateHawk
      */
     public CallSummary<HawkSignatureAuthenticationRequest, Object> authenticateHawk(HawkSignatureAuthenticationRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/authenticate-hawk", Object.class);
@@ -378,7 +378,7 @@ public class Auth extends TaskClusterRequestHandler {
      * from the request body. On success, the response contains the clientId
      * and scopes as seen by the API method.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#testAuthenticate
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#testAuthenticate
      */
     public CallSummary<TestAuthenticateRequest, TestAuthenticateResponse> testAuthenticate(TestAuthenticateRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/test-authenticate", TestAuthenticateResponse.class);
@@ -401,7 +401,7 @@ public class Auth extends TaskClusterRequestHandler {
      * This method may later be extended to allow specification of client and
      * required scopes via query arguments.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#testAuthenticateGet
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#testAuthenticateGet
      */
     public CallSummary<EmptyPayload, TestAuthenticateResponse> testAuthenticateGet() throws APICallFailure {
         return apiCall(null, "GET", "/test-authenticate-get/", TestAuthenticateResponse.class);
@@ -412,7 +412,7 @@ public class Auth extends TaskClusterRequestHandler {
      * 
      * **Warning** this api end-point is **not stable**.
      *
-     * See http://docs.taskcluster.net/auth/api-docs/#ping
+     * See https://docs.taskcluster.net/reference/platform/auth/api-docs/#ping
      */
     public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);

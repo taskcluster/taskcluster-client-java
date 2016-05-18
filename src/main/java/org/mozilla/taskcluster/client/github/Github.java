@@ -18,7 +18,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  * This document describes the API end-point for consuming GitHub
  * web hooks
  *
- * See: http://docs.taskcluster.net/services/taskcluster-github
+ * See: https://docs.taskcluster.net/reference/core/github/api-docs
  */
 public class Github extends TaskClusterRequestHandler {
 
@@ -52,7 +52,7 @@ public class Github extends TaskClusterRequestHandler {
      * Capture a GitHub event and publish it via pulse, if it's a push
      * or pull request.
      *
-     * See http://docs.taskcluster.net/services/taskcluster-github/#githubWebHookConsumer
+     * See https://docs.taskcluster.net/reference/core/github/api-docs/#githubWebHookConsumer
      */
     public CallSummary<EmptyPayload, EmptyPayload> githubWebHookConsumer() throws APICallFailure {
         return apiCall(null, "POST", "/github", EmptyPayload.class);
@@ -63,7 +63,7 @@ public class Github extends TaskClusterRequestHandler {
      * 
      * **Warning** this api end-point is **not stable**.
      *
-     * See http://docs.taskcluster.net/services/taskcluster-github/#ping
+     * See https://docs.taskcluster.net/reference/core/github/api-docs/#ping
      */
     public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);
