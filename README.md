@@ -25,6 +25,9 @@ A java port of taskcluster-client.
 * [Index](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/index/Index.html)  
   The task index is responsible for indexing tasks.
 
+* [Login](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/login/Login.html)  
+  The Login service serves as the interface between external authentication systems and TaskCluster credentials.
+
 * [Purge Cache](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/purgecache/PurgeCache.html)  
   The purge-cache service is responsible for publishing a pulse message for workers, so they can purge cache upon request.
 
