@@ -61,13 +61,16 @@ public class Login extends TaskClusterRequestHandler {
     }
 
     /**
-     * Given an [assertion](https://developer.mozilla.org/en-US/Persona/Quick_setup#Step_4_Verify_the_user%E2%80%99s_credentials), return
-     * an appropriate set of temporary credentials.
+     * Given an [assertion](https://developer.mozilla.org/en-US/Persona/Quick_setup), return an appropriate set of temporary credentials.
+     * 
+     * The supplied audience must be on a whitelist of TaskCluster-related
+     * sites configured in the login service.  This is not a general-purpose
+     * assertion-verification service!
      *
      * See https://docs.taskcluster.net/reference/core/login/api-docs/#credentialsFromPersonaAssertion
      */
-    public CallSummary<EmptyPayload, CredentialsResponse> credentialsFromPersonaAssertion() throws APICallFailure {
-        return apiCall(null, "POST", "/persona", CredentialsResponse.class);
+    public CallSummary<PersonaAssertionRequest, CredentialsResponse> credentialsFromPersonaAssertion(PersonaAssertionRequest payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/persona", CredentialsResponse.class);
     }
 
     /**
