@@ -20,7 +20,7 @@
 
     <section class="main-content">
       <h1>
-<a id="taskcluster-client-java" class="anchor" href="#taskcluster-client-java" aria-hidden="true"><span class="octicon octicon-link"></span></a>taskcluster-client-java</h1>
+<a id="taskcluster-client-java" class="anchor" href="#taskcluster-client-java" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>taskcluster-client-java</h1>
 
 <p><img hspace="20" align="left" src="https://tools.taskcluster.net/lib/assets/taskcluster-120.png">
 <a href="https://maven-badges.herokuapp.com/maven-central/org.mozilla.taskcluster/taskcluster-client/"><img src="https://maven-badges.herokuapp.com/maven-central/org.mozilla.taskcluster/taskcluster-client/badge.svg" alt="Maven Central"></a>
@@ -32,7 +32,7 @@
 <p>A java port of taskcluster-client.</p>
 
 <h2>
-<a id="http-apis" class="anchor" href="#http-apis" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTTP APIs</h2>
+<a id="http-apis" class="anchor" href="#http-apis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HTTP APIs</h2>
 
 <ul>
 <li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/auth/Auth.html">Auth</a><br>
@@ -45,6 +45,8 @@ The Github service is responsible for publishing pulse messages for supported Gi
 Hooks are a mechanism for creating tasks in response to events.</p></li>
 <li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/index/Index.html">Index</a><br>
 The task index is responsible for indexing tasks.</p></li>
+<li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/login/Login.html">Login</a><br>
+The Login service serves as the interface between external authentication systems and TaskCluster credentials.</p></li>
 <li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/purgecache/PurgeCache.html">Purge Cache</a><br>
 The purge-cache service is responsible for publishing a pulse message for workers, so they can purge cache upon request.</p></li>
 <li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/queue/Queue.html">Queue</a><br>
@@ -56,15 +58,30 @@ The secrets service is responsible for managing secure data in TaskCluster.</p><
 </ul>
 
 <h3>
-<a id="amqp-apis" class="anchor" href="#amqp-apis" aria-hidden="true"><span class="octicon octicon-link"></span></a>AMQP APIs</h3>
+<a id="amqp-apis" class="anchor" href="#amqp-apis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>AMQP APIs</h3>
 
 <p>Currently AMQP APIs are not supported in the java client.</p>
 
+<h3>
+<a id="client-utilities" class="anchor" href="#client-utilities" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Client utilities</h3>
+
+<ul>
+<li>
+<a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/Credentials.html">Credentials</a><br>
+For credentials operations, such as:
+
+<ul>
+<li>Creating temporary credentials from permanent credentials</li>
+<li>Limiting credentials to a set of authorized scopes</li>
+</ul>
+</li>
+</ul>
+
 <h2>
-<a id="using" class="anchor" href="#using" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using</h2>
+<a id="using" class="anchor" href="#using" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using</h2>
 
 <h3>
-<a id="maven" class="anchor" href="#maven" aria-hidden="true"><span class="octicon octicon-link"></span></a>Maven</h3>
+<a id="maven" class="anchor" href="#maven" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Maven</h3>
 
 <p>In order to use this library from your maven project, simply include it as a project dependency:</p>
 
@@ -88,21 +105,26 @@ The secrets service is responsible for managing secure data in TaskCluster.</p><
 </ul>
 
 <h2>
-<a id="calling-api-end-points" class="anchor" href="#calling-api-end-points" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calling API End-Points</h2>
+<a id="calling-api-end-points" class="anchor" href="#calling-api-end-points" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Calling API End-Points</h2>
 
-<p>To invoke an API end-point, instantiate one of the HTTP API classes (from section <a href="#http-apis">HTTP APIs</a>).
-In the following example we instantiate an instance of the <code>Queue</code> client class and use it to create a task.</p>
+<p>To invoke an API end-point, instantiate one of the HTTP API classes (from
+section <a href="#http-apis">HTTP APIs</a>).  In the following example we instantiate an
+instance of the <code>Queue</code> client class and use it to create a task.</p>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.*</span>;
 <span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.queue.*</span>;
 
 <span class="pl-c1">...</span>
 
-    <span class="pl-c">// Instantiate the Queue Client class</span>
-    <span class="pl-smi">Queue</span> queue <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Queue</span>(<span class="pl-smi">System</span><span class="pl-k">.</span>getenv(<span class="pl-s"><span class="pl-pds">"</span>TASKCLUSTER_CLIENT_ID<span class="pl-pds">"</span></span>), <span class="pl-smi">System</span><span class="pl-k">.</span>getenv(<span class="pl-s"><span class="pl-pds">"</span>TASKCLUSTER_ACCESS_TOKEN<span class="pl-pds">"</span></span>));
+    <span class="pl-c">// Create credentials, e.g. from environment variables...</span>
+    <span class="pl-smi">Credentials</span> creds <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Credentials</span>(
+        <span class="pl-smi">System</span><span class="pl-k">.</span>getenv(<span class="pl-s"><span class="pl-pds">"</span>TASKCLUSTER_CLIENT_ID<span class="pl-pds">"</span></span>),
+        <span class="pl-smi">System</span><span class="pl-k">.</span>getenv(<span class="pl-s"><span class="pl-pds">"</span>TASKCLUSTER_ACCESS_TOKEN<span class="pl-pds">"</span></span>),
+        <span class="pl-smi">System</span><span class="pl-k">.</span>getenv(<span class="pl-s"><span class="pl-pds">"</span>TASKCLUSTER_CERTIFICATE<span class="pl-pds">"</span></span>)
+    );
 
-    <span class="pl-c">// Certificate must also be provided if using temporary credentials</span>
-    <span class="pl-c">// Queue queue = new Queue(System.getenv("TASKCLUSTER_CLIENT_ID"), System.getenv("TASKCLUSTER_ACCESS_TOKEN"), System.getenv("TASKCLUSTER_CERTIFICATE"));</span>
+    <span class="pl-c">// Instantiate the Queue client class</span>
+    <span class="pl-smi">Queue</span> queue <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Queue</span>(creds);
 
     <span class="pl-c">// Supply a unique task name</span>
     <span class="pl-smi">String</span> taskId <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>...<span class="pl-pds">"</span></span>;
@@ -129,18 +151,95 @@ In the following example we instantiate an instance of the <code>Queue</code> cl
 
 <span class="pl-c1">...</span></pre></div>
 
-<p>See the <a href="#http-apis">HTTP API javadocs</a> for more information, or browse the <a href="https://github.com/taskcluster/taskcluster-client-java/tree/master/src/test/java/org/mozilla/taskcluster">unit tests</a> for further examples.</p>
+<h2>
+<a id="temporary-credentials" class="anchor" href="#temporary-credentials" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Temporary credentials</h2>
+
+<p>You can generate temporary credentials from permanent credentials using the
+java client. This may be useful if you wish to issue credentials to a third
+party. See <a href="http://docs.taskcluster.net/auth/temporary-credentials/">http://docs.taskcluster.net/auth/temporary-credentials/</a> for more
+information. Both named and unnamed temporary credentials are supported,
+although named credentials are preferred if you are not sure which type to use.</p>
+
+<h3>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">package</span> <span class="pl-smi">org.mozilla.taskcluster</span>;
+
+<span class="pl-k">import</span> <span class="pl-smi">java.util.Date</span>;
+
+<span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.APICallFailure</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.CallSummary</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.Credentials</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.EmptyPayload</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.InvalidOptionsException</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.queue.ListArtifactsResponse</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.queue.ListArtifactsResponse.Artifacts</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.mozilla.taskcluster.client.queue.Queue</span>;
+
+<span class="pl-c">/**</span>
+<span class="pl-c"> * This simple demo lists the artifacts in run 0 of task U7On2dUVS9KlEgw7LUaCMQ.</span>
+<span class="pl-c"> * It creates permanent credentials from environment variables</span>
+<span class="pl-c"> * TASKCLUSTER_CLIENT_ID and TASKCLUSTER_ACCESS_TOKEN, and then creates</span>
+<span class="pl-c"> * temporary credentials, valid for 24 hours, from these permanent credentials.</span>
+<span class="pl-c"> * It queries the Queue using the temporary credentials, and with limited</span>
+<span class="pl-c"> * authorized scopes.</span>
+<span class="pl-c"> *</span>
+<span class="pl-c"> * Note, the queue.listArtifacts(...) call doesn't require any scopes, the</span>
+<span class="pl-c"> * generation of temporary credentials, and limiting via authorized scopes is</span>
+<span class="pl-c"> * purely illustrative. The TASKCLUSTER_CLIENT_ID must satisfy</span>
+<span class="pl-c"> * auth:create-client:demo-client/taskcluster-client-java, though.</span>
+<span class="pl-c"> */</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">Demo</span> {
+    <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">void</span> <span class="pl-en">main</span>(<span class="pl-k">String</span>[] <span class="pl-v">args</span>) {
+        <span class="pl-smi">Credentials</span> permCreds <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Credentials</span>(
+            <span class="pl-smi">System</span><span class="pl-k">.</span>getenv(<span class="pl-s"><span class="pl-pds">"</span>TASKCLUSTER_CLIENT_ID<span class="pl-pds">"</span></span>),
+            <span class="pl-smi">System</span><span class="pl-k">.</span>getenv(<span class="pl-s"><span class="pl-pds">"</span>TASKCLUSTER_ACCESS_TOKEN<span class="pl-pds">"</span></span>)
+        );
+        <span class="pl-smi">Date</span> now <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Date</span>();
+        <span class="pl-k">try</span> {
+            <span class="pl-smi">Credentials</span> tempCreds <span class="pl-k">=</span> permCreds<span class="pl-k">.</span>createTemporaryCredentials(
+                <span class="pl-s"><span class="pl-pds">"</span>demo-client/taskcluster-client-java<span class="pl-pds">"</span></span>,
+                <span class="pl-k">new</span> <span class="pl-smi">String</span>[] {
+                    <span class="pl-s"><span class="pl-pds">"</span>assume:legacy-permacred<span class="pl-pds">"</span></span>
+                },
+                <span class="pl-c">// valid immediately</span>
+                now,
+                <span class="pl-c">// expire in 24 hours</span>
+                <span class="pl-k">new</span> <span class="pl-smi">Date</span>(now<span class="pl-k">.</span>getTime() <span class="pl-k">+</span> <span class="pl-c1">1000</span> <span class="pl-k">*</span> <span class="pl-c1">60</span> <span class="pl-k">*</span> <span class="pl-c1">60</span> <span class="pl-k">*</span> <span class="pl-c1">24</span>)
+            );
+            tempCreds<span class="pl-k">.</span>authorizedScopes <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">String</span>[] { <span class="pl-s"><span class="pl-pds">"</span>queue:get-artifact:private/build/*<span class="pl-pds">"</span></span> };
+            <span class="pl-smi">Queue</span> queue <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Queue</span>(tempCreds);
+            <span class="pl-k">CallSummary&lt;<span class="pl-smi">EmptyPayload</span>, <span class="pl-smi">ListArtifactsResponse</span>&gt;</span> cs <span class="pl-k">=</span> queue<span class="pl-k">.</span>listArtifacts(<span class="pl-s"><span class="pl-pds">"</span>U7On2dUVS9KlEgw7LUaCMQ<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>);
+            <span class="pl-smi">ListArtifactsResponse</span> artifacts <span class="pl-k">=</span> cs<span class="pl-k">.</span>responsePayload;
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>Artifacts:<span class="pl-pds">"</span></span>);
+            <span class="pl-k">for</span> (<span class="pl-smi">Artifacts</span> artifact <span class="pl-k">:</span> artifacts<span class="pl-k">.</span>artifacts) {
+                <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>  * <span class="pl-pds">"</span></span> <span class="pl-k">+</span> artifact<span class="pl-k">.</span>name);
+            }
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>Done.<span class="pl-pds">"</span></span>);
+        } <span class="pl-k">catch</span> (<span class="pl-smi">InvalidOptionsException</span> e) {
+            <span class="pl-smi">System</span><span class="pl-k">.</span>err<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>Could not create temporary credentials<span class="pl-pds">"</span></span>);
+            e<span class="pl-k">.</span>printStackTrace();
+        } <span class="pl-k">catch</span> (<span class="pl-smi">APICallFailure</span> e) {
+            <span class="pl-smi">System</span><span class="pl-k">.</span>err<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>Could not query the Queue service<span class="pl-pds">"</span></span>);
+            e<span class="pl-k">.</span>printStackTrace();
+        }
+    }
+}</pre></div>
+
+<p>See the <a href="#http-apis">HTTP API javadocs</a> for more information, or browse the <a href="https://github.com/taskcluster/taskcluster-client-java/tree/master/src/test/java/org/mozilla/taskcluster">unit
+tests</a>
+for further examples.</p>
 
 <h2>
-<a id="building" class="anchor" href="#building" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building</h2>
-
-<p><a href="https://godoc.org/github.com/taskcluster/taskcluster-client-java"><img src="https://godoc.org/github.com/taskcluster/taskcluster-client-java?status.svg" alt="GoDoc"></a></p>
+<a id="building" class="anchor" href="#building" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Building</h2>
 
 <p>The java libraries provided by this client are auto-generated in
-<a href="https://golang.org/">go</a> using the schemas defined in
+<a href="https://golang.org/">go</a> (not java!) using the schemas defined in
 <a href="http://references.taskcluster.net/manifest.json">http://references.taskcluster.net/manifest.json</a> combined with supplementary
 information stored in
 <a href="https://github.com/taskcluster/taskcluster-client-java/blob/master/codegenerator/model/apis.json">apis.json</a>.</p>
+
+<p><a href="https://godoc.org/github.com/taskcluster/taskcluster-client-java"><img src="https://godoc.org/github.com/taskcluster/taskcluster-client-java?status.svg" alt="GoDoc"></a></p>
 
 <p>In order to completely regenerate all of the HTTP and AMQP libraries, please run
 <a href="https://github.com/taskcluster/taskcluster-client-java/blob/master/build.sh">build.sh</a>
@@ -155,9 +254,10 @@ apache maven. All three need to be setup and configured correctly.</p>
 directory.</p>
 
 <h2>
-<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
 
-<p>Contributions are welcome. Please fork, and issue a Pull Request back with an explanation of your changes.</p>
+<p>Contributions are welcome. Please fork, and issue a Pull Request back with an
+explanation of your changes.</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/taskcluster/taskcluster-client-java">Taskcluster-client-java</a> is maintained by <a href="https://github.com/taskcluster">taskcluster</a>.</span>
