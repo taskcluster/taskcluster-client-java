@@ -3035,7 +3035,7 @@ Properties
   Property 'action' =
     Description            = 'The GitHub `action` which triggered an event.
     '
-    Enum                   = '[assigned unassigned labeled unlabeled opened closed reopened synchronize]'
+    Enum                   = '[assigned unassigned labeled unlabeled opened edited closed reopened synchronize]'
     TypeName               = 'action'
     IsInputSchema          = 'false'
     IsOutputSchema         = 'false'
