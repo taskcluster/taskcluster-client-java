@@ -53,7 +53,7 @@ public class Secrets extends TaskClusterRequestHandler {
      * Set the secret associated with some key.  If the secret already exists, it is
      * updated instead.
      *
-     * See https://docs.taskcluster.net/reference/core/secrets/api-docs/#set
+     * See https://docs.taskcluster.net/reference/core/secrets/api-docs#set
      */
     public CallSummary<Secret, EmptyPayload> set(String name, Secret payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/secret/" + uriEncode(name), EmptyPayload.class);
@@ -62,7 +62,7 @@ public class Secrets extends TaskClusterRequestHandler {
     /**
      * Delete the secret associated with some key.
      *
-     * See https://docs.taskcluster.net/reference/core/secrets/api-docs/#remove
+     * See https://docs.taskcluster.net/reference/core/secrets/api-docs#remove
      */
     public CallSummary<EmptyPayload, EmptyPayload> remove(String name) throws APICallFailure {
         return apiCall(null, "DELETE", "/secret/" + uriEncode(name), EmptyPayload.class);
@@ -74,7 +74,7 @@ public class Secrets extends TaskClusterRequestHandler {
      * scope necessary to get the secret, the call will fail with a 403 code
      * regardless of whether the secret exists.
      *
-     * See https://docs.taskcluster.net/reference/core/secrets/api-docs/#get
+     * See https://docs.taskcluster.net/reference/core/secrets/api-docs#get
      */
     public CallSummary<EmptyPayload, Secret> get(String name) throws APICallFailure {
         return apiCall(null, "GET", "/secret/" + uriEncode(name), Secret.class);
@@ -85,7 +85,7 @@ public class Secrets extends TaskClusterRequestHandler {
      * other words, secret name `<X>` will only be returned if a) a secret
      * with name `<X>` exists, and b) you posses the scope `secrets:get:<X>`.
      *
-     * See https://docs.taskcluster.net/reference/core/secrets/api-docs/#list
+     * See https://docs.taskcluster.net/reference/core/secrets/api-docs#list
      */
     public CallSummary<EmptyPayload, SecretsList> list() throws APICallFailure {
         return apiCall(null, "GET", "/secrets", SecretsList.class);
@@ -95,7 +95,7 @@ public class Secrets extends TaskClusterRequestHandler {
      * Respond without doing anything.  This endpoint is used to check that
      * the service is up.
      *
-     * See https://docs.taskcluster.net/reference/core/secrets/api-docs/#ping
+     * See https://docs.taskcluster.net/reference/core/secrets/api-docs#ping
      */
     public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);

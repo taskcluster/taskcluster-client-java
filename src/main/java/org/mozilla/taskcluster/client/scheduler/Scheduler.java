@@ -117,7 +117,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * CC'ed with the routing-key: `route.<route>`. This is useful if you want
      * another component to listen for completed tasks you have posted.
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs/#createTaskGraph
+     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#createTaskGraph
      */
     public CallSummary<TaskGraphDefinition1, TaskGraphStatusResponse> createTaskGraph(String taskGraphId, TaskGraphDefinition1 payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/task-graph/" + uriEncode(taskGraphId), TaskGraphStatusResponse.class);
@@ -138,7 +138,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * state. Hence, it is only truly _safe_ to call this API end-point from
      * within a task in the task-graph being modified.
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs/#extendTaskGraph
+     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#extendTaskGraph
      */
     public CallSummary<TaskGraphDefinition, TaskGraphStatusResponse> extendTaskGraph(String taskGraphId, TaskGraphDefinition payload) throws APICallFailure {
         return apiCall(payload, "POST", "/task-graph/" + uriEncode(taskGraphId) + "/extend", TaskGraphStatusResponse.class);
@@ -151,7 +151,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * 
      * **Note**, that `finished` implies successfully completion.
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs/#status
+     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#status
      */
     public CallSummary<EmptyPayload, TaskGraphStatusResponse> status(String taskGraphId) throws APICallFailure {
         return apiCall(null, "GET", "/task-graph/" + uriEncode(taskGraphId) + "/status", TaskGraphStatusResponse.class);
@@ -165,7 +165,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * If you want more detailed information use the `inspectTaskGraph`
      * end-point instead.
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs/#info
+     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#info
      */
     public CallSummary<EmptyPayload, TaskGraphInfoResponse> info(String taskGraphId) throws APICallFailure {
         return apiCall(null, "GET", "/task-graph/" + uriEncode(taskGraphId) + "/info", TaskGraphInfoResponse.class);
@@ -185,7 +185,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * as we do not promise it will remain fully backward compatible in
      * the future.
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs/#inspect
+     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#inspect
      */
     public CallSummary<EmptyPayload, InspectTaskGraphResponse> inspect(String taskGraphId) throws APICallFailure {
         return apiCall(null, "GET", "/task-graph/" + uriEncode(taskGraphId) + "/inspect", InspectTaskGraphResponse.class);
@@ -205,7 +205,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * as we do not promise it will remain fully backward compatible in
      * the future.
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs/#inspectTask
+     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#inspectTask
      */
     public CallSummary<EmptyPayload, InspectTaskGraphTaskResponse> inspectTask(String taskGraphId, String taskId) throws APICallFailure {
         return apiCall(null, "GET", "/task-graph/" + uriEncode(taskGraphId) + "/inspect/" + uriEncode(taskId), InspectTaskGraphTaskResponse.class);
@@ -216,7 +216,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * 
      * **Warning** this api end-point is **not stable**.
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs/#ping
+     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#ping
      */
     public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);

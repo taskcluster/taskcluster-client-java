@@ -67,7 +67,7 @@ public class Login extends TaskClusterRequestHandler {
      * sites configured in the login service.  This is not a general-purpose
      * assertion-verification service!
      *
-     * See https://docs.taskcluster.net/reference/core/login/api-docs/#credentialsFromPersonaAssertion
+     * See https://docs.taskcluster.net/reference/core/login/api-docs#credentialsFromPersonaAssertion
      */
     public CallSummary<PersonaAssertionRequest, CredentialsResponse> credentialsFromPersonaAssertion(PersonaAssertionRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/persona", CredentialsResponse.class);
@@ -78,7 +78,7 @@ public class Login extends TaskClusterRequestHandler {
      * 
      * **Warning** this api end-point is **not stable**.
      *
-     * See https://docs.taskcluster.net/reference/core/login/api-docs/#ping
+     * See https://docs.taskcluster.net/reference/core/login/api-docs#ping
      */
     public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);

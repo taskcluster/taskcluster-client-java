@@ -56,7 +56,7 @@ public class Queue extends TaskClusterRequestHandler {
      * definition may have been modified by queue, if an optional property isn't
      * specified the queue may provide a default value.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#task
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#task
      */
     public CallSummary<EmptyPayload, TaskDefinitionResponse> task(String taskId) throws APICallFailure {
         return apiCall(null, "GET", "/task/" + uriEncode(taskId), TaskDefinitionResponse.class);
@@ -65,7 +65,7 @@ public class Queue extends TaskClusterRequestHandler {
     /**
      * Get task status structure from `taskId`
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#status
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#status
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> status(String taskId) throws APICallFailure {
         return apiCall(null, "GET", "/task/" + uriEncode(taskId) + "/status", TaskStatusResponse.class);
@@ -89,7 +89,7 @@ public class Queue extends TaskClusterRequestHandler {
      * If you're not interested in listing all the members at once, you may
      * use the query-string option `limit` to return fewer.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#listTaskGroup
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#listTaskGroup
      */
     public CallSummary<EmptyPayload, ListTaskGroupResponse> listTaskGroup(String taskGroupId) throws APICallFailure {
         return apiCall(null, "GET", "/task-group/" + uriEncode(taskGroupId) + "/list", ListTaskGroupResponse.class);
@@ -113,7 +113,7 @@ public class Queue extends TaskClusterRequestHandler {
      * If you're not interested in listing all the tasks at once, you may
      * use the query-string option `limit` to return fewer.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#listDependentTasks
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#listDependentTasks
      */
     public CallSummary<EmptyPayload, ListDependentTasksResponse> listDependentTasks(String taskId) throws APICallFailure {
         return apiCall(null, "GET", "/task/" + uriEncode(taskId) + "/dependents", ListDependentTasksResponse.class);
@@ -142,7 +142,7 @@ public class Queue extends TaskClusterRequestHandler {
      * **Important** Any scopes the task requires are also required for creating
      * the task. Please see the Request Payload (Task Definition) for details.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#createTask
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#createTask
      */
     public CallSummary<TaskDefinitionRequest, TaskStatusResponse> createTask(String taskId, TaskDefinitionRequest payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/task/" + uriEncode(taskId), TaskStatusResponse.class);
@@ -167,7 +167,7 @@ public class Queue extends TaskClusterRequestHandler {
      * **Note** this operation is **idempotent**, as long as you upload the same
      * task definition as previously defined this operation is safe to retry.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#defineTask
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#defineTask
      */
     public CallSummary<TaskDefinitionRequest, TaskStatusResponse> defineTask(String taskId, TaskDefinitionRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/task/" + uriEncode(taskId) + "/define", TaskStatusResponse.class);
@@ -183,7 +183,7 @@ public class Queue extends TaskClusterRequestHandler {
      * if called with `taskId` that is already scheduled, or even resolved.
      * To reschedule a task previously resolved, use `rerunTask`.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#scheduleTask
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#scheduleTask
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> scheduleTask(String taskId) throws APICallFailure {
         return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/schedule", TaskStatusResponse.class);
@@ -203,7 +203,7 @@ public class Queue extends TaskClusterRequestHandler {
      * isn't either `failed` or `completed`, this operation will just return the
      * current task status.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#rerunTask
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#rerunTask
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> rerunTask(String taskId) throws APICallFailure {
         return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/rerun", TaskStatusResponse.class);
@@ -223,7 +223,7 @@ public class Queue extends TaskClusterRequestHandler {
      * isn't `unscheduled`, `pending` or `running`, this operation will just
      * return the current task status.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#cancelTask
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#cancelTask
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> cancelTask(String taskId) throws APICallFailure {
         return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/cancel", TaskStatusResponse.class);
@@ -234,7 +234,7 @@ public class Queue extends TaskClusterRequestHandler {
      * Once messages are polled from here, you can claim the referenced task
      * with `claimTask`, and afterwards you should always delete the message.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#pollTaskUrls
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#pollTaskUrls
      */
     public CallSummary<EmptyPayload, PollTaskUrlsResponse> pollTaskUrls(String provisionerId, String workerType) throws APICallFailure {
         return apiCall(null, "GET", "/poll-task-url/" + uriEncode(provisionerId) + "/" + uriEncode(workerType), PollTaskUrlsResponse.class);
@@ -243,7 +243,7 @@ public class Queue extends TaskClusterRequestHandler {
     /**
      * claim a task, more to be added later...
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#claimTask
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#claimTask
      */
     public CallSummary<TaskClaimRequest, TaskClaimResponse> claimTask(String taskId, String runId, TaskClaimRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/claim", TaskClaimResponse.class);
@@ -252,7 +252,7 @@ public class Queue extends TaskClusterRequestHandler {
     /**
      * reclaim a task more to be added later...
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#reclaimTask
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#reclaimTask
      */
     public CallSummary<EmptyPayload, TaskReclaimResponse> reclaimTask(String taskId, String runId) throws APICallFailure {
         return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/reclaim", TaskReclaimResponse.class);
@@ -261,7 +261,7 @@ public class Queue extends TaskClusterRequestHandler {
     /**
      * Report a task completed, resolving the run as `completed`.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#reportCompleted
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#reportCompleted
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> reportCompleted(String taskId, String runId) throws APICallFailure {
         return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/completed", TaskStatusResponse.class);
@@ -276,7 +276,7 @@ public class Queue extends TaskClusterRequestHandler {
      * or other unexpected condition. In these cases we have a task exception,
      * which should be reported with `reportException`.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#reportFailed
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#reportFailed
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> reportFailed(String taskId, String runId) throws APICallFailure {
         return apiCall(null, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/failed", TaskStatusResponse.class);
@@ -296,7 +296,7 @@ public class Queue extends TaskClusterRequestHandler {
      * reason specific to this code. If user-specific code hits a resource that
      * is temporarily unavailable worker should report task _failed_.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#reportException
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#reportException
      */
     public CallSummary<TaskExceptionRequest, TaskStatusResponse> reportException(String taskId, String runId, TaskExceptionRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/exception", TaskStatusResponse.class);
@@ -362,7 +362,7 @@ public class Queue extends TaskClusterRequestHandler {
      * updated. You should only use this to update the `url` property for
      * reference artifacts your process has created.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#createArtifact
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#createArtifact
      */
     public CallSummary<Object, Object> createArtifact(String taskId, String runId, String name, Object payload) throws APICallFailure {
         return apiCall(payload, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/artifacts/" + uriEncode(name), Object.class);
@@ -381,7 +381,7 @@ public class Queue extends TaskClusterRequestHandler {
      * client users might want to generate a signed URL for this end-point and
      * use that URL with a normal HTTP client.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#getArtifact
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#getArtifact
      */
     public CallSummary<EmptyPayload, EmptyPayload> getArtifact(String taskId, String runId, String name) throws APICallFailure {
         return apiCall(null, "GET", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/artifacts/" + uriEncode(name), EmptyPayload.class);
@@ -404,7 +404,7 @@ public class Queue extends TaskClusterRequestHandler {
      * `queue.getArtifact`, so consider that if you already know the `runId` of
      * the latest run. Otherwise, just us the most convenient API end-point.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#getLatestArtifact
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#getLatestArtifact
      */
     public CallSummary<EmptyPayload, EmptyPayload> getLatestArtifact(String taskId, String name) throws APICallFailure {
         return apiCall(null, "GET", "/task/" + uriEncode(taskId) + "/artifacts/" + uriEncode(name), EmptyPayload.class);
@@ -421,7 +421,7 @@ public class Queue extends TaskClusterRequestHandler {
      * By default this end-point will list up-to 1000 artifacts in a single page
      * you may limit this with the query-string parameter `limit`.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#listArtifacts
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#listArtifacts
      */
     public CallSummary<EmptyPayload, ListArtifactsResponse> listArtifacts(String taskId, String runId) throws APICallFailure {
         return apiCall(null, "GET", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/artifacts", ListArtifactsResponse.class);
@@ -439,7 +439,7 @@ public class Queue extends TaskClusterRequestHandler {
      * By default this end-point will list up-to 1000 artifacts in a single page
      * you may limit this with the query-string parameter `limit`.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#listLatestArtifacts
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#listLatestArtifacts
      */
     public CallSummary<EmptyPayload, ListArtifactsResponse> listLatestArtifacts(String taskId) throws APICallFailure {
         return apiCall(null, "GET", "/task/" + uriEncode(taskId) + "/artifacts", ListArtifactsResponse.class);
@@ -454,7 +454,7 @@ public class Queue extends TaskClusterRequestHandler {
      * should be no means expect this to be an accurate number.
      * It is, however, a solid estimate of the number of pending tasks.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#pendingTasks
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#pendingTasks
      */
     public CallSummary<EmptyPayload, CountPendingTasksResponse> pendingTasks(String provisionerId, String workerType) throws APICallFailure {
         return apiCall(null, "GET", "/pending/" + uriEncode(provisionerId) + "/" + uriEncode(workerType), CountPendingTasksResponse.class);
@@ -465,7 +465,7 @@ public class Queue extends TaskClusterRequestHandler {
      * 
      * **Warning** this api end-point is **not stable**.
      *
-     * See https://docs.taskcluster.net/reference/platform/queue/api-docs/#ping
+     * See https://docs.taskcluster.net/reference/platform/queue/api-docs#ping
      */
     public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);
