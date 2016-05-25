@@ -163,7 +163,7 @@ func (entry *APIEntry) generateAPICode(apiName string) string {
 		comment += "\n"
 	}
 	comment += "     *\n"
-	comment += fmt.Sprintf("     * See %v/#%v\n", entry.Parent.apiDef.DocRoot, entry.Name)
+	comment += fmt.Sprintf("     * See %v#%v\n", entry.Parent.apiDef.DocRoot, entry.Name)
 	comment += "     */\n"
 	inputParams := ""
 	if len(entry.Args) > 0 {
