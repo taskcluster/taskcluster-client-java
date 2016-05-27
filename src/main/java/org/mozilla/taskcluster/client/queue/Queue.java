@@ -139,6 +139,9 @@ public class Queue extends TaskClusterRequestHandler {
      * for completed tasks you have posted.  The caller must have scope
      * `queue:route:<route>` for each route.
      * 
+     * **Dependencies**, any tasks referenced in `task.dependencies` must have
+     * already been created at the time of this call.
+     * 
      * **Important** Any scopes the task requires are also required for creating
      * the task. Please see the Request Payload (Task Definition) for details.
      *
