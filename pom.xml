@@ -10,7 +10,7 @@
 
 	<name>Taskcluster Client (java port)</name>
 	<description>Taskcluster is a job execution framework supporting multiple platforms, enabling cross-platform continuous integration and other arbitrary job scheduling. The Taskcluster Client is a runtime library for interacting with Taskcluster. It exists for several languages; this is the java implementation.</description>
-	<url>http://docs.taskcluster.net</url>
+	<url>https://docs.taskcluster.net</url>
 	<inceptionYear>2014</inceptionYear>
 
 	<properties>

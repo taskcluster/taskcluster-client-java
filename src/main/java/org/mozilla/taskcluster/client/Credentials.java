@@ -104,8 +104,9 @@ public class Credentials {
      * a base64 encoded representation of "null" or "{}". Hawk interprets the
      * empty string as meaning the ext header is not needed.
      *
-     * See: * http://docs.taskcluster.net/auth/authorized-scopes *
-     * http://docs.taskcluster.net/auth/temporary-credentials
+     * See:
+	 *   * https://docs.taskcluster.net/manual/apis/authorized-scopes
+	 *   * https://docs.taskcluster.net/manual/apis/temporary-credentials
      */
     private String GetExtAuthField() {
         ExtAuthField extAuthField = new ExtAuthField(getCertificate(), authorizedScopes);
