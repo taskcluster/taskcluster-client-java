@@ -13,12 +13,14 @@ import (
 //
 //////////////////////////////////////////////////////////////////
 
+// API represents the HTTP interface of a TaskCluster service
 type API struct {
-	Version     interface{} `json:"version"`
-	Title       string      `json:"title"`
-	Description string      `json:"description"`
 	BaseURL     string      `json:"baseUrl"`
+	Description string      `json:"description"`
 	Entries     []APIEntry  `json:"entries"`
+	Title       string      `json:"title"`
+	Version     interface{} `json:"version"`
+	Schema      string      `json:"$schema"`
 
 	apiDef *APIDefinition
 }
@@ -26,10 +28,12 @@ type API struct {
 func (api *API) String() string {
 	var result string = fmt.Sprintf(
 		"Version     = '%v'\n"+
+			"Schema      = '%v'\n"+
 			"Title       = '%v'\n"+
 			"Description = '%v'\n"+
 			"Base URL    = '%v'\n",
-		api.Version, api.Title, api.Description, api.BaseURL)
+		api.Version, api.Schema, api.Title, api.Description, api.BaseURL,
+	)
 	for i, entry := range api.Entries {
 		result += fmt.Sprintf("Entry %-6v=\n%v", i, entry.String())
 	}
@@ -62,7 +66,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 `
 	comment := "/**\n"
 	if api.Description != "" {
-		comment += utils.Indent(api.Description, " * ")
+		comment += utils.Indent(api.Description, " * ", true)
 	}
 	if len(comment) >= 1 && comment[len(comment)-1:] != "\n" {
 		comment += "\n"
@@ -111,29 +115,32 @@ func (api *API) setAPIDefinition(apiDef *APIDefinition) {
 }
 
 type APIEntry struct {
-	Type        string     `json:"type"`
-	Method      string     `json:"method"`
-	Route       string     `json:"route"`
 	Args        []string   `json:"args"`
-	Name        string     `json:"name"`
-	Scopes      [][]string `json:"scopes"`
+	Description string     `json:"description"`
 	Input       string     `json:"input"`
+	Method      string     `json:"method"`
+	Name        string     `json:"name"`
+	Query       []string   `json:"query"`
+	Route       string     `json:"route"`
+	Scopes      [][]string `json:"scopes"`
+	Stability   string     `json:"stability"`
 	Output      string     `json:"output"`
 	Title       string     `json:"title"`
-	Description string     `json:"description"`
+	Type        string     `json:"type"`
 
 	MethodName string
 	Parent     *API
 }
 
+// Add entry.Input and entry.Output to schemaURLs, if they are set
 func (entry *APIEntry) postPopulate(apiDef *APIDefinition) {
-	if entry.Input != "" {
-		entry.Parent.apiDef.cacheJsonSchema(&entry.Input)
-		entry.Parent.apiDef.schemas[entry.Input].IsInputSchema = true
-	}
-	if entry.Output != "" {
-		entry.Parent.apiDef.cacheJsonSchema(&entry.Output)
-		entry.Parent.apiDef.schemas[entry.Output].IsOutputSchema = true
+	for _, v := range []string{
+		entry.Input,
+		entry.Output,
+	} {
+		if x := &entry.Parent.apiDef.schemaURLs; v != "" {
+			*x = append(*x, v)
+		}
 	}
 }
 
@@ -143,21 +150,24 @@ func (entry *APIEntry) String() string {
 			"    Entry Method      = '%v'\n"+
 			"    Entry Route       = '%v'\n"+
 			"    Entry Args        = '%v'\n"+
+			"    Entry Query        = '%v'\n"+
 			"    Entry Name        = '%v'\n"+
+			"    Entry Stability   = '%v'\n"+
 			"    Entry Scopes      = '%v'\n"+
 			"    Entry Input       = '%v'\n"+
 			"    Entry Output      = '%v'\n"+
 			"    Entry Title       = '%v'\n"+
 			"    Entry Description = '%v'\n",
 		entry.Type, entry.Method, entry.Route, entry.Args,
-		entry.Name, entry.Scopes, entry.Input, entry.Output,
-		entry.Title, entry.Description)
+		entry.Query, entry.Name, entry.Stability, entry.Scopes,
+		entry.Input, entry.Output, entry.Title, entry.Description,
+	)
 }
 
 func (entry *APIEntry) generateAPICode(apiName string) string {
 	comment := "\n    /**\n"
 	if entry.Description != "" {
-		comment += utils.Indent(entry.Description, "     * ")
+		comment += utils.Indent(entry.Description, "     * ", true)
 	}
 	if len(comment) >= 1 && comment[len(comment)-1:] != "\n" {
 		comment += "\n"
@@ -173,7 +183,7 @@ func (entry *APIEntry) generateAPICode(apiName string) string {
 	apiArgsPayload := "null"
 	if entry.Input != "" {
 		apiArgsPayload = "payload"
-		p := entry.Parent.apiDef.schemas[entry.Input].TypeName + " payload"
+		p := entry.Parent.apiDef.schemas.SubSchema(entry.Input).TypeName + " payload"
 		if inputParams == "" {
 			inputParams = p
 		} else {
@@ -183,14 +193,11 @@ func (entry *APIEntry) generateAPICode(apiName string) string {
 
 	requestType := "EmptyPayload"
 	if entry.Input != "" {
-		requestType = entry.Parent.apiDef.schemas[entry.Input].TypeName
+		requestType = entry.Parent.apiDef.schemas.SubSchema(entry.Input).TypeName
 	}
 	responseType := "EmptyPayload"
 	if entry.Output != "" {
-		responseType = entry.Parent.apiDef.schemas[entry.Output].TypeName
-		if entry.Parent.apiDef.schemas[entry.Output].Type != nil && *entry.Parent.apiDef.schemas[entry.Output].Type == "array" {
-			responseType += "[]"
-		}
+		responseType = entry.Parent.apiDef.schemas.SubSchema(entry.Output).TypeName
 	}
 	returnType := "CallSummary<" + requestType + ", " + responseType + ">"
 

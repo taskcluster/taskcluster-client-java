@@ -1,8 +1,6 @@
 package model
 
-import (
-	"fmt"
-)
+import "fmt"
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -59,7 +57,7 @@ type ExchangeEntry struct {
 }
 
 func (entry *ExchangeEntry) postPopulate(apiDef *APIDefinition) {
-	entry.Payload = entry.Parent.apiDef.cacheJsonSchema(&entry.Schema)
+	entry.Parent.apiDef.schemaURLs = append(entry.Parent.apiDef.schemaURLs, entry.Schema)
 }
 
 func (entry *ExchangeEntry) String() string {
