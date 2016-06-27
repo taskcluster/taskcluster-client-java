@@ -9,10 +9,12 @@ import (
 )
 
 // indents a block of text with an indent string, see http://play.golang.org/p/nV1_VLau7C
-func Indent(text, indent string) string {
-	text = strings.Replace(text, "*/", "* /", -1)
+func Indent(text, indent string, escapeText bool) string {
 	if text == "" {
 		return text
+	}
+	if escapeText {
+		text = strings.Replace(text, "*/", "* /", -1)
 	}
 	if text[len(text)-1:] == "\n" {
 		result := ""
@@ -140,10 +142,14 @@ func Comment(text, indent string) string {
 		return text
 	}
 	comment := indent + "/**\n"
-	comment += Indent(text, indent+" * ")
+	comment += Indent(text, indent+" * ", true)
 	if comment[len(comment)-1:] != "\n" {
 		comment += "\n"
 	}
 	comment += indent + " */\n"
-	return comment
+	trimmed := strings.Split(comment, "\n")
+	for i, t := range trimmed {
+		trimmed[i] = strings.TrimRight(t, " ")
+	}
+	return strings.Join(trimmed, "\n")
 }

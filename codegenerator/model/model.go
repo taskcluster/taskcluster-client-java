@@ -3,16 +3,19 @@ package model
 //go:generate generatemodel -u http://references.taskcluster.net/manifest.json -f apis.json -o ../.. -m model-data.txt
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/taskcluster/taskcluster-client-java/codegenerator/utils"
-	"github.com/xeipuuv/gojsonschema"
 	"io"
 	"net/http"
 	"os"
 	"path/filepath"
 	"sort"
 	"strings"
+
+	"github.com/taskcluster/jsonschema2go"
+	"github.com/taskcluster/taskcluster-client-java/codegenerator/utils"
+	"github.com/xeipuuv/gojsonschema"
 )
 
 var (
@@ -37,65 +40,46 @@ type APIModel interface {
 // APIDefinition represents the definition of a REST API, comprising of the URL to the defintion
 // of the API in json format, together with a URL to a json schema to validate the definition
 type APIDefinition struct {
-	URL         string `json:"url"`
-	SchemaURL   string `json:"schema"`
-	Name        string `json:"name"`
-	DocRoot     string `json:"docroot"`
-	Data        APIModel
-	schemaURLs  []string
-	schemas     map[string]*JsonSubSchema
-	PackageName string
-	PackagePath string
+	URL            string `json:"url"`
+	Name           string `json:"name"`
+	DocRoot        string `json:"docroot"`
+	Data           APIModel
+	schemaURLs     []string
+	schemas        *jsonschema2go.SchemaSet
+	PackageName    string
+	ExampleVarName string
+	PackagePath    string
+	SchemaURL      string
 }
 
 func (a *APIDefinition) generateAPICode() string {
 	return a.Data.generateAPICode(a.Name)
 }
 
-func (apiDef *APIDefinition) loadJson(reader io.Reader, schema *string) {
+func (apiDef *APIDefinition) loadJson(reader io.Reader) {
+	b := new(bytes.Buffer)
+	_, err := b.ReadFrom(reader)
+	utils.ExitOnFail(err)
+	data := b.Bytes()
+	f := new(interface{})
+	err = json.Unmarshal(data, f)
+	utils.ExitOnFail(err)
+	schema := (*f).(map[string]interface{})["$schema"].(string)
+	apiDef.SchemaURL = schema
 	var m APIModel
-	switch *schema {
-	case "http://schemas.taskcluster.net/base/v1/api-reference.json":
+	switch schema {
+	case "http://schemas.taskcluster.net/base/v1/api-reference.json#":
 		m = new(API)
-	case "http://schemas.taskcluster.net/base/v1/exchanges-reference.json":
+	case "http://schemas.taskcluster.net/base/v1/exchanges-reference.json#":
 		m = new(Exchange)
+	default:
+		panic(fmt.Errorf("Do not know how to handle API with schema %q", schema))
 	}
-	decoder := json.NewDecoder(reader)
-	err = decoder.Decode(m)
+	err = json.Unmarshal(data, m)
 	utils.ExitOnFail(err)
 	m.setAPIDefinition(apiDef)
 	m.postPopulate(apiDef)
 	apiDef.Data = m
-}
-
-func (apiDef *APIDefinition) loadJsonSchema(url string) *JsonSubSchema {
-	var resp *http.Response
-	resp, err = http.Get(url)
-	utils.ExitOnFail(err)
-	defer resp.Body.Close()
-	decoder := json.NewDecoder(resp.Body)
-	m := new(JsonSubSchema)
-	err = decoder.Decode(m)
-	utils.ExitOnFail(err)
-	m.postPopulate(apiDef)
-	return m
-}
-
-func (apiDef *APIDefinition) cacheJsonSchema(url *string) *JsonSubSchema {
-	// if url is not provided, there is nothing to download
-	if url == nil || *url == "" {
-		return nil
-	}
-	// workaround for problem where some urls don't end with a #
-	if (*url)[len(*url)-1:] != "#" {
-		*url += "#"
-	}
-	// only fetch if we haven't fetched already...
-	if _, ok := apiDef.schemas[*url]; !ok {
-		apiDef.schemas[*url] = apiDef.loadJsonSchema(*url)
-		apiDef.schemas[*url].SourceURL = *url
-	}
-	return apiDef.schemas[*url]
 }
 
 // LoadAPIs takes care of reading all json files and performing elementary
@@ -152,37 +136,14 @@ func LoadAPIs(apiManifestUrl, supplementaryDataFile string) []APIDefinition {
 		}
 	}
 	for i := range apiDefs {
-		// first check that the json schema is valid!
-		validateJson(apiDefs[i].SchemaURL, apiDefs[i].URL)
-
-		apiDefs[i].schemas = make(map[string]*JsonSubSchema)
 		var resp *http.Response
 		resp, err = http.Get(apiDefs[i].URL)
 		utils.ExitOnFail(err)
 		defer resp.Body.Close()
-		apiDefs[i].loadJson(resp.Body, &apiDefs[i].SchemaURL)
+		apiDefs[i].loadJson(resp.Body)
 
-		// now all data should be loaded, let's sort the schemas
-		apiDefs[i].schemaURLs = make([]string, 0, len(apiDefs[i].schemas))
-		for url := range apiDefs[i].schemas {
-			apiDefs[i].schemaURLs = append(apiDefs[i].schemaURLs, url)
-		}
-		sort.Strings(apiDefs[i].schemaURLs)
-		// finally, now we can generate normalised names
-		// for schemas
-		// keep a record of generated type names, so that we don't reuse old names
-		// map[string]bool acts like a set of strings
-		TypeName := make(map[string]bool)
-		for _, j := range apiDefs[i].schemaURLs {
-			apiDefs[i].schemas[j].TypeName = utils.Normalise(*apiDefs[i].schemas[j].Title, TypeName)
-		}
-		//////////////////////////////////////////////////////////////////////////////
-		// these next four lines are a temporary hack while waiting for https://github.com/taskcluster/taskcluster-queue/pull/31
-		if x, ok := apiDefs[i].schemas["http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#"]; ok {
-			y := "object"
-			x.Properties.Properties["artifacts"].Items.Type = &y
-		}
-		//////////////////////////////////////////////////////////////////////////////
+		// check that the json schema is valid!
+		validateJson(apiDefs[i].SchemaURL, apiDefs[i].URL)
 	}
 	return apiDefs
 }
@@ -221,15 +182,9 @@ func GenerateCode(goOutputDir, modelData string) {
 		content += apiDefs[i].generateAPICode()
 		className := strings.Title(apiDefs[i].Name)
 		sourceFile := filepath.Join(apiDefs[i].PackagePath, className+".java")
-		fmt.Println("Formatting source code " + sourceFile + "...")
-		// formattedContent, err := format.Source([]byte(content))
-		// in case of formatting failure, let's keep the unformatted version so
-		// we can troubleshoot more easily...
-		// if err != nil {
+		fmt.Println("Generating source code " + sourceFile + "...")
 		utils.WriteStringToFile(content, sourceFile)
-		// }
 		utils.ExitOnFail(err)
-		// utils.WriteStringToFile(string(formattedContent), sourceFile)
 	}
 
 	content := "The following file is an auto-generated static dump of the API models at time of code generation.\n"
@@ -238,9 +193,9 @@ func GenerateCode(goOutputDir, modelData string) {
 	for i := range apiDefs {
 		content += utils.Underline(apiDefs[i].URL)
 		content += apiDefs[i].Data.String() + "\n\n"
-		for _, url := range apiDefs[i].schemaURLs {
+		for _, url := range apiDefs[i].schemas.SortedSanitizedURLs() {
 			content += (utils.Underline(url))
-			content += apiDefs[i].schemas[url].String() + "\n\n"
+			content += apiDefs[i].schemas.SubSchema(url).String() + "\n\n"
 		}
 	}
 	utils.WriteStringToFile(content, modelData)
@@ -253,24 +208,41 @@ func GenerateCode(goOutputDir, modelData string) {
 // a generated type might use time.Time, so if not imported, this would have to be added.
 // using a map of strings -> bool to simulate a set - true => include
 func generatePayloadTypes(apiDef *APIDefinition) {
-	for _, i := range apiDef.schemaURLs {
+
+	job := &jsonschema2go.Job{
+		Package:     apiDef.PackageName,
+		URLs:        apiDef.schemaURLs,
+		SkipCodeGen: true,
+		TypeNameGenerator: func(name string, exported bool, blacklist map[string]bool) (identifier string) {
+			return utils.Normalise(name, blacklist)
+		},
+		MemberNameGenerator: func(name string, exported bool, blacklist map[string]bool) (identifier string) {
+			return utils.NormaliseLower(name, blacklist)
+		},
+	}
+	result, err := job.Execute()
+	utils.ExitOnFail(err)
+
+	apiDef.schemas = result.SchemaSet
+
+	for _, i := range apiDef.schemas.SortedSanitizedURLs() {
 		extraPackages := make(map[string]bool)
 		content := "package org.mozilla.taskcluster.client." + strings.ToLower(apiDef.PackageName) + ";\n"
 		content += "\n"
-		var typeContent string
-		var simpleType string
-		typeContent, extraPackages, simpleType = apiDef.schemas[i].TypeDefinition(0, false, extraPackages)
-		if simpleType == "" {
+		s := JsonSubSchema(*apiDef.schemas.SubSchema(i))
+		typeClass, typeComment, typ := (&s).TypeDefinition(0, extraPackages)
+		if typeClass != "" {
 			if len(extraPackages) > 0 {
 				for pckage := range extraPackages {
 					content += "import " + pckage + ";\n"
 				}
 				content += "\n"
 			}
-			content += typeContent
-			utils.WriteStringToFile(content, filepath.Join(apiDef.PackagePath, apiDef.schemas[i].TypeName+".java"))
+			content += typeComment
+			content += typeClass[1:]
+			utils.WriteStringToFile(content, filepath.Join(apiDef.PackagePath, apiDef.schemas.SubSchema(i).TypeName+".java"))
 		} else {
-			apiDef.schemas[i].TypeName = simpleType
+			apiDef.schemas.SubSchema(i).TypeName = typ
 		}
 	}
 }
