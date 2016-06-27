@@ -119,7 +119,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      *
      * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#createTaskGraph
      */
-    public CallSummary<TaskGraphDefinition1, TaskGraphStatusResponse> createTaskGraph(String taskGraphId, TaskGraphDefinition1 payload) throws APICallFailure {
+    public CallSummary<TaskGraphDefinition, TaskGraphStatusResponse> createTaskGraph(String taskGraphId, TaskGraphDefinition payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/task-graph/" + uriEncode(taskGraphId), TaskGraphStatusResponse.class);
     }
 
@@ -140,7 +140,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      *
      * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#extendTaskGraph
      */
-    public CallSummary<TaskGraphDefinition, TaskGraphStatusResponse> extendTaskGraph(String taskGraphId, TaskGraphDefinition payload) throws APICallFailure {
+    public CallSummary<TaskGraphDefinition1, TaskGraphStatusResponse> extendTaskGraph(String taskGraphId, TaskGraphDefinition1 payload) throws APICallFailure {
         return apiCall(payload, "POST", "/task-graph/" + uriEncode(taskGraphId) + "/extend", TaskGraphStatusResponse.class);
     }
 

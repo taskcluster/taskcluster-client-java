@@ -1,10 +1,10 @@
 package org.mozilla.taskcluster.client.queue;
 
 /**
-* Request for a run of a task to be resolved with an exception
-*
-* See http://schemas.taskcluster.net/queue/v1/task-exception-request.json#
-*/
+ * Request for a run of a task to be resolved with an exception
+ *
+ * See http://schemas.taskcluster.net/queue/v1/task-exception-request.json#
+ */
 public class TaskExceptionRequest {
 
     /**
@@ -39,6 +39,15 @@ public class TaskExceptionRequest {
      * convention in this case to create an artifact entitled
      * `public/superseded-by` containing the taskId of the task that superseded
      * this one.
+     *
+     * Possible values:
+     *     * "worker-shutdown"
+     *     * "malformed-payload"
+     *     * "resource-unavailable"
+     *     * "internal-error"
+     *     * "superseded"
+     *
+     * See http://schemas.taskcluster.net/queue/v1/task-exception-request.json#/properties/reason
      */
     public String reason;
 }

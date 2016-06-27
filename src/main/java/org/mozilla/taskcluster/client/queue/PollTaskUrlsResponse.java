@@ -3,24 +3,21 @@ package org.mozilla.taskcluster.client.queue;
 import java.util.Date;
 
 /**
-* Response to request for poll task urls.
-*
-* See http://schemas.taskcluster.net/queue/v1/poll-task-urls-response.json#
-*/
+ * Response to request for poll task urls.
+ *
+ * See http://schemas.taskcluster.net/queue/v1/poll-task-urls-response.json#
+ */
 public class PollTaskUrlsResponse {
 
     /**
      * Date and time after which the signed URLs provided in this response
      * expires and not longer works for authentication.
+     *
+     * See http://schemas.taskcluster.net/queue/v1/poll-task-urls-response.json#/properties/expires
      */
     public Date expires;
 
-    /**
-     * List of signed URLs for queues to poll tasks from, they must be called
-     * in the order they are given. As the first entry in this array **may**
-     * have higher priority.
-     */
-    public class Queues {
+    public class QueuesEntry {
 
         /**
          * Signed URL to delete messages that have been received using the
@@ -32,6 +29,10 @@ public class PollTaskUrlsResponse {
          * `encodeURIComponent` both `MessageId` and `PopReceipt` prior to
          * substitution, otherwise you will experience intermittent failures!
          * Note this URL only works with `DELETE` request.
+         *
+         * Syntax:     ^https://
+         *
+         * See http://schemas.taskcluster.net/queue/v1/poll-task-urls-response.json#/properties/queues/items/properties/signedDeleteUrl
          */
         public String signedDeleteUrl;
 
@@ -50,9 +51,18 @@ public class PollTaskUrlsResponse {
          * **Remark**, you are allowed to append `&numofmessages=N`,
          * where N < 32, to the URLs if you wish to obtain more than one
          * message at the time.
+         *
+         * See http://schemas.taskcluster.net/queue/v1/poll-task-urls-response.json#/properties/queues/items/properties/signedPollUrl
          */
         public String signedPollUrl;
     }
 
-    public Queues[] queues;
+    /**
+     * List of signed URLs for queues to poll tasks from, they must be called
+     * in the order they are given. As the first entry in this array **may**
+     * have higher priority.
+     *
+     * See http://schemas.taskcluster.net/queue/v1/poll-task-urls-response.json#/properties/queues
+     */
+    public QueuesEntry[] queues;
 }
