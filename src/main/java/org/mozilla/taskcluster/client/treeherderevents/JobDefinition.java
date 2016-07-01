@@ -65,7 +65,6 @@ public class JobDefinition {
 
         /**
          *
-         * Syntax:     ^[\w/?-]+$
          * Min length: 1
          * Max length: 25
          *
@@ -84,7 +83,6 @@ public class JobDefinition {
 
         /**
          *
-         * Syntax:     ^$|^[\w.-]+$
          * Min length: 0
          * Max length: 25
          *

@@ -10064,7 +10064,6 @@ Properties
       Property 'groupSymbol' =
         MaxLength              = '25'
         MinLength              = '1'
-        Pattern                = '^[\w/?-]+$'
         Title                  = 'group symbol'
         Type                   = 'string'
         TypeName               = ''
@@ -10079,7 +10078,6 @@ Properties
       Property 'jobSymbol' =
         MaxLength              = '25'
         MinLength              = '0'
-        Pattern                = '^$|^[\w.-]+$'
         Title                  = 'jobSymbol'
         Type                   = 'string'
         TypeName               = ''
