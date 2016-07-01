@@ -172,6 +172,7 @@ func (entry *APIEntry) generateAPICode(apiName string) string {
 	if len(comment) >= 1 && comment[len(comment)-1:] != "\n" {
 		comment += "\n"
 	}
+	comment += requiredScopesComment(entry.Scopes)
 	comment += "     *\n"
 	comment += fmt.Sprintf("     * See %v#%v\n", entry.Parent.apiDef.DocRoot, entry.Name)
 	comment += "     */\n"
@@ -207,4 +208,30 @@ func (entry *APIEntry) generateAPICode(apiName string) string {
 	content += "    }\n"
 	// can remove any code that added an empty string to another string
 	return strings.Replace(content, ` + ""`, "", -1)
+}
+
+func requiredScopesComment(scopes [][]string) string {
+	if len(scopes) == 0 {
+		return ""
+	}
+	comment := "     *\n"
+	comment += "     * Required scopes:\n"
+	switch len(scopes) {
+	case 0:
+	case 1:
+		comment += "     *   * " + strings.Join(scopes[0], ", and\n     *   * ") + "\n"
+	default:
+		lines := make([]string, len(scopes))
+		for i, j := range scopes {
+			switch len(j) {
+			case 0:
+			case 1:
+				lines[i] = "     *   * " + j[0]
+			default:
+				lines[i] = "     *   * (" + strings.Join(j, " and ") + ")"
+			}
+		}
+		comment += strings.Join(lines, ", or\n") + "\n"
+	}
+	return comment
 }
