@@ -30,7 +30,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  * if such scopes are discovered.  Thus users can create long-lived credentials
  * that are only usable until the user's access level is reduced.
  *
- * See: https://docs.taskcluster.net/reference/core/login/api-docs
+ * @see "[Login API Documentation](https://docs.taskcluster.net/reference/core/login/api-docs)"
  */
 public class Login extends TaskClusterRequestHandler {
 
@@ -67,7 +67,7 @@ public class Login extends TaskClusterRequestHandler {
      * sites configured in the login service.  This is not a general-purpose
      * assertion-verification service!
      *
-     * See https://docs.taskcluster.net/reference/core/login/api-docs#credentialsFromPersonaAssertion
+     * @see "[Get TaskCluster credentials given a Persona assertion API Documentation](https://docs.taskcluster.net/reference/core/login/api-docs#credentialsFromPersonaAssertion)"
      */
     public CallSummary<PersonaAssertionRequest, CredentialsResponse> credentialsFromPersonaAssertion(PersonaAssertionRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/persona", CredentialsResponse.class);
@@ -78,7 +78,7 @@ public class Login extends TaskClusterRequestHandler {
      * 
      * **Warning** this api end-point is **not stable**.
      *
-     * See https://docs.taskcluster.net/reference/core/login/api-docs#ping
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/login/api-docs#ping)"
      */
     public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);

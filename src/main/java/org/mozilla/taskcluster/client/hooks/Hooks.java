@@ -26,7 +26,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *  * `["0 0 1 * * *"]` -- daily at 1:00 UTC
  *  * `["0 0 9,21 * * 1-5", "0 0 12 * * 0,6"]` -- weekdays at 9:00 and 21:00 UTC, weekends at noon
  *
- * See: https://docs.taskcluster.net/reference/core/hooks/api-docs
+ * @see "[Hooks API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs)"
  */
 public class Hooks extends TaskClusterRequestHandler {
 
@@ -59,7 +59,7 @@ public class Hooks extends TaskClusterRequestHandler {
     /**
      * This endpoint will return a list of all hook groups with at least one hook.
      *
-     * See https://docs.taskcluster.net/reference/core/hooks/api-docs#listHookGroups
+     * @see "[List hook groups API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#listHookGroups)"
      */
     public CallSummary<EmptyPayload, HookGroups> listHookGroups() throws APICallFailure {
         return apiCall(null, "GET", "/hooks", HookGroups.class);
@@ -69,7 +69,7 @@ public class Hooks extends TaskClusterRequestHandler {
      * This endpoint will return a list of all the hook definitions within a
      * given hook group.
      *
-     * See https://docs.taskcluster.net/reference/core/hooks/api-docs#listHooks
+     * @see "[List hooks in a given group API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#listHooks)"
      */
     public CallSummary<EmptyPayload, HookList> listHooks(String hookGroupId) throws APICallFailure {
         return apiCall(null, "GET", "/hooks/" + uriEncode(hookGroupId), HookList.class);
@@ -79,7 +79,7 @@ public class Hooks extends TaskClusterRequestHandler {
      * This endpoint will return the hook defintion for the given `hookGroupId`
      * and hookId.
      *
-     * See https://docs.taskcluster.net/reference/core/hooks/api-docs#hook
+     * @see "[Get hook definition API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#hook)"
      */
     public CallSummary<EmptyPayload, HookDefinition> hook(String hookGroupId, String hookId) throws APICallFailure {
         return apiCall(null, "GET", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId), HookDefinition.class);
@@ -89,7 +89,7 @@ public class Hooks extends TaskClusterRequestHandler {
      * This endpoint will return the current status of the hook.  This represents a
      * snapshot in time and may vary from one call to the next.
      *
-     * See https://docs.taskcluster.net/reference/core/hooks/api-docs#getHookStatus
+     * @see "[Get hook status API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#getHookStatus)"
      */
     public CallSummary<EmptyPayload, HookStatusResponse> getHookStatus(String hookGroupId, String hookId) throws APICallFailure {
         return apiCall(null, "GET", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/status", HookStatusResponse.class);
@@ -99,7 +99,7 @@ public class Hooks extends TaskClusterRequestHandler {
      * This endpoint will return the schedule and next scheduled creation time
      * for the given hook.
      *
-     * See https://docs.taskcluster.net/reference/core/hooks/api-docs#getHookSchedule
+     * @see "[Get hook schedule API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#getHookSchedule)"
      */
     public CallSummary<EmptyPayload, HookScheduleResponse> getHookSchedule(String hookGroupId, String hookId) throws APICallFailure {
         return apiCall(null, "GET", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/schedule", HookScheduleResponse.class);
@@ -114,10 +114,10 @@ public class Hooks extends TaskClusterRequestHandler {
      *
      * Required scopes:
      *
-     *   * hooks:modify-hook:<hookGroupId>/<hookId>, and
-     *   * assume:hook-id:<hookGroupId>/<hookId>
+     *   * `hooks:modify-hook:<hookGroupId>/<hookId>`, and
+     *   * `assume:hook-id:<hookGroupId>/<hookId>`
      *
-     * See https://docs.taskcluster.net/reference/core/hooks/api-docs#createHook
+     * @see "[Create a hook API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#createHook)"
      */
     public CallSummary<HookCreationRequest, HookDefinition> createHook(String hookGroupId, String hookId, HookCreationRequest payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId), HookDefinition.class);
@@ -129,10 +129,10 @@ public class Hooks extends TaskClusterRequestHandler {
      *
      * Required scopes:
      *
-     *   * hooks:modify-hook:<hookGroupId>/<hookId>, and
-     *   * assume:hook-id:<hookGroupId>/<hookId>
+     *   * `hooks:modify-hook:<hookGroupId>/<hookId>`, and
+     *   * `assume:hook-id:<hookGroupId>/<hookId>`
      *
-     * See https://docs.taskcluster.net/reference/core/hooks/api-docs#updateHook
+     * @see "[Update a hook API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#updateHook)"
      */
     public CallSummary<HookCreationRequest, HookDefinition> updateHook(String hookGroupId, String hookId, HookCreationRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId), HookDefinition.class);
@@ -143,9 +143,9 @@ public class Hooks extends TaskClusterRequestHandler {
      *
      * Required scopes:
      *
-     *   * hooks:modify-hook:<hookGroupId>/<hookId>
+     *   * `hooks:modify-hook:<hookGroupId>/<hookId>`
      *
-     * See https://docs.taskcluster.net/reference/core/hooks/api-docs#removeHook
+     * @see "[Delete a hook API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#removeHook)"
      */
     public CallSummary<EmptyPayload, EmptyPayload> removeHook(String hookGroupId, String hookId) throws APICallFailure {
         return apiCall(null, "DELETE", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId), EmptyPayload.class);

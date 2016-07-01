@@ -101,7 +101,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  * good idea to document task index hierarchies, as these make up extension
  * points in their own.
  *
- * See: https://docs.taskcluster.net/reference/core/index/api-docs
+ * @see "[Index API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs)"
  */
 public class Index extends TaskClusterRequestHandler {
 
@@ -135,7 +135,7 @@ public class Index extends TaskClusterRequestHandler {
      * Find task by namespace, if no task existing for the given namespace, this
      * API end-point respond `404`.
      *
-     * See https://docs.taskcluster.net/reference/core/index/api-docs#findTask
+     * @see "[Find Indexed Task API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#findTask)"
      */
     public CallSummary<EmptyPayload, IndexedTaskResponse> findTask(String namespace) throws APICallFailure {
         return apiCall(null, "GET", "/task/" + uriEncode(namespace), IndexedTaskResponse.class);
@@ -151,7 +151,7 @@ public class Index extends TaskClusterRequestHandler {
      * **Remark**, this end-point is designed for humans browsing for tasks, not
      * services, as that makes little sense.
      *
-     * See https://docs.taskcluster.net/reference/core/index/api-docs#listNamespaces
+     * @see "[List Namespaces API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#listNamespaces)"
      */
     public CallSummary<ListNamespacesRequest, ListNamespacesResponse> listNamespaces(String namespace, ListNamespacesRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/namespaces/" + uriEncode(namespace), ListNamespacesResponse.class);
@@ -167,7 +167,7 @@ public class Index extends TaskClusterRequestHandler {
      * **Remark**, this end-point is designed for humans browsing for tasks, not
      * services, as that makes little sense.
      *
-     * See https://docs.taskcluster.net/reference/core/index/api-docs#listTasks
+     * @see "[List Tasks API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#listTasks)"
      */
     public CallSummary<ListTasksRequest, ListTasksResponse> listTasks(String namespace, ListTasksRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/tasks/" + uriEncode(namespace), ListTasksResponse.class);
@@ -179,9 +179,9 @@ public class Index extends TaskClusterRequestHandler {
      *
      * Required scopes:
      *
-     *   * index:insert-task:<namespace>
+     *   * `index:insert-task:<namespace>`
      *
-     * See https://docs.taskcluster.net/reference/core/index/api-docs#insertTask
+     * @see "[Insert Task into Index API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#insertTask)"
      */
     public CallSummary<InsertTaskRequest, IndexedTaskResponse> insertTask(String namespace, InsertTaskRequest payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/task/" + uriEncode(namespace), IndexedTaskResponse.class);
@@ -194,9 +194,9 @@ public class Index extends TaskClusterRequestHandler {
      *
      * Required scopes:
      *
-     *   * queue:get-artifact:<name>
+     *   * `queue:get-artifact:<name>`
      *
-     * See https://docs.taskcluster.net/reference/core/index/api-docs#findArtifactFromTask
+     * @see "[Get Artifact From Indexed Task API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#findArtifactFromTask)"
      */
     public CallSummary<EmptyPayload, EmptyPayload> findArtifactFromTask(String namespace, String name) throws APICallFailure {
         return apiCall(null, "GET", "/task/" + uriEncode(namespace) + "/artifacts/" + uriEncode(name), EmptyPayload.class);
@@ -207,7 +207,7 @@ public class Index extends TaskClusterRequestHandler {
      * 
      * **Warning** this api end-point is **not stable**.
      *
-     * See https://docs.taskcluster.net/reference/core/index/api-docs#ping
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#ping)"
      */
     public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);

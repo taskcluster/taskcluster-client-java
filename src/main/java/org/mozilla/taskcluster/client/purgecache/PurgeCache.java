@@ -18,7 +18,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  * This document describes the API end-point for publishing the pulse
  * message. This is mainly intended to be used by tools.
  *
- * See: https://docs.taskcluster.net/reference/core/purge-cache/api-docs
+ * @see "[PurgeCache API Documentation](https://docs.taskcluster.net/reference/core/purge-cache/api-docs)"
  */
 public class PurgeCache extends TaskClusterRequestHandler {
 
@@ -55,9 +55,9 @@ public class PurgeCache extends TaskClusterRequestHandler {
      *
      * Required scopes:
      *
-     *   * purge-cache:<provisionerId>/<workerType>:<cacheName>
+     *   * `purge-cache:<provisionerId>/<workerType>:<cacheName>`
      *
-     * See https://docs.taskcluster.net/reference/core/purge-cache/api-docs#purgeCache
+     * @see "[Purge Worker Cache API Documentation](https://docs.taskcluster.net/reference/core/purge-cache/api-docs#purgeCache)"
      */
     public CallSummary<PurgeCacheRequest, EmptyPayload> purgeCache(String provisionerId, String workerType, PurgeCacheRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/purge-cache/" + uriEncode(provisionerId) + "/" + uriEncode(workerType), EmptyPayload.class);
@@ -68,7 +68,7 @@ public class PurgeCache extends TaskClusterRequestHandler {
      * 
      * **Warning** this api end-point is **not stable**.
      *
-     * See https://docs.taskcluster.net/reference/core/purge-cache/api-docs#ping
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/purge-cache/api-docs#ping)"
      */
     public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);

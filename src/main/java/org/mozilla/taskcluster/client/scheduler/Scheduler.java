@@ -22,7 +22,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *  * End-users, who wants to execute a set of dependent tasks, and
  *  * Tools, that wants to inspect the state of a task-graph.
  *
- * See: https://docs.taskcluster.net/reference/platform/scheduler/api-docs
+ * @see "[Scheduler API Documentation](https://docs.taskcluster.net/reference/platform/scheduler/api-docs)"
  */
 public class Scheduler extends TaskClusterRequestHandler {
 
@@ -119,9 +119,9 @@ public class Scheduler extends TaskClusterRequestHandler {
      *
      * Required scopes:
      *
-     *   * scheduler:create-task-graph
+     *   * `scheduler:create-task-graph`
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#createTaskGraph
+     * @see "[Create new task-graph API Documentation](https://docs.taskcluster.net/reference/platform/scheduler/api-docs#createTaskGraph)"
      */
     public CallSummary<TaskGraphDefinition, TaskGraphStatusResponse> createTaskGraph(String taskGraphId, TaskGraphDefinition payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/task-graph/" + uriEncode(taskGraphId), TaskGraphStatusResponse.class);
@@ -144,9 +144,9 @@ public class Scheduler extends TaskClusterRequestHandler {
      *
      * Required scopes:
      *
-     *   * scheduler:extend-task-graph:<taskGraphId>
+     *   * `scheduler:extend-task-graph:<taskGraphId>`
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#extendTaskGraph
+     * @see "[Extend existing task-graph API Documentation](https://docs.taskcluster.net/reference/platform/scheduler/api-docs#extendTaskGraph)"
      */
     public CallSummary<TaskGraphDefinition1, TaskGraphStatusResponse> extendTaskGraph(String taskGraphId, TaskGraphDefinition1 payload) throws APICallFailure {
         return apiCall(payload, "POST", "/task-graph/" + uriEncode(taskGraphId) + "/extend", TaskGraphStatusResponse.class);
@@ -159,7 +159,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * 
      * **Note**, that `finished` implies successfully completion.
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#status
+     * @see "[Task Graph Status API Documentation](https://docs.taskcluster.net/reference/platform/scheduler/api-docs#status)"
      */
     public CallSummary<EmptyPayload, TaskGraphStatusResponse> status(String taskGraphId) throws APICallFailure {
         return apiCall(null, "GET", "/task-graph/" + uriEncode(taskGraphId) + "/status", TaskGraphStatusResponse.class);
@@ -173,7 +173,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * If you want more detailed information use the `inspectTaskGraph`
      * end-point instead.
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#info
+     * @see "[Task Graph Information API Documentation](https://docs.taskcluster.net/reference/platform/scheduler/api-docs#info)"
      */
     public CallSummary<EmptyPayload, TaskGraphInfoResponse> info(String taskGraphId) throws APICallFailure {
         return apiCall(null, "GET", "/task-graph/" + uriEncode(taskGraphId) + "/info", TaskGraphInfoResponse.class);
@@ -193,7 +193,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * as we do not promise it will remain fully backward compatible in
      * the future.
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#inspect
+     * @see "[Inspect Task Graph API Documentation](https://docs.taskcluster.net/reference/platform/scheduler/api-docs#inspect)"
      */
     public CallSummary<EmptyPayload, InspectTaskGraphResponse> inspect(String taskGraphId) throws APICallFailure {
         return apiCall(null, "GET", "/task-graph/" + uriEncode(taskGraphId) + "/inspect", InspectTaskGraphResponse.class);
@@ -213,7 +213,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * as we do not promise it will remain fully backward compatible in
      * the future.
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#inspectTask
+     * @see "[Inspect Task from a Task-Graph API Documentation](https://docs.taskcluster.net/reference/platform/scheduler/api-docs#inspectTask)"
      */
     public CallSummary<EmptyPayload, InspectTaskGraphTaskResponse> inspectTask(String taskGraphId, String taskId) throws APICallFailure {
         return apiCall(null, "GET", "/task-graph/" + uriEncode(taskGraphId) + "/inspect/" + uriEncode(taskId), InspectTaskGraphTaskResponse.class);
@@ -224,7 +224,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * 
      * **Warning** this api end-point is **not stable**.
      *
-     * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#ping
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/platform/scheduler/api-docs#ping)"
      */
     public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);
