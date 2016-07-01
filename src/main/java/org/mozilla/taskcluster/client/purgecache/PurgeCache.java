@@ -53,6 +53,9 @@ public class PurgeCache extends TaskClusterRequestHandler {
      * `provisionerId` and `workerType` in the routing-key. Workers should
      * be listening for this message and purge caches when they see it.
      *
+     * Required scopes:
+     *   * purge-cache:<provisionerId>/<workerType>:<cacheName>
+     *
      * See https://docs.taskcluster.net/reference/core/purge-cache/api-docs#purgeCache
      */
     public CallSummary<PurgeCacheRequest, EmptyPayload> purgeCache(String provisionerId, String workerType, PurgeCacheRequest payload) throws APICallFailure {

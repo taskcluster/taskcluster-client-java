@@ -177,6 +177,9 @@ public class Index extends TaskClusterRequestHandler {
      * Insert a task into the index. Please see the introduction above, for how
      * to index successfully completed tasks automatically, using custom routes.
      *
+     * Required scopes:
+     *   * index:insert-task:<namespace>
+     *
      * See https://docs.taskcluster.net/reference/core/index/api-docs#insertTask
      */
     public CallSummary<InsertTaskRequest, IndexedTaskResponse> insertTask(String namespace, InsertTaskRequest payload) throws APICallFailure {
@@ -187,6 +190,9 @@ public class Index extends TaskClusterRequestHandler {
      * Find task by namespace and redirect to artifact with given `name`,
      * if no task existing for the given namespace, this API end-point respond
      * `404`.
+     *
+     * Required scopes:
+     *   * queue:get-artifact:<name>
      *
      * See https://docs.taskcluster.net/reference/core/index/api-docs#findArtifactFromTask
      */

@@ -145,6 +145,10 @@ public class Queue extends TaskClusterRequestHandler {
      * **Important** Any scopes the task requires are also required for creating
      * the task. Please see the Request Payload (Task Definition) for details.
      *
+     * Required scopes:
+     *   * queue:create-task:<provisionerId>/<workerType>, or
+     *   * (queue:define-task:<provisionerId>/<workerType> and queue:task-group-id:<schedulerId>/<taskGroupId> and queue:schedule-task:<schedulerId>/<taskGroupId>/<taskId>)
+     *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#createTask
      */
     public CallSummary<TaskDefinitionRequest, TaskStatusResponse> createTask(String taskId, TaskDefinitionRequest payload) throws APICallFailure {
@@ -170,6 +174,11 @@ public class Queue extends TaskClusterRequestHandler {
      * **Note** this operation is **idempotent**, as long as you upload the same
      * task definition as previously defined this operation is safe to retry.
      *
+     * Required scopes:
+     *   * queue:define-task:<provisionerId>/<workerType>, or
+     *   * queue:create-task:<provisionerId>/<workerType>, or
+     *   * (queue:define-task:<provisionerId>/<workerType> and queue:task-group-id:<schedulerId>/<taskGroupId>)
+     *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#defineTask
      */
     public CallSummary<TaskDefinitionRequest, TaskStatusResponse> defineTask(String taskId, TaskDefinitionRequest payload) throws APICallFailure {
@@ -185,6 +194,10 @@ public class Queue extends TaskClusterRequestHandler {
      * **Note** this operation is **idempotent** and will not fail or complain
      * if called with `taskId` that is already scheduled, or even resolved.
      * To reschedule a task previously resolved, use `rerunTask`.
+     *
+     * Required scopes:
+     *   * (queue:schedule-task and assume:scheduler-id:<schedulerId>/<taskGroupId>), or
+     *   * queue:schedule-task:<schedulerId>/<taskGroupId>/<taskId>
      *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#scheduleTask
      */
@@ -206,6 +219,10 @@ public class Queue extends TaskClusterRequestHandler {
      * isn't either `failed` or `completed`, this operation will just return the
      * current task status.
      *
+     * Required scopes:
+     *   * (queue:rerun-task and assume:scheduler-id:<schedulerId>/<taskGroupId>), or
+     *   * queue:rerun-task:<schedulerId>/<taskGroupId>/<taskId>
+     *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#rerunTask
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> rerunTask(String taskId) throws APICallFailure {
@@ -226,6 +243,10 @@ public class Queue extends TaskClusterRequestHandler {
      * isn't `unscheduled`, `pending` or `running`, this operation will just
      * return the current task status.
      *
+     * Required scopes:
+     *   * (queue:cancel-task and assume:scheduler-id:<schedulerId>/<taskGroupId>), or
+     *   * queue:cancel-task:<schedulerId>/<taskGroupId>/<taskId>
+     *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#cancelTask
      */
     public CallSummary<EmptyPayload, TaskStatusResponse> cancelTask(String taskId) throws APICallFailure {
@@ -237,6 +258,10 @@ public class Queue extends TaskClusterRequestHandler {
      * Once messages are polled from here, you can claim the referenced task
      * with `claimTask`, and afterwards you should always delete the message.
      *
+     * Required scopes:
+     *   * (queue:poll-task-urls and assume:worker-type:<provisionerId>/<workerType>), or
+     *   * queue:poll-task-urls:<provisionerId>/<workerType>
+     *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#pollTaskUrls
      */
     public CallSummary<EmptyPayload, PollTaskUrlsResponse> pollTaskUrls(String provisionerId, String workerType) throws APICallFailure {
@@ -245,6 +270,10 @@ public class Queue extends TaskClusterRequestHandler {
 
     /**
      * claim a task, more to be added later...
+     *
+     * Required scopes:
+     *   * (queue:claim-task and assume:worker-type:<provisionerId>/<workerType> and assume:worker-id:<workerGroup>/<workerId>), or
+     *   * (queue:claim-task:<provisionerId>/<workerType> and queue:worker-id:<workerGroup>/<workerId>)
      *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#claimTask
      */
@@ -255,6 +284,10 @@ public class Queue extends TaskClusterRequestHandler {
     /**
      * reclaim a task more to be added later...
      *
+     * Required scopes:
+     *   * (queue:claim-task and assume:worker-id:<workerGroup>/<workerId>), or
+     *   * queue:reclaim-task:<taskId>/<runId>
+     *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#reclaimTask
      */
     public CallSummary<EmptyPayload, TaskReclaimResponse> reclaimTask(String taskId, String runId) throws APICallFailure {
@@ -263,6 +296,10 @@ public class Queue extends TaskClusterRequestHandler {
 
     /**
      * Report a task completed, resolving the run as `completed`.
+     *
+     * Required scopes:
+     *   * (queue:resolve-task and assume:worker-id:<workerGroup>/<workerId>), or
+     *   * queue:resolve-task:<taskId>/<runId>
      *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#reportCompleted
      */
@@ -278,6 +315,10 @@ public class Queue extends TaskClusterRequestHandler {
      * Don't use this if the task couldn't be run because if malformed payload,
      * or other unexpected condition. In these cases we have a task exception,
      * which should be reported with `reportException`.
+     *
+     * Required scopes:
+     *   * (queue:resolve-task and assume:worker-id:<workerGroup>/<workerId>), or
+     *   * queue:resolve-task:<taskId>/<runId>
      *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#reportFailed
      */
@@ -298,6 +339,10 @@ public class Queue extends TaskClusterRequestHandler {
      * Do not use this to signal that some user-specified code crashed for any
      * reason specific to this code. If user-specific code hits a resource that
      * is temporarily unavailable worker should report task _failed_.
+     *
+     * Required scopes:
+     *   * (queue:resolve-task and assume:worker-id:<workerGroup>/<workerId>), or
+     *   * queue:resolve-task:<taskId>/<runId>
      *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#reportException
      */
@@ -365,6 +410,10 @@ public class Queue extends TaskClusterRequestHandler {
      * updated. You should only use this to update the `url` property for
      * reference artifacts your process has created.
      *
+     * Required scopes:
+     *   * (queue:create-artifact:<name> and assume:worker-id:<workerGroup>/<workerId>), or
+     *   * queue:create-artifact:<taskId>/<runId>
+     *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#createArtifact
      */
     public CallSummary<Object, Object> createArtifact(String taskId, String runId, String name, Object payload) throws APICallFailure {
@@ -383,6 +432,9 @@ public class Queue extends TaskClusterRequestHandler {
      * stored externally. Either way, the response may not be JSON. So API
      * client users might want to generate a signed URL for this end-point and
      * use that URL with a normal HTTP client.
+     *
+     * Required scopes:
+     *   * queue:get-artifact:<name>
      *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#getArtifact
      */
@@ -406,6 +458,9 @@ public class Queue extends TaskClusterRequestHandler {
      * **Remark**, this end-point is slightly slower than
      * `queue.getArtifact`, so consider that if you already know the `runId` of
      * the latest run. Otherwise, just us the most convenient API end-point.
+     *
+     * Required scopes:
+     *   * queue:get-artifact:<name>
      *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#getLatestArtifact
      */

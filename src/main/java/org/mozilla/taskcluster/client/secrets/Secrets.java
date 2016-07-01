@@ -53,6 +53,9 @@ public class Secrets extends TaskClusterRequestHandler {
      * Set the secret associated with some key.  If the secret already exists, it is
      * updated instead.
      *
+     * Required scopes:
+     *   * secrets:set:<name>
+     *
      * See https://docs.taskcluster.net/reference/core/secrets/api-docs#set
      */
     public CallSummary<Secret, EmptyPayload> set(String name, Secret payload) throws APICallFailure {
@@ -61,6 +64,9 @@ public class Secrets extends TaskClusterRequestHandler {
 
     /**
      * Delete the secret associated with some key.
+     *
+     * Required scopes:
+     *   * secrets:set:<name>
      *
      * See https://docs.taskcluster.net/reference/core/secrets/api-docs#remove
      */
@@ -73,6 +79,9 @@ public class Secrets extends TaskClusterRequestHandler {
      * expired, the response code 410 is returned.  If the caller lacks the
      * scope necessary to get the secret, the call will fail with a 403 code
      * regardless of whether the secret exists.
+     *
+     * Required scopes:
+     *   * secrets:get:<name>
      *
      * See https://docs.taskcluster.net/reference/core/secrets/api-docs#get
      */

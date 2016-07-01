@@ -109,6 +109,9 @@ public class Auth extends TaskClusterRequestHandler {
      * 
      * The caller's scopes must satisfy `scopes`.
      *
+     * Required scopes:
+     *   * auth:create-client:<clientId>
+     *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#createClient
      */
     public CallSummary<CreateClientRequest, CreateClientResponse> createClient(String clientId, CreateClientRequest payload) throws APICallFailure {
@@ -123,6 +126,9 @@ public class Auth extends TaskClusterRequestHandler {
      * There is no way to retrieve an existing `accessToken`, so if you loose it
      * you must reset the accessToken to acquire it again.
      *
+     * Required scopes:
+     *   * auth:reset-access-token:<clientId>
+     *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#resetAccessToken
      */
     public CallSummary<EmptyPayload, CreateClientResponse> resetAccessToken(String clientId) throws APICallFailure {
@@ -135,6 +141,9 @@ public class Auth extends TaskClusterRequestHandler {
      * satisfy all scopes being added to the client in the update operation.
      * If no scopes are given in the request, the client's scopes remain
      * unchanged
+     *
+     * Required scopes:
+     *   * auth:update-client:<clientId>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#updateClient
      */
@@ -149,6 +158,9 @@ public class Auth extends TaskClusterRequestHandler {
      * This is typically used by identity providers to re-enable clients that
      * had been disabled when the corresponding identity's scopes changed.
      *
+     * Required scopes:
+     *   * auth:enable-client:<clientId>
+     *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#enableClient
      */
     public CallSummary<EmptyPayload, GetClientResponse> enableClient(String clientId) throws APICallFailure {
@@ -161,6 +173,9 @@ public class Auth extends TaskClusterRequestHandler {
      * This is typically used by identity providers to disable clients when the
      * corresponding identity's scopes no longer satisfy the client's scopes.
      *
+     * Required scopes:
+     *   * auth:disable-client:<clientId>
+     *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#disableClient
      */
     public CallSummary<EmptyPayload, GetClientResponse> disableClient(String clientId) throws APICallFailure {
@@ -170,6 +185,9 @@ public class Auth extends TaskClusterRequestHandler {
     /**
      * Delete a client, please note that any roles related to this client must
      * be deleted independently.
+     *
+     * Required scopes:
+     *   * auth:delete-client:<clientId>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#deleteClient
      */
@@ -205,6 +223,9 @@ public class Auth extends TaskClusterRequestHandler {
      * If there already exists a role with the same `roleId` this operation
      * will fail. Use `updateRole` to modify an existing role.
      *
+     * Required scopes:
+     *   * auth:create-role:<roleId>
+     *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#createRole
      */
     public CallSummary<CreateRoleRequest, GetRoleResponse> createRole(String roleId, CreateRoleRequest payload) throws APICallFailure {
@@ -217,6 +238,9 @@ public class Auth extends TaskClusterRequestHandler {
      * The caller's scopes must satisfy all of the new scopes being added, but
      * need not satisfy all of the client's existing scopes.
      *
+     * Required scopes:
+     *   * auth:update-role:<roleId>
+     *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#updateRole
      */
     public CallSummary<CreateRoleRequest, GetRoleResponse> updateRole(String roleId, CreateRoleRequest payload) throws APICallFailure {
@@ -226,6 +250,9 @@ public class Auth extends TaskClusterRequestHandler {
     /**
      * Delete a role. This operation will succeed regardless of whether or not
      * the role exists.
+     *
+     * Required scopes:
+     *   * auth:delete-role:<roleId>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#deleteRole
      */
@@ -308,6 +335,9 @@ public class Auth extends TaskClusterRequestHandler {
      * access to `my-folder/file.txt` as expected, but also to `my-folder.txt`,
      * which may not be intended.
      *
+     * Required scopes:
+     *   * auth:aws-s3:<level>:<bucket>/<prefix>
+     *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#awsS3Credentials
      */
     public CallSummary<EmptyPayload, AWSS3CredentialsResponse> awsS3Credentials(String level, String bucket, String prefix) throws APICallFailure {
@@ -318,6 +348,9 @@ public class Auth extends TaskClusterRequestHandler {
      * Get a shared access signature (SAS) string for use with a specific Azure
      * Table Storage table.  Note, this will create the table, if it doesn't
      * already exist.
+     *
+     * Required scopes:
+     *   * auth:azure-table-access:<account>/<table>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#azureTableSAS
      */
@@ -334,6 +367,9 @@ public class Auth extends TaskClusterRequestHandler {
      * initial team configured for this component. Contact a Sentry admin
      * to have the project transferred to a team you have access to if needed
      *
+     * Required scopes:
+     *   * auth:sentry:<project>
+     *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#sentryDSN
      */
     public CallSummary<EmptyPayload, SentryDSNResponse> sentryDSN(String project) throws APICallFailure {
@@ -344,6 +380,9 @@ public class Auth extends TaskClusterRequestHandler {
      * Get temporary `token` and `baseUrl` for sending metrics to statsum.
      * 
      * The token is valid for 24 hours, clients should refresh after expiration.
+     *
+     * Required scopes:
+     *   * auth:statsum:<project>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#statsumToken
      */

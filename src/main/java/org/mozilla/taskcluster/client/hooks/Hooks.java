@@ -112,6 +112,10 @@ public class Hooks extends TaskClusterRequestHandler {
      * create the task.  That role must satisfy task.scopes as well as the
      * necessary scopes to add the task to the queue.
      *
+     * Required scopes:
+     *   * hooks:modify-hook:<hookGroupId>/<hookId>, and
+     *   * assume:hook-id:<hookGroupId>/<hookId>
+     *
      * See https://docs.taskcluster.net/reference/core/hooks/api-docs#createHook
      */
     public CallSummary<HookCreationRequest, HookDefinition> createHook(String hookGroupId, String hookId, HookCreationRequest payload) throws APICallFailure {
@@ -122,6 +126,10 @@ public class Hooks extends TaskClusterRequestHandler {
      * This endpoint will update an existing hook.  All fields except
      * `hookGroupId` and `hookId` can be modified.
      *
+     * Required scopes:
+     *   * hooks:modify-hook:<hookGroupId>/<hookId>, and
+     *   * assume:hook-id:<hookGroupId>/<hookId>
+     *
      * See https://docs.taskcluster.net/reference/core/hooks/api-docs#updateHook
      */
     public CallSummary<HookCreationRequest, HookDefinition> updateHook(String hookGroupId, String hookId, HookCreationRequest payload) throws APICallFailure {
@@ -130,6 +138,9 @@ public class Hooks extends TaskClusterRequestHandler {
 
     /**
      * This endpoint will remove a hook definition.
+     *
+     * Required scopes:
+     *   * hooks:modify-hook:<hookGroupId>/<hookId>
      *
      * See https://docs.taskcluster.net/reference/core/hooks/api-docs#removeHook
      */

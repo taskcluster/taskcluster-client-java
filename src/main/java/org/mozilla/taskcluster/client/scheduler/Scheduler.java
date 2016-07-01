@@ -117,6 +117,9 @@ public class Scheduler extends TaskClusterRequestHandler {
      * CC'ed with the routing-key: `route.<route>`. This is useful if you want
      * another component to listen for completed tasks you have posted.
      *
+     * Required scopes:
+     *   * scheduler:create-task-graph
+     *
      * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#createTaskGraph
      */
     public CallSummary<TaskGraphDefinition, TaskGraphStatusResponse> createTaskGraph(String taskGraphId, TaskGraphDefinition payload) throws APICallFailure {
@@ -137,6 +140,9 @@ public class Scheduler extends TaskClusterRequestHandler {
      * _finished_ or _blocked_, this method will leave the task-graph in this
      * state. Hence, it is only truly _safe_ to call this API end-point from
      * within a task in the task-graph being modified.
+     *
+     * Required scopes:
+     *   * scheduler:extend-task-graph:<taskGraphId>
      *
      * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#extendTaskGraph
      */
