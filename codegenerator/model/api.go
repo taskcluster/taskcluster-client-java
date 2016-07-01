@@ -216,7 +216,7 @@ func requiredScopesComment(scopes [][]string) string {
 	}
 	comment := "     *\n"
 	comment += "     * Required scopes:\n"
-	comment := "     *\n"
+	comment += "     *\n"
 	switch len(scopes) {
 	case 0:
 	case 1:
