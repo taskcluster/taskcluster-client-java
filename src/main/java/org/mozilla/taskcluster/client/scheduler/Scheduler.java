@@ -118,6 +118,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * another component to listen for completed tasks you have posted.
      *
      * Required scopes:
+     *
      *   * scheduler:create-task-graph
      *
      * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#createTaskGraph
@@ -142,6 +143,7 @@ public class Scheduler extends TaskClusterRequestHandler {
      * within a task in the task-graph being modified.
      *
      * Required scopes:
+     *
      *   * scheduler:extend-task-graph:<taskGraphId>
      *
      * See https://docs.taskcluster.net/reference/platform/scheduler/api-docs#extendTaskGraph

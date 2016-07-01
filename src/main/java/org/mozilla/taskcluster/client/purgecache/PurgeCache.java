@@ -54,6 +54,7 @@ public class PurgeCache extends TaskClusterRequestHandler {
      * be listening for this message and purge caches when they see it.
      *
      * Required scopes:
+     *
      *   * purge-cache:<provisionerId>/<workerType>:<cacheName>
      *
      * See https://docs.taskcluster.net/reference/core/purge-cache/api-docs#purgeCache

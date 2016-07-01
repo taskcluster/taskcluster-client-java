@@ -178,6 +178,7 @@ public class Index extends TaskClusterRequestHandler {
      * to index successfully completed tasks automatically, using custom routes.
      *
      * Required scopes:
+     *
      *   * index:insert-task:<namespace>
      *
      * See https://docs.taskcluster.net/reference/core/index/api-docs#insertTask
@@ -192,6 +193,7 @@ public class Index extends TaskClusterRequestHandler {
      * `404`.
      *
      * Required scopes:
+     *
      *   * queue:get-artifact:<name>
      *
      * See https://docs.taskcluster.net/reference/core/index/api-docs#findArtifactFromTask

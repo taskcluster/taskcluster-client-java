@@ -110,6 +110,7 @@ public class Auth extends TaskClusterRequestHandler {
      * The caller's scopes must satisfy `scopes`.
      *
      * Required scopes:
+     *
      *   * auth:create-client:<clientId>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#createClient
@@ -127,6 +128,7 @@ public class Auth extends TaskClusterRequestHandler {
      * you must reset the accessToken to acquire it again.
      *
      * Required scopes:
+     *
      *   * auth:reset-access-token:<clientId>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#resetAccessToken
@@ -143,6 +145,7 @@ public class Auth extends TaskClusterRequestHandler {
      * unchanged
      *
      * Required scopes:
+     *
      *   * auth:update-client:<clientId>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#updateClient
@@ -159,6 +162,7 @@ public class Auth extends TaskClusterRequestHandler {
      * had been disabled when the corresponding identity's scopes changed.
      *
      * Required scopes:
+     *
      *   * auth:enable-client:<clientId>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#enableClient
@@ -174,6 +178,7 @@ public class Auth extends TaskClusterRequestHandler {
      * corresponding identity's scopes no longer satisfy the client's scopes.
      *
      * Required scopes:
+     *
      *   * auth:disable-client:<clientId>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#disableClient
@@ -187,6 +192,7 @@ public class Auth extends TaskClusterRequestHandler {
      * be deleted independently.
      *
      * Required scopes:
+     *
      *   * auth:delete-client:<clientId>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#deleteClient
@@ -224,6 +230,7 @@ public class Auth extends TaskClusterRequestHandler {
      * will fail. Use `updateRole` to modify an existing role.
      *
      * Required scopes:
+     *
      *   * auth:create-role:<roleId>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#createRole
@@ -239,6 +246,7 @@ public class Auth extends TaskClusterRequestHandler {
      * need not satisfy all of the client's existing scopes.
      *
      * Required scopes:
+     *
      *   * auth:update-role:<roleId>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#updateRole
@@ -252,6 +260,7 @@ public class Auth extends TaskClusterRequestHandler {
      * the role exists.
      *
      * Required scopes:
+     *
      *   * auth:delete-role:<roleId>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#deleteRole
@@ -336,6 +345,7 @@ public class Auth extends TaskClusterRequestHandler {
      * which may not be intended.
      *
      * Required scopes:
+     *
      *   * auth:aws-s3:<level>:<bucket>/<prefix>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#awsS3Credentials
@@ -350,6 +360,7 @@ public class Auth extends TaskClusterRequestHandler {
      * already exist.
      *
      * Required scopes:
+     *
      *   * auth:azure-table-access:<account>/<table>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#azureTableSAS
@@ -368,6 +379,7 @@ public class Auth extends TaskClusterRequestHandler {
      * to have the project transferred to a team you have access to if needed
      *
      * Required scopes:
+     *
      *   * auth:sentry:<project>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#sentryDSN
@@ -382,6 +394,7 @@ public class Auth extends TaskClusterRequestHandler {
      * The token is valid for 24 hours, clients should refresh after expiration.
      *
      * Required scopes:
+     *
      *   * auth:statsum:<project>
      *
      * See https://docs.taskcluster.net/reference/platform/auth/api-docs#statsumToken

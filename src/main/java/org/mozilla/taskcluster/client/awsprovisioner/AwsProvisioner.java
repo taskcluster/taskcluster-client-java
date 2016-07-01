@@ -107,6 +107,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * the other secrets.
      *
      * Required scopes:
+     *
      *   * aws-provisioner:manage-worker-type:<workerType>
      *
      * See https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#createWorkerType
@@ -129,6 +130,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * create method.
      *
      * Required scopes:
+     *
      *   * aws-provisioner:manage-worker-type:<workerType>
      *
      * See https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#updateWorkerType
@@ -145,6 +147,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * method.
      *
      * Required scopes:
+     *
      *   * aws-provisioner:view-worker-type:<workerType>, or
      *   * aws-provisioner:manage-worker-type:<workerType>
      *
@@ -167,6 +170,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * not a supported or tested action
      *
      * Required scopes:
+     *
      *   * aws-provisioner:manage-worker-type:<workerType>
      *
      * See https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#removeWorkerType
@@ -196,6 +200,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * creates a new secret directly for each spot bid.
      *
      * Required scopes:
+     *
      *   * aws-provisioner:create-secret
      *
      * See https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#createSecret
@@ -254,6 +259,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * **This API end-point is experimental and may be subject to change without warning.**
      *
      * Required scopes:
+     *
      *   * aws-provisioner:view-worker-type:<workerType>, or
      *   * aws-provisioner:manage-worker-type:<workerType>
      *
@@ -271,6 +277,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      * similar to that returned from `listWorkerTypeSummaries`.
      *
      * Required scopes:
+     *
      *   * aws-provisioner:view-worker-type:<workerType>
      *
      * See https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#state

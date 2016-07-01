@@ -146,6 +146,7 @@ public class Queue extends TaskClusterRequestHandler {
      * the task. Please see the Request Payload (Task Definition) for details.
      *
      * Required scopes:
+     *
      *   * queue:create-task:<provisionerId>/<workerType>, or
      *   * (queue:define-task:<provisionerId>/<workerType> and queue:task-group-id:<schedulerId>/<taskGroupId> and queue:schedule-task:<schedulerId>/<taskGroupId>/<taskId>)
      *
@@ -175,6 +176,7 @@ public class Queue extends TaskClusterRequestHandler {
      * task definition as previously defined this operation is safe to retry.
      *
      * Required scopes:
+     *
      *   * queue:define-task:<provisionerId>/<workerType>, or
      *   * queue:create-task:<provisionerId>/<workerType>, or
      *   * (queue:define-task:<provisionerId>/<workerType> and queue:task-group-id:<schedulerId>/<taskGroupId>)
@@ -196,6 +198,7 @@ public class Queue extends TaskClusterRequestHandler {
      * To reschedule a task previously resolved, use `rerunTask`.
      *
      * Required scopes:
+     *
      *   * (queue:schedule-task and assume:scheduler-id:<schedulerId>/<taskGroupId>), or
      *   * queue:schedule-task:<schedulerId>/<taskGroupId>/<taskId>
      *
@@ -220,6 +223,7 @@ public class Queue extends TaskClusterRequestHandler {
      * current task status.
      *
      * Required scopes:
+     *
      *   * (queue:rerun-task and assume:scheduler-id:<schedulerId>/<taskGroupId>), or
      *   * queue:rerun-task:<schedulerId>/<taskGroupId>/<taskId>
      *
@@ -244,6 +248,7 @@ public class Queue extends TaskClusterRequestHandler {
      * return the current task status.
      *
      * Required scopes:
+     *
      *   * (queue:cancel-task and assume:scheduler-id:<schedulerId>/<taskGroupId>), or
      *   * queue:cancel-task:<schedulerId>/<taskGroupId>/<taskId>
      *
@@ -259,6 +264,7 @@ public class Queue extends TaskClusterRequestHandler {
      * with `claimTask`, and afterwards you should always delete the message.
      *
      * Required scopes:
+     *
      *   * (queue:poll-task-urls and assume:worker-type:<provisionerId>/<workerType>), or
      *   * queue:poll-task-urls:<provisionerId>/<workerType>
      *
@@ -272,6 +278,7 @@ public class Queue extends TaskClusterRequestHandler {
      * claim a task, more to be added later...
      *
      * Required scopes:
+     *
      *   * (queue:claim-task and assume:worker-type:<provisionerId>/<workerType> and assume:worker-id:<workerGroup>/<workerId>), or
      *   * (queue:claim-task:<provisionerId>/<workerType> and queue:worker-id:<workerGroup>/<workerId>)
      *
@@ -285,6 +292,7 @@ public class Queue extends TaskClusterRequestHandler {
      * reclaim a task more to be added later...
      *
      * Required scopes:
+     *
      *   * (queue:claim-task and assume:worker-id:<workerGroup>/<workerId>), or
      *   * queue:reclaim-task:<taskId>/<runId>
      *
@@ -298,6 +306,7 @@ public class Queue extends TaskClusterRequestHandler {
      * Report a task completed, resolving the run as `completed`.
      *
      * Required scopes:
+     *
      *   * (queue:resolve-task and assume:worker-id:<workerGroup>/<workerId>), or
      *   * queue:resolve-task:<taskId>/<runId>
      *
@@ -317,6 +326,7 @@ public class Queue extends TaskClusterRequestHandler {
      * which should be reported with `reportException`.
      *
      * Required scopes:
+     *
      *   * (queue:resolve-task and assume:worker-id:<workerGroup>/<workerId>), or
      *   * queue:resolve-task:<taskId>/<runId>
      *
@@ -341,6 +351,7 @@ public class Queue extends TaskClusterRequestHandler {
      * is temporarily unavailable worker should report task _failed_.
      *
      * Required scopes:
+     *
      *   * (queue:resolve-task and assume:worker-id:<workerGroup>/<workerId>), or
      *   * queue:resolve-task:<taskId>/<runId>
      *
@@ -411,6 +422,7 @@ public class Queue extends TaskClusterRequestHandler {
      * reference artifacts your process has created.
      *
      * Required scopes:
+     *
      *   * (queue:create-artifact:<name> and assume:worker-id:<workerGroup>/<workerId>), or
      *   * queue:create-artifact:<taskId>/<runId>
      *
@@ -434,6 +446,7 @@ public class Queue extends TaskClusterRequestHandler {
      * use that URL with a normal HTTP client.
      *
      * Required scopes:
+     *
      *   * queue:get-artifact:<name>
      *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#getArtifact
@@ -460,6 +473,7 @@ public class Queue extends TaskClusterRequestHandler {
      * the latest run. Otherwise, just us the most convenient API end-point.
      *
      * Required scopes:
+     *
      *   * queue:get-artifact:<name>
      *
      * See https://docs.taskcluster.net/reference/platform/queue/api-docs#getLatestArtifact

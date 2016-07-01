@@ -113,6 +113,7 @@ public class Hooks extends TaskClusterRequestHandler {
      * necessary scopes to add the task to the queue.
      *
      * Required scopes:
+     *
      *   * hooks:modify-hook:<hookGroupId>/<hookId>, and
      *   * assume:hook-id:<hookGroupId>/<hookId>
      *
@@ -127,6 +128,7 @@ public class Hooks extends TaskClusterRequestHandler {
      * `hookGroupId` and `hookId` can be modified.
      *
      * Required scopes:
+     *
      *   * hooks:modify-hook:<hookGroupId>/<hookId>, and
      *   * assume:hook-id:<hookGroupId>/<hookId>
      *
@@ -140,6 +142,7 @@ public class Hooks extends TaskClusterRequestHandler {
      * This endpoint will remove a hook definition.
      *
      * Required scopes:
+     *
      *   * hooks:modify-hook:<hookGroupId>/<hookId>
      *
      * See https://docs.taskcluster.net/reference/core/hooks/api-docs#removeHook

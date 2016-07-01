@@ -54,6 +54,7 @@ public class Secrets extends TaskClusterRequestHandler {
      * updated instead.
      *
      * Required scopes:
+     *
      *   * secrets:set:<name>
      *
      * See https://docs.taskcluster.net/reference/core/secrets/api-docs#set
@@ -66,6 +67,7 @@ public class Secrets extends TaskClusterRequestHandler {
      * Delete the secret associated with some key.
      *
      * Required scopes:
+     *
      *   * secrets:set:<name>
      *
      * See https://docs.taskcluster.net/reference/core/secrets/api-docs#remove
@@ -81,6 +83,7 @@ public class Secrets extends TaskClusterRequestHandler {
      * regardless of whether the secret exists.
      *
      * Required scopes:
+     *
      *   * secrets:get:<name>
      *
      * See https://docs.taskcluster.net/reference/core/secrets/api-docs#get
