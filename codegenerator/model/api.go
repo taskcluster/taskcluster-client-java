@@ -72,7 +72,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 		comment += "\n"
 	}
 	comment += " *\n"
-	comment += fmt.Sprintf(" * See: %v\n", api.apiDef.DocRoot)
+	comment += fmt.Sprintf(" * @see \"[%v API Documentation](%v)\"\n", className, api.apiDef.DocRoot)
 	comment += " */\n"
 	content += comment
 	content += "public class " + className + ` extends TaskClusterRequestHandler {
@@ -174,7 +174,7 @@ func (entry *APIEntry) generateAPICode(apiName string) string {
 	}
 	comment += requiredScopesComment(entry.Scopes)
 	comment += "     *\n"
-	comment += fmt.Sprintf("     * See %v#%v\n", entry.Parent.apiDef.DocRoot, entry.Name)
+	comment += fmt.Sprintf("     * @see \"[%v API Documentation](%v#%v)\"\n", entry.Title, entry.Parent.apiDef.DocRoot, entry.Name)
 	comment += "     */\n"
 	inputParams := ""
 	if len(entry.Args) > 0 {
@@ -220,16 +220,16 @@ func requiredScopesComment(scopes [][]string) string {
 	switch len(scopes) {
 	case 0:
 	case 1:
-		comment += "     *   * " + strings.Join(scopes[0], ", and\n     *   * ") + "\n"
+		comment += "     *   * `" + strings.Join(scopes[0], "`, and\n     *   * `") + "`\n"
 	default:
 		lines := make([]string, len(scopes))
 		for i, j := range scopes {
 			switch len(j) {
 			case 0:
 			case 1:
-				lines[i] = "     *   * " + j[0]
+				lines[i] = "     *   * `" + j[0] + "`"
 			default:
-				lines[i] = "     *   * (" + strings.Join(j, " and ") + ")"
+				lines[i] = "     *   * (`" + strings.Join(j, "` and `") + "`)"
 			}
 		}
 		comment += strings.Join(lines, ", or\n") + "\n"
