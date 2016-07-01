@@ -56,7 +56,6 @@ public class JobDefinition {
 
         /**
          *
-         * Syntax:     ^[\w,\+\s\[\]\(\)-]+$
          * Min length: 1
          * Max length: 100
          *
@@ -76,7 +75,6 @@ public class JobDefinition {
 
         /**
          *
-         * Syntax:     ^[A-Za-z0-9\s_,\.\+\[\]\(\)-]+$
          * Min length: 1
          * Max length: 100
          *

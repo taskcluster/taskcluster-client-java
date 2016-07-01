@@ -10057,7 +10057,6 @@ Properties
       Property 'groupName' =
         MaxLength              = '100'
         MinLength              = '1'
-        Pattern                = '^[\w,\+\s\[\]\(\)-]+$'
         Title                  = 'group name'
         Type                   = 'string'
         TypeName               = ''
@@ -10073,7 +10072,6 @@ Properties
       Property 'jobName' =
         MaxLength              = '100'
         MinLength              = '1'
-        Pattern                = '^[A-Za-z0-9\s_,\.\+\[\]\(\)-]+$'
         Title                  = 'job name'
         Type                   = 'string'
         TypeName               = ''
