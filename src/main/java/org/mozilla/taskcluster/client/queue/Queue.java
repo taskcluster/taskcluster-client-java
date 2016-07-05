@@ -53,8 +53,8 @@ public class Queue extends TaskClusterRequestHandler {
 
     /**
      * This end-point will return the task-definition. Notice that the task
-     * definition may have been modified by queue, if an optional property isn't
-     * specified the queue may provide a default value.
+     * definition may have been modified by queue, if an optional property is
+     * not specified the queue may provide a default value.
      *
      * @see "[Get Task Definition API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#task)"
      */
@@ -86,7 +86,7 @@ public class Queue extends TaskClusterRequestHandler {
      * keep calling `listTaskGroup` with the last `continuationToken` until you
      * get a result without a `continuationToken`.
      * 
-     * If you're not interested in listing all the members at once, you may
+     * If you are not interested in listing all the members at once, you may
      * use the query-string option `limit` to return fewer.
      *
      * @see "[List Task Group API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#listTaskGroup)"
@@ -110,7 +110,7 @@ public class Queue extends TaskClusterRequestHandler {
      * keep calling `listDependentTasks` with the last `continuationToken` until
      * you get a result without a `continuationToken`.
      * 
-     * If you're not interested in listing all the tasks at once, you may
+     * If you are not interested in listing all the tasks at once, you may
      * use the query-string option `limit` to return fewer.
      *
      * @see "[List Dependent Tasks API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#listDependentTasks)"
@@ -219,8 +219,8 @@ public class Queue extends TaskClusterRequestHandler {
      * because a spot node died.
      * 
      * **Remark** this operation is idempotent, if you try to rerun a task that
-     * isn't either `failed` or `completed`, this operation will just return the
-     * current task status.
+     * is not either `failed` or `completed`, this operation will just return
+     * the current task status.
      *
      * Required scopes:
      *
@@ -321,9 +321,9 @@ public class Queue extends TaskClusterRequestHandler {
      * a run that failed because the task specific code behaved unexpectedly.
      * For example the task exited non-zero, or didn't produce expected output.
      * 
-     * Don't use this if the task couldn't be run because if malformed payload,
-     * or other unexpected condition. In these cases we have a task exception,
-     * which should be reported with `reportException`.
+     * Do not use this if the task couldn't be run because if malformed
+     * payload, or other unexpected condition. In these cases we have a task
+     * exception, which should be reported with `reportException`.
      *
      * Required scopes:
      *
