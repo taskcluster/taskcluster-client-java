@@ -2574,7 +2574,7 @@ http://references.taskcluster.net/aws-provisioner/v1/exchanges.json
 Version         = '0'
 Title           = 'AWS Provisioner Pulse Exchanges'
 Description     = 'Exchanges from the provisioner... more docs later'
-Exchange Prefix = 'exchange/taskcluster-aws-provisioner/'
+Exchange Prefix = 'exchange/taskcluster-aws-provisioner/v1/'
 Entry 0     = 
     Entry Type        = 'topic-exchange'
     Entry Exchange    = 'worker-type-created'
