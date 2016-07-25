@@ -150,4 +150,17 @@ public class Hooks extends TaskClusterRequestHandler {
     public CallSummary<EmptyPayload, EmptyPayload> removeHook(String hookGroupId, String hookId) throws APICallFailure {
         return apiCall(null, "DELETE", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId), EmptyPayload.class);
     }
+
+    /**
+     * This endpoint will trigger the creation of a task from a hook definition.
+     *
+     * Required scopes:
+     *
+     *   * `hooks:trigger-hook:<hookGroupId>/<hookId>`
+     *
+     * @see "[Trigger a hook API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#triggerHook)"
+     */
+    public CallSummary<Object, TaskStatusResponse> triggerHook(String hookGroupId, String hookId, Object payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/trigger", TaskStatusResponse.class);
+    }
 }
