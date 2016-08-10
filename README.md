@@ -28,6 +28,9 @@ A java port of taskcluster-client.
 * [Login](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/login/Login.html)  
   The Login service serves as the interface between external authentication systems and TaskCluster credentials.
 
+* [Notify](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/notify/Notify.html)  
+  The notification service listens for tasks with associated notifications and sends them.
+
 * [Purge Cache](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/purgecache/PurgeCache.html)  
   The purge-cache service is responsible for publishing a pulse message for workers, so they can purge cache upon request.
 
