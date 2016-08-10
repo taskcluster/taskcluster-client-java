@@ -8,6 +8,7 @@ org.mozilla.taskcluster.client.githubevents
 org.mozilla.taskcluster.client.hooks
 org.mozilla.taskcluster.client.index
 org.mozilla.taskcluster.client.login
+org.mozilla.taskcluster.client.notify
 org.mozilla.taskcluster.client.purgecache
 org.mozilla.taskcluster.client.purgecacheevents
 org.mozilla.taskcluster.client.queue
