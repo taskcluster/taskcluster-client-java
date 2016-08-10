@@ -47,19 +47,22 @@ public class APITest {
     }
 
     /**
-     * This is a silly test that looks for the latest mozilla-central buildbot
-     * linux64 l10n build and asserts that it must have a created time between a
-     * year ago and an hour in the future.
+     * This is a silly test that looks for the latest mozilla-inbound linux64 debug
+     * build and asserts that it must have a created time between a year ago and an
+     * hour in the future.
      *
-     * Could easily break at a point in the future, at which point we can change
-     * to something else.
+     * Could easily break at a point in the future, e.g. if this index route
+     * changes, at which point we can change to something else.
+     *
+     * Note, no credentials are needed, so this can be run even on travis-ci.org,
+     * for example.
      */
     @Test
     public void findLatestBuildbotTask() {
         Index index = new Index();
         Queue queue = new Queue();
         try {
-            String taskId = index.findTask("buildbot.branches.mozilla-central.linux64.l10n").responsePayload.taskId;
+            String taskId = index.findTask("gecko.v1.mozilla-inbound.latest.linux.linux64.debug").responsePayload.taskId;
             Date created = queue.task(taskId).responsePayload.created;
 
             // calculate time an hour in the future to allow for clock drift
