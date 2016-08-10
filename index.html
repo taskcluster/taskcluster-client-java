@@ -47,6 +47,8 @@ Hooks are a mechanism for creating tasks in response to events.</p></li>
 The task index is responsible for indexing tasks.</p></li>
 <li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/login/Login.html">Login</a><br>
 The Login service serves as the interface between external authentication systems and TaskCluster credentials.</p></li>
+<li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/notify/Notify.html">Notify</a><br>
+The notification service listens for tasks with associated notifications and sends them.</p></li>
 <li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/purgecache/PurgeCache.html">Purge Cache</a><br>
 The purge-cache service is responsible for publishing a pulse message for workers, so they can purge cache upon request.</p></li>
 <li><p><a href="http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/queue/Queue.html">Queue</a><br>
@@ -156,8 +158,8 @@ instance of the <code>Queue</code> client class and use it to create a task.</p>
 
 <p>You can generate temporary credentials from permanent credentials using the
 java client. This may be useful if you wish to issue credentials to a third
-party. See <a href="http://docs.taskcluster.net/auth/temporary-credentials/">http://docs.taskcluster.net/auth/temporary-credentials/</a> for more
-information. Both named and unnamed temporary credentials are supported,
+party. See <a href="https://docs.taskcluster.net/manual/apis/temporary-credentials">https://docs.taskcluster.net/manual/apis/temporary-credentials</a> for
+more information. Both named and unnamed temporary credentials are supported,
 although named credentials are preferred if you are not sure which type to use.</p>
 
 <h3>
