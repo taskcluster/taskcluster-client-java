@@ -58,7 +58,7 @@ public class APITest {
      * for example.
      */
     @Test
-    public void findLatestBuildbotTask() {
+    public void findLatestLinux64DebugBuild() {
         Index index = new Index();
         Queue queue = new Queue();
         try {
