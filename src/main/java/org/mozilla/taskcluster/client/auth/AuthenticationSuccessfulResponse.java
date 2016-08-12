@@ -1,5 +1,7 @@
 package org.mozilla.taskcluster.client.auth;
 
+import java.util.Date;
+
 /**
  * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/anyOf[0]
  */
@@ -15,6 +17,17 @@ public class AuthenticationSuccessfulResponse {
      * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/anyOf[0]/properties/clientId
      */
     public String clientId;
+
+    /**
+     * The expiration time for the credentials used to make this request.
+     * This should be treated as the latest time at which the authorization
+     * is valid.  For most cases, where the access being authorized occurs
+     * immediately, this field can be ignored, as the value will always be
+     * in the future if the status is `auth-success`.
+     *
+     * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/anyOf[0]/properties/expires
+     */
+    public Date expires;
 
     /**
      * Payload as extracted from `Authentication` header. This property is
