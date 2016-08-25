@@ -48,7 +48,8 @@ public class Notify extends TaskClusterRequestHandler {
     /**
      * Send an email to `address`. The content is markdown and will be rendered
      * to HTML, but both the HTML and raw markdown text will be sent in the
-     * email.
+     * email. If a link is included, it will be rendered to a nice button in the
+     * HTML version of the email
      *
      * Required scopes:
      *
