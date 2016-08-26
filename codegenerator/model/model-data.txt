@@ -5110,6 +5110,7 @@ Properties
     '
     MaxLength              = '255'
     MinLength              = '1'
+    Pattern                = '^[A-Za-z\[\]\\~_\^{|}][A-Za-z0-9\-\[\]\\~_\^{|}]{0,254}$'
     Type                   = 'string'
     TypeName               = ''
     SourceURL              = 'http://schemas.taskcluster.net/notify/v1/irc-request.json#/properties/user'

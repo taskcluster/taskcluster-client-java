@@ -31,6 +31,7 @@ public class PostIRCMessageRequest {
      * User to post the message to. Please note that you **must** supply
      * either `user` or `channel`, you cannot supply both.
      *
+     * Syntax:     ^[A-Za-z\[\]\\~_\^{|}][A-Za-z0-9\-\[\]\\~_\^{|}]{0,254}$
      * Min length: 1
      * Max length: 255
      *
