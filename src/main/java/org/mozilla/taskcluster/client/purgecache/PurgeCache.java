@@ -64,6 +64,30 @@ public class PurgeCache extends TaskClusterRequestHandler {
     }
 
     /**
+     * This is useful mostly for administors to view
+     * the set of open purge requests. It should not
+     * be used by workers. They should use the purgeRequests
+     * endpoint that is specific to their workerType and
+     * provisionerId.
+     *
+     * @see "[All Open Purge Requests API Documentation](https://docs.taskcluster.net/reference/core/purge-cache/api-docs#allPurgeRequests)"
+     */
+    public CallSummary<EmptyPayload, OpenPurgeRequestList> allPurgeRequests() throws APICallFailure {
+        return apiCall(null, "GET", "/purge-cache/list", OpenPurgeRequestList.class);
+    }
+
+    /**
+     * List of caches that need to be purged if they are from before
+     * a certain time. This is safe to be used in automation from
+     * workers.
+     *
+     * @see "[Open Purge Requests for a provisionerId/workerType pair API Documentation](https://docs.taskcluster.net/reference/core/purge-cache/api-docs#purgeRequests)"
+     */
+    public CallSummary<EmptyPayload, OpenPurgeRequestList> purgeRequests(String provisionerId, String workerType) throws APICallFailure {
+        return apiCall(null, "GET", "/purge-cache/" + uriEncode(provisionerId) + "/" + uriEncode(workerType), OpenPurgeRequestList.class);
+    }
+
+    /**
      * Documented later...
      * 
      * **Warning** this api end-point is **not stable**.
