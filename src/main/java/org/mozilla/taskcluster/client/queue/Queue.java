@@ -281,6 +281,20 @@ public class Queue extends TaskClusterRequestHandler {
     }
 
     /**
+     * Claim any task, more to be added later... long polling up to 20s.
+     *
+     * Required scopes:
+     *
+     *   * `queue:claim-work:<provisionerId>/<workerType>`, and
+     *   * `queue:worker-id:<workerGroup>/<workerId>`
+     *
+     * @see "[Claim Work API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#claimWork)"
+     */
+    public CallSummary<ClaimWorkRequest, ClaimWorkResponse> claimWork(String provisionerId, String workerType, ClaimWorkRequest payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/claim-work/" + uriEncode(provisionerId) + "/" + uriEncode(workerType), ClaimWorkResponse.class);
+    }
+
+    /**
      * claim a task, more to be added later...
      *
      * Required scopes:
@@ -288,7 +302,7 @@ public class Queue extends TaskClusterRequestHandler {
      *   * (`queue:claim-task` and `assume:worker-type:<provisionerId>/<workerType>` and `assume:worker-id:<workerGroup>/<workerId>`), or
      *   * (`queue:claim-task:<provisionerId>/<workerType>` and `queue:worker-id:<workerGroup>/<workerId>`)
      *
-     * @see "[Claim task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#claimTask)"
+     * @see "[Claim Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#claimTask)"
      */
     public CallSummary<TaskClaimRequest, TaskClaimResponse> claimTask(String taskId, String runId, TaskClaimRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/task/" + uriEncode(taskId) + "/runs/" + uriEncode(runId) + "/claim", TaskClaimResponse.class);
