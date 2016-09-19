@@ -4120,7 +4120,7 @@ Properties
           Description            = 'Reason for the creation of this run,
           **more reasons may be added in the future**.
           '
-          Enum                   = '[scheduled retry rerun exception]'
+          Enum                   = '[scheduled retry task-retry rerun exception]'
           Title                  = 'Reason Created'
           Type                   = 'string'
           TypeName               = ''
@@ -4131,7 +4131,7 @@ Properties
           Note, **more reasons may be added in the future**, also this
           property is only available after the run is resolved.
           '
-          Enum                   = '[completed failed deadline-exceeded canceled superseded claim-expired worker-shutdown malformed-payload resource-unavailable internal-error]'
+          Enum                   = '[completed failed deadline-exceeded canceled superseded claim-expired worker-shutdown malformed-payload resource-unavailable internal-error intermittent-task]'
           Title                  = 'Reason Resolved'
           Type                   = 'string'
           TypeName               = ''
@@ -5754,8 +5754,9 @@ failed instead of exception. You should `reportException` if,
   * The `task.payload` is invalid,
   * Non-existent resources are referenced,
   * Declared actions cannot be executed due to unavailable resources,
-  * The worker had to shutdown prematurely, or,
-  * The worker experienced an unknown error.
+  * The worker had to shutdown prematurely,
+  * The worker experienced an unknown error, or,
+  * The task explicitely requested a retry.
 
 Do not use this to signal that some user-specified code crashed for any
 reason specific to this code. If user-specific code hits a resource that
@@ -7546,8 +7547,12 @@ Properties
     convention in this case to create an artifact entitled
     `public/superseded-by` containing the taskId of the task that superseded
     this one.
+    **Report `intermittent-task`** if the task explicitely requested a retry
+    because task is intermittent. Workers can choose whether or not to
+    support this, but workers shouldn't blindly report this for every task
+    that fails.
     '
-    Enum                   = '[worker-shutdown malformed-payload resource-unavailable internal-error superseded]'
+    Enum                   = '[worker-shutdown malformed-payload resource-unavailable internal-error superseded intermittent-task]'
     Type                   = 'string'
     TypeName               = ''
     SourceURL              = 'http://schemas.taskcluster.net/queue/v1/task-exception-request.json#/properties/reason'
@@ -7734,7 +7739,7 @@ Properties
           Description            = 'Reason for the creation of this run,
           **more reasons may be added in the future**.
           '
-          Enum                   = '[scheduled retry rerun exception]'
+          Enum                   = '[scheduled retry task-retry rerun exception]'
           Title                  = 'Reason Created'
           Type                   = 'string'
           TypeName               = ''
@@ -7745,7 +7750,7 @@ Properties
           Note, **more reasons may be added in the future**, also this
           property is only available after the run is resolved.
           '
-          Enum                   = '[completed failed deadline-exceeded canceled superseded claim-expired worker-shutdown malformed-payload resource-unavailable internal-error]'
+          Enum                   = '[completed failed deadline-exceeded canceled superseded claim-expired worker-shutdown malformed-payload resource-unavailable internal-error intermittent-task]'
           Title                  = 'Reason Resolved'
           Type                   = 'string'
           TypeName               = ''
@@ -9242,7 +9247,7 @@ Properties
           Description            = 'Reason for the creation of this run,
           **more reasons may be added in the future**.
           '
-          Enum                   = '[scheduled retry rerun exception]'
+          Enum                   = '[scheduled retry task-retry rerun exception]'
           Title                  = 'Reason Created'
           Type                   = 'string'
           TypeName               = ''
@@ -9253,7 +9258,7 @@ Properties
           Note, **more reasons may be added in the future**, also this
           property is only available after the run is resolved.
           '
-          Enum                   = '[completed failed deadline-exceeded canceled superseded claim-expired worker-shutdown malformed-payload resource-unavailable internal-error]'
+          Enum                   = '[completed failed deadline-exceeded canceled superseded claim-expired worker-shutdown malformed-payload resource-unavailable internal-error intermittent-task]'
           Title                  = 'Reason Resolved'
           Type                   = 'string'
           TypeName               = ''

@@ -363,8 +363,9 @@ public class Queue extends TaskClusterRequestHandler {
      *   * The `task.payload` is invalid,
      *   * Non-existent resources are referenced,
      *   * Declared actions cannot be executed due to unavailable resources,
-     *   * The worker had to shutdown prematurely, or,
-     *   * The worker experienced an unknown error.
+     *   * The worker had to shutdown prematurely,
+     *   * The worker experienced an unknown error, or,
+     *   * The task explicitely requested a retry.
      * 
      * Do not use this to signal that some user-specified code crashed for any
      * reason specific to this code. If user-specific code hits a resource that
