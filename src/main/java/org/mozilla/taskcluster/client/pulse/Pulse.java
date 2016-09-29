@@ -69,4 +69,19 @@ public class Pulse extends TaskClusterRequestHandler {
     public CallSummary<EmptyPayload, RabbitOverviewResponse> overview() throws APICallFailure {
         return apiCall(null, "GET", "/overview", RabbitOverviewResponse.class);
     }
+
+    /**
+     * Creates a namespace, given the taskcluster credentials with scopes.
+     * 
+     * **Warning** this api end-point is **not stable**.
+     *
+     * Required scopes:
+     *
+     *   * `pulse:namespace:<namespace>`
+     *
+     * @see "[Create a namespace API Documentation](https://docs.do.not.exist.yet.service.not.in.production#namespace)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> namespace(String namespace) throws APICallFailure {
+        return apiCall(null, "GET", "/namespace/" + uriEncode(namespace), EmptyPayload.class);
+    }
 }

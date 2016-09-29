@@ -5208,6 +5208,21 @@ Entry 1     =
     Entry Description = 'An overview of the Rabbit cluster
 
 **Warning** this api end-point is **not stable**.'
+Entry 2     =
+    Entry Type        = 'function'
+    Entry Method      = 'get'
+    Entry Route       = '/namespace/<namespace>'
+    Entry Args        = '[namespace]'
+    Entry Query        = '[]'
+    Entry Name        = 'namespace'
+    Entry Stability   = 'experimental'
+    Entry Scopes      = '[[pulse:namespace:<namespace>]]'
+    Entry Input       = ''
+    Entry Output      = ''
+    Entry Title       = 'Create a namespace'
+    Entry Description = 'Creates a namespace, given the taskcluster credentials with scopes.
+
+**Warning** this api end-point is **not stable**.'
 
 
 http://schemas.taskcluster.net/pulse/v1/rabbit-overview.json#
