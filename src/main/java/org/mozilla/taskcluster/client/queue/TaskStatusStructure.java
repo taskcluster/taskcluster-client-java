@@ -11,7 +11,7 @@ public class TaskStatusStructure {
 
     /**
      * Deadline of the task, `pending` and `running` runs are
-     * resolved as **failed** if not resolved by other means
+     * resolved as **exception** if not resolved by other means
      * before the deadline. Note, deadline cannot be more than
      * 5 days into the future
      *
