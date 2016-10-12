@@ -72,8 +72,8 @@ public class PurgeCache extends TaskClusterRequestHandler {
      *
      * @see "[All Open Purge Requests API Documentation](https://docs.taskcluster.net/reference/core/purge-cache/api-docs#allPurgeRequests)"
      */
-    public CallSummary<EmptyPayload, OpenPurgeRequestList> allPurgeRequests() throws APICallFailure {
-        return apiCall(null, "GET", "/purge-cache/list", OpenPurgeRequestList.class);
+    public CallSummary<EmptyPayload, OpenAllPurgeRequestsList> allPurgeRequests() throws APICallFailure {
+        return apiCall(null, "GET", "/purge-cache/list", OpenAllPurgeRequestsList.class);
     }
 
     /**

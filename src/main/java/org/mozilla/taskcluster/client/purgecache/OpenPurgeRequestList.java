@@ -16,13 +16,6 @@ public class OpenPurgeRequestList {
      */
     public boolean cacheHit;
 
-    /**
-     * Passed back from Azure to allow us to page through long result sets.
-     *
-     * See http://schemas.taskcluster.net/purge-cache/v1/purge-cache-request-list.json#/properties/continuationToken
-     */
-    public String continuationToken;
-
     public class RequestsEntry {
 
         /**
