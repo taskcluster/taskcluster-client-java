@@ -467,14 +467,13 @@ Entry 22    =
     Entry Args        = '[]'
     Entry Query        = '[]'
     Entry Name        = 'ping'
-    Entry Stability   = 'experimental'
+    Entry Stability   = 'stable'
     Entry Scopes      = '[]'
     Entry Input       = ''
     Entry Output      = ''
     Entry Title       = 'Ping Server'
-    Entry Description = 'Documented later...
-
-**Warning** this api end-point is **not stable**.'
+    Entry Description = 'Respond without doing anything.
+This endpoint is used to check that the service is up.'
 
 
 http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#
@@ -5361,14 +5360,13 @@ Entry 3     =
     Entry Args        = '[]'
     Entry Query        = '[]'
     Entry Name        = 'ping'
-    Entry Stability   = 'experimental'
+    Entry Stability   = 'stable'
     Entry Scopes      = '[]'
     Entry Input       = ''
     Entry Output      = ''
     Entry Title       = 'Ping Server'
-    Entry Description = 'Documented later...
-
-**Warning** this api end-point is **not stable**.'
+    Entry Description = 'Respond without doing anything.
+This endpoint is used to check that the service is up.'
 
 
 http://schemas.taskcluster.net/purge-cache/v1/all-purge-cache-request-list.json#
