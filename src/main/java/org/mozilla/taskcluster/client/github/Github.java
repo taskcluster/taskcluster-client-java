@@ -59,10 +59,11 @@ public class Github extends TaskClusterRequestHandler {
     }
 
     /**
-     * A paginated list of all builds that have been run in
-     * taskcluster. They are sorted in order of submission.
+     * A paginated list of builds that have been run in
+     * Taskcluster. Can be filtered on various git-specific
+     * fields.
      *
-     * @see "[All Builds API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#builds)"
+     * @see "[List of Builds API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#builds)"
      */
     public CallSummary<EmptyPayload, Builds> builds() throws APICallFailure {
         return apiCall(null, "GET", "/builds", Builds.class);

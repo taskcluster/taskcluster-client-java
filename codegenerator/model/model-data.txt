@@ -3009,15 +3009,16 @@ Entry 1     =
     Entry Method      = 'get'
     Entry Route       = '/builds'
     Entry Args        = '[]'
-    Entry Query        = '[continuationToken limit]'
+    Entry Query        = '[continuationToken limit organization repository sha]'
     Entry Name        = 'builds'
     Entry Stability   = 'experimental'
     Entry Scopes      = '[]'
     Entry Input       = ''
     Entry Output      = 'http://schemas.taskcluster.net/github/v1/build-list.json#'
-    Entry Title       = 'All Builds'
-    Entry Description = 'A paginated list of all builds that have been run in
-taskcluster. They are sorted in order of submission.'
+    Entry Title       = 'List of Builds'
+    Entry Description = 'A paginated list of builds that have been run in
+Taskcluster. Can be filtered on various git-specific
+fields.'
 Entry 2     =
     Entry Type        = 'function'
     Entry Method      = 'get'
