@@ -49,17 +49,6 @@ public class Pulse extends TaskClusterRequestHandler {
     }
 
     /**
-     * Documented later...
-     * 
-     * **Warning** this api end-point is **not stable**.
-     *
-     * @see "[Ping Server API Documentation](https://docs.do.not.exist.yet.service.not.in.production#ping)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
-        return apiCall(null, "GET", "/ping", EmptyPayload.class);
-    }
-
-    /**
      * An overview of the Rabbit cluster
      * 
      * **Warning** this api end-point is **not stable**.
@@ -83,5 +72,15 @@ public class Pulse extends TaskClusterRequestHandler {
      */
     public CallSummary<NamespaceCreationRequest, EmptyPayload> namespace(String namespace, NamespaceCreationRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/namespace/" + uriEncode(namespace), EmptyPayload.class);
+    }
+
+    /**
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
+     *
+     * @see "[Ping Server API Documentation](https://docs.do.not.exist.yet.service.not.in.production#ping)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
+        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }
