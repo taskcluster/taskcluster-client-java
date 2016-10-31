@@ -7,27 +7,10 @@ package org.mozilla.taskcluster.client.pulse;
  */
 public class NamespaceCreationRequest {
 
-    public class Contact {
-
-        /**
-         * The contact id (eg. username, email address)
-         *
-         * See http://schemas.taskcluster.net/pulse/v1/namespace-request.json#/properties/contact/properties/id
-         */
-        public String id;
-
-        /**
-         * The contact method (eg. irc, email)
-         *
-         * See http://schemas.taskcluster.net/pulse/v1/namespace-request.json#/properties/contact/properties/method
-         */
-        public String method;
-    }
-
     /**
-     * The contact Information
+     * The contact information which will be handed off to the notification service
      *
      * See http://schemas.taskcluster.net/pulse/v1/namespace-request.json#/properties/contact
      */
-    public Contact contact;
+    public Object contact;
 }

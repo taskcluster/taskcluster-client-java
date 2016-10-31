@@ -60,6 +60,17 @@ public class Pulse extends TaskClusterRequestHandler {
     }
 
     /**
+     * A list of exchanges in the rabbit cluster
+     * 
+     * **Warning** this api end-point is **not stable**.
+     *
+     * @see "[Rabbit Exchanges API Documentation](https://docs.do.not.exist.yet.service.not.in.production#exchanges)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> exchanges() throws APICallFailure {
+        return apiCall(null, "GET", "/exchanges", EmptyPayload.class);
+    }
+
+    /**
      * Creates a namespace, given the taskcluster credentials with scopes.
      * 
      * **Warning** this api end-point is **not stable**.
