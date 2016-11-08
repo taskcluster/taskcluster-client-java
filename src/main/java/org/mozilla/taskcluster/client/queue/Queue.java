@@ -554,9 +554,8 @@ public class Queue extends TaskClusterRequestHandler {
     }
 
     /**
-     * Documented later...
-     * 
-     * **Warning** this api end-point is **not stable**.
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
      *
      * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#ping)"
      */
