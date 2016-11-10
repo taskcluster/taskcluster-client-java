@@ -66,8 +66,8 @@ public class Pulse extends TaskClusterRequestHandler {
      *
      * @see "[Rabbit Exchanges API Documentation](https://docs.do.not.exist.yet.service.not.in.production#exchanges)"
      */
-    public CallSummary<EmptyPayload, EmptyPayload> exchanges() throws APICallFailure {
-        return apiCall(null, "GET", "/exchanges", EmptyPayload.class);
+    public CallSummary<EmptyPayload, String[]> exchanges() throws APICallFailure {
+        return apiCall(null, "GET", "/exchanges", String[].class);
     }
 
     /**
@@ -81,8 +81,8 @@ public class Pulse extends TaskClusterRequestHandler {
      *
      * @see "[Create a namespace API Documentation](https://docs.do.not.exist.yet.service.not.in.production#namespace)"
      */
-    public CallSummary<NamespaceCreationRequest, EmptyPayload> namespace(String namespace, NamespaceCreationRequest payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/namespace/" + uriEncode(namespace), EmptyPayload.class);
+    public CallSummary<NamespaceCreationRequest, NamespaceCreationResponse> namespace(String namespace, NamespaceCreationRequest payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/namespace/" + uriEncode(namespace), NamespaceCreationResponse.class);
     }
 
     /**
