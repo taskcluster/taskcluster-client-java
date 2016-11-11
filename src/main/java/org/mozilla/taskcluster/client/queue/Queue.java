@@ -465,6 +465,13 @@ public class Queue extends TaskClusterRequestHandler {
      * stored externally. Either way, the response may not be JSON. So API
      * client users might want to generate a signed URL for this end-point and
      * use that URL with a normal HTTP client.
+     * 
+     * **Caching**, artifacts may be cached in data centers closer to the
+     * workers in-order to reduce bandwidth costs. This can lead to longer
+     * response times. Caching can be skipped by setting the header
+     * `x-taskcluster-skip-cache: true`, this should only be used for resources
+     * where request volume is known to be low, and caching not useful.
+     * (This feature may be disabled in the future, use is sparingly!)
      *
      * Required scopes:
      *

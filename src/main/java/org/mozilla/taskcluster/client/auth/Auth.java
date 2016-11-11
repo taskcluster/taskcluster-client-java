@@ -349,6 +349,13 @@ public class Auth extends TaskClusterRequestHandler {
      * will result in an access-denied error from AWS.  This limitation is due to a
      * security flaw in Amazon S3 which might otherwise allow indefinite access to
      * uploaded objects.
+     * 
+     * **EC2 metadata compatibility**, if the querystring parameter
+     * `?format=iam-role-compat` is given, the response will be compatible
+     * with the JSON exposed by the EC2 metadata service. This aims to ease
+     * compatibility for libraries and tools built to auto-refresh credentials.
+     * For details on the format returned by EC2 metadata service see:
+     * [EC2 User Guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#instance-metadata-security-credentials).
      *
      * Required scopes:
      *
