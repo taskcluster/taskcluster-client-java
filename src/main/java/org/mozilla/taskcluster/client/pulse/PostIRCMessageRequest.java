@@ -30,16 +30,6 @@ public class PostIRCMessageRequest {
         public String channel;
 
         /**
-         * IRC message to send as plain text.
-         *
-         * Min length: 1
-         * Max length: 510
-         *
-         * See http://schemas.taskcluster.net/pulse/v1/irc-request.json#/properties/payload/properties/message
-         */
-        public String message;
-
-        /**
          * User to post the message to. Please note that you **must** supply
          * either `user` or `channel`, you cannot supply both.
          *
