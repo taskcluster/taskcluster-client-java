@@ -111,7 +111,7 @@ public class APITest {
         Map<String, Object> extra = new HashMap<String, Object>();
         extra.put("index", index);
         td.extra = extra;
-        td.metadata = td.new Metadata();
+        td.metadata = td.new MetaData();
         td.metadata.description = "Stuff";
         td.metadata.name = "[TC] Pete";
         td.metadata.owner = "pmoore@mozilla.com";
