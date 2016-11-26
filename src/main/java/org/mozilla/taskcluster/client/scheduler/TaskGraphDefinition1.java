@@ -7,7 +7,7 @@ package org.mozilla.taskcluster.client.scheduler;
  */
 public class TaskGraphDefinition1 {
 
-    public class TasksEntry {
+    public class TaskNode {
 
         /**
          * List of required `taskId`s
@@ -49,5 +49,5 @@ public class TaskGraphDefinition1 {
      *
      * See http://schemas.taskcluster.net/scheduler/v1/extend-task-graph-request.json#/properties/tasks
      */
-    public TasksEntry[] tasks;
+    public TaskNode[] tasks;
 }

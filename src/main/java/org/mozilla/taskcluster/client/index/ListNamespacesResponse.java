@@ -18,7 +18,7 @@ public class ListNamespacesResponse {
      */
     public String continuationToken;
 
-    public class NamespacesEntry {
+    public class Namespace {
 
         /**
          * Date at which this entry, and by implication all entries below it,
@@ -51,5 +51,5 @@ public class ListNamespacesResponse {
      *
      * See http://schemas.taskcluster.net/index/v1/list-namespaces-response.json#/properties/namespaces
      */
-    public NamespacesEntry[] namespaces;
+    public Namespace[] namespaces;
 }

@@ -49,7 +49,7 @@ public class TaskStatusStructure {
      */
     public int retriesLeft;
 
-    public class RunsEntry {
+    public class RunInformation {
 
         /**
          * Reason for the creation of this run,
@@ -180,7 +180,7 @@ public class TaskStatusStructure {
      *
      * See http://schemas.taskcluster.net/queue/v1/task-status.json#/properties/runs
      */
-    public RunsEntry[] runs;
+    public RunInformation[] runs;
 
     /**
      * Identifier for the scheduler that _defined_ this task.

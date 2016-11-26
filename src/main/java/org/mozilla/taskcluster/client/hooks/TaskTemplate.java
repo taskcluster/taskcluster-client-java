@@ -24,7 +24,7 @@ public class TaskTemplate {
      */
     public Object extra;
 
-    public class Metadata {
+    public class MetaData {
 
         /**
          * Human readable description of the task, please **explain** what the
@@ -73,7 +73,7 @@ public class TaskTemplate {
      *
      * See http://schemas.taskcluster.net/hooks/v1/task-template.json#/properties/metadata
      */
-    public Metadata metadata;
+    public MetaData metadata;
 
     /**
      * Task-specific payload following worker-specific format. For example the

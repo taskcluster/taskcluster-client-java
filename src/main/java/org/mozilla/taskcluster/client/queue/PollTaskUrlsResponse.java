@@ -17,7 +17,7 @@ public class PollTaskUrlsResponse {
      */
     public Date expires;
 
-    public class QueuesEntry {
+    public class SignedURLsForAQueue {
 
         /**
          * Signed URL to delete messages that have been received using the
@@ -64,5 +64,5 @@ public class PollTaskUrlsResponse {
      *
      * See http://schemas.taskcluster.net/queue/v1/poll-task-urls-response.json#/properties/queues
      */
-    public QueuesEntry[] queues;
+    public SignedURLsForAQueue[] queues;
 }

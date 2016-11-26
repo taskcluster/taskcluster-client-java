@@ -7,7 +7,7 @@ package org.mozilla.taskcluster.client.scheduler;
  */
 public class TaskGraphDefinition {
 
-    public class Metadata {
+    public class MetaData {
 
         /**
          * Human readable description of task-graph, **explain** what it does!
@@ -54,7 +54,7 @@ public class TaskGraphDefinition {
      *
      * See http://schemas.taskcluster.net/scheduler/v1/task-graph.json#/properties/metadata
      */
-    public Metadata metadata;
+    public MetaData metadata;
 
     /**
      * List of task-graph specific routes, AMQP messages will be CC'ed to these
@@ -85,7 +85,7 @@ public class TaskGraphDefinition {
      */
     public Object tags;
 
-    public class TasksEntry {
+    public class TaskNode {
 
         /**
          * List of required `taskId`s
@@ -127,5 +127,5 @@ public class TaskGraphDefinition {
      *
      * See http://schemas.taskcluster.net/scheduler/v1/task-graph.json#/properties/tasks
      */
-    public TasksEntry[] tasks;
+    public TaskNode[] tasks;
 }

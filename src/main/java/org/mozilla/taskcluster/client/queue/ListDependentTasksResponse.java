@@ -29,7 +29,7 @@ public class ListDependentTasksResponse {
      */
     public String taskId;
 
-    public class TasksEntry {
+    public class TaskDefinitionAndStatus {
 
         /**
          * See http://schemas.taskcluster.net/queue/v1/list-dependent-tasks-response.json#/properties/tasks/items/properties/status
@@ -47,5 +47,5 @@ public class ListDependentTasksResponse {
      *
      * See http://schemas.taskcluster.net/queue/v1/list-dependent-tasks-response.json#/properties/tasks
      */
-    public TasksEntry[] tasks;
+    public TaskDefinitionAndStatus[] tasks;
 }

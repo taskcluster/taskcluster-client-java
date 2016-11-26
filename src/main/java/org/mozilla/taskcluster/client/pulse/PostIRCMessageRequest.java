@@ -17,7 +17,7 @@ public class PostIRCMessageRequest {
      */
     public String method;
 
-    public class Payload {
+    public class TheContactPayload {
 
         /**
          * Channel to post the message in. Please note that you **must** supply
@@ -47,5 +47,5 @@ public class PostIRCMessageRequest {
      *
      * See http://schemas.taskcluster.net/pulse/v1/irc-request.json#/properties/payload
      */
-    public Payload payload;
+    public TheContactPayload payload;
 }

@@ -66,8 +66,8 @@ public class Pulse extends TaskClusterRequestHandler {
      *
      * @see "[Rabbit Exchanges API Documentation](https://docs.do.not.exist.yet.service.not.in.production#exchanges)"
      */
-    public CallSummary<EmptyPayload, String[]> exchanges() throws APICallFailure {
-        return apiCall(null, "GET", "/exchanges", String[].class);
+    public CallSummary<EmptyPayload, Exchange[]> exchanges() throws APICallFailure {
+        return apiCall(null, "GET", "/exchanges", Exchange[].class);
     }
 
     /**

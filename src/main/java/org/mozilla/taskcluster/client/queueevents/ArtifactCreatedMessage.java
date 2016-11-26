@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class ArtifactCreatedMessage {
 
-    public class Artifact {
+    public class ArtifactCreated {
 
         /**
          * Mimetype for the artifact that was created.
@@ -59,7 +59,7 @@ public class ArtifactCreatedMessage {
      *
      * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact
      */
-    public Artifact artifact;
+    public ArtifactCreated artifact;
 
     /**
      * Id of the run on which artifact was created.

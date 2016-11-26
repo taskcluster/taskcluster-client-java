@@ -17,7 +17,7 @@ public class SendEmailRequest {
      */
     public String method;
 
-    public class Payload {
+    public class TheContactPayload {
 
         /**
          * E-mail address to which the message should be sent
@@ -39,5 +39,5 @@ public class SendEmailRequest {
      *
      * See http://schemas.taskcluster.net/pulse/v1/email-request.json#/properties/payload
      */
-    public Payload payload;
+    public TheContactPayload payload;
 }

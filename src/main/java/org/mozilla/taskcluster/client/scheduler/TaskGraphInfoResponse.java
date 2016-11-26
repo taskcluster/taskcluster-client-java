@@ -7,7 +7,7 @@ package org.mozilla.taskcluster.client.scheduler;
  */
 public class TaskGraphInfoResponse {
 
-    public class Metadata {
+    public class MetaData {
 
         /**
          * Human readable description of task-graph, **explain** what it does!
@@ -51,7 +51,7 @@ public class TaskGraphInfoResponse {
      *
      * See http://schemas.taskcluster.net/scheduler/v1/task-graph-info-response.json#/properties/metadata
      */
-    public Metadata metadata;
+    public MetaData metadata;
 
     /**
      * See http://schemas.taskcluster.net/scheduler/v1/task-graph-info-response.json#/properties/status

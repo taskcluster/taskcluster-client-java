@@ -29,7 +29,7 @@ public class ListTaskGroupResponse {
      */
     public String taskGroupId;
 
-    public class TasksEntry {
+    public class TaskDefinitionAndStatus {
 
         /**
          * See http://schemas.taskcluster.net/queue/v1/list-task-group-response.json#/properties/tasks/items/properties/status
@@ -47,5 +47,5 @@ public class ListTaskGroupResponse {
      *
      * See http://schemas.taskcluster.net/queue/v1/list-task-group-response.json#/properties/tasks
      */
-    public TasksEntry[] tasks;
+    public TaskDefinitionAndStatus[] tasks;
 }

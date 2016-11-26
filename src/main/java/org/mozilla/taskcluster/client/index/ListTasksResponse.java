@@ -18,7 +18,7 @@ public class ListTasksResponse {
      */
     public String continuationToken;
 
-    public class TasksEntry {
+    public class Task {
 
         /**
          * Data that was reported with the task. This is an arbitrary JSON
@@ -72,5 +72,5 @@ public class ListTasksResponse {
      *
      * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks
      */
-    public TasksEntry[] tasks;
+    public Task[] tasks;
 }

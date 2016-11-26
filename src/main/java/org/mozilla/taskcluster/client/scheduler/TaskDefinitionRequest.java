@@ -63,7 +63,7 @@ public class TaskDefinitionRequest {
      */
     public Object extra;
 
-    public class Metadata {
+    public class MetaData {
 
         /**
          * Human readable description of the task, please **explain** what the
@@ -112,7 +112,7 @@ public class TaskDefinitionRequest {
      *
      * See http://schemas.taskcluster.net/queue/v1/create-task-request.json#/properties/metadata
      */
-    public Metadata metadata;
+    public MetaData metadata;
 
     /**
      * Task-specific payload following worker-specific format. For example the

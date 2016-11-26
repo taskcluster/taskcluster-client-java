@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class AWSS3CredentialsResponse {
 
-    public class Credentials {
+    public class TemporarySecurityCredentials {
 
         /**
          * Access key identifier that identifies the temporary security
@@ -40,7 +40,7 @@ public class AWSS3CredentialsResponse {
      *
      * See http://schemas.taskcluster.net/auth/v1/aws-s3-credentials-response.json#/properties/credentials
      */
-    public Credentials credentials;
+    public TemporarySecurityCredentials credentials;
 
     /**
      * Date and time of when the temporary credentials expires.

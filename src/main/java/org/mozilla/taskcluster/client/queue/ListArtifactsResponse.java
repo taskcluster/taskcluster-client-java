@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class ListArtifactsResponse {
 
-    public class ArtifactsEntry {
+    public class Artifact {
 
         /**
          * Mimetype for the artifact that was created.
@@ -58,7 +58,7 @@ public class ListArtifactsResponse {
      *
      * See http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts
      */
-    public ArtifactsEntry[] artifacts;
+    public Artifact[] artifacts;
 
     /**
      * Opaque `continuationToken` to be given as query-string option to get the

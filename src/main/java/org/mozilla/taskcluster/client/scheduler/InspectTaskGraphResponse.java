@@ -7,7 +7,7 @@ package org.mozilla.taskcluster.client.scheduler;
  */
 public class InspectTaskGraphResponse {
 
-    public class Metadata {
+    public class MetaData {
 
         /**
          * Human readable description of task-graph, **explain** what it does!
@@ -51,7 +51,7 @@ public class InspectTaskGraphResponse {
      *
      * See http://schemas.taskcluster.net/scheduler/v1/inspect-task-graph-response.json#/properties/metadata
      */
-    public Metadata metadata;
+    public MetaData metadata;
 
     /**
      * List of scopes (or scope-patterns) that tasks of the task-graph is authorized to use.
@@ -72,7 +72,7 @@ public class InspectTaskGraphResponse {
      */
     public Object tags;
 
-    public class TasksEntry {
+    public class TaskInformation {
 
         /**
          * List of `taskId`s that requires this task to be _complete successfully_ before they can be scheduled.
@@ -160,5 +160,5 @@ public class InspectTaskGraphResponse {
      *
      * See http://schemas.taskcluster.net/scheduler/v1/inspect-task-graph-response.json#/properties/tasks
      */
-    public TasksEntry[] tasks;
+    public TaskInformation[] tasks;
 }
