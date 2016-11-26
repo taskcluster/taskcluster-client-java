@@ -232,6 +232,11 @@ func generatePayloadTypes(apiDef *APIDefinition) {
 		s := JsonSubSchema(*apiDef.schemas.SubSchema(i))
 		typeClass, typeComment, typ := (&s).TypeDefinition(0, extraPackages)
 		if typeClass != "" {
+			className := typ
+			if strings.HasSuffix(typ, "[]") {
+				className = typ[:len(typ)-2]
+				apiDef.schemas.SubSchema(i).TypeName = typ
+			}
 			if len(extraPackages) > 0 {
 				for pckage := range extraPackages {
 					content += "import " + pckage + ";\n"
@@ -240,7 +245,7 @@ func generatePayloadTypes(apiDef *APIDefinition) {
 			}
 			content += typeComment
 			content += typeClass[1:]
-			utils.WriteStringToFile(content, filepath.Join(apiDef.PackagePath, apiDef.schemas.SubSchema(i).TypeName+".java"))
+			utils.WriteStringToFile(content, filepath.Join(apiDef.PackagePath, className+".java"))
 		} else {
 			apiDef.schemas.SubSchema(i).TypeName = typ
 		}
