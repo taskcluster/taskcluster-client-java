@@ -50,8 +50,6 @@ public class Pulse extends TaskClusterRequestHandler {
 
     /**
      * An overview of the Rabbit cluster
-     * 
-     * **Warning** this api end-point is **not stable**.
      *
      * @see "[Rabbit Overview API Documentation](https://docs.do.not.exist.yet.service.not.in.production#overview)"
      */
@@ -61,8 +59,6 @@ public class Pulse extends TaskClusterRequestHandler {
 
     /**
      * A list of exchanges in the rabbit cluster
-     * 
-     * **Warning** this api end-point is **not stable**.
      *
      * @see "[Rabbit Exchanges API Documentation](https://docs.do.not.exist.yet.service.not.in.production#exchanges)"
      */
@@ -72,17 +68,28 @@ public class Pulse extends TaskClusterRequestHandler {
 
     /**
      * Creates a namespace, given the taskcluster credentials with scopes.
-     * 
-     * **Warning** this api end-point is **not stable**.
      *
      * Required scopes:
      *
      *   * `pulse:namespace:<namespace>`
      *
-     * @see "[Create a namespace API Documentation](https://docs.do.not.exist.yet.service.not.in.production#namespace)"
+     * @see "[Create a namespace API Documentation](https://docs.do.not.exist.yet.service.not.in.production#createNamespace)"
      */
-    public CallSummary<NamespaceCreationRequest, NamespaceCreationResponse> namespace(String namespace, NamespaceCreationRequest payload) throws APICallFailure {
+    public CallSummary<NamespaceCreationRequest, NamespaceCreationResponse> createNamespace(String namespace, NamespaceCreationRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/namespace/" + uriEncode(namespace), NamespaceCreationResponse.class);
+    }
+
+    /**
+     * Gets a namespace, given the taskcluster credentials with scopes.
+     *
+     * Required scopes:
+     *
+     *   * `pulse:namespace:<namespace>`
+     *
+     * @see "[Get namespace information API Documentation](https://docs.do.not.exist.yet.service.not.in.production#namespace)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> namespace(String namespace) throws APICallFailure {
+        return apiCall(null, "GET", "/namespace/" + uriEncode(namespace), EmptyPayload.class);
     }
 
     /**
