@@ -3446,6 +3446,47 @@ Entry 8     =
     Entry Output      = 'http://schemas.taskcluster.net/hooks/v1/task-status.json'
     Entry Title       = 'Trigger a hook'
     Entry Description = 'This endpoint will trigger the creation of a task from a hook definition.'
+Entry 9     =
+    Entry Type        = 'function'
+    Entry Method      = 'get'
+    Entry Route       = '/hooks/<hookGroupId>/<hookId>/token'
+    Entry Args        = '[hookGroupId hookId]'
+    Entry Query        = '[]'
+    Entry Name        = 'getTriggerToken'
+    Entry Stability   = 'experimental'
+    Entry Scopes      = '[[hooks:get-trigger-token:<hookGroupId>/<hookId>]]'
+    Entry Input       = ''
+    Entry Output      = 'http://schemas.taskcluster.net/hooks/v1/trigger-token-response.json'
+    Entry Title       = 'Get a trigger token'
+    Entry Description = 'Retrieve a unique secret token for triggering the specified hook. This
+token can be deactivated with `resetTriggerToken`.'
+Entry 10    =
+    Entry Type        = 'function'
+    Entry Method      = 'post'
+    Entry Route       = '/hooks/<hookGroupId>/<hookId>/token'
+    Entry Args        = '[hookGroupId hookId]'
+    Entry Query        = '[]'
+    Entry Name        = 'resetTriggerToken'
+    Entry Stability   = 'experimental'
+    Entry Scopes      = '[[hooks:reset-trigger-token:<hookGroupId>/<hookId>]]'
+    Entry Input       = ''
+    Entry Output      = 'http://schemas.taskcluster.net/hooks/v1/trigger-token-response.json'
+    Entry Title       = 'Reset a trigger token'
+    Entry Description = 'Reset the token for triggering a given hook. This invalidates token that
+may have been issued via getTriggerToken with a new token.'
+Entry 11    =
+    Entry Type        = 'function'
+    Entry Method      = 'post'
+    Entry Route       = '/hooks/<hookGroupId>/<hookId>/trigger/<token>'
+    Entry Args        = '[hookGroupId hookId token]'
+    Entry Query        = '[]'
+    Entry Name        = 'triggerHookWithToken'
+    Entry Stability   = 'experimental'
+    Entry Scopes      = '[]'
+    Entry Input       = 'http://schemas.taskcluster.net/hooks/v1/trigger-payload.json'
+    Entry Output      = 'http://schemas.taskcluster.net/hooks/v1/task-status.json'
+    Entry Title       = 'Trigger a hook with a token'
+    Entry Description = 'This endpoint triggers a defined hook with a valid token.'
 
 
 http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#
@@ -4167,6 +4208,26 @@ Title                  = 'trigger payload'
 Type                   = 'object'
 TypeName               = 'Object'
 SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/trigger-payload.json#'
+
+
+http://schemas.taskcluster.net/hooks/v1/trigger-token-response.json#
+====================================================================
+Additional Properties  = 'false'
+Description            = 'Secret token for a trigger
+'
+ID                     = 'http://schemas.taskcluster.net/hooks/v1/trigger-token-response.json#'
+Properties
+  Property 'token' =
+    Title                  = 'Token'
+    Type                   = 'string'
+    TypeName               = 'Token'
+    SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/trigger-token-response.json#/properties/token'
+Required               = '[token]'
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'trigger token response'
+Type                   = 'object'
+TypeName               = 'TriggerTokenResponse'
+SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/trigger-token-response.json#'
 
 
 http://schemas.taskcluster.net/queue/v1/task-status.json#

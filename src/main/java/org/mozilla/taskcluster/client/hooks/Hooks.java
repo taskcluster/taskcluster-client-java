@@ -163,4 +163,41 @@ public class Hooks extends TaskClusterRequestHandler {
     public CallSummary<Object, TaskStatusResponse> triggerHook(String hookGroupId, String hookId, Object payload) throws APICallFailure {
         return apiCall(payload, "POST", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/trigger", TaskStatusResponse.class);
     }
+
+    /**
+     * Retrieve a unique secret token for triggering the specified hook. This
+     * token can be deactivated with `resetTriggerToken`.
+     *
+     * Required scopes:
+     *
+     *   * `hooks:get-trigger-token:<hookGroupId>/<hookId>`
+     *
+     * @see "[Get a trigger token API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#getTriggerToken)"
+     */
+    public CallSummary<EmptyPayload, TriggerTokenResponse> getTriggerToken(String hookGroupId, String hookId) throws APICallFailure {
+        return apiCall(null, "GET", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/token", TriggerTokenResponse.class);
+    }
+
+    /**
+     * Reset the token for triggering a given hook. This invalidates token that
+     * may have been issued via getTriggerToken with a new token.
+     *
+     * Required scopes:
+     *
+     *   * `hooks:reset-trigger-token:<hookGroupId>/<hookId>`
+     *
+     * @see "[Reset a trigger token API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#resetTriggerToken)"
+     */
+    public CallSummary<EmptyPayload, TriggerTokenResponse> resetTriggerToken(String hookGroupId, String hookId) throws APICallFailure {
+        return apiCall(null, "POST", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/token", TriggerTokenResponse.class);
+    }
+
+    /**
+     * This endpoint triggers a defined hook with a valid token.
+     *
+     * @see "[Trigger a hook with a token API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#triggerHookWithToken)"
+     */
+    public CallSummary<Object, TaskStatusResponse> triggerHookWithToken(String hookGroupId, String hookId, String token, Object payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/trigger/" + uriEncode(token), TaskStatusResponse.class);
+    }
 }
