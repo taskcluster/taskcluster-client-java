@@ -49,8 +49,8 @@ public class Github extends TaskClusterRequestHandler {
     }
 
     /**
-     * Capture a GitHub event and publish it via pulse, if it's a push
-     * or pull request.
+     * Capture a GitHub event and publish it via pulse, if it's a push,
+     * release or pull request.
      *
      * @see "[Consume GitHub WebHook API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#githubWebHookConsumer)"
      */
