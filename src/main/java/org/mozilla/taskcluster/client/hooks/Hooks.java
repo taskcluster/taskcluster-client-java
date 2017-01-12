@@ -160,8 +160,8 @@ public class Hooks extends TaskClusterRequestHandler {
      *
      * @see "[Trigger a hook API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#triggerHook)"
      */
-    public CallSummary<Object, TaskStatusResponse> triggerHook(String hookGroupId, String hookId, Object payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/trigger", TaskStatusResponse.class);
+    public CallSummary<Object, TaskStatusStructure> triggerHook(String hookGroupId, String hookId, Object payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/trigger", TaskStatusStructure.class);
     }
 
     /**
@@ -197,7 +197,17 @@ public class Hooks extends TaskClusterRequestHandler {
      *
      * @see "[Trigger a hook with a token API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#triggerHookWithToken)"
      */
-    public CallSummary<Object, TaskStatusResponse> triggerHookWithToken(String hookGroupId, String hookId, String token, Object payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/trigger/" + uriEncode(token), TaskStatusResponse.class);
+    public CallSummary<Object, TaskStatusStructure> triggerHookWithToken(String hookGroupId, String hookId, String token, Object payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/trigger/" + uriEncode(token), TaskStatusStructure.class);
+    }
+
+    /**
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
+     *
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#ping)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
+        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }
