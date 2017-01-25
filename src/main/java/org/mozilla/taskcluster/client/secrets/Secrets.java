@@ -112,4 +112,14 @@ public class Secrets extends TaskClusterRequestHandler {
     public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
         return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
+
+    /**
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
+     *
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/secrets/api-docs#ping)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> ping1() throws APICallFailure {
+        return apiCall(null, "GET", "/ping", EmptyPayload.class);
+    }
 }

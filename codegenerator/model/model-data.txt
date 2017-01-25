@@ -11737,6 +11737,20 @@ Entry 4     =
     Entry Title       = 'Ping Server'
     Entry Description = 'Respond without doing anything.  This endpoint is used to check that
 the service is up.'
+Entry 5     =
+    Entry Type        = 'function'
+    Entry Method      = 'get'
+    Entry Route       = '/ping'
+    Entry Args        = '[]'
+    Entry Query        = '[]'
+    Entry Name        = 'ping'
+    Entry Stability   = 'stable'
+    Entry Scopes      = '[]'
+    Entry Input       = ''
+    Entry Output      = ''
+    Entry Title       = 'Ping Server'
+    Entry Description = 'Respond without doing anything.
+This endpoint is used to check that the service is up.'
 
 
 http://schemas.taskcluster.net/secrets/v1/secret-list.json#
