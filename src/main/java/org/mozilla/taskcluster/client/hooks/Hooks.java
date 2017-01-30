@@ -21,11 +21,11 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  * scopes in `task.scopes`.  The new task has a `taskGroupId` equal to its
  * `taskId`, as is the convention for decision tasks.
  * 
- * Hooks can have a 'schedule' indicating specific times that new tasks should
+ * Hooks can have a "schedule" indicating specific times that new tasks should
  * be created.  Each schedule is in a simple cron format, per 
  * https://www.npmjs.com/package/cron-parser.  For example:
- *  * `["0 0 1 * * *"]` -- daily at 1:00 UTC
- *  * `["0 0 9,21 * * 1-5", "0 0 12 * * 0,6"]` -- weekdays at 9:00 and 21:00 UTC, weekends at noon
+ *  * `['0 0 1 * * *']` -- daily at 1:00 UTC
+ *  * `['0 0 9,21 * * 1-5', '0 0 12 * * 0,6']` -- weekdays at 9:00 and 21:00 UTC, weekends at noon
  *
  * @see "[Hooks API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs)"
  */
