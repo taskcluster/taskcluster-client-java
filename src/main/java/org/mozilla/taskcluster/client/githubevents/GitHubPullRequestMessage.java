@@ -34,6 +34,15 @@ public class GitHubPullRequestMessage {
     public Object details;
 
     /**
+     * The GitHub webhook deliveryId. Extracted from the header 'X-GitHub-Delivery'
+     *
+     * Syntax:     ^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}$
+     *
+     * See http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/eventId
+     */
+    public String eventId;
+
+    /**
      * The installation which had an event.
      *
      * Mininum:    0
