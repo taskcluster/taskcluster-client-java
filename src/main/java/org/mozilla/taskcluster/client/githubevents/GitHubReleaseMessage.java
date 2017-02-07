@@ -15,6 +15,16 @@ public class GitHubReleaseMessage {
     public Object details;
 
     /**
+     * The installation which had an event.
+     *
+     * Mininum:    0
+     * Maximum:    10000000000
+     *
+     * See http://schemas.taskcluster.net/github/v1/github-release-message.json#/properties/installationId
+     */
+    public int installationId;
+
+    /**
      * The GitHub `organization` which had an event.
      *
      * Syntax:     ^([a-zA-Z0-9-_%]*)$

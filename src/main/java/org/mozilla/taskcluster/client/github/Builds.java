@@ -19,6 +19,13 @@ public class Builds {
         public Date created;
 
         /**
+         * Type of Github event that triggered the build (i.e. push, pull_request.opened).
+         *
+         * See http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/eventType
+         */
+        public String eventType;
+
+        /**
          * Github organization associated with the build.
          *
          * Syntax:     ^([a-zA-Z0-9-_%]*)$

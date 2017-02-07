@@ -3093,6 +3093,11 @@ Properties
           Type                   = 'string'
           TypeName               = 'Created'
           SourceURL              = 'http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/created'
+        Property 'eventType' =
+          Description            = 'Type of Github event that triggered the build (i.e. push, pull_request.opened).'
+          Type                   = 'string'
+          TypeName               = 'EventType'
+          SourceURL              = 'http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/eventType'
         Property 'organization' =
           Description            = 'Github organization associated with the build.'
           MaxLength              = '100'
@@ -3275,6 +3280,14 @@ Properties
     Type                   = 'object'
     TypeName               = 'Details'
     SourceURL              = 'http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/details'
+  Property 'installationId' =
+    Description            = 'The installation which had an event.
+    '
+    Maximum                = '10000000000'
+    Minimum                = '0'
+    Type                   = 'integer'
+    TypeName               = 'InstallationId'
+    SourceURL              = 'http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/installationId'
   Property 'organization' =
     Description            = 'The GitHub `organization` which had an event.
     '
@@ -3299,7 +3312,7 @@ Properties
     Type HAS NOT BEEN SET!!!
     TypeName               = 'Version'
     SourceURL              = 'http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/version'
-Required               = '[version organization repository action]'
+Required               = '[version organization repository action installationId]'
 Schema                 = 'http://json-schema.org/draft-04/schema#'
 Title                  = 'GitHub Pull Request Message'
 Type                   = 'object'
@@ -3320,6 +3333,14 @@ Properties
     Type                   = 'object'
     TypeName               = 'Details'
     SourceURL              = 'http://schemas.taskcluster.net/github/v1/github-push-message.json#/properties/details'
+  Property 'installationId' =
+    Description            = 'The installation which had an event.
+    '
+    MaxLength              = '10000000000'
+    MinLength              = '0'
+    Type                   = 'integer'
+    TypeName               = 'InstallationId'
+    SourceURL              = 'http://schemas.taskcluster.net/github/v1/github-push-message.json#/properties/installationId'
   Property 'organization' =
     Description            = 'The GitHub `organization` which had an event.
     '
@@ -3344,7 +3365,7 @@ Properties
     Type HAS NOT BEEN SET!!!
     TypeName               = 'Version'
     SourceURL              = 'http://schemas.taskcluster.net/github/v1/github-push-message.json#/properties/version'
-Required               = '[version organization repository]'
+Required               = '[version organization repository installationId]'
 Schema                 = 'http://json-schema.org/draft-04/schema#'
 Title                  = 'GitHub Push Message'
 Type                   = 'object'
@@ -3365,6 +3386,14 @@ Properties
     Type                   = 'object'
     TypeName               = 'Details'
     SourceURL              = 'http://schemas.taskcluster.net/github/v1/github-release-message.json#/properties/details'
+  Property 'installationId' =
+    Description            = 'The installation which had an event.
+    '
+    Maximum                = '10000000000'
+    Minimum                = '0'
+    Type                   = 'integer'
+    TypeName               = 'InstallationId'
+    SourceURL              = 'http://schemas.taskcluster.net/github/v1/github-release-message.json#/properties/installationId'
   Property 'organization' =
     Description            = 'The GitHub `organization` which had an event.
     '
