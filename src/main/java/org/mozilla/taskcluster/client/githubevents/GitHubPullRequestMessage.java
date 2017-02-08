@@ -21,6 +21,7 @@ public class GitHubPullRequestMessage {
      *     * "reopened"
      *     * "synchronize"
      *     * "review_requested"
+     *     * "review_request_removed"
      *
      * See http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/action
      */
