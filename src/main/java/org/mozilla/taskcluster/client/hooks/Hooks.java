@@ -77,7 +77,7 @@ public class Hooks extends TaskClusterRequestHandler {
     }
 
     /**
-     * This endpoint will return the hook defintion for the given `hookGroupId`
+     * This endpoint will return the hook definition for the given `hookGroupId`
      * and hookId.
      *
      * @see "[Get hook definition API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#hook)"
