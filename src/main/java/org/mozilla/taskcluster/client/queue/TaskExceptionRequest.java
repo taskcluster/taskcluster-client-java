@@ -39,7 +39,7 @@ public class TaskExceptionRequest {
      * convention in this case to create an artifact entitled
      * `public/superseded-by` containing the taskId of the task that superseded
      * this one.
-     * **Report `intermittent-task`** if the task explicitely requested a retry
+     * **Report `intermittent-task`** if the task explicitly requested a retry
      * because task is intermittent. Workers can choose whether or not to
      * support this, but workers shouldn't blindly report this for every task
      * that fails.
