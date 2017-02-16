@@ -56,7 +56,7 @@ public class CreateClientResponse {
 
     /**
      * If true, this client is disabled and cannot be used.  This usually occurs when the
-     * scopes available to the user owning the client no longer satisfy the client.
+     * scopes avaialble to the user owning the client no longer satisfy the client.
      *
      * See http://schemas.taskcluster.net/auth/v1/create-client-response.json#/properties/disabled
      */
