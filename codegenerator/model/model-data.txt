@@ -3060,6 +3060,20 @@ fields.'
 Entry 2     =
     Entry Type        = 'function'
     Entry Method      = 'get'
+    Entry Route       = '/repository/<owner>/<repo>'
+    Entry Args        = '[owner repo]'
+    Entry Query        = '[]'
+    Entry Name        = 'isInstalledFor'
+    Entry Stability   = 'experimental'
+    Entry Scopes      = '[]'
+    Entry Input       = ''
+    Entry Output      = 'http://schemas.taskcluster.net/github/v1/is-installed-for.json'
+    Entry Title       = 'Check if Repository has Integration'
+    Entry Description = 'Checks if the integration has been installed for
+a given repository of a given organization or user.'
+Entry 3     =
+    Entry Type        = 'function'
+    Entry Method      = 'get'
     Entry Route       = '/ping'
     Entry Args        = '[]'
     Entry Query        = '[]'
@@ -3191,6 +3205,27 @@ Pattern                = 'Unknown'
 Type HAS NOT BEEN SET!!!
 TypeName               = 'Object'
 SourceURL              = 'http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/eventId/oneOf[1]'
+
+
+http://schemas.taskcluster.net/github/v1/is-installed-for.json#
+===============================================================
+Additional Properties  = 'false'
+Description            = 'Check if Repository has Integration
+'
+ID                     = 'http://schemas.taskcluster.net/github/v1/is-installed-for.json#'
+Properties
+  Property 'installed' =
+    Description            = 'True if integration is installed, False otherwise.
+    '
+    Type                   = 'boolean'
+    TypeName               = 'Installed'
+    SourceURL              = 'http://schemas.taskcluster.net/github/v1/is-installed-for.json#/properties/installed'
+Required               = '[installed]'
+Schema                 = 'http://json-schema.org/draft-04/schema#'
+Title                  = 'isInstalledFor'
+Type                   = 'object'
+TypeName               = 'IsInstalledFor'
+SourceURL              = 'http://schemas.taskcluster.net/github/v1/is-installed-for.json#'
 
 
 http://references.taskcluster.net/github/v1/exchanges.json

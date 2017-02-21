@@ -70,6 +70,16 @@ public class Github extends TaskClusterRequestHandler {
     }
 
     /**
+     * Checks if the integration has been installed for
+     * a given repository of a given organization or user.
+     *
+     * @see "[Check if Repository has Integration API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#isInstalledFor)"
+     */
+    public CallSummary<EmptyPayload, IsInstalledFor> isInstalledFor(String owner, String repo) throws APICallFailure {
+        return apiCall(null, "GET", "/repository/" + uriEncode(owner) + "/" + uriEncode(repo), IsInstalledFor.class);
+    }
+
+    /**
      * Respond without doing anything.
      * This endpoint is used to check that the service is up.
      *
