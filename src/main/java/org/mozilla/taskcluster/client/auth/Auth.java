@@ -368,6 +368,32 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
+     * Retrieve a list of all Azure accounts managed by Taskcluster Auth.
+     *
+     * Required scopes:
+     *
+     *   * `auth:azure-table:list-accounts`
+     *
+     * @see "[List Accounts Managed by Auth API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureAccounts)"
+     */
+    public CallSummary<EmptyPayload, AzureListAccountResponse> azureAccounts() throws APICallFailure {
+        return apiCall(null, "GET", "/azure/accounts", AzureListAccountResponse.class);
+    }
+
+    /**
+     * Retrieve a list of all tables in an account.
+     *
+     * Required scopes:
+     *
+     *   * `auth:azure-table:list-tables:<account>`
+     *
+     * @see "[List Tables in an Account Managed by Auth API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureTables)"
+     */
+    public CallSummary<EmptyPayload, AzureListAccountResponse1> azureTables(String account) throws APICallFailure {
+        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/tables", AzureListAccountResponse1.class);
+    }
+
+    /**
      * Get a shared access signature (SAS) string for use with a specific Azure
      * Table Storage table. By not specifying a level as in azureTableSASLevel,
      * you will get read-write permissions. If you get read-write from this, it will create the
