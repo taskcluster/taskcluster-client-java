@@ -369,17 +369,18 @@ public class Auth extends TaskClusterRequestHandler {
 
     /**
      * Get a shared access signature (SAS) string for use with a specific Azure
-     * Table Storage table.  Note, this will create the table, if it doesn't
-     * already exist.
+     * Table Storage table. By not specifying a level as in azureTableSASLevel,
+     * you will get read-write permissions. If you get read-write from this, it will create the
+     * table if it doesn't already exist.
      *
      * Required scopes:
      *
-     *   * `auth:azure-table-access:<account>/<table>`
+     *   * `auth:azure-table:<level>:<account>/<table>`
      *
      * @see "[Get Shared-Access-Signature for Azure Table API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureTableSAS)"
      */
-    public CallSummary<EmptyPayload, AzureSharedAccessSignatureResponse> azureTableSAS(String account, String table) throws APICallFailure {
-        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/table/" + uriEncode(table) + "/read-write", AzureSharedAccessSignatureResponse.class);
+    public CallSummary<EmptyPayload, AzureSharedAccessSignatureResponse> azureTableSAS(String account, String table, String level) throws APICallFailure {
+        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/table/" + uriEncode(table) + "/" + uriEncode(level), AzureSharedAccessSignatureResponse.class);
     }
 
     /**
