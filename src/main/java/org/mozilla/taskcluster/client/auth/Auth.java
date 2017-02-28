@@ -405,8 +405,8 @@ public class Auth extends TaskClusterRequestHandler {
      *
      * @see "[Get Shared-Access-Signature for Azure Table API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureTableSAS)"
      */
-    public CallSummary<EmptyPayload, Var> azureTableSAS(String account, String table, String level) throws APICallFailure {
-        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/table/" + uriEncode(table) + "/" + uriEncode(level), Var.class);
+    public CallSummary<EmptyPayload, AzureSharedAccessSignatureResponse> azureTableSAS(String account, String table, String level) throws APICallFailure {
+        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/table/" + uriEncode(table) + "/" + uriEncode(level), AzureSharedAccessSignatureResponse.class);
     }
 
     /**
