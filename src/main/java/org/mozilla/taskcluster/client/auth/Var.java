@@ -8,7 +8,7 @@ import java.util.Date;
  *
  * See http://schemas.taskcluster.net/auth/v1/azure-table-access-response.json#
  */
-public class AzureSharedAccessSignatureResponse {
+public class Var {
 
     /**
      * Date and time of when the Shared-Access-Signature expires.
