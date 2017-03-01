@@ -410,6 +410,20 @@ public class Auth extends TaskClusterRequestHandler {
     }
 
     /**
+     * Get a shared access signature (SAS) string for use with a specific Azure
+     * Blob Storage container. If the level is read-write, the container will be created, if it doesn't already exists.
+     *
+     * Required scopes:
+     *
+     *   * `auth:azure-blob:<level>:<account>/<container>`
+     *
+     * @see "[Get Shared-Access-Signature for Azure Blob API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureBlobSAS)"
+     */
+    public CallSummary<EmptyPayload, Var1> azureBlobSAS(String account, String container, String level) throws APICallFailure {
+        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/containers/" + uriEncode(container) + "/" + uriEncode(level), Var1.class);
+    }
+
+    /**
      * Get temporary DSN (access credentials) for a sentry project.
      * The credentials returned can be used with any Sentry client for up to
      * 24 hours, after which the credentials will be automatically disabled.
