@@ -70,6 +70,16 @@ public class Github extends TaskClusterRequestHandler {
     }
 
     /**
+     * Checks the status of the latest build of a given branch 
+     * and returns corresponding badge image.
+     *
+     * @see "[Latest Build Status Badge API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#badge)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> badge(String owner, String repo, String branch) throws APICallFailure {
+        return apiCall(null, "GET", "/badge/" + uriEncode(owner) + "/" + uriEncode(repo) + "/" + uriEncode(branch), EmptyPayload.class);
+    }
+
+    /**
      * Checks if the integration has been installed for
      * a given repository of a given organization or user.
      *
