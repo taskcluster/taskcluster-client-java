@@ -72,4 +72,16 @@ public class SendEmailRequest {
      * See http://schemas.taskcluster.net/notify/v1/email-request.json#/properties/subject
      */
     public String subject;
+
+    /**
+     * E-mail html template used to format your content.
+     *
+     * Possible values:
+     *     * "simple"
+     *     * "fullscreen"
+     * Default:    "simple"
+     *
+     * See http://schemas.taskcluster.net/notify/v1/email-request.json#/properties/template
+     */
+    public String template;
 }
