@@ -15,8 +15,8 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  * manages pulse credentials for taskcluster users.
  * 
  * A service to manage Pulse credentials for anything using
- * Taskcluster credentials. This allows us self-service and
- * greater control within the Taskcluster project.
+ * Taskcluster credentials. This allows for self-service pulse
+ * access and greater control within the Taskcluster project.
  *
  * @see "[Pulse API Documentation](https://docs.do.not.exist.yet.service.not.in.production)"
  */
@@ -49,7 +49,7 @@ public class Pulse extends TaskClusterRequestHandler {
     }
 
     /**
-     * An overview of the Rabbit cluster
+     * Get an overview of the Rabbit cluster.
      *
      * @see "[Rabbit Overview API Documentation](https://docs.do.not.exist.yet.service.not.in.production#overview)"
      */
@@ -58,7 +58,8 @@ public class Pulse extends TaskClusterRequestHandler {
     }
 
     /**
-     * A list of exchanges in the rabbit cluster
+     * Get a list of all exchanges in the rabbit cluster.  This will include exchanges
+     * not managed by this service, if any exist.
      *
      * @see "[Rabbit Exchanges API Documentation](https://docs.do.not.exist.yet.service.not.in.production#exchanges)"
      */
@@ -67,29 +68,33 @@ public class Pulse extends TaskClusterRequestHandler {
     }
 
     /**
-     * Creates a namespace, given the taskcluster credentials with scopes.
+     * List the namespaces managed by this service.
+     * 
+     * This will list up to 1000 namespaces. If more namespaces are present a
+     * `continuationToken` will be returned, which can be given in the next
+     * request. For the initial request, do not provide continuation.
      *
-     * Required scopes:
-     *
-     *   * `pulse:namespace:<namespace>`
-     *
-     * @see "[Create a namespace API Documentation](https://docs.do.not.exist.yet.service.not.in.production#createNamespace)"
+     * @see "[List Namespaces API Documentation](https://docs.do.not.exist.yet.service.not.in.production#listNamespaces)"
      */
-    public CallSummary<NamespaceCreationRequest, NamespaceCreationResponse> createNamespace(String namespace, NamespaceCreationRequest payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/namespace/" + uriEncode(namespace), NamespaceCreationResponse.class);
+    public CallSummary<EmptyPayload, ListNamespacesResponse> listNamespaces() throws APICallFailure {
+        return apiCall(null, "GET", "/namespaces", ListNamespacesResponse.class);
     }
 
     /**
-     * Gets a namespace, given the taskcluster credentials with scopes.
+     * Claim a namespace, returning a username and password with access to that
+     * namespace good for a short time.  Clients should call this endpoint again
+     * at the re-claim time given in the response, as the password will be rotated
+     * soon after that time.  The namespace will expire, and any associated queues
+     * and exchanges will be deleted, at the given expiration time
      *
      * Required scopes:
      *
      *   * `pulse:namespace:<namespace>`
      *
-     * @see "[Get namespace information API Documentation](https://docs.do.not.exist.yet.service.not.in.production#namespace)"
+     * @see "[Claim a namespace API Documentation](https://docs.do.not.exist.yet.service.not.in.production#claimNamespace)"
      */
-    public CallSummary<EmptyPayload, EmptyPayload> namespace(String namespace) throws APICallFailure {
-        return apiCall(null, "GET", "/namespace/" + uriEncode(namespace), EmptyPayload.class);
+    public CallSummary<NamespaceCreationRequest, NamespaceCreationResponse> claimNamespace(String namespace, NamespaceCreationRequest payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/namespace/" + uriEncode(namespace), NamespaceCreationResponse.class);
     }
 
     /**
