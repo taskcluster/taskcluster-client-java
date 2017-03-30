@@ -1,5 +1,7 @@
 package org.mozilla.taskcluster.client.pulse;
 
+import java.util.Date;
+
 /**
  * Response from a request to list namespaces
  *
@@ -24,6 +26,13 @@ public class ListNamespacesResponse {
          * See http://schemas.taskcluster.net/pulse/v1/list-namespaces-response.json#/properties/namespaces/items/properties/contact
          */
         public Object contact;
+
+        /**
+         * Date-time at which this namespace was first claimed.
+         *
+         * See http://schemas.taskcluster.net/pulse/v1/list-namespaces-response.json#/properties/namespaces/items/properties/created
+         */
+        public Date created;
 
         /**
          * The namespace's name
