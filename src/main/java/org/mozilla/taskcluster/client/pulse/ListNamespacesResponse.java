@@ -35,6 +35,14 @@ public class ListNamespacesResponse {
         public Date created;
 
         /**
+         * Date-time after which the username, and all associated queues and
+         * exchanges, should be deleted.
+         *
+         * See http://schemas.taskcluster.net/pulse/v1/list-namespaces-response.json#/properties/namespaces/items/properties/expires
+         */
+        public Date expires;
+
+        /**
          * The namespace's name
          *
          * See http://schemas.taskcluster.net/pulse/v1/list-namespaces-response.json#/properties/namespaces/items/properties/namespace

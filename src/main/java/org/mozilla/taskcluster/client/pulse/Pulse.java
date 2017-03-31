@@ -81,6 +81,16 @@ public class Pulse extends TaskClusterRequestHandler {
     }
 
     /**
+     * Get public information about a single namespace. This is the same information
+     * as returned by `listNamespaces`.
+     *
+     * @see "[Get a namespace API Documentation](https://docs.do.not.exist.yet.service.not.in.production#namespace)"
+     */
+    public CallSummary<EmptyPayload, Namespace> namespace(String namespace) throws APICallFailure {
+        return apiCall(null, "GET", "/namespace/" + uriEncode(namespace), Namespace.class);
+    }
+
+    /**
      * Claim a namespace, returning a username and password with access to that
      * namespace good for a short time.  Clients should call this endpoint again
      * at the re-claim time given in the response, as the password will be rotated
