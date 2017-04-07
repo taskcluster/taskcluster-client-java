@@ -111,6 +111,20 @@ public class Pulse extends TaskClusterRequestHandler {
     }
 
     /**
+     * Immediately delete the given namespace.  This will delete all exchanges and queues which the
+     * namespace had configure access to, as if it had just expired.
+     *
+     * Required scopes:
+     *
+     *   * `pulse:namespace:<namespace>`
+     *
+     * @see "[Delete a namespace API Documentation](https://docs.do.not.exist.yet.service.not.in.production#deleteNamespace)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> deleteNamespace(String namespace) throws APICallFailure {
+        return apiCall(null, "DELETE", "/namespace/" + uriEncode(namespace), EmptyPayload.class);
+    }
+
+    /**
      * Respond without doing anything.
      * This endpoint is used to check that the service is up.
      *
