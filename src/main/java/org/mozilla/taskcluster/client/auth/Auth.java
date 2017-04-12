@@ -13,10 +13,15 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 /**
  * Authentication related API end-points for TaskCluster and related
  * services. These API end-points are of interest if you wish to:
- *   * Authenticate request signed with TaskCluster credentials,
+ *   * Authorize a request signed with TaskCluster credentials,
  *   * Manage clients and roles,
  *   * Inspect or audit clients and roles,
  *   * Gain access to various services guarded by this API.
+ * 
+ * Note that in this service "authentication" refers to validating the
+ * correctness of the supplied credentials (that the caller posesses the
+ * appropriate access token). This service does not provide any kind of user
+ * authentication (identifying a particular person).
  * 
  * ### Clients
  * The authentication service manages _clients_, at a high-level each client
@@ -395,8 +400,10 @@ public class Auth extends TaskClusterRequestHandler {
 
     /**
      * Get a shared access signature (SAS) string for use with a specific Azure
-     * Table Storage table. By not specifying a level as in azureTableSASLevel,
-     * you will get read-write permissions. If you get read-write from this, it will create the
+     * Table Storage table.
+     * 
+     * The `level` parameter can be `read-write` or `read-only` and determines
+     * which type of credentials are returned.  If level is read-write, it will create the
      * table if it doesn't already exist.
      *
      * Required scopes:
@@ -411,7 +418,11 @@ public class Auth extends TaskClusterRequestHandler {
 
     /**
      * Get a shared access signature (SAS) string for use with a specific Azure
-     * Blob Storage container. If the level is read-write, the container will be created, if it doesn't already exists.
+     * Blob Storage container.
+     * 
+     * The `level` parameter can be `read-write` or `read-only` and determines
+     * which type of credentials are returned.  If level is read-write, it will create the
+     * container if it doesn't already exist.
      *
      * Required scopes:
      *
