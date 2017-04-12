@@ -10,7 +10,7 @@ import java.util.Date;
 public class GetSecretRequest {
 
     /**
-     * The date at which the secret is no longer guarunteed to exist
+     * The date at which the secret is no longer guaranteed to exist
      *
      * See http://schemas.taskcluster.net/aws-provisioner/v1/create-secret-request.json#/properties/expiration
      */

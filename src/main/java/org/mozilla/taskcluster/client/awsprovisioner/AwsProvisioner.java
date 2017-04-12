@@ -153,7 +153,7 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
-     * Retreive a copy of the requested worker type definition.
+     * Retrieve a copy of the requested worker type definition.
      * This copy contains a lastModified field as well as the worker
      * type name.  As such, it will require manipulation to be able to
      * use the results of this method to submit date to the update
@@ -202,73 +202,6 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      */
     public CallSummary<EmptyPayload, String[]> listWorkerTypes() throws APICallFailure {
         return apiCall(null, "GET", "/list-worker-types", String[].class);
-    }
-
-    /**
-     * Create an AMI Set. An AMI Set is a collection of AMIs with a single name.
-     *
-     * Required scopes:
-     *
-     *   * `aws-provisioner:manage-ami-set:<amiSetId>`
-     *
-     * @see "[Create new AMI Set API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#createAmiSet)"
-     */
-    public CallSummary<CreateAMISetRequest, EmptyPayload> createAmiSet(String id, CreateAMISetRequest payload) throws APICallFailure {
-        return apiCall(payload, "PUT", "/ami-set/" + uriEncode(id), EmptyPayload.class);
-    }
-
-    /**
-     * Retreive a copy of the requested AMI set.
-     *
-     * @see "[Get AMI Set API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#amiSet)"
-     */
-    public CallSummary<EmptyPayload, GetAMISetResponse> amiSet(String id) throws APICallFailure {
-        return apiCall(null, "GET", "/ami-set/" + uriEncode(id), GetAMISetResponse.class);
-    }
-
-    /**
-     * Provide a new copy of an AMI Set to replace the existing one.
-     * This will overwrite the existing AMI Set if there
-     * is already an AMI Set of that name. This method will return a
-     * 200 response along with a copy of the AMI Set created.
-     * Note that if you are using the result of a GET on the ami-set
-     * end point that you will need to delete the lastModified and amiSet
-     * keys from the object returned, since those fields are not allowed
-     * the request body for this method.
-     * 
-     * Otherwise, all input requirements and actions are the same as the
-     * create method.
-     *
-     * Required scopes:
-     *
-     *   * `aws-provisioner:manage-ami-set:<amiSetId>`
-     *
-     * @see "[Update AMI Set API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#updateAmiSet)"
-     */
-    public CallSummary<CreateAMISetRequest, GetAMISetResponse> updateAmiSet(String id, CreateAMISetRequest payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/ami-set/" + uriEncode(id) + "/update", GetAMISetResponse.class);
-    }
-
-    /**
-     * Return a list of AMI sets names.
-     *
-     * @see "[List AMI sets API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#listAmiSets)"
-     */
-    public CallSummary<EmptyPayload, String[]> listAmiSets() throws APICallFailure {
-        return apiCall(null, "GET", "/list-ami-sets", String[].class);
-    }
-
-    /**
-     * Delete an AMI Set.
-     *
-     * Required scopes:
-     *
-     *   * `aws-provisioner:manage-ami-set:<amiSetId>`
-     *
-     * @see "[Delete AMI Set API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#removeAmiSet)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> removeAmiSet(String id) throws APICallFailure {
-        return apiCall(null, "DELETE", "/ami-set/" + uriEncode(id), EmptyPayload.class);
     }
 
     /**
@@ -367,14 +300,20 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
-     * Documented later...
-     * 
-     * **Warning** this api end-point is **not stable**.
+     * Return the state of a given workertype as stored by the provisioner. 
+     * This state is stored as three lists: 1 for running instances, 1 for
+     * pending requests.  The `summary` property contains an updated summary
+     * similar to that returned from `listWorkerTypeSummaries`.
      *
-     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#ping)"
+     * Required scopes:
+     *
+     *   * `aws-provisioner:view-worker-type:<workerType>`, or
+     *   * `aws-provisioner:manage-worker-type:<workerType>`
+     *
+     * @see "[Get AWS State for a worker type API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#newState)"
      */
-    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
-        return apiCall(null, "GET", "/ping", EmptyPayload.class);
+    public CallSummary<EmptyPayload, EmptyPayload> newState(String workerType) throws APICallFailure {
+        return apiCall(null, "GET", "/new-state/" + uriEncode(workerType), EmptyPayload.class);
     }
 
     /**
@@ -428,5 +367,15 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
      */
     public CallSummary<EmptyPayload, EmptyPayload> shutdownEverySingleEc2InstanceManagedByThisProvisioner() throws APICallFailure {
         return apiCall(null, "POST", "/shutdown/every/single/ec2/instance/managed/by/this/provisioner", EmptyPayload.class);
+    }
+
+    /**
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
+     *
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#ping)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
+        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }
