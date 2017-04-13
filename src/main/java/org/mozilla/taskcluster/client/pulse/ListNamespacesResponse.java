@@ -21,11 +21,13 @@ public class ListNamespacesResponse {
     public class Namespace {
 
         /**
-         * The contact information which will be handed off to the notification service
+         * E-mail address that will reach people who can address problems with runaway queue length.
+         * The service will send warning notifications to this address before forcibly deleting the
+         * queue.
          *
          * See http://schemas.taskcluster.net/pulse/v1/list-namespaces-response.json#/properties/namespaces/items/properties/contact
          */
-        public Object contact;
+        public String contact;
 
         /**
          * Date-time at which this namespace was first claimed.

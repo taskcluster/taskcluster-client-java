@@ -10,11 +10,13 @@ import java.util.Date;
 public class NamespaceCreationRequest {
 
     /**
-     * The contact information which will be handed off to the notification service
+     * E-mail address that will reach people who can address problems with runaway queue length.
+     * The service will send warning notifications to this address before forcibly deleting the
+     * queue.
      *
      * See http://schemas.taskcluster.net/pulse/v1/namespace-request.json#/properties/contact
      */
-    public Object contact;
+    public String contact;
 
     /**
      * Date-time after which the username, and all associated queues and
