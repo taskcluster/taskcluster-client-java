@@ -58,16 +58,6 @@ public class Pulse extends TaskClusterRequestHandler {
     }
 
     /**
-     * Get a list of all exchanges in the rabbit cluster.  This will include exchanges
-     * not managed by this service, if any exist.
-     *
-     * @see "[Rabbit Exchanges API Documentation](https://docs.do.not.exist.yet.service.not.in.production#exchanges)"
-     */
-    public CallSummary<EmptyPayload, Exchange[]> exchanges() throws APICallFailure {
-        return apiCall(null, "GET", "/exchanges", Exchange[].class);
-    }
-
-    /**
      * List the namespaces managed by this service.
      * 
      * This will list up to 1000 namespaces. If more namespaces are present a
