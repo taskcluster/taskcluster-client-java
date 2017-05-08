@@ -90,6 +90,16 @@ public class Github extends TaskClusterRequestHandler {
     }
 
     /**
+     * Builds a link to the task inspector for the given task group
+     *  and redirects the user to that page.
+     *
+     * @see "[Redirects to the task inspector page API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#taskLink)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> taskLink(String owner, String repo, String branch) throws APICallFailure {
+        return apiCall(null, "GET", "/taskLink/" + uriEncode(owner) + "/" + uriEncode(repo) + "/" + uriEncode(branch), EmptyPayload.class);
+    }
+
+    /**
      * Respond without doing anything.
      * This endpoint is used to check that the service is up.
      *
