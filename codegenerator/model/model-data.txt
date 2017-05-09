@@ -3069,8 +3069,9 @@ Entry 4     =
     Entry Input       = ''
     Entry Output      = ''
     Entry Title       = 'Redirects to the task inspector page'
-    Entry Description = 'Builds a link to the task inspector for the given task group
- and redirects the user to that page.'
+    Entry Description = 'Finds a link to the task inspector for the given task group
+in the status object returned by GitHub,
+and returns the link to redirect the user to that page.'
 Entry 5     =
     Entry Type        = 'function'
     Entry Method      = 'get'
