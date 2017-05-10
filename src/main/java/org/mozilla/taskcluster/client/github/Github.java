@@ -70,34 +70,36 @@ public class Github extends TaskClusterRequestHandler {
     }
 
     /**
-     * Checks the status of the latest build of a given branch 
-     * and returns corresponding badge image.
+     * Checks the status of the latest build of a given branch
+     * and returns corresponding badge svg.
      *
      * @see "[Latest Build Status Badge API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#badge)"
      */
     public CallSummary<EmptyPayload, EmptyPayload> badge(String owner, String repo, String branch) throws APICallFailure {
-        return apiCall(null, "GET", "/badge/" + uriEncode(owner) + "/" + uriEncode(repo) + "/" + uriEncode(branch), EmptyPayload.class);
+        return apiCall(null, "GET", "/repository/" + uriEncode(owner) + "/" + uriEncode(repo) + "/" + uriEncode(branch) + "/badge.svg", EmptyPayload.class);
     }
 
     /**
-     * Checks if the integration has been installed for
-     * a given repository of a given organization or user.
+     * Returns any repository metadata that is
+     * useful within Taskcluster related services.
      *
-     * @see "[Check if Repository has Integration API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#isInstalledFor)"
+     * @see "[Get Repository Info API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#repository)"
      */
-    public CallSummary<EmptyPayload, IsInstalledFor> isInstalledFor(String owner, String repo) throws APICallFailure {
-        return apiCall(null, "GET", "/repository/" + uriEncode(owner) + "/" + uriEncode(repo), IsInstalledFor.class);
+    public CallSummary<EmptyPayload, Repository> repository(String owner, String repo) throws APICallFailure {
+        return apiCall(null, "GET", "/repository/" + uriEncode(owner) + "/" + uriEncode(repo), Repository.class);
     }
 
     /**
-     * Finds a link to the task inspector for the given task group
-     * in the status object returned by GitHub,
-     * and returns the link to redirect the user to that page.
+     * For a given branch of a repository, this will always point
+     * to a status page for the most recent task triggered by that
+     * branch.
+     * 
+     * Note: This is a redirect rather than a direct link.
      *
-     * @see "[Redirects to the task inspector page API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#taskLink)"
+     * @see "[Latest Status for Branch API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#latest)"
      */
-    public CallSummary<EmptyPayload, EmptyPayload> taskLink(String owner, String repo, String branch) throws APICallFailure {
-        return apiCall(null, "GET", "/taskLink/" + uriEncode(owner) + "/" + uriEncode(repo) + "/" + uriEncode(branch), EmptyPayload.class);
+    public CallSummary<EmptyPayload, EmptyPayload> latest(String owner, String repo, String branch) throws APICallFailure {
+        return apiCall(null, "GET", "/repository/" + uriEncode(owner) + "/" + uriEncode(repo) + "/" + uriEncode(branch) + "/latest", EmptyPayload.class);
     }
 
     /**
