@@ -122,13 +122,18 @@ public class TaskDefinitionResponse {
     public Object payload;
 
     /**
-     * Priority of task, this defaults to `normal` and the scope
-     * `queue:task-priority:high` is required to define a task with `priority`
-     * set to `high`. Additional priority levels may be added later.
+     * Priority of task, this defaults to `lowest` and the scope
+     * `queue:create-task:<priority>/<provisionerId>/<workerType>` is required
+     * to define a task with `<priority>`.
      *
      * Possible values:
+     *     * "highest"
+     *     * "very-high"
      *     * "high"
-     *     * "normal"
+     *     * "medium"
+     *     * "low"
+     *     * "very-low"
+     *     * "lowest"
      *
      * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/priority
      */
