@@ -147,9 +147,8 @@ public class Queue extends TaskClusterRequestHandler {
      *
      * Required scopes:
      *
-     *   * `queue:create-task:<provisionerId>/<workerType>`, or
-     *   * (`queue:define-task:<provisionerId>/<workerType>` and `queue:task-group-id:<schedulerId>/<taskGroupId>` and `queue:schedule-task:<schedulerId>/<taskGroupId>/<taskId>`), or
-     *   * (`queue:create-task:<priority>:<provisionerId>/<workerType>` and `queue:scheduler-id:<schedulerId>`)
+     *   * `queue:create-task:<priority>:<provisionerId>/<workerType>`, and
+     *   * `queue:scheduler-id:<schedulerId>`
      *
      * @see "[Create New Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#createTask)"
      */
@@ -163,9 +162,8 @@ public class Queue extends TaskClusterRequestHandler {
      *
      * Required scopes:
      *
-     *   * `queue:define-task:<provisionerId>/<workerType>`, or
-     *   * `queue:create-task:<provisionerId>/<workerType>`, or
-     *   * (`queue:define-task:<provisionerId>/<workerType>` and `queue:task-group-id:<schedulerId>/<taskGroupId>`)
+     *   * `queue:create-task:<priority>:<provisionerId>/<workerType>`, and
+     *   * `queue:scheduler-id:<schedulerId>`
      *
      * @see "[Define Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#defineTask)"
      */
