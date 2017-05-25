@@ -103,6 +103,35 @@ public class Github extends TaskClusterRequestHandler {
     }
 
     /**
+     * For a given changeset (SHA) of a repository, this will attach a "commit status"
+     * on github. These statuses are links displayed next to each revision.
+     * The status is either OK (green check) or FAILURE (red cross), 
+     * made of a custom title and link.
+     *
+     * Required scopes:
+     *
+     *   * `github:create-status:<owner>/<repo>`
+     *
+     * @see "[Post a status against a given changeset API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#createStatus)"
+     */
+    public CallSummary<CreateStatus, EmptyPayload> createStatus(String owner, String repo, String sha, CreateStatus payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/repository/" + uriEncode(owner) + "/" + uriEncode(repo) + "/statuses/" + uriEncode(sha), EmptyPayload.class);
+    }
+
+    /**
+     * For a given Issue or Pull Request of a repository, this will write a new message.
+     *
+     * Required scopes:
+     *
+     *   * `github:create-comment:<owner>/<repo>`
+     *
+     * @see "[Post a comment on a given GitHub Issue or Pull Request API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#createComment)"
+     */
+    public CallSummary<CreateComment, EmptyPayload> createComment(String owner, String repo, String number, CreateComment payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/repository/" + uriEncode(owner) + "/" + uriEncode(repo) + "/issues/" + uriEncode(number) + "/comments", EmptyPayload.class);
+    }
+
+    /**
      * Respond without doing anything.
      * This endpoint is used to check that the service is up.
      *
