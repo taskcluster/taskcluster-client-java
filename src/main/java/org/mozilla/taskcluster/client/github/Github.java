@@ -16,7 +16,10 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  * messages in response to GitHub events.
  * 
  * This document describes the API end-point for consuming GitHub
- * web hooks
+ * web hooks, as well as some useful consumer APIs.
+ * 
+ * When Github forbids an action, this service returns an HTTP 403
+ * with code ForbiddenByGithub.
  *
  * @see "[Github API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs)"
  */
