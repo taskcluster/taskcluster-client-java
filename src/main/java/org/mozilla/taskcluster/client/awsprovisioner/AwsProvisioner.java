@@ -332,44 +332,6 @@ public class AwsProvisioner extends TaskClusterRequestHandler {
     }
 
     /**
-     * WARNING: YOU ALMOST CERTAINLY DO NOT WANT TO USE THIS 
-     * Shut down every single EC2 instance associated with this workerType. 
-     * This means every single last one.  You probably don't want to use 
-     * this method, which is why it has an obnoxious name.  Don't even try 
-     * to claim you didn't know what this method does!
-     * 
-     * **This API end-point is experimental and may be subject to change without warning.**
-     *
-     * Required scopes:
-     *
-     *   * `aws-provisioner:terminate-all-worker-type:<workerType>`
-     *
-     * @see "[Shutdown Every Ec2 Instance of this Worker Type API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#terminateAllInstancesOfWorkerType)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> terminateAllInstancesOfWorkerType(String workerType) throws APICallFailure {
-        return apiCall(null, "POST", "/worker-type/" + uriEncode(workerType) + "/terminate-all-instances", EmptyPayload.class);
-    }
-
-    /**
-     * WARNING: YOU ALMOST CERTAINLY DO NOT WANT TO USE THIS 
-     * Shut down every single EC2 instance managed by this provisioner. 
-     * This means every single last one.  You probably don't want to use 
-     * this method, which is why it has an obnoxious name.  Don't even try 
-     * to claim you didn't know what this method does!
-     * 
-     * **This API end-point is experimental and may be subject to change without warning.**
-     *
-     * Required scopes:
-     *
-     *   * `aws-provisioner:terminate-all-worker-type:*`
-     *
-     * @see "[Shutdown Every Single Ec2 Instance Managed By This Provisioner API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#shutdownEverySingleEc2InstanceManagedByThisProvisioner)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> shutdownEverySingleEc2InstanceManagedByThisProvisioner() throws APICallFailure {
-        return apiCall(null, "POST", "/shutdown/every/single/ec2/instance/managed/by/this/provisioner", EmptyPayload.class);
-    }
-
-    /**
      * Respond without doing anything.
      * This endpoint is used to check that the service is up.
      *
