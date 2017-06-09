@@ -23,7 +23,7 @@ public class ListNamespacesResponse {
         /**
          * E-mail address that will reach people who can address problems with runaway queue length.
          * The service will send warning notifications to this address before forcibly deleting the
-         * queue.
+         * queue.  If omitted, no warnings will be given.
          *
          * See http://schemas.taskcluster.net/pulse/v1/list-namespaces-response.json#/properties/namespaces/items/properties/contact
          */
