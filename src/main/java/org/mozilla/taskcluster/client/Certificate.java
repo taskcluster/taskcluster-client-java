@@ -13,8 +13,8 @@ import com.google.gson.GsonBuilder;
 import net.iharder.Base64;
 
 /**
- * TaskCluster certificates are used in temporary credentials when
- * authenticating against TaskCluster HTTP(S) end points.
+ * Taskcluster certificates are used in temporary credentials when
+ * authenticating against Taskcluster HTTP(S) end points.
  */
 
 public class Certificate {

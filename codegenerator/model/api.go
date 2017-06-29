@@ -13,7 +13,7 @@ import (
 //
 //////////////////////////////////////////////////////////////////
 
-// API represents the HTTP interface of a TaskCluster service
+// API represents the HTTP interface of a Taskcluster service
 type API struct {
 	BaseURL     string      `json:"baseUrl"`
 	Description string      `json:"description"`
@@ -61,7 +61,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
-import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
+import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 `
 	comment := "/**\n"
@@ -75,7 +75,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
 	comment += fmt.Sprintf(" * @see \"[%v API Documentation](%v)\"\n", className, api.apiDef.DocRoot)
 	comment += " */\n"
 	content += comment
-	content += "public class " + className + ` extends TaskClusterRequestHandler {
+	content += "public class " + className + ` extends TaskclusterRequestHandler {
 
     protected static final String defaultBaseURL = "` + api.BaseURL + `";
 

@@ -37,13 +37,13 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-public abstract class TaskClusterRequestHandler {
+public abstract class TaskclusterRequestHandler {
 
     static final Gson         gson;
     static HttpRequestFactory requestFactory;
 
     static {
-        // TaskCluster uses UTC-based ISO8601 date format like this:
+        // Taskcluster uses UTC-based ISO8601 date format like this:
         final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         JsonSerializer<Date> ser = new JsonSerializer<Date>() {
@@ -73,19 +73,19 @@ public abstract class TaskClusterRequestHandler {
     private boolean     authenticate;
     private String      baseURL;
 
-    public TaskClusterRequestHandler(Credentials credentials, String baseURL) {
+    public TaskclusterRequestHandler(Credentials credentials, String baseURL) {
         this.authenticate = true;
         this.baseURL = baseURL;
         this.credentials = credentials;
     }
 
-    public TaskClusterRequestHandler(String baseURL) {
+    public TaskclusterRequestHandler(String baseURL) {
         this.authenticate = false;
         this.baseURL = baseURL;
         this.credentials = null;
     }
 
-    public TaskClusterRequestHandler setBaseURL(String baseURL) {
+    public TaskclusterRequestHandler setBaseURL(String baseURL) {
         this.baseURL = baseURL;
         return this;
     }
