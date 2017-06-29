@@ -8,7 +8,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
-import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
+import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * The AWS Provisioner is responsible for provisioning instances on EC2 for use in
@@ -41,7 +41,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *
  * @see "[AwsProvisioner API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs)"
  */
-public class AwsProvisioner extends TaskClusterRequestHandler {
+public class AwsProvisioner extends TaskclusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://aws-provisioner.taskcluster.net/v1";
 

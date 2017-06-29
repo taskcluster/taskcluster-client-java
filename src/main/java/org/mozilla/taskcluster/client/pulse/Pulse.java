@@ -8,7 +8,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
-import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
+import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * The taskcluster-pulse service, typically available at `pulse.taskcluster.net`
@@ -20,7 +20,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *
  * @see "[Pulse API Documentation](https://docs.do.not.exist.yet.service.not.in.production)"
  */
-public class Pulse extends TaskClusterRequestHandler {
+public class Pulse extends TaskclusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://pulse.taskcluster.net/v1";
 

@@ -8,7 +8,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
-import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
+import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * The github service, typically available at
@@ -23,7 +23,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *
  * @see "[Github API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs)"
  */
-public class Github extends TaskClusterRequestHandler {
+public class Github extends TaskclusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://github.taskcluster.net/v1";
 

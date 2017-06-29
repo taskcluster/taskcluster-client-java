@@ -8,7 +8,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
-import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
+import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * The task index, typically available at `index.taskcluster.net`, is
@@ -106,7 +106,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *
  * @see "[Index API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs)"
  */
-public class Index extends TaskClusterRequestHandler {
+public class Index extends TaskclusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://index.taskcluster.net/v1";
 

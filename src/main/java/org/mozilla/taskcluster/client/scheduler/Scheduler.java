@@ -8,7 +8,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
-import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
+import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * The task-graph scheduler, typically available at
@@ -24,7 +24,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *
  * @see "[Scheduler API Documentation](https://docs.taskcluster.net/reference/platform/scheduler/api-docs)"
  */
-public class Scheduler extends TaskClusterRequestHandler {
+public class Scheduler extends TaskclusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://scheduler.taskcluster.net/v1";
 

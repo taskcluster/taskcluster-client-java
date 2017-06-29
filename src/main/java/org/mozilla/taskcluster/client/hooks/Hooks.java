@@ -8,7 +8,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
-import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
+import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * Hooks are a mechanism for creating tasks in response to events.
@@ -29,7 +29,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *
  * @see "[Hooks API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs)"
  */
-public class Hooks extends TaskClusterRequestHandler {
+public class Hooks extends TaskclusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://hooks.taskcluster.net/v1";
 

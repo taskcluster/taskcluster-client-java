@@ -8,7 +8,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
-import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
+import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * The purge-cache service, typically available at
@@ -20,7 +20,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *
  * @see "[PurgeCache API Documentation](https://docs.taskcluster.net/reference/core/purge-cache/api-docs)"
  */
-public class PurgeCache extends TaskClusterRequestHandler {
+public class PurgeCache extends TaskclusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://purge-cache.taskcluster.net/v1";
 

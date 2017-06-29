@@ -8,7 +8,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
-import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
+import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * The notification service, typically available at `notify.taskcluster.net`
@@ -17,7 +17,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *
  * @see "[Notify API Documentation](https://docs.taskcluster.net/reference/core/notify/api-docs)"
  */
-public class Notify extends TaskClusterRequestHandler {
+public class Notify extends TaskclusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://notify.taskcluster.net/v1";
 

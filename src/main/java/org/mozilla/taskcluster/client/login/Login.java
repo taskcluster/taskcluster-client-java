@@ -8,7 +8,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
-import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
+import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * The Login service serves as the interface between external authentication
@@ -19,7 +19,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *
  * @see "[Login API Documentation](https://docs.taskcluster.net/reference/core/login/api-docs)"
  */
-public class Login extends TaskClusterRequestHandler {
+public class Login extends TaskclusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://login.taskcluster.net/v1";
 

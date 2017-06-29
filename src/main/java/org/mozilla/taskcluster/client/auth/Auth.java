@@ -8,7 +8,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
-import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
+import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * Authentication related API end-points for TaskCluster and related
@@ -53,7 +53,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *
  * @see "[Auth API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs)"
  */
-public class Auth extends TaskClusterRequestHandler {
+public class Auth extends TaskclusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://auth.taskcluster.net/v1";
 

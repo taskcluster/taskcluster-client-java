@@ -8,7 +8,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
-import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
+import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * The queue, typically available at `queue.taskcluster.net`, is responsible
@@ -23,7 +23,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *
  * @see "[Queue API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs)"
  */
-public class Queue extends TaskClusterRequestHandler {
+public class Queue extends TaskclusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://queue.taskcluster.net/v1";
 

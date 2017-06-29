@@ -8,7 +8,7 @@ import org.mozilla.taskcluster.client.APICallFailure;
 import org.mozilla.taskcluster.client.CallSummary;
 import org.mozilla.taskcluster.client.Credentials;
 import org.mozilla.taskcluster.client.EmptyPayload;
-import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
+import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * The secrets service provides a simple key/value store for small bits of secret
@@ -21,7 +21,7 @@ import org.mozilla.taskcluster.client.TaskClusterRequestHandler;
  *
  * @see "[Secrets API Documentation](https://docs.taskcluster.net/reference/core/secrets/api-docs)"
  */
-public class Secrets extends TaskClusterRequestHandler {
+public class Secrets extends TaskclusterRequestHandler {
 
     protected static final String defaultBaseURL = "https://secrets.taskcluster.net/v1";
 
