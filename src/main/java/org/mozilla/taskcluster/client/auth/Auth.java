@@ -469,6 +469,20 @@ public class Auth extends TaskclusterRequestHandler {
     }
 
     /**
+     * Get temporary `token` and `id` for connecting to webhooktunnel
+     * The token is valid for 96 hours, clients should refresh after expiration.
+     *
+     * Required scopes:
+     *
+     *   * `auth:webhooktunnel`
+     *
+     * @see "[Get Token for Webhooktunnel Proxy API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#webhooktunnelToken)"
+     */
+    public CallSummary<EmptyPayload, WebhooktunnelTokenResponse> webhooktunnelToken() throws APICallFailure {
+        return apiCall(null, "GET", "/webhooktunnel", WebhooktunnelTokenResponse.class);
+    }
+
+    /**
      * Validate the request signature given on input and return list of scopes
      * that the authenticating client has.
      * 
