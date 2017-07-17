@@ -1,7 +1,7 @@
 package org.mozilla.taskcluster.client.queueevents;
 
 /**
- * Message reporting that TaskCluster have failed to run a task.
+ * Message reporting that Taskcluster have failed to run a task.
  *
  * See http://schemas.taskcluster.net/queue/v1/task-exception-message.json#
  */
