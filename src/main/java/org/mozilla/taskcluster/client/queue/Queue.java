@@ -550,6 +550,24 @@ public class Queue extends TaskclusterRequestHandler {
     }
 
     /**
+     * Get all active provisioners.
+     * 
+     * The term "provisioner" is taken broadly to mean anything with a provisionerId.
+     * This does not necessarily mean there is an associated service performing any
+     * provisioning activity.
+     * 
+     * The response is paged. If this end-point returns a `continuationToken`, you
+     * should call the end-point again with the `continuationToken` as a query-string
+     * option. By default this end-point will list up to 1000 provisioners in a single
+     * page. You may limit this with the query-string parameter `limit`.
+     *
+     * @see "[Get a list of all active provisioners API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#listProvisioners)"
+     */
+    public CallSummary<EmptyPayload, ListProvisionersResponse> listProvisioners() throws APICallFailure {
+        return apiCall(null, "GET", "/provisioners", ListProvisionersResponse.class);
+    }
+
+    /**
      * Get an approximate number of pending tasks for the given `provisionerId`
      * and `workerType`.
      * 
