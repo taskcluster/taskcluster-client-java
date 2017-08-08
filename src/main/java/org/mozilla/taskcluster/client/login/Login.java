@@ -12,10 +12,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * The Login service serves as the interface between external authentication
- * systems and TaskCluster credentials.  It acts as the server side of
- * https://tools.taskcluster.net.  If you are working on federating logins
- * with TaskCluster, this is probably *not* the service you are looking for.
- * Instead, use the federated login support in the tools site.
+ * systems and TaskCluster credentials.
  *
  * @see "[Login API Documentation](https://docs.taskcluster.net/reference/core/login/api-docs)"
  */
@@ -45,6 +42,29 @@ public class Login extends TaskclusterRequestHandler {
 
     public Login() {
         super(defaultBaseURL);
+    }
+
+    /**
+     * Given an OIDC `access_token` from a trusted OpenID provider, return a
+     * set of Taskcluster credentials for use on behalf of the identified
+     * user.
+     * 
+     * This method is typically not called with a Taskcluster client library
+     * and does not accept Hawk credentials. The `access_token` should be
+     * given in an `Authorization` header:
+     * ```
+     * Authorization: Bearer abc.xyz
+     * ```
+     * 
+     * The `access_token` is first verified against the named
+     * :provider, then passed to the provider's API to retrieve a user
+     * profile. That profile is then used to generate Taskcluster credentials
+     * appropriate to the user.
+     *
+     * @see "[Get TaskCluster credentials given a suitable `access_token` API Documentation](https://docs.taskcluster.net/reference/core/login/api-docs#oidcCredentials)"
+     */
+    public CallSummary<EmptyPayload, CredentialsResponse> oidcCredentials(String provider) throws APICallFailure {
+        return apiCall(null, "GET", "/oidc-credentials/" + uriEncode(provider), CredentialsResponse.class);
     }
 
     /**
