@@ -583,6 +583,20 @@ public class Queue extends TaskclusterRequestHandler {
     }
 
     /**
+     * Get all active worker-types for the given provisioner.
+     * 
+     * The response is paged. If this end-point returns a `continuationToken`, you
+     * should call the end-point again with the `continuationToken` as a query-string
+     * option. By default this end-point will list up to 1000 worker-types in a single
+     * page. You may limit this with the query-string parameter `limit`.
+     *
+     * @see "[Get a list of all active worker-types API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#listWorkerTypes)"
+     */
+    public CallSummary<EmptyPayload, ListWorkerTypesResponse> listWorkerTypes(String provisionerId) throws APICallFailure {
+        return apiCall(null, "GET", "/provisioners/" + uriEncode(provisionerId) + "/worker-types", ListWorkerTypesResponse.class);
+    }
+
+    /**
      * Respond without doing anything.
      * This endpoint is used to check that the service is up.
      *
