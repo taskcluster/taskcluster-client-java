@@ -59,7 +59,9 @@ public class Login extends TaskclusterRequestHandler {
      * The `access_token` is first verified against the named
      * :provider, then passed to the provider's API to retrieve a user
      * profile. That profile is then used to generate Taskcluster credentials
-     * appropriate to the user.
+     * appropriate to the user. Note that the resulting credentials may or may
+     * not include a `certificate` property. Callers should be prepared for either
+     * alternative.
      *
      * @see "[Get TaskCluster credentials given a suitable `access_token` API Documentation](https://docs.taskcluster.net/reference/core/login/api-docs#oidcCredentials)"
      */
