@@ -5415,7 +5415,11 @@ The `access_token` is first verified against the named
 profile. That profile is then used to generate Taskcluster credentials
 appropriate to the user. Note that the resulting credentials may or may
 not include a `certificate` property. Callers should be prepared for either
-alternative.'
+alternative.
+
+The given credentials will expire in a relatively short time. Callers should
+monitor this expiration and refresh the credentials if necessary, by calling
+this endpoint again, if they have expired.'
 Entry 1     =
     Entry Type        = 'function'
     Entry Method      = 'get'

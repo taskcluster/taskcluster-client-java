@@ -62,6 +62,10 @@ public class Login extends TaskclusterRequestHandler {
      * appropriate to the user. Note that the resulting credentials may or may
      * not include a `certificate` property. Callers should be prepared for either
      * alternative.
+     * 
+     * The given credentials will expire in a relatively short time. Callers should
+     * monitor this expiration and refresh the credentials if necessary, by calling
+     * this endpoint again, if they have expired.
      *
      * @see "[Get TaskCluster credentials given a suitable `access_token` API Documentation](https://docs.taskcluster.net/reference/core/login/api-docs#oidcCredentials)"
      */
