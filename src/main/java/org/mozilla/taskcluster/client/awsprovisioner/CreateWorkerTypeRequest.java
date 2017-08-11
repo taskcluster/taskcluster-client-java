@@ -7,6 +7,46 @@ package org.mozilla.taskcluster.client.awsprovisioner;
  */
 public class CreateWorkerTypeRequest {
 
+    public class AvailabilityZonesEntry {
+
+        /**
+         * The AWS availability zone being configured.  Example: eu-central-1b
+         *
+         * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones/items/properties/availabilityZone
+         */
+        public String availabilityZone;
+
+        /**
+         * LaunchSpecification entries unique to this AZ
+         *
+         * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones/items/properties/launchSpec
+         */
+        public Object launchSpec;
+
+        /**
+         * Static Secrets unique to this AZ
+         *
+         * Default:    map[]
+         *
+         * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones/items/properties/secrets
+         */
+        public Object secrets;
+
+        /**
+         * UserData entries unique to this AZ
+         *
+         * Default:    map[]
+         *
+         * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones/items/properties/userData
+         */
+        public Object userData;
+    }
+
+    /**
+     * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones
+     */
+    public AvailabilityZonesEntry[] availabilityZones;
+
     /**
      * True if this worker type is allowed on demand instances.  Currently
      * ignored
