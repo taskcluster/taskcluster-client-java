@@ -2100,7 +2100,7 @@ Entry 12    =
     Entry Query        = '[]'
     Entry Name        = 'state'
     Entry Stability   = 'stable'
-    Entry Scopes      = '[[aws-provisioner:view-worker-type:<workerType>] [aws-provisioner:manage-worker-type:<workerType>]]'
+    Entry Scopes      = '[]'
     Entry Input       = ''
     Entry Output      = ''
     Entry Title       = 'Get AWS State for a worker type'
@@ -2109,22 +2109,6 @@ This state is stored as three lists: 1 for running instances, 1 for
 pending requests.  The `summary` property contains an updated summary
 similar to that returned from `listWorkerTypeSummaries`.'
 Entry 13    =
-    Entry Type        = 'function'
-    Entry Method      = 'get'
-    Entry Route       = '/new-state/<workerType>'
-    Entry Args        = '[workerType]'
-    Entry Query        = '[]'
-    Entry Name        = 'newState'
-    Entry Stability   = 'stable'
-    Entry Scopes      = '[[aws-provisioner:view-worker-type:<workerType>] [aws-provisioner:manage-worker-type:<workerType>]]'
-    Entry Input       = ''
-    Entry Output      = ''
-    Entry Title       = 'Get AWS State for a worker type'
-    Entry Description = 'Return the state of a given workertype as stored by the provisioner. 
-This state is stored as three lists: 1 for running instances, 1 for
-pending requests.  The `summary` property contains an updated summary
-similar to that returned from `listWorkerTypeSummaries`.'
-Entry 14    =
     Entry Type        = 'function'
     Entry Method      = 'get'
     Entry Route       = '/backend-status'
@@ -2143,7 +2127,7 @@ and used to tell if the background provisioning process is still
 running.
 
 **Warning** this api end-point is **not stable**.'
-Entry 15    =
+Entry 14    =
     Entry Type        = 'function'
     Entry Method      = 'get'
     Entry Route       = '/ping'

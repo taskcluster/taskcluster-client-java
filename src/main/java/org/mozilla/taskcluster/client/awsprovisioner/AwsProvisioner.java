@@ -288,32 +288,10 @@ public class AwsProvisioner extends TaskclusterRequestHandler {
      * pending requests.  The `summary` property contains an updated summary
      * similar to that returned from `listWorkerTypeSummaries`.
      *
-     * Required scopes:
-     *
-     *   * `aws-provisioner:view-worker-type:<workerType>`, or
-     *   * `aws-provisioner:manage-worker-type:<workerType>`
-     *
      * @see "[Get AWS State for a worker type API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#state)"
      */
     public CallSummary<EmptyPayload, EmptyPayload> state(String workerType) throws APICallFailure {
         return apiCall(null, "GET", "/state/" + uriEncode(workerType), EmptyPayload.class);
-    }
-
-    /**
-     * Return the state of a given workertype as stored by the provisioner. 
-     * This state is stored as three lists: 1 for running instances, 1 for
-     * pending requests.  The `summary` property contains an updated summary
-     * similar to that returned from `listWorkerTypeSummaries`.
-     *
-     * Required scopes:
-     *
-     *   * `aws-provisioner:view-worker-type:<workerType>`, or
-     *   * `aws-provisioner:manage-worker-type:<workerType>`
-     *
-     * @see "[Get AWS State for a worker type API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#newState)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> newState(String workerType) throws APICallFailure {
-        return apiCall(null, "GET", "/new-state/" + uriEncode(workerType), EmptyPayload.class);
     }
 
     /**
