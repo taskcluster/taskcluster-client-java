@@ -1,5 +1,7 @@
 package org.mozilla.taskcluster.client.queue;
 
+import java.util.Date;
+
 /**
  * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#
  */
@@ -21,6 +23,21 @@ public class ListProvisionersResponse {
     public class ProvisionerInformation {
 
         /**
+         * Description of the provisioner.
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/description
+         */
+        public String description;
+
+        /**
+         * Date and time after which the provisioner created will be automatically
+         * deleted by the queue.
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/expires
+         */
+        public Date expires;
+
+        /**
          *
          * Syntax:     ^([a-zA-Z0-9-_]*)$
          * Min length: 1
@@ -29,6 +46,21 @@ public class ListProvisionersResponse {
          * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/provisionerId
          */
         public String provisionerId;
+
+        /**
+         * This is the stability of the provisioner. Accepted values:
+         *  * `experimental`
+         *  * `stable`
+         *  * `deprecated`
+         *
+         * Possible values:
+         *     * "experimental"
+         *     * "stable"
+         *     * "deprecated"
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/stability
+         */
+        public String stability;
     }
 
     /**

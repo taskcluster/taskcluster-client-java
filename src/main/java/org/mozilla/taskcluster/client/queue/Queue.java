@@ -607,7 +607,7 @@ public class Queue extends TaskclusterRequestHandler {
      * @see "[Get a list of all active workerGroup/workerId of a workerType API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#listWorkers)"
      */
     public CallSummary<EmptyPayload, ListWorkersResponse> listWorkers(String provisionerId, String workerType) throws APICallFailure {
-        return apiCall(null, "GET", "/provisioners/" + uriEncode(provisionerId) + "/workerTypes/" + uriEncode(workerType) + "/workers", ListWorkersResponse.class);
+        return apiCall(null, "GET", "/provisioners/" + uriEncode(provisionerId) + "/worker-types/" + uriEncode(workerType) + "/workers", ListWorkersResponse.class);
     }
 
     /**
