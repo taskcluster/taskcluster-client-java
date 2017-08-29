@@ -14,6 +14,8 @@ public class AuthenticationSuccessfulResponse {
      * for logging, auditing, and identifying the credential but **must** not be
      * used for access control.  That's what scopes are for.
      *
+     * Syntax:     ^[A-Za-z0-9@/:.+|_-]+$
+     *
      * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/anyOf[0]/properties/clientId
      */
     public String clientId;

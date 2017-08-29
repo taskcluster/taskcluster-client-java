@@ -22,7 +22,7 @@ public class CreateClientResponse {
     /**
      * ClientId of the client
      *
-     * Syntax:     ^[A-Za-z0-9@/:._-]+$
+     * Syntax:     ^[A-Za-z0-9@/:.+|_-]+$
      *
      * See http://schemas.taskcluster.net/auth/v1/create-client-response.json#/properties/clientId
      */

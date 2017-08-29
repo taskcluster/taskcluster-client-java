@@ -12,7 +12,7 @@ public class GetClientResponse {
     /**
      * ClientId of the client scopes is requested about
      *
-     * Syntax:     ^[A-Za-z0-9@/:._-]+$
+     * Syntax:     ^[A-Za-z0-9@/:.+|_-]+$
      *
      * See http://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/clientId
      */

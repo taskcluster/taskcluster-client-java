@@ -10,7 +10,7 @@ public class TestAuthenticateResponse {
     /**
      * ClientId from the request as it will be logged
      *
-     * Syntax:     ^[A-Za-z0-9@/:._-]+$
+     * Syntax:     ^[A-Za-z0-9@/:.+|_-]+$
      *
      * See http://schemas.taskcluster.net/auth/v1/test-authenticate-response.json#/properties/clientId
      */
