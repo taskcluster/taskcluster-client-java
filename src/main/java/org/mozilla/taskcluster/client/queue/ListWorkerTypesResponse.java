@@ -40,6 +40,13 @@ public class ListWorkerTypesResponse {
         public Date expires;
 
         /**
+         * Date and time where the worker-type was last seen active
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/lastDateActive
+         */
+        public Date lastDateActive;
+
+        /**
          *
          * Syntax:     ^([a-zA-Z0-9-_]*)$
          * Min length: 1

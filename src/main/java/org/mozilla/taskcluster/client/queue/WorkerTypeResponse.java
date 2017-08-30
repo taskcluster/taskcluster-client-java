@@ -1,0 +1,71 @@
+package org.mozilla.taskcluster.client.queue;
+
+import java.util.Date;
+
+/**
+ * Response to a worker-type request from a provisioner.
+ *
+ * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#
+ */
+public class WorkerTypeResponse {
+
+    /**
+     * Description of the worker-type.
+     *
+     * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/description
+     */
+    public String description;
+
+    /**
+     * Date and time after which the worker-type will be automatically
+     * deleted by the queue.
+     *
+     * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/expires
+     */
+    public Date expires;
+
+    /**
+     * Date of the last time this worker-type was seen active. `lastDateActive` is updated every 6 hours
+     * but may be off by up-to 6 hours. Nonetheless, `lastDateActive` is a good indicator
+     * of when the worker-type was last seen active.
+     *
+     * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/lastDateActive
+     */
+    public Date lastDateActive;
+
+    /**
+     *
+     * Syntax:     ^([a-zA-Z0-9-_]*)$
+     * Min length: 1
+     * Max length: 22
+     *
+     * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/provisionerId
+     */
+    public String provisionerId;
+
+    /**
+     * This is the stability of the worker-type. Accepted values:
+     *   * `experimental`
+     *   * `stable`
+     *   * `deprecated`
+     *
+     * Possible values:
+     *     * "experimental"
+     *     * "stable"
+     *     * "deprecated"
+     *
+     * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/stability
+     */
+    public String stability;
+
+    /**
+     * WorkerType name.
+     *
+     * Syntax:     ^([a-zA-Z0-9-_]*)$
+     * Min length: 1
+     * Max length: 22
+     *
+     * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/workerType
+     */
+    public String workerType;
+}

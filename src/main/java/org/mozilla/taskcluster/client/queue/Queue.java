@@ -597,6 +597,33 @@ public class Queue extends TaskclusterRequestHandler {
     }
 
     /**
+     * Get a worker-type from a provisioner.
+     *
+     * @see "[Get a worker-type API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#getWorkerType)"
+     */
+    public CallSummary<EmptyPayload, WorkerTypeResponse> getWorkerType(String provisionerId, String workerType) throws APICallFailure {
+        return apiCall(null, "GET", "/provisioners/" + uriEncode(provisionerId) + "/worker-types/" + uriEncode(workerType), WorkerTypeResponse.class);
+    }
+
+    /**
+     * Declare a workerType, supplying some details about it.
+     * 
+     * `declareWorkerType` allows updating one or more properties of a worker-type as long as the required scopes are
+     * possessed. For example, a request to update the `gecko-b-1-w2008` worker-type within the `aws-provisioner-v1`
+     * provisioner with a body `{description: 'This worker type is great'}` would require you to have the scope
+     * `queue:declare-worker-type:aws-provisioner-v1/gecko-b-1-w2008#description`.
+     *
+     * Required scopes:
+     *
+     *   * `queue:declare-worker-type:<provisionerId>/<workerType>#<property>`
+     *
+     * @see "[Update a worker-type API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#declareWorkerType)"
+     */
+    public CallSummary<WorkerTypeRequest, WorkerTypeResponse> declareWorkerType(String provisionerId, String workerType, WorkerTypeRequest payload) throws APICallFailure {
+        return apiCall(payload, "PUT", "/provisioners/" + uriEncode(provisionerId) + "/worker-types/" + uriEncode(workerType), WorkerTypeResponse.class);
+    }
+
+    /**
      * Get a list of all active workerGroup/workerId of a workerType.
      * 
      * The response is paged. If this end-point returns a `continuationToken`, you
