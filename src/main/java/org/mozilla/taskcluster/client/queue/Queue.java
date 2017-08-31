@@ -568,6 +568,41 @@ public class Queue extends TaskclusterRequestHandler {
     }
 
     /**
+     * Get an active provisioner.
+     * 
+     * The term "provisioner" is taken broadly to mean anything with a provisionerId.
+     * This does not necessarily mean there is an associated service performing any
+     * provisioning activity.
+     *
+     * @see "[Get an active provisioner API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#getProvisioner)"
+     */
+    public CallSummary<EmptyPayload, ProvisionerResponse> getProvisioner(String provisionerId) throws APICallFailure {
+        return apiCall(null, "GET", "/provisioners/" + uriEncode(provisionerId), ProvisionerResponse.class);
+    }
+
+    /**
+     * Declare a provisioner, supplying some details about it.
+     * 
+     * `declareProvisioner` allows updating one or more properties of a provisioner as long as the required scopes are
+     * possessed. For example, a request to update the `aws-provisioner-v1`
+     * provisioner with a body `{description: 'This provisioner is great'}` would require you to have the scope
+     * `queue:declare-provisioner:aws-provisioner-v1#description`.
+     * 
+     * The term "provisioner" is taken broadly to mean anything with a provisionerId.
+     * This does not necessarily mean there is an associated service performing any
+     * provisioning activity.
+     *
+     * Required scopes:
+     *
+     *   * `queue:declare-provisioner:<provisionerId>#<property>`
+     *
+     * @see "[Update a provisioner API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#declareProvisioner)"
+     */
+    public CallSummary<ProvisionerRequest, ProvisionerResponse> declareProvisioner(String provisionerId, ProvisionerRequest payload) throws APICallFailure {
+        return apiCall(payload, "PUT", "/provisioners/" + uriEncode(provisionerId), ProvisionerResponse.class);
+    }
+
+    /**
      * Get an approximate number of pending tasks for the given `provisionerId`
      * and `workerType`.
      * 

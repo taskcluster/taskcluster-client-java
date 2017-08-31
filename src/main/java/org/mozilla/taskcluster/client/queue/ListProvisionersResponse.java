@@ -38,6 +38,13 @@ public class ListProvisionersResponse {
         public Date expires;
 
         /**
+         * Date and time where the provisioner was last seen active
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/lastDateActive
+         */
+        public Date lastDateActive;
+
+        /**
          *
          * Syntax:     ^([a-zA-Z0-9-_]*)$
          * Min length: 1
