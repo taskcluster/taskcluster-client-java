@@ -673,6 +673,31 @@ public class Queue extends TaskclusterRequestHandler {
     }
 
     /**
+     * Get a worker from a worker-type.
+     *
+     * @see "[Get a worker-type API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#getWorker)"
+     */
+    public CallSummary<EmptyPayload, WorkerResponse> getWorker(String provisionerId, String workerType, String workerGroup, String workerId) throws APICallFailure {
+        return apiCall(null, "GET", "/provisioners/" + uriEncode(provisionerId) + "/worker-types/" + uriEncode(workerType) + "/workers/" + uriEncode(workerGroup) + "/" + uriEncode(workerId), WorkerResponse.class);
+    }
+
+    /**
+     * Declare a worker, supplying some details about it.
+     * 
+     * `declareWorker` allows updating one or more properties of a worker as long as the required scopes are
+     * possessed.
+     *
+     * Required scopes:
+     *
+     *   * `queue:declare-worker:<provisionerId>/<workerType>/<workerGroup><workerId>#<property>`
+     *
+     * @see "[Declare a worker API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#declareWorker)"
+     */
+    public CallSummary<WorkerRequest, WorkerResponse> declareWorker(String provisionerId, String workerType, String workerGroup, String workerId, WorkerRequest payload) throws APICallFailure {
+        return apiCall(payload, "PUT", "/provisioners/" + uriEncode(provisionerId) + "/worker-types/" + uriEncode(workerType) + "/" + uriEncode(workerGroup) + "/" + uriEncode(workerId), WorkerResponse.class);
+    }
+
+    /**
      * Respond without doing anything.
      * This endpoint is used to check that the service is up.
      *
