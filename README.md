@@ -37,9 +37,6 @@ A java port of taskcluster-client.
 * [Queue](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/queue/Queue.html)  
   The queue is responsible for accepting tasks and track their state as they are executed by workers.
 
-* [Scheduler](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/scheduler/Scheduler.html)  
-  The task-graph scheduler is responsible for accepting task-graphs and scheduling tasks for evaluation by the queue as their dependencies are satisfied.
-
 * [Secrets](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/secrets/Secrets.html)  
   The secrets service is responsible for managing secure data in TaskCluster.
 
