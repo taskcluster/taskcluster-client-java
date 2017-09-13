@@ -1,0 +1,8 @@
+title: Taskcluster-client-java
+description: A java client for interfacing with taskcluster server components
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
