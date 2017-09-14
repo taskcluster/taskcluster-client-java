@@ -14,7 +14,5 @@ org.mozilla.taskcluster.client.purgecache
 org.mozilla.taskcluster.client.purgecacheevents
 org.mozilla.taskcluster.client.queue
 org.mozilla.taskcluster.client.queueevents
-org.mozilla.taskcluster.client.scheduler
-org.mozilla.taskcluster.client.schedulerevents
 org.mozilla.taskcluster.client.secrets
 org.mozilla.taskcluster.client.treeherderevents
