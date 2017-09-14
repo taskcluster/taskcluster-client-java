@@ -9626,6 +9626,14 @@ Description            = 'Request to update a worker.
 '
 ID                     = 'http://schemas.taskcluster.net/queue/v1/update-worker-request.json#'
 Properties
+  Property 'disabled' =
+    Description            = 'Disabling a worker allows the machine to remain alive but not accept jobs.
+    Enabling a worker on the other hand will resume accepting jobs.
+    '
+    Title                  = 'Worker Disabled'
+    Type                   = 'boolean'
+    TypeName               = 'WorkerDisabled'
+    SourceURL              = 'http://schemas.taskcluster.net/queue/v1/update-worker-request.json#/properties/disabled'
   Property 'expires' =
     Description            = 'Date and time after which the worker will be automatically
     deleted by the queue.
@@ -9690,6 +9698,14 @@ Description            = 'Response containing information about a worker.
 '
 ID                     = 'http://schemas.taskcluster.net/queue/v1/worker-response.json#'
 Properties
+  Property 'disabled' =
+    Description            = 'Disabling a worker allows the machine to remain alive but not accept jobs.
+    Enabling a worker on the other hand will resume accepting jobs.
+    '
+    Title                  = 'Worker Disabled'
+    Type                   = 'boolean'
+    TypeName               = 'WorkerDisabled'
+    SourceURL              = 'http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/disabled'
   Property 'expires' =
     Description            = 'Date and time after which the worker will be automatically
     deleted by the queue.
@@ -9764,7 +9780,7 @@ Properties
     Type                   = 'string'
     TypeName               = 'WorkerTypeName'
     SourceURL              = 'http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/workerType'
-Required               = '[provisionerId workerType workerGroup workerId recentTasks expires firstClaim]'
+Required               = '[provisionerId workerType workerGroup workerId recentTasks expires disabled firstClaim]'
 Schema                 = 'http://json-schema.org/draft-04/schema#'
 Title                  = 'Worker Response'
 Type                   = 'object'

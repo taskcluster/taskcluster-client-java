@@ -10,6 +10,14 @@ import java.util.Date;
 public class WorkerResponse {
 
     /**
+     * Disabling a worker allows the machine to remain alive but not accept jobs.
+     * Enabling a worker on the other hand will resume accepting jobs.
+     *
+     * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/disabled
+     */
+    public boolean disabled;
+
+    /**
      * Date and time after which the worker will be automatically
      * deleted by the queue.
      *
