@@ -1,5 +1,7 @@
 package org.mozilla.taskcluster.client.queue;
 
+import java.util.Date;
+
 /**
  * Response from a `listWorkers` request.
  *
@@ -21,6 +23,32 @@ public class ListWorkersResponse {
     public String continuationToken;
 
     public class WorkersEntry {
+
+        /**
+         * Disabling a worker allows the machine to remain alive but not accept jobs.
+         * Enabling a worker on the other hand will resume accepting jobs.
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/disabled
+         */
+        public boolean disabled;
+
+        /**
+         * Date of the first time this worker claimed a task.
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/firstClaim
+         */
+        public Date firstClaim;
+
+        /**
+         * Unique task identifier, this is UUID encoded as
+         * [URL-safe base64](http://tools.ietf.org/html/rfc4648#section-5) and
+         * stripped of `=` padding.
+         *
+         * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/latestTask
+         */
+        public String latestTask;
 
         /**
          * Identifier for the worker group containing this worker.
