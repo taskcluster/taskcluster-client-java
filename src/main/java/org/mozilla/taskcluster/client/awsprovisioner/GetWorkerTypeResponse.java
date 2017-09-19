@@ -26,6 +26,13 @@ public class GetWorkerTypeResponse {
         public Object launchSpec;
 
         /**
+         * The AWS region containing this availability zone.  Example: eu-central-1
+         *
+         * See http://schemas.taskcluster.net/aws-provisioner/v1/get-worker-type-response.json#/properties/availabilityZones/items/properties/region
+         */
+        public String region;
+
+        /**
          * Static Secrets unique to this AZ
          *
          * Default:    map[]
