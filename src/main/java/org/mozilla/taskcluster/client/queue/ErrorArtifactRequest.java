@@ -8,7 +8,7 @@ import java.util.Date;
  * for a task to declare that it failed to provide an artifact it wanted
  * to upload.
  *
- * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]
+ * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[4]
  */
 public class ErrorArtifactRequest {
 
@@ -16,7 +16,7 @@ public class ErrorArtifactRequest {
      * Date-time after which the queue should stop replying with the error
      * and forget about the artifact.
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]/properties/expires
+     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[4]/properties/expires
      */
     public Date expires;
 
@@ -25,7 +25,7 @@ public class ErrorArtifactRequest {
      *
      * Max length: 4096
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]/properties/message
+     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[4]/properties/message
      */
     public String message;
 
@@ -37,7 +37,7 @@ public class ErrorArtifactRequest {
      *     * "invalid-resource-on-worker"
      *     * "too-large-file-on-worker"
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]/properties/reason
+     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[4]/properties/reason
      */
     public String reason;
 
@@ -47,7 +47,7 @@ public class ErrorArtifactRequest {
      * Possible values:
      *     * "error"
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]/properties/storageType
+     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[4]/properties/storageType
      */
     public String storageType;
 }
