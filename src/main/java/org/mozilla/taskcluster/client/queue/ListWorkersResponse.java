@@ -39,16 +39,36 @@ public class ListWorkersResponse {
          */
         public Date firstClaim;
 
+        public class MostRecentTask {
+
+            /**
+             * Id of this task run, `run-id`s always starts from `0`
+             *
+             * Mininum:    0
+             * Maximum:    1000
+             *
+             * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/latestTask/properties/runId
+             */
+            public int runId;
+
+            /**
+             * Unique task identifier, this is UUID encoded as
+             * [URL-safe base64](http://tools.ietf.org/html/rfc4648#section-5) and
+             * stripped of `=` padding.
+             *
+             * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
+             *
+             * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/latestTask/properties/taskId
+             */
+            public String taskId;
+        }
+
         /**
-         * Unique task identifier, this is UUID encoded as
-         * [URL-safe base64](http://tools.ietf.org/html/rfc4648#section-5) and
-         * stripped of `=` padding.
-         *
-         * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
+         * The most recent claimed task
          *
          * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/latestTask
          */
-        public String latestTask;
+        public MostRecentTask latestTask;
 
         /**
          * Identifier for the worker group containing this worker.
