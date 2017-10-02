@@ -62,7 +62,7 @@ public class APITest {
         Index index = new Index();
         Queue queue = new Queue();
         try {
-            String taskId = index.findTask("gecko.v1.mozilla-inbound.latest.linux.linux64.debug").responsePayload.taskId;
+            String taskId = index.findTask("gecko.v2.mozilla-inbound.latest.firefox.linux64-debug").responsePayload.taskId;
             Date created = queue.task(taskId).responsePayload.created;
 
             // calculate time an hour in the future to allow for clock drift
