@@ -12217,8 +12217,9 @@ Properties
     success: Build/Test executed without error or failure
     canceled: The job was cancelled by a user
     unknown: When the job is not yet completed
+    superseded: When a job has been superseded by another job
     '
-    Enum                   = '[success fail exception canceled unknown]'
+    Enum                   = '[success fail exception canceled unknown superseded]'
     Title                  = 'result'
     Type                   = 'string'
     TypeName               = 'Result'

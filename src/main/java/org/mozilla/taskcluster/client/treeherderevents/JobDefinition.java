@@ -368,6 +368,7 @@ public class JobDefinition {
      * success: Build/Test executed without error or failure
      * canceled: The job was cancelled by a user
      * unknown: When the job is not yet completed
+     * superseded: When a job has been superseded by another job
      *
      * Possible values:
      *     * "success"
@@ -375,6 +376,7 @@ public class JobDefinition {
      *     * "exception"
      *     * "canceled"
      *     * "unknown"
+     *     * "superseded"
      *
      * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/result
      */
