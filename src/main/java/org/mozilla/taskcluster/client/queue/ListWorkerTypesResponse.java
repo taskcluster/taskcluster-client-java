@@ -9,6 +9,62 @@ import java.util.Date;
  */
 public class ListWorkerTypesResponse {
 
+    public class Actions1 {
+
+        /**
+         * Actions have a "context" that is one of provisioner, worker-type,
+         * or worker, indicating which it applies to. `context` is used to construct
+         * the query string of the `POST` request.
+         * If `context='worker'`, the query string will be
+         * `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}&workerGroup=${WORKER_GROUP}&workerId=${WORKER_ID}`.
+         * If `context='worker-type'`, the query string will be
+         * `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}`.
+         * If `context='provisioner'`, the query string will be
+         * `?provisionerId=${PROVISIONER_ID}`.
+         *
+         * Possible values:
+         *     * "worker-type"
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/actions/items/properties/context
+         */
+        public String context;
+
+        /**
+         * Description of the provisioner.
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/actions/items/properties/description
+         */
+        public String description;
+
+        /**
+         * Short names for things like logging/error messages.
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/actions/items/properties/name
+         */
+        public String name;
+
+        /**
+         * Appropriate title for any sort of Modal prompt.
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/actions/items/properties/title
+         */
+        public Object title;
+
+        /**
+         * When an action is triggered, the `url`
+         * and `context` property are used to make the `POST` request.
+         * The request needs to be signed with the user's Taskcluster credentials.
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/actions/items/properties/url
+         */
+        public String url;
+    }
+
+    /**
+     * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/actions
+     */
+    public Actions1[] actions;
+
     /**
      * Opaque `continuationToken` to be given as query-string option to get the
      * next set of worker-types in the provisioner.
