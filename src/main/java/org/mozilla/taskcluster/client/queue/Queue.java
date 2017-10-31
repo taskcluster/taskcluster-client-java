@@ -725,7 +725,7 @@ public class Queue extends TaskclusterRequestHandler {
      *
      * Required scopes:
      *
-     *   * `queue:declare-worker:<provisionerId>/<workerType>/<workerGroup><workerId>#<property>`
+     *   * `queue:declare-worker:<provisionerId>/<workerType>/<workerGroup>/<workerId>#<property>`
      *
      * @see "[Declare a worker API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#declareWorker)"
      */
