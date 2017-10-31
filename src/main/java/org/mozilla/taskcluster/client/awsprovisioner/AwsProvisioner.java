@@ -43,7 +43,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class AwsProvisioner extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://aws-provisioner.taskcluster.net/v1";
+    protected static final String defaultBaseURL = "https://staging-aws-provisioner.herokuapp.com/v1";
 
     public AwsProvisioner(Credentials credentials) {
         super(credentials, defaultBaseURL);
