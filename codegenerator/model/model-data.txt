@@ -7605,7 +7605,7 @@ Properties
           Description            = 'This is the `storageType` for the request that was used to create
           the artifact.
           '
-          Enum                   = '[s3 azure reference error]'
+          Enum                   = '[blob s3 azure reference error]'
           Title                  = 'Artifact Storage-Type'
           Type                   = 'string'
           TypeName               = 'ArtifactStorageType'

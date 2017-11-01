@@ -43,6 +43,7 @@ public class ListArtifactsResponse {
          * the artifact.
          *
          * Possible values:
+         *     * "blob"
          *     * "s3"
          *     * "azure"
          *     * "reference"
