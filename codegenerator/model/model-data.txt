@@ -9013,6 +9013,10 @@ OneOf
         Items
           Properties
             Property 'headers' =
+              Additional Properties  = 'Type                   = 'string'
+              TypeName               = ''
+              SourceURL              = ''
+              '
               Description            = 'Headers of request'
               Type                   = 'object'
               TypeName               = 'Headers'
@@ -9196,6 +9200,10 @@ Properties
     Items
       Properties
         Property 'headers' =
+          Additional Properties  = 'Type                   = 'string'
+          TypeName               = ''
+          SourceURL              = ''
+          '
           Description            = 'Headers of request'
           Type                   = 'object'
           TypeName               = 'Headers'
