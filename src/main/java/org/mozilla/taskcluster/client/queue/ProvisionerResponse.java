@@ -13,14 +13,13 @@ public class ProvisionerResponse {
 
         /**
          * Actions have a "context" that is one of provisioner, worker-type,
-         * or worker, indicating which it applies to. `context` is used to construct
-         * the query string of the `POST` request.
-         * If `context='worker'`, the query string will be
-         * `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}&workerGroup=${WORKER_GROUP}&workerId=${WORKER_ID}`.
-         * If `context='worker-type'`, the query string will be
-         * `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}`.
-         * If `context='provisioner'`, the query string will be
-         * `?provisionerId=${PROVISIONER_ID}`.
+         * or worker, indicating which it applies to. `context` is used by the front-end to know where to display the action.
+         *
+         * | `context`   | Page displayed        |
+         * |-------------|-----------------------|
+         * | provisioner | Provisioner Explorer  |
+         * | worker-type | Workers Explorer      |
+         * | worker      | Worker Explorer       |
          *
          * Possible values:
          *     * "provisioner"
@@ -39,6 +38,19 @@ public class ProvisionerResponse {
         public String description;
 
         /**
+         * Method to indicate the desired action to be performed for a given resource.
+         *
+         * Possible values:
+         *     * "POST"
+         *     * "PUT"
+         *     * "DELETE"
+         *     * "PATCH"
+         *
+         * See http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/actions/items/properties/method
+         */
+        public String method;
+
+        /**
          * Short names for things like logging/error messages.
          *
          * See http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/actions/items/properties/name
@@ -53,9 +65,16 @@ public class ProvisionerResponse {
         public Object title;
 
         /**
-         * When an action is triggered, the `url`
-         * and `context` property are used to make the `POST` request.
-         * The request needs to be signed with the user's Taskcluster credentials.
+         * When an action is triggered, a request is made using the `url` and `method`.
+         * Depending on the `context`, the following parameters will be substituted in the url:
+         *
+         * | `context`   | Path parameters                                          |
+         * |-------------|----------------------------------------------------------|
+         * | provisioner | <provisionerId>                                          |
+         * | worker-type | <provisionerId>, <workerType>                            |
+         * | worker      | <provisionerId>, <workerType>, <workerGroup>, <workerId> |
+         *
+         * _Note: The request needs to be signed with the user's Taskcluster credentials._
          *
          * See http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/actions/items/properties/url
          */

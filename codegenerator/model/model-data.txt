@@ -7726,22 +7726,23 @@ Properties
         Property 'actions' =
           Items
             Additional Properties  = 'false'
-            Description            = 'Actions are defined on the provisioner. When an action is triggered,
-            it will use the `url` and `context` property to construct the URL and
-            perform a `POST` request. Note that the request will be signed with the
-            user's Taskcluster credentials.
+            Description            = 'Actions are defined on the provisioner and they are performed via a request using the `url` and `method`.
+            Depending on the `context`, the `url` will be filled with parameters. In addition, `context` is
+            used by the front-end to know where to display the action. For example, `context=worker`
+            will display the action on the worker explorer.
+            
+            _Note: The request will be signed with the user's Taskcluster credentials._
             '
             Properties
               Property 'context' =
                 Description            = 'Actions have a "context" that is one of provisioner, worker-type,
-                or worker, indicating which it applies to. `context` is used to construct
-                the query string of the `POST` request.
-                If `context='worker'`, the query string will be
-                `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}&workerGroup=${WORKER_GROUP}&workerId=${WORKER_ID}`.
-                If `context='worker-type'`, the query string will be
-                `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}`.
-                If `context='provisioner'`, the query string will be
-                `?provisionerId=${PROVISIONER_ID}`.
+                or worker, indicating which it applies to. `context` is used by the front-end to know where to display the action.
+                
+                | `context`   | Page displayed        |
+                |-------------|-----------------------|
+                | provisioner | Provisioner Explorer  |
+                | worker-type | Workers Explorer      |
+                | worker      | Worker Explorer       |
                 '
                 Enum                   = '[provisioner worker-type worker]'
                 Title                  = 'Context'
@@ -7755,6 +7756,14 @@ Properties
                 Type                   = 'string'
                 TypeName               = 'Description'
                 SourceURL              = 'http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/actions/items/properties/description'
+              Property 'method' =
+                Description            = 'Method to indicate the desired action to be performed for a given resource.
+                '
+                Enum                   = '[POST PUT DELETE PATCH]'
+                Title                  = 'Method'
+                Type                   = 'string'
+                TypeName               = 'Method'
+                SourceURL              = 'http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/actions/items/properties/method'
               Property 'name' =
                 Description            = 'Short names for things like logging/error messages.
                 '
@@ -7770,16 +7779,22 @@ Properties
                 TypeName               = 'Title'
                 SourceURL              = 'http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/actions/items/properties/title'
               Property 'url' =
-                Description            = 'When an action is triggered, the `url`
-                and `context` property are used to make the `POST` request.
-                The request needs to be signed with the user's Taskcluster credentials.
+                Description            = 'When an action is triggered, a request is made using the `url` and `method`.
+                Depending on the `context`, the following parameters will be substituted in the url:
+                
+                | `context`   | Path parameters                                          |
+                |-------------|----------------------------------------------------------|
+                | provisioner | <provisionerId>                                          |
+                | worker-type | <provisionerId>, <workerType>                            |
+                | worker      | <provisionerId>, <workerType>, <workerGroup>, <workerId> |
+                
+                _Note: The request needs to be signed with the user's Taskcluster credentials._
                 '
-                Format                 = 'uri'
                 Title                  = 'URL'
                 Type                   = 'string'
                 TypeName               = 'URL'
                 SourceURL              = 'http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/actions/items/properties/url'
-            Required               = '[name title context url description]'
+            Required               = '[name title context url method description]'
             Title                  = 'Actions'
             Type                   = 'object'
             TypeName               = 'Actions1'
@@ -7917,22 +7932,23 @@ Properties
   Property 'actions' =
     Items
       Additional Properties  = 'false'
-      Description            = 'Actions are defined on the provisioner. When an action is triggered,
-      it will use the `url` and `context` property to construct the URL and
-      perform a `POST` request. Note that the request will be signed with the
-      user's Taskcluster credentials.
+      Description            = 'Actions are defined on the provisioner and they are performed via a request using the `url` and `method`.
+      Depending on the `context`, the `url` will be filled with parameters. In addition, `context` is
+      used by the front-end to know where to display the action. For example, `context=worker`
+      will display the action on the worker explorer.
+      
+      _Note: The request will be signed with the user's Taskcluster credentials._
       '
       Properties
         Property 'context' =
           Description            = 'Actions have a "context" that is one of provisioner, worker-type,
-          or worker, indicating which it applies to. `context` is used to construct
-          the query string of the `POST` request.
-          If `context='worker'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}&workerGroup=${WORKER_GROUP}&workerId=${WORKER_ID}`.
-          If `context='worker-type'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}`.
-          If `context='provisioner'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}`.
+          or worker, indicating which it applies to. `context` is used by the front-end to know where to display the action.
+          
+          | `context`   | Page displayed        |
+          |-------------|-----------------------|
+          | provisioner | Provisioner Explorer  |
+          | worker-type | Workers Explorer      |
+          | worker      | Worker Explorer       |
           '
           Enum                   = '[worker]'
           Title                  = 'Context'
@@ -7946,6 +7962,14 @@ Properties
           Type                   = 'string'
           TypeName               = 'Description'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/actions/items/properties/description'
+        Property 'method' =
+          Description            = 'Method to indicate the desired action to be performed for a given resource.
+          '
+          Enum                   = '[POST PUT DELETE PATCH]'
+          Title                  = 'Method'
+          Type                   = 'string'
+          TypeName               = 'Method'
+          SourceURL              = 'http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/actions/items/properties/method'
         Property 'name' =
           Description            = 'Short names for things like logging/error messages.
           '
@@ -7961,16 +7985,22 @@ Properties
           TypeName               = 'Title'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/actions/items/properties/title'
         Property 'url' =
-          Description            = 'When an action is triggered, the `url`
-          and `context` property are used to make the `POST` request.
-          The request needs to be signed with the user's Taskcluster credentials.
+          Description            = 'When an action is triggered, a request is made using the `url` and `method`.
+          Depending on the `context`, the following parameters will be substituted in the url:
+          
+          | `context`   | Path parameters                                          |
+          |-------------|----------------------------------------------------------|
+          | provisioner | <provisionerId>                                          |
+          | worker-type | <provisionerId>, <workerType>                            |
+          | worker      | <provisionerId>, <workerType>, <workerGroup>, <workerId> |
+          
+          _Note: The request needs to be signed with the user's Taskcluster credentials._
           '
-          Format                 = 'uri'
           Title                  = 'URL'
           Type                   = 'string'
           TypeName               = 'URL'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/actions/items/properties/url'
-      Required               = '[name title context url description]'
+      Required               = '[name title context url method description]'
       Title                  = 'Actions'
       Type                   = 'object'
       TypeName               = 'Actions1'
@@ -8083,22 +8113,23 @@ Properties
   Property 'actions' =
     Items
       Additional Properties  = 'false'
-      Description            = 'Actions are defined on the provisioner. When an action is triggered,
-      it will use the `url` and `context` property to construct the URL and
-      perform a `POST` request. Note that the request will be signed with the
-      user's Taskcluster credentials.
+      Description            = 'Actions are defined on the provisioner and they are performed via a request using the `url` and `method`.
+      Depending on the `context`, the `url` will be filled with parameters. In addition, `context` is
+      used by the front-end to know where to display the action. For example, `context=worker`
+      will display the action on the worker explorer.
+      
+      _Note: The request will be signed with the user's Taskcluster credentials._
       '
       Properties
         Property 'context' =
           Description            = 'Actions have a "context" that is one of provisioner, worker-type,
-          or worker, indicating which it applies to. `context` is used to construct
-          the query string of the `POST` request.
-          If `context='worker'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}&workerGroup=${WORKER_GROUP}&workerId=${WORKER_ID}`.
-          If `context='worker-type'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}`.
-          If `context='provisioner'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}`.
+          or worker, indicating which it applies to. `context` is used by the front-end to know where to display the action.
+          
+          | `context`   | Page displayed        |
+          |-------------|-----------------------|
+          | provisioner | Provisioner Explorer  |
+          | worker-type | Workers Explorer      |
+          | worker      | Worker Explorer       |
           '
           Enum                   = '[worker-type]'
           Title                  = 'Context'
@@ -8112,6 +8143,14 @@ Properties
           Type                   = 'string'
           TypeName               = 'Description'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/actions/items/properties/description'
+        Property 'method' =
+          Description            = 'Method to indicate the desired action to be performed for a given resource.
+          '
+          Enum                   = '[POST PUT DELETE PATCH]'
+          Title                  = 'Method'
+          Type                   = 'string'
+          TypeName               = 'Method'
+          SourceURL              = 'http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/actions/items/properties/method'
         Property 'name' =
           Description            = 'Short names for things like logging/error messages.
           '
@@ -8127,16 +8166,22 @@ Properties
           TypeName               = 'Title'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/actions/items/properties/title'
         Property 'url' =
-          Description            = 'When an action is triggered, the `url`
-          and `context` property are used to make the `POST` request.
-          The request needs to be signed with the user's Taskcluster credentials.
+          Description            = 'When an action is triggered, a request is made using the `url` and `method`.
+          Depending on the `context`, the following parameters will be substituted in the url:
+          
+          | `context`   | Path parameters                                          |
+          |-------------|----------------------------------------------------------|
+          | provisioner | <provisionerId>                                          |
+          | worker-type | <provisionerId>, <workerType>                            |
+          | worker      | <provisionerId>, <workerType>, <workerGroup>, <workerId> |
+          
+          _Note: The request needs to be signed with the user's Taskcluster credentials._
           '
-          Format                 = 'uri'
           Title                  = 'URL'
           Type                   = 'string'
           TypeName               = 'URL'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/actions/items/properties/url'
-      Required               = '[name title context url description]'
+      Required               = '[name title context url method description]'
       Title                  = 'Actions'
       Type                   = 'object'
       TypeName               = 'Actions1'
@@ -9384,22 +9429,23 @@ Properties
   Property 'actions' =
     Items
       Additional Properties  = 'false'
-      Description            = 'Actions are defined on the provisioner. When an action is triggered,
-      it will use the `url` and `context` property to construct the URL and
-      perform a `POST` request. Note that the request will be signed with the
-      user's Taskcluster credentials.
+      Description            = 'Actions are defined on the provisioner and they are performed via a request using the `url` and `method`.
+      Depending on the `context`, the `url` will be filled with parameters. In addition, `context` is
+      used by the front-end to know where to display the action. For example, `context=worker`
+      will display the action on the worker explorer.
+      
+      _Note: The request will be signed with the user's Taskcluster credentials._
       '
       Properties
         Property 'context' =
           Description            = 'Actions have a "context" that is one of provisioner, worker-type,
-          or worker, indicating which it applies to. `context` is used to construct
-          the query string of the `POST` request.
-          If `context='worker'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}&workerGroup=${WORKER_GROUP}&workerId=${WORKER_ID}`.
-          If `context='worker-type'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}`.
-          If `context='provisioner'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}`.
+          or worker, indicating which it applies to. `context` is used by the front-end to know where to display the action.
+          
+          | `context`   | Page displayed        |
+          |-------------|-----------------------|
+          | provisioner | Provisioner Explorer  |
+          | worker-type | Workers Explorer      |
+          | worker      | Worker Explorer       |
           '
           Enum                   = '[provisioner worker-type worker]'
           Title                  = 'Context'
@@ -9413,6 +9459,14 @@ Properties
           Type                   = 'string'
           TypeName               = 'Description'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/actions/items/properties/description'
+        Property 'method' =
+          Description            = 'Method to indicate the desired action to be performed for a given resource.
+          '
+          Enum                   = '[POST PUT DELETE PATCH]'
+          Title                  = 'Method'
+          Type                   = 'string'
+          TypeName               = 'Method'
+          SourceURL              = 'http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/actions/items/properties/method'
         Property 'name' =
           Description            = 'Short names for things like logging/error messages.
           '
@@ -9428,16 +9482,22 @@ Properties
           TypeName               = 'Title'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/actions/items/properties/title'
         Property 'url' =
-          Description            = 'When an action is triggered, the `url`
-          and `context` property are used to make the `POST` request.
-          The request needs to be signed with the user's Taskcluster credentials.
+          Description            = 'When an action is triggered, a request is made using the `url` and `method`.
+          Depending on the `context`, the following parameters will be substituted in the url:
+          
+          | `context`   | Path parameters                                          |
+          |-------------|----------------------------------------------------------|
+          | provisioner | <provisionerId>                                          |
+          | worker-type | <provisionerId>, <workerType>                            |
+          | worker      | <provisionerId>, <workerType>, <workerGroup>, <workerId> |
+          
+          _Note: The request needs to be signed with the user's Taskcluster credentials._
           '
-          Format                 = 'uri'
           Title                  = 'URL'
           Type                   = 'string'
           TypeName               = 'URL'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/actions/items/properties/url'
-      Required               = '[name title context url description]'
+      Required               = '[name title context url method description]'
       Title                  = 'Actions'
       Type                   = 'object'
       TypeName               = 'Actions1'
@@ -10333,26 +10393,23 @@ Properties
   Property 'actions' =
     Items
       Additional Properties  = 'false'
-      Description            = 'Actions are defined on the provisioner. When an action is triggered,
-      it will use the `url` and `context` property to construct the URL and
-      perform a `POST` request. Note that the request will be signed with the
-      user's Taskcluster credentials.
-      If `url='https://hardware-provisioner.mozilla-releng.net/v1/power-cycle'`
-      and `context=‘worker-type’` for instance, the constructed URL will be
-      `'https://hardware-provisioner.mozilla-releng.net/v1/power-cycle?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}`.
-      In other words, `url` handles the path name and `context` constructs the query string.
+      Description            = 'Actions are defined on the provisioner and they are performed via a request using the `url` and `method`.
+      Depending on the `context`, the `url` will be filled with parameters. In addition, `context` is
+      used by the front-end to know where to display the action. For example, `context=worker`
+      will display the action on the worker explorer.
+      
+      _Note: The request will be signed with the user's Taskcluster credentials._
       '
       Properties
         Property 'context' =
           Description            = 'Actions have a "context" that is one of provisioner, worker-type,
-          or worker, indicating which it applies to. `context` is used to construct
-          the query string of the `POST` request.
-          If `context='worker'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}&workerGroup=${WORKER_GROUP}&workerId=${WORKER_ID}`.
-          If `context='worker-type'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}`.
-          If `context='provisioner'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}`.
+          or worker, indicating which it applies to. `context` is used by the front-end to know where to display the action.
+          
+          | `context`   | Page displayed        |
+          |-------------|-----------------------|
+          | provisioner | Provisioner Explorer  |
+          | worker-type | Workers Explorer      |
+          | worker      | Worker Explorer       |
           '
           Enum                   = '[provisioner worker-type worker]'
           Title                  = 'Context'
@@ -10366,6 +10423,14 @@ Properties
           Type                   = 'string'
           TypeName               = 'Description'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/update-provisioner-request.json#/properties/actions/items/properties/description'
+        Property 'method' =
+          Description            = 'Method to indicate the desired action to be performed for a given resource.
+          '
+          Enum                   = '[POST PUT DELETE PATCH]'
+          Title                  = 'Method'
+          Type                   = 'string'
+          TypeName               = 'Method'
+          SourceURL              = 'http://schemas.taskcluster.net/queue/v1/update-provisioner-request.json#/properties/actions/items/properties/method'
         Property 'name' =
           Description            = 'Short names for things like logging/error messages.
           '
@@ -10381,16 +10446,22 @@ Properties
           TypeName               = 'Title'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/update-provisioner-request.json#/properties/actions/items/properties/title'
         Property 'url' =
-          Description            = 'When an action is triggered, the `url`
-          and `context` property are used to make the `POST` request.
-          The request needs to be signed with the user's Taskcluster credentials.
+          Description            = 'When an action is triggered, a request is made using the `url` and `method`.
+          Depending on the `context`, the following parameters will be substituted in the url:
+          
+          | `context`   | Path parameters                                          |
+          |-------------|----------------------------------------------------------|
+          | provisioner | <provisionerId>                                          |
+          | worker-type | <provisionerId>, <workerType>                            |
+          | worker      | <provisionerId>, <workerType>, <workerGroup>, <workerId> |
+          
+          _Note: The request needs to be signed with the user's Taskcluster credentials._
           '
-          Format                 = 'uri'
           Title                  = 'URL'
           Type                   = 'string'
           TypeName               = 'URL'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/update-provisioner-request.json#/properties/actions/items/properties/url'
-      Required               = '[name title context url description]'
+      Required               = '[name title context url method description]'
       Title                  = 'Actions'
       Type                   = 'object'
       TypeName               = 'Actions1'
@@ -10514,22 +10585,23 @@ Properties
   Property 'actions' =
     Items
       Additional Properties  = 'false'
-      Description            = 'Actions are defined on the provisioner. When an action is triggered,
-      it will use the `url` and `context` property to construct the URL and
-      perform a `POST` request. Note that the request will be signed with the
-      user's Taskcluster credentials.
+      Description            = 'Actions are defined on the provisioner and they are performed via a request using the `url` and `method`.
+      Depending on the `context`, the `url` will be filled with parameters. In addition, `context` is
+      used by the front-end to know where to display the action. For example, `context=worker`
+      will display the action on the worker explorer.
+      
+      _Note: The request will be signed with the user's Taskcluster credentials._
       '
       Properties
         Property 'context' =
           Description            = 'Actions have a "context" that is one of provisioner, worker-type,
-          or worker, indicating which it applies to. `context` is used to construct
-          the query string of the `POST` request.
-          If `context='worker'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}&workerGroup=${WORKER_GROUP}&workerId=${WORKER_ID}`.
-          If `context='worker-type'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}`.
-          If `context='provisioner'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}`.
+          or worker, indicating which it applies to. `context` is used by the front-end to know where to display the action.
+          
+          | `context`   | Page displayed        |
+          |-------------|-----------------------|
+          | provisioner | Provisioner Explorer  |
+          | worker-type | Workers Explorer      |
+          | worker      | Worker Explorer       |
           '
           Enum                   = '[worker]'
           Title                  = 'Context'
@@ -10558,9 +10630,16 @@ Properties
           TypeName               = 'Title'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items/properties/title'
         Property 'url' =
-          Description            = 'When an action is triggered, the `url`
-          and `context` property are used to make the `POST` request.
-          The request needs to be signed with the user's Taskcluster credentials.
+          Description            = 'When an action is triggered, a request is made using the `url` and `method`.
+          Depending on the `context`, the following parameters will be substituted in the url:
+          
+          | `context`   | Path parameters                                          |
+          |-------------|----------------------------------------------------------|
+          | provisioner | <provisionerId>                                          |
+          | worker-type | <provisionerId>, <workerType>                            |
+          | worker      | <provisionerId>, <workerType>, <workerGroup>, <workerId> |
+          
+          _Note: The request needs to be signed with the user's Taskcluster credentials._
           '
           Format                 = 'uri'
           Title                  = 'URL'
@@ -10689,22 +10768,23 @@ Properties
   Property 'actions' =
     Items
       Additional Properties  = 'false'
-      Description            = 'Actions are defined on the provisioner. When an action is triggered,
-      it will use the `url` and `context` property to construct the URL and
-      perform a `POST` request. Note that the request will be signed with the
-      user's Taskcluster credentials.
+      Description            = 'Actions are defined on the provisioner and they are performed via a request using the `url` and `method`.
+      Depending on the `context`, the `url` will be filled with parameters. In addition, `context` is
+      used by the front-end to know where to display the action. For example, `context=worker`
+      will display the action on the worker explorer.
+      
+      _Note: The request will be signed with the user's Taskcluster credentials._
       '
       Properties
         Property 'context' =
           Description            = 'Actions have a "context" that is one of provisioner, worker-type,
-          or worker, indicating which it applies to. `context` is used to construct
-          the query string of the `POST` request.
-          If `context='worker'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}&workerGroup=${WORKER_GROUP}&workerId=${WORKER_ID}`.
-          If `context='worker-type'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}&workerType=${WORKER_TYPE}`.
-          If `context='provisioner'`, the query string will be
-          `?provisionerId=${PROVISIONER_ID}`.
+          or worker, indicating which it applies to. `context` is used by the front-end to know where to display the action.
+          
+          | `context`   | Page displayed        |
+          |-------------|-----------------------|
+          | provisioner | Provisioner Explorer  |
+          | worker-type | Workers Explorer      |
+          | worker      | Worker Explorer       |
           '
           Enum                   = '[worker-type]'
           Title                  = 'Context'
@@ -10718,6 +10798,14 @@ Properties
           Type                   = 'string'
           TypeName               = 'Description'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/description'
+        Property 'method' =
+          Description            = 'Method to indicate the desired action to be performed for a given resource.
+          '
+          Enum                   = '[POST PUT DELETE PATCH]'
+          Title                  = 'Method'
+          Type                   = 'string'
+          TypeName               = 'Method'
+          SourceURL              = 'http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/method'
         Property 'name' =
           Description            = 'Short names for things like logging/error messages.
           '
@@ -10733,16 +10821,22 @@ Properties
           TypeName               = 'Title'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/title'
         Property 'url' =
-          Description            = 'When an action is triggered, the `url`
-          and `context` property are used to make the `POST` request.
-          The request needs to be signed with the user's Taskcluster credentials.
+          Description            = 'When an action is triggered, a request is made using the `url` and `method`.
+          Depending on the `context`, the following parameters will be substituted in the url:
+          
+          | `context`   | Path parameters                                          |
+          |-------------|----------------------------------------------------------|
+          | provisioner | <provisionerId>                                          |
+          | worker-type | <provisionerId>, <workerType>                            |
+          | worker      | <provisionerId>, <workerType>, <workerGroup>, <workerId> |
+          
+          _Note: The request needs to be signed with the user's Taskcluster credentials._
           '
-          Format                 = 'uri'
           Title                  = 'URL'
           Type                   = 'string'
           TypeName               = 'URL'
           SourceURL              = 'http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/url'
-      Required               = '[name title context url description]'
+      Required               = '[name title context url method description]'
       Title                  = 'Actions'
       Type                   = 'object'
       TypeName               = 'Actions1'
