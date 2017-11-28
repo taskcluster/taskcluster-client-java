@@ -694,8 +694,9 @@ public class Queue extends TaskclusterRequestHandler {
     /**
      * Get a list of all active workers of a workerType.
      * 
-     * `listWorkers` allows a response to be filtered by the `disabled` property.
-     * To filter the query, you should call the end-point with `disabled` as a query-string option.
+     * `listWorkers` allows a response to be filtered by quarantined and non quarantined workers.
+     * To filter the query, you should call the end-point with `quarantined` as a query-string option with a
+     * true or false value.
      * 
      * The response is paged. If this end-point returns a `continuationToken`, you
      * should call the end-point again with the `continuationToken` as a query-string
@@ -715,6 +716,19 @@ public class Queue extends TaskclusterRequestHandler {
      */
     public CallSummary<EmptyPayload, WorkerResponse> getWorker(String provisionerId, String workerType, String workerGroup, String workerId) throws APICallFailure {
         return apiCall(null, "GET", "/provisioners/" + uriEncode(provisionerId) + "/worker-types/" + uriEncode(workerType) + "/workers/" + uriEncode(workerGroup) + "/" + uriEncode(workerId), WorkerResponse.class);
+    }
+
+    /**
+     * Quarantine a worker
+     *
+     * Required scopes:
+     *
+     *   * `queue:quarantine-worker:<provisionerId>/<workerType>/<workerGroup>/<workerId>`
+     *
+     * @see "[Quarantine a worker API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#quarantineWorker)"
+     */
+    public CallSummary<QuarantineWorkerRequest, WorkerResponse> quarantineWorker(String provisionerId, String workerType, String workerGroup, String workerId, QuarantineWorkerRequest payload) throws APICallFailure {
+        return apiCall(payload, "PUT", "/provisioners/" + uriEncode(provisionerId) + "/worker-types/" + uriEncode(workerType) + "/workers/" + uriEncode(workerGroup) + "/" + uriEncode(workerId), WorkerResponse.class);
     }
 
     /**

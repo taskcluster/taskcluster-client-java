@@ -9,81 +9,6 @@ import java.util.Date;
  */
 public class ListWorkersResponse {
 
-    public class Actions1 {
-
-        /**
-         * Actions have a "context" that is one of provisioner, worker-type,
-         * or worker, indicating which it applies to. `context` is used by the front-end to know where to display the action.
-         *
-         * | `context`   | Page displayed        |
-         * |-------------|-----------------------|
-         * | provisioner | Provisioner Explorer  |
-         * | worker-type | Workers Explorer      |
-         * | worker      | Worker Explorer       |
-         *
-         * Possible values:
-         *     * "worker"
-         *
-         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/actions/items/properties/context
-         */
-        public String context;
-
-        /**
-         * Description of the provisioner.
-         *
-         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/actions/items/properties/description
-         */
-        public String description;
-
-        /**
-         * Method to indicate the desired action to be performed for a given resource.
-         *
-         * Possible values:
-         *     * "POST"
-         *     * "PUT"
-         *     * "DELETE"
-         *     * "PATCH"
-         *
-         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/actions/items/properties/method
-         */
-        public String method;
-
-        /**
-         * Short names for things like logging/error messages.
-         *
-         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/actions/items/properties/name
-         */
-        public String name;
-
-        /**
-         * Appropriate title for any sort of Modal prompt.
-         *
-         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/actions/items/properties/title
-         */
-        public Object title;
-
-        /**
-         * When an action is triggered, a request is made using the `url` and `method`.
-         * Depending on the `context`, the following parameters will be substituted in the url:
-         *
-         * | `context`   | Path parameters                                          |
-         * |-------------|----------------------------------------------------------|
-         * | provisioner | <provisionerId>                                          |
-         * | worker-type | <provisionerId>, <workerType>                            |
-         * | worker      | <provisionerId>, <workerType>, <workerGroup>, <workerId> |
-         *
-         * _Note: The request needs to be signed with the user's Taskcluster credentials._
-         *
-         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/actions/items/properties/url
-         */
-        public String url;
-    }
-
-    /**
-     * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/actions
-     */
-    public Actions1[] actions;
-
     /**
      * Opaque `continuationToken` to be given as query-string option to get the
      * next set of workers in the worker-type.
@@ -98,14 +23,6 @@ public class ListWorkersResponse {
     public String continuationToken;
 
     public class WorkersEntry {
-
-        /**
-         * Disabling a worker allows the machine to remain alive but not accept jobs.
-         * Enabling a worker on the other hand will resume accepting jobs.
-         *
-         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/disabled
-         */
-        public boolean disabled;
 
         /**
          * Date of the first time this worker claimed a task.
@@ -144,6 +61,16 @@ public class ListWorkersResponse {
          * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/latestTask
          */
         public MostRecentTask latestTask;
+
+        /**
+         * Quarantining a worker allows the machine to remain alive but not accept jobs.
+         * Once the quarantineUntil time has elapsed, the worker resumes accepting jobs.
+         * Note that a quarantine can be lifted by setting `quarantineUntil` to the present time (or
+         * somewhere in the past).
+         *
+         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/quarantineUntil
+         */
+        public Date quarantineUntil;
 
         /**
          * Identifier for the worker group containing this worker.

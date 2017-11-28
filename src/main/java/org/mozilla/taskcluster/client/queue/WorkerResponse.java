@@ -85,14 +85,6 @@ public class WorkerResponse {
     public Actions1[] actions;
 
     /**
-     * Disabling a worker allows the machine to remain alive but not accept jobs.
-     * Enabling a worker on the other hand will resume accepting jobs.
-     *
-     * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/disabled
-     */
-    public boolean disabled;
-
-    /**
      * Date and time after which the worker will be automatically
      * deleted by the queue.
      *
@@ -116,6 +108,16 @@ public class WorkerResponse {
      * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/provisionerId
      */
     public String provisionerId;
+
+    /**
+     * Quarantining a worker allows the machine to remain alive but not accept jobs.
+     * Once the quarantineUntil time has elapsed, the worker resumes accepting jobs.
+     * Note that a quarantine can be lifted by setting `quarantineUntil` to the present time (or
+     * somewhere in the past).
+     *
+     * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/quarantineUntil
+     */
+    public Date quarantineUntil;
 
     public class RecentTasksEntry {
 
