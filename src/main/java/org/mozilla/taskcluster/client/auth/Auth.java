@@ -233,6 +233,9 @@ public class Auth extends TaskclusterRequestHandler {
      * 
      * If there already exists a role with the same `roleId` this operation
      * will fail. Use `updateRole` to modify an existing role.
+     * 
+     * Creation of a role that will generate an infinite expansion will result
+     * in an error response.
      *
      * Required scopes:
      *
@@ -249,6 +252,9 @@ public class Auth extends TaskclusterRequestHandler {
      * 
      * The caller's scopes must satisfy all of the new scopes being added, but
      * need not satisfy all of the client's existing scopes.
+     * 
+     * An update of a role that will generate an infinite expansion will result
+     * in an error response.
      *
      * Required scopes:
      *
