@@ -93,20 +93,19 @@ public class Credentials {
     }
 
     /**
-     * GetExtAuthField generates the hawk ext header based on the
-     * authorizedScopes and the certificate used in the case of temporary
-     * credentials. The header is a base64 encoded json object with a
-     * "certificate" property set to the certificate of the temporary
-     * credentials and a "authorizedScopes" property set to the array of
-     * authorizedScopes, if provided. If either "certificate" or
+     * GetExtAuthField generates the hawk ext header based on the authorizedScopes
+     * and the certificate used in the case of temporary credentials. The header is
+     * a base64 encoded json object with a "certificate" property set to the
+     * certificate of the temporary credentials and a "authorizedScopes" property
+     * set to the array of authorizedScopes, if provided. If either "certificate" or
      * "authorizedScopes" is not supplied, they will be omitted from the json
-     * result. If neither are provided, an empty string is returned, rather than
-     * a base64 encoded representation of "null" or "{}". Hawk interprets the
-     * empty string as meaning the ext header is not needed.
+     * result. If neither are provided, an empty string is returned, rather than a
+     * base64 encoded representation of "null" or "{}". Hawk interprets the empty
+     * string as meaning the ext header is not needed.
      *
      * See:
-	 *   * https://docs.taskcluster.net/manual/apis/authorized-scopes
-	 *   * https://docs.taskcluster.net/manual/apis/temporary-credentials
+     *   * https://docs.taskcluster.net/manual/apis/authorized-scopes
+     *   * https://docs.taskcluster.net/manual/apis/temporary-credentials
      */
     private String GetExtAuthField() {
         ExtAuthField extAuthField = new ExtAuthField(getCertificate(), authorizedScopes);

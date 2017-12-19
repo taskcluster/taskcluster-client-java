@@ -43,7 +43,8 @@ public class Certificate {
     }
 
     private static String slug() {
-        // The UUID is generated using a cryptographically strong pseudo random number generator
+        // The UUID is generated using a cryptographically strong pseudo random number
+        // generator
         UUID uuid = UUID.randomUUID();
         long hi = uuid.getMostSignificantBits();
         long lo = uuid.getLeastSignificantBits();
