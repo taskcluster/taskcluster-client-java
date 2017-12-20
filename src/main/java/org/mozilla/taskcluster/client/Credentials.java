@@ -46,14 +46,27 @@ public class Credentials {
         configureHawk();
     }
 
-    /*
-     * This method is used to generate unnamed temporary credentials
+    /**
+     * This method is used to generate unnamed temporary credentials.
+     *
+     * Note that the auth service already applies a 5 minute clock skew to the
+     * start and expiry times in
+     * https://github.com/taskcluster/taskcluster-auth/pull/117 so no clock
+     * skew is applied in this method, nor should be applied by the caller.
      */
     public Credentials createTemporaryCredentials(String[] scopes, Date start, Date expiry)
             throws InvalidOptionsException {
         return this.createTemporaryCredentials("", scopes, start, expiry);
     }
 
+    /**
+     * This method is used to generate named temporary credentials.
+     *
+     * Note that the auth service already applies a 5 minute clock skew to the
+     * start and expiry times in
+     * https://github.com/taskcluster/taskcluster-auth/pull/117 so no clock
+     * skew is applied in this method, nor should be applied by the caller.
+     */
     public Credentials createTemporaryCredentials(String clientId, String[] scopes, Date start, Date expiry)
             throws InvalidOptionsException {
         // Check dates
