@@ -254,13 +254,13 @@ public class APITest {
      */
     @Test
     public void tempCred() {
-        Date now = new Date();
+        Date fiveMinsAgo = new Date(new Date().getTime() - 1000 * 60 * 5);
         try {
             Credentials tempCreds = TEST_AUTH_CREDS.createTemporaryCredentials(new String[] { "scope:1", "scope:2" },
-                    // valid immediately
-                    now,
-                    // expire in 1 hour
-                    new Date(now.getTime() + 1000 * 60 * 60));
+                    // valid 5 mins ago (account for clock skew)
+                    fiveMinsAgo,
+                    // expire in 55 mins
+                    new Date(fiveMinsAgo.getTime() + 1000 * 60 * 60));
             TestAuthenticateRequest request = new TestAuthenticateRequest();
             request.clientScopes = new String[] { "scope:*" };
             request.requiredScopes = new String[] { "scope:1" };
@@ -283,14 +283,14 @@ public class APITest {
      */
     @Test
     public void namedTempCred() {
-        Date now = new Date();
+        Date fiveMinsAgo = new Date(new Date().getTime() - 1000 * 60 * 5);
         try {
             Credentials tempCreds = TEST_AUTH_CREDS.createTemporaryCredentials("jimmy",
                     new String[] { "scope:1", "scope:2" },
-                    // valid immediately
-                    now,
-                    // expire in 1 hour
-                    new Date(now.getTime() + 1000 * 60 * 60));
+                    // valid 5 mins ago (account for clock skew)
+                    fiveMinsAgo,
+                    // expire in 55 mins
+                    new Date(fiveMinsAgo.getTime() + 1000 * 60 * 60));
             TestAuthenticateRequest request = new TestAuthenticateRequest();
             request.clientScopes = new String[] { "scope:*", "auth:create-client:jimmy" };
             request.requiredScopes = new String[] { "scope:1" };
@@ -314,7 +314,7 @@ public class APITest {
      */
     @Test
     public void authorizedScopes() {
-        Date now = new Date();
+        Date fiveMinsAgo = new Date(new Date().getTime() - 1000 * 60 * 5);
         try {
             Credentials permaCredsWithAuthorizedScopes = new Credentials(TEST_AUTH_CREDS.clientId,
                     TEST_AUTH_CREDS.accessToken);
@@ -339,13 +339,13 @@ public class APITest {
      */
     @Test
     public void tempCredsWithAuthorizedScopes() {
-        Date now = new Date();
+        Date fiveMinsAgo = new Date(new Date().getTime() - 1000 * 60 * 5);
         try {
             Credentials tempCreds = TEST_AUTH_CREDS.createTemporaryCredentials(new String[] { "scope:1", "scope:2" },
-                    // valid immediately
-                    now,
-                    // expire in 1 hour
-                    new Date(now.getTime() + 1000 * 60 * 60));
+                    // valid 5 mins ago (account for clock skew)
+                    fiveMinsAgo,
+                    // expire in 55 mins
+                    new Date(fiveMinsAgo.getTime() + 1000 * 60 * 60));
             tempCreds.authorizedScopes = new String[] { "scope:1" };
             TestAuthenticateRequest request = new TestAuthenticateRequest();
             request.clientScopes = new String[] { "scope:*" };
@@ -370,14 +370,14 @@ public class APITest {
      */
     @Test
     public void namedTempCredsWithAuthorizedScopes() {
-        Date now = new Date();
+        Date fiveMinsAgo = new Date(new Date().getTime() - 1000 * 60 * 5);
         try {
             Credentials tempCreds = TEST_AUTH_CREDS.createTemporaryCredentials("julie",
                     new String[] { "scope:1", "scope:2" },
-                    // valid immediately
-                    now,
-                    // expire in 1 hour
-                    new Date(now.getTime() + 1000 * 60 * 60));
+                    // valid 5 mins ago (account for clock skew)
+                    fiveMinsAgo,
+                    // expire in 55 mins
+                    new Date(fiveMinsAgo.getTime() + 1000 * 60 * 60));
             tempCreds.authorizedScopes = new String[] { "scope:1" };
             TestAuthenticateRequest request = new TestAuthenticateRequest();
             request.clientScopes = new String[] { "scope:*", "auth:create-client:j*" };
