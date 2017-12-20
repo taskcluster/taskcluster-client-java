@@ -1,4 +1,4 @@
-package org.mozilla.taskcluster;
+package org.mozilla.taskcluster.client;
 
 import org.mozilla.taskcluster.client.Credentials;
 
