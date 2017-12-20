@@ -226,7 +226,9 @@ public class APITest {
 
     /**
      * This test calls https://docs.taskcluster.net/reference/platform/taskcluster-auth/references/api#testAuthenticate
-     * with a permanent client, with a required scope which is satisfied by a client (star) scope
+     * with a permanent client, with a required scope which is satisfied by a client (star) scope.
+     *
+     * Ported from https://github.com/taskcluster/taskcluster-client-go/blob/8c0f081d4a444cf2169684a1b1eb0ead6183fc45/creds_test.go#L72-L83
      */
     @Test
     public void permaCred() {
@@ -247,6 +249,8 @@ public class APITest {
      * This test calls https://docs.taskcluster.net/reference/platform/taskcluster-auth/references/api#testAuthenticate
      * with an unnamed temporary client with scopes satisfied (but less than) by client scopes, that themselves satisfy
      * the required scopes.
+     *
+     * Ported from https://github.com/taskcluster/taskcluster-client-go/blob/8c0f081d4a444cf2169684a1b1eb0ead6183fc45/creds_test.go#L85-L101
      */
     @Test
     public void tempCred() {
@@ -274,6 +278,8 @@ public class APITest {
 
     /**
      * This test is like tempCred but uses named temporary credentials.
+     *
+     * Ported from https://github.com/taskcluster/taskcluster-client-go/blob/8c0f081d4a444cf2169684a1b1eb0ead6183fc45/creds_test.go#L103-L120
      */
     @Test
     public void namedTempCred() {
@@ -303,6 +309,8 @@ public class APITest {
     /**
      * This test calls https://docs.taskcluster.net/reference/platform/taskcluster-auth/references/api#testAuthenticate
      * using permanent credentials with authorzied scopes.
+     *
+     * Ported from https://github.com/taskcluster/taskcluster-client-go/blob/8c0f081d4a444cf2169684a1b1eb0ead6183fc45/creds_test.go#L157-L170
      */
     @Test
     public void authorizedScopes() {
@@ -325,7 +333,40 @@ public class APITest {
 
     /**
      * This test calls https://docs.taskcluster.net/reference/platform/taskcluster-auth/references/api#testAuthenticate
-     * using temporary credentials with authorized scopes.
+     * using unnamed temporary credentials with authorized scopes.
+     *
+     * Ported from https://github.com/taskcluster/taskcluster-client-go/blob/8c0f081d4a444cf2169684a1b1eb0ead6183fc45/creds_test.go#L172-L189
+     */
+    @Test
+    public void tempCredsWithAuthorizedScopes() {
+        Date now = new Date();
+        try {
+            Credentials tempCreds = TEST_AUTH_CREDS.createTemporaryCredentials(new String[] { "scope:1", "scope:2" },
+                    // valid immediately
+                    now,
+                    // expire in 1 hour
+                    new Date(now.getTime() + 1000 * 60 * 60));
+            tempCreds.authorizedScopes = new String[] { "scope:1" };
+            TestAuthenticateRequest request = new TestAuthenticateRequest();
+            request.clientScopes = new String[] { "scope:*" };
+            request.requiredScopes = new String[] { "scope:1" };
+            Auth auth = new Auth(tempCreds);
+            CallSummary<TestAuthenticateRequest, TestAuthenticateResponse> cs = auth.testAuthenticate(request);
+            checkAuthenticate(cs.responsePayload, "tester", new String[] { "scope:1" });
+        } catch (APICallFailure e) {
+            e.printStackTrace();
+            Assert.fail("Exception thrown");
+        } catch (InvalidOptionsException e) {
+            e.printStackTrace();
+            Assert.fail("Exception thrown");
+        }
+    }
+
+    /**
+     * This test calls https://docs.taskcluster.net/reference/platform/taskcluster-auth/references/api#testAuthenticate
+     * using named temporary credentials with authorized scopes.
+     *
+     * Ported from https://github.com/taskcluster/taskcluster-client-go/blob/8c0f081d4a444cf2169684a1b1eb0ead6183fc45/creds_test.go#L191-L209
      */
     @Test
     public void namedTempCredsWithAuthorizedScopes() {
