@@ -100,6 +100,7 @@ public class TaskDefinitionRequest {
          * repository. This should be place someone can go an do a git/hg blame
          * to who came up with recipe for this task.
          *
+         * Syntax:     ^https?://
          * Max length: 4096
          *
          * See http://schemas.taskcluster.net/queue/v1/create-task-request.json#/properties/metadata/properties/source
