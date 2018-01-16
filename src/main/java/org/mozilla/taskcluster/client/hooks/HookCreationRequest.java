@@ -84,4 +84,9 @@ public class HookCreationRequest {
      * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/task
      */
     public TaskTemplate task;
+
+    /**
+     * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/triggerSchema
+     */
+    public Object triggerSchema;
 }

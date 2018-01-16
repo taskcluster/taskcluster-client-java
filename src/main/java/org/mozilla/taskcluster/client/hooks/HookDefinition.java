@@ -102,4 +102,9 @@ public class HookDefinition {
      * See http://schemas.taskcluster.net/hooks/v1/hook-definition.json#/properties/task
      */
     public TaskTemplate task;
+
+    /**
+     * See http://schemas.taskcluster.net/hooks/v1/hook-definition.json#/properties/triggerSchema
+     */
+    public Object triggerSchema;
 }
