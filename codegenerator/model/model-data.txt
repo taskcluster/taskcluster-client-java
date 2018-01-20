@@ -5455,6 +5455,7 @@ This endpoint is used to check that the service is up.'
 
 http://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#
 =======================================================================
+Additional Properties  = 'false'
 Description            = 'A response containing credentials corresponding to a supplied OIDC `access_token`.
 '
 ID                     = 'http://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#'
