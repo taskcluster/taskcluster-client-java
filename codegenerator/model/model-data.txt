@@ -4010,6 +4010,7 @@ SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/create-hook-re
 
 http://schemas.taskcluster.net/hooks/v1/hook-definition.json#
 =============================================================
+Additional Properties  = 'false'
 Description            = 'Definition of a hook that will create tasks when defined events occur.
 '
 ID                     = 'http://schemas.taskcluster.net/hooks/v1/hook-definition.json#'
@@ -4212,7 +4213,7 @@ Properties
         Type                   = 'object'
         TypeName               = 'NoFire'
         SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/hook-status.json#/properties/lastFire/oneOf[2]'
-    Type                   = 'object'
+    Type HAS NOT BEEN SET!!!
     TypeName               = 'LastFire'
     SourceURL              = 'http://schemas.taskcluster.net/hooks/v1/hook-status.json#/properties/lastFire'
   Property 'nextScheduledDate' =
@@ -12302,6 +12303,7 @@ Properties
     TypeName               = 'Coalesced'
     SourceURL              = 'http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/coalesced'
   Property 'display' =
+    Additional Properties  = 'false'
     Properties
       Property 'chunkCount' =
         Minimum                = '1'
@@ -12465,6 +12467,7 @@ Properties
           consider the log already parsed and skip parsing.
           '
           Items
+            Additional Properties  = 'false'
             Properties
               Property 'errors' =
                 Items
@@ -12542,6 +12545,7 @@ Properties
   Property 'origin' =
     OneOf
       Item '0' =
+        Additional Properties  = 'false'
         Properties
           Property 'kind' =
             Enum                   = '[hg.mozilla.org]'
@@ -12572,6 +12576,7 @@ Properties
         TypeName               = 'HGPush'
         SourceURL              = 'http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[0]'
       Item '1' =
+        Additional Properties  = 'false'
         Description            = 'BACKWARD COMPATABILITY: An HG job that only has a revision_hash.
         Some repos like mozilla-beta have not yet merged in the code that
         allows them access to the revision.
@@ -12606,6 +12611,7 @@ Properties
         TypeName               = 'HGPushLegacy'
         SourceURL              = 'http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[1]'
       Item '2' =
+        Additional Properties  = 'false'
         Properties
           Property 'kind' =
             Enum                   = '[github.com]'
@@ -12769,6 +12775,7 @@ SourceURL              = 'http://schemas.taskcluster.net/taskcluster-treeherder/
 
 http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/definitions/machine
 ============================================================================================
+Additional Properties  = 'false'
 Properties
   Property 'architecture' =
     MaxLength              = '25'
@@ -12806,6 +12813,7 @@ SourceURL              = 'http://schemas.taskcluster.net/taskcluster-treeherder/
 
 http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[0]
 ===================================================================================================
+Additional Properties  = 'false'
 Properties
   Property 'kind' =
     Enum                   = '[hg.mozilla.org]'
@@ -12839,6 +12847,7 @@ SourceURL              = 'http://schemas.taskcluster.net/taskcluster-treeherder/
 
 http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[1]
 ===================================================================================================
+Additional Properties  = 'false'
 Description            = 'BACKWARD COMPATABILITY: An HG job that only has a revision_hash.
 Some repos like mozilla-beta have not yet merged in the code that
 allows them access to the revision.
@@ -12876,6 +12885,7 @@ SourceURL              = 'http://schemas.taskcluster.net/taskcluster-treeherder/
 
 http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[2]
 ===================================================================================================
+Additional Properties  = 'false'
 Properties
   Property 'kind' =
     Enum                   = '[github.com]'
