@@ -3088,7 +3088,7 @@ http://references.taskcluster.net/github/v1/api.json
 ====================================================
 Version     = '0'
 Schema      = 'http://schemas.taskcluster.net/base/v1/api-reference.json#'
-Title       = 'TaskCluster GitHub API Documentation'
+Title       = 'Taskcluster GitHub API Documentation'
 Description = 'The github service, typically available at
 `github.taskcluster.net`, is responsible for publishing pulse
 messages in response to GitHub events.
@@ -3420,7 +3420,7 @@ SourceURL              = 'http://schemas.taskcluster.net/github/v1/repository.js
 http://references.taskcluster.net/github/v1/exchanges.json
 ==========================================================
 Version         = '0'
-Title           = 'TaskCluster-Github Exchanges'
+Title           = 'Taskcluster-Github Exchanges'
 Description     = 'The github service, typically available at
 `github.taskcluster.net`, is responsible for publishing a pulse
 message for supported github events.
@@ -12196,7 +12196,7 @@ Properties
     TypeName               = 'Secrets'
     SourceURL              = 'http://schemas.taskcluster.net/secrets/v1/secret-list.json#/properties/secrets'
 Required               = '[secrets]'
-Schema                 = 'http://json-schema.org/draft-04/schema#'
+Schema                 = 'http://json-schema.org/draft-06/schema#'
 Title                  = 'Secrets List'
 Type                   = 'object'
 TypeName               = 'SecretsList'
@@ -12224,7 +12224,7 @@ Properties
     TypeName               = 'Secret'
     SourceURL              = 'http://schemas.taskcluster.net/secrets/v1/secret.json#/properties/secret'
 Required               = '[secret expires]'
-Schema                 = 'http://json-schema.org/draft-04/schema#'
+Schema                 = 'http://json-schema.org/draft-06/schema#'
 Title                  = 'Secret'
 Type                   = 'object'
 TypeName               = 'Secret'
