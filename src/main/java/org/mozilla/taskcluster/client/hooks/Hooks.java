@@ -118,11 +118,11 @@ public class Hooks extends TaskclusterRequestHandler {
      * The caller's credentials must include the role that will be used to
      * create the task.  That role must satisfy task.scopes as well as the
      * necessary scopes to add the task to the queue.
-     *
+
      * Required scopes:
-     *
-     *   * `hooks:modify-hook:<hookGroupId>/<hookId>`, and
-     *   * `assume:hook-id:<hookGroupId>/<hookId>`
+     *   All of:
+     *   * hooks:modify-hook:<hookGroupId>/<hookId>
+     *   * assume:hook-id:<hookGroupId>/<hookId>
      *
      * @see "[Create a hook API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#createHook)"
      */
@@ -133,11 +133,11 @@ public class Hooks extends TaskclusterRequestHandler {
     /**
      * This endpoint will update an existing hook.  All fields except
      * `hookGroupId` and `hookId` can be modified.
-     *
+
      * Required scopes:
-     *
-     *   * `hooks:modify-hook:<hookGroupId>/<hookId>`, and
-     *   * `assume:hook-id:<hookGroupId>/<hookId>`
+     *   All of:
+     *   * hooks:modify-hook:<hookGroupId>/<hookId>
+     *   * assume:hook-id:<hookGroupId>/<hookId>
      *
      * @see "[Update a hook API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#updateHook)"
      */
@@ -147,10 +147,9 @@ public class Hooks extends TaskclusterRequestHandler {
 
     /**
      * This endpoint will remove a hook definition.
-     *
+
      * Required scopes:
-     *
-     *   * `hooks:modify-hook:<hookGroupId>/<hookId>`
+     *   hooks:modify-hook:<hookGroupId>/<hookId>
      *
      * @see "[Delete a hook API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#removeHook)"
      */
@@ -160,10 +159,9 @@ public class Hooks extends TaskclusterRequestHandler {
 
     /**
      * This endpoint will trigger the creation of a task from a hook definition.
-     *
+
      * Required scopes:
-     *
-     *   * `hooks:trigger-hook:<hookGroupId>/<hookId>`
+     *   hooks:trigger-hook:<hookGroupId>/<hookId>
      *
      * @see "[Trigger a hook API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#triggerHook)"
      */
@@ -174,10 +172,9 @@ public class Hooks extends TaskclusterRequestHandler {
     /**
      * Retrieve a unique secret token for triggering the specified hook. This
      * token can be deactivated with `resetTriggerToken`.
-     *
+
      * Required scopes:
-     *
-     *   * `hooks:get-trigger-token:<hookGroupId>/<hookId>`
+     *   hooks:get-trigger-token:<hookGroupId>/<hookId>
      *
      * @see "[Get a trigger token API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#getTriggerToken)"
      */
@@ -188,10 +185,9 @@ public class Hooks extends TaskclusterRequestHandler {
     /**
      * Reset the token for triggering a given hook. This invalidates token that
      * may have been issued via getTriggerToken with a new token.
-     *
+
      * Required scopes:
-     *
-     *   * `hooks:reset-trigger-token:<hookGroupId>/<hookId>`
+     *   hooks:reset-trigger-token:<hookGroupId>/<hookId>
      *
      * @see "[Reset a trigger token API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#resetTriggerToken)"
      */

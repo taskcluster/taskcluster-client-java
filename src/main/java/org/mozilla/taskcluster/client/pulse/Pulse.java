@@ -89,10 +89,9 @@ public class Pulse extends TaskclusterRequestHandler {
      * 
      * The `expires` and `contact` properties can be updated at any time in a reclaim
      * operation.
-     *
+
      * Required scopes:
-     *
-     *   * `pulse:namespace:<namespace>`
+     *   pulse:namespace:<namespace>
      *
      * @see "[Claim a namespace API Documentation](https://docs.do.not.exist.yet.service.not.in.production#claimNamespace)"
      */

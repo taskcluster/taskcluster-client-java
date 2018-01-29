@@ -52,10 +52,9 @@ public class PurgeCache extends TaskclusterRequestHandler {
      * Publish a purge-cache message to purge caches named `cacheName` with
      * `provisionerId` and `workerType` in the routing-key. Workers should
      * be listening for this message and purge caches when they see it.
-     *
+
      * Required scopes:
-     *
-     *   * `purge-cache:<provisionerId>/<workerType>:<cacheName>`
+     *   purge-cache:<provisionerId>/<workerType>:<cacheName>
      *
      * @see "[Purge Worker Cache API Documentation](https://docs.taskcluster.net/reference/core/purge-cache/api-docs#purgeCache)"
      */

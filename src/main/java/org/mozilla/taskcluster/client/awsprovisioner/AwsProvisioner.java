@@ -105,10 +105,9 @@ public class AwsProvisioner extends TaskclusterRequestHandler {
      * are available using the secrets api.  If specified, the scopes provided
      * will be used to generate a set of temporary credentials available with
      * the other secrets.
-     *
+
      * Required scopes:
-     *
-     *   * `aws-provisioner:manage-worker-type:<workerType>`
+     *   aws-provisioner:manage-worker-type:<workerType>
      *
      * @see "[Create new Worker Type API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#createWorkerType)"
      */
@@ -128,10 +127,9 @@ public class AwsProvisioner extends TaskclusterRequestHandler {
      * 
      * Otherwise, all input requirements and actions are the same as the
      * create method.
-     *
+
      * Required scopes:
-     *
-     *   * `aws-provisioner:manage-worker-type:<workerType>`
+     *   aws-provisioner:manage-worker-type:<workerType>
      *
      * @see "[Update Worker Type API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#updateWorkerType)"
      */
@@ -158,11 +156,11 @@ public class AwsProvisioner extends TaskclusterRequestHandler {
      * type name.  As such, it will require manipulation to be able to
      * use the results of this method to submit date to the update
      * method.
-     *
+
      * Required scopes:
-     *
-     *   * `aws-provisioner:view-worker-type:<workerType>`, or
-     *   * `aws-provisioner:manage-worker-type:<workerType>`
+     *   Any of:
+     *   - aws-provisioner:view-worker-type:<workerType>
+     *   - aws-provisioner:manage-worker-type:<workerType>
      *
      * @see "[Get Worker Type API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#workerType)"
      */
@@ -181,10 +179,9 @@ public class AwsProvisioner extends TaskclusterRequestHandler {
      * either ensure that no tasks are created with that worker type name
      * or you could theoretically set maxCapacity to 0, though, this is
      * not a supported or tested action
-     *
+
      * Required scopes:
-     *
-     *   * `aws-provisioner:manage-worker-type:<workerType>`
+     *   aws-provisioner:manage-worker-type:<workerType>
      *
      * @see "[Delete Worker Type API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#removeWorkerType)"
      */
@@ -211,10 +208,9 @@ public class AwsProvisioner extends TaskclusterRequestHandler {
      * 
      * This method is not ordinarily used in production; instead, the provisioner
      * creates a new secret directly for each spot bid.
-     *
+
      * Required scopes:
-     *
-     *   * `aws-provisioner:create-secret:<workerType>`
+     *   aws-provisioner:create-secret:<workerType>
      *
      * @see "[Create new Secret API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#createSecret)"
      */
@@ -270,11 +266,11 @@ public class AwsProvisioner extends TaskclusterRequestHandler {
      * test worker types, nothing more
      * 
      * **This API end-point is experimental and may be subject to change without warning.**
-     *
+
      * Required scopes:
-     *
-     *   * `aws-provisioner:view-worker-type:<workerType>`, or
-     *   * `aws-provisioner:manage-worker-type:<workerType>`
+     *   Any of:
+     *   - aws-provisioner:view-worker-type:<workerType>
+     *   - aws-provisioner:manage-worker-type:<workerType>
      *
      * @see "[Get All Launch Specifications for WorkerType API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#getLaunchSpecs)"
      */

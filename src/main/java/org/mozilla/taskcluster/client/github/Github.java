@@ -110,10 +110,9 @@ public class Github extends TaskclusterRequestHandler {
      * on github. These statuses are links displayed next to each revision.
      * The status is either OK (green check) or FAILURE (red cross), 
      * made of a custom title and link.
-     *
+
      * Required scopes:
-     *
-     *   * `github:create-status:<owner>/<repo>`
+     *   github:create-status:<owner>/<repo>
      *
      * @see "[Post a status against a given changeset API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#createStatus)"
      */
@@ -123,10 +122,9 @@ public class Github extends TaskclusterRequestHandler {
 
     /**
      * For a given Issue or Pull Request of a repository, this will write a new message.
-     *
+
      * Required scopes:
-     *
-     *   * `github:create-comment:<owner>/<repo>`
+     *   github:create-comment:<owner>/<repo>
      *
      * @see "[Post a comment on a given GitHub Issue or Pull Request API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#createComment)"
      */

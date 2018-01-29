@@ -144,11 +144,11 @@ public class Queue extends TaskclusterRequestHandler {
      * 
      * **Important** Any scopes the task requires are also required for creating
      * the task. Please see the Request Payload (Task Definition) for details.
-     *
+
      * Required scopes:
-     *
-     *   * `queue:create-task:<priority>:<provisionerId>/<workerType>`, and
-     *   * `queue:scheduler-id:<schedulerId>`
+     *   All of:
+     *   * queue:create-task:<priority>:<provisionerId>/<workerType>
+     *   * queue:scheduler-id:<schedulerId>
      *
      * @see "[Create New Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#createTask)"
      */
@@ -159,11 +159,11 @@ public class Queue extends TaskclusterRequestHandler {
     /**
      * **Deprecated**, this is the same as `createTask` with a **self-dependency**.
      * This is only present for legacy.
-     *
+
      * Required scopes:
-     *
-     *   * `queue:create-task:<priority>:<provisionerId>/<workerType>`, and
-     *   * `queue:scheduler-id:<schedulerId>`
+     *   All of:
+     *   * queue:create-task:<priority>:<provisionerId>/<workerType>
+     *   * queue:scheduler-id:<schedulerId>
      *
      * @see "[Define Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#defineTask)"
      */
@@ -186,11 +186,13 @@ public class Queue extends TaskclusterRequestHandler {
      * **Note** this operation is **idempotent** and will not fail or complain
      * if called with a `taskId` that is already scheduled, or even resolved.
      * To reschedule a task previously resolved, use `rerunTask`.
-     *
+
      * Required scopes:
-     *
-     *   * (`queue:schedule-task` and `assume:scheduler-id:<schedulerId>/<taskGroupId>`), or
-     *   * `queue:schedule-task:<schedulerId>/<taskGroupId>/<taskId>`
+     *   Any of:
+     *   - All of:
+     *     * queue:schedule-task
+     *     * assume:scheduler-id:<schedulerId>/<taskGroupId>
+     *   - queue:schedule-task:<schedulerId>/<taskGroupId>/<taskId>
      *
      * @see "[Schedule Defined Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#scheduleTask)"
      */
@@ -211,11 +213,13 @@ public class Queue extends TaskclusterRequestHandler {
      * **Remark** this operation is idempotent, if you try to rerun a task that
      * is not either `failed` or `completed`, this operation will just return
      * the current task status.
-     *
+
      * Required scopes:
-     *
-     *   * (`queue:rerun-task` and `assume:scheduler-id:<schedulerId>/<taskGroupId>`), or
-     *   * `queue:rerun-task:<schedulerId>/<taskGroupId>/<taskId>`
+     *   Any of:
+     *   - All of:
+     *     * queue:rerun-task
+     *     * assume:scheduler-id:<schedulerId>/<taskGroupId>
+     *   - queue:rerun-task:<schedulerId>/<taskGroupId>/<taskId>
      *
      * @see "[Rerun a Resolved Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#rerunTask)"
      */
@@ -236,11 +240,13 @@ public class Queue extends TaskclusterRequestHandler {
      * **Remark** this operation is idempotent, if you try to cancel a task that
      * isn't `unscheduled`, `pending` or `running`, this operation will just
      * return the current task status.
-     *
+
      * Required scopes:
-     *
-     *   * (`queue:cancel-task` and `assume:scheduler-id:<schedulerId>/<taskGroupId>`), or
-     *   * `queue:cancel-task:<schedulerId>/<taskGroupId>/<taskId>`
+     *   Any of:
+     *   - All of:
+     *     * queue:cancel-task
+     *     * assume:scheduler-id:<schedulerId>/<taskGroupId>
+     *   - queue:cancel-task:<schedulerId>/<taskGroupId>/<taskId>
      *
      * @see "[Cancel Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#cancelTask)"
      */
@@ -252,11 +258,13 @@ public class Queue extends TaskclusterRequestHandler {
      * Get a signed URLs to get and delete messages from azure queue.
      * Once messages are polled from here, you can claim the referenced task
      * with `claimTask`, and afterwards you should always delete the message.
-     *
+
      * Required scopes:
-     *
-     *   * (`queue:poll-task-urls` and `assume:worker-type:<provisionerId>/<workerType>`), or
-     *   * `queue:poll-task-urls:<provisionerId>/<workerType>`
+     *   Any of:
+     *   - All of:
+     *     * queue:poll-task-urls
+     *     * assume:worker-type:<provisionerId>/<workerType>
+     *   - queue:poll-task-urls:<provisionerId>/<workerType>
      *
      * @see "[Get Urls to Poll Pending Tasks API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#pollTaskUrls)"
      */
@@ -266,11 +274,11 @@ public class Queue extends TaskclusterRequestHandler {
 
     /**
      * Claim any task, more to be added later... long polling up to 20s.
-     *
+
      * Required scopes:
-     *
-     *   * `queue:claim-work:<provisionerId>/<workerType>`, and
-     *   * `queue:worker-id:<workerGroup>/<workerId>`
+     *   All of:
+     *   * queue:claim-work:<provisionerId>/<workerType>
+     *   * queue:worker-id:<workerGroup>/<workerId>
      *
      * @see "[Claim Work API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#claimWork)"
      */
@@ -280,11 +288,16 @@ public class Queue extends TaskclusterRequestHandler {
 
     /**
      * claim a task, more to be added later...
-     *
+
      * Required scopes:
-     *
-     *   * (`queue:claim-task` and `assume:worker-type:<provisionerId>/<workerType>` and `assume:worker-id:<workerGroup>/<workerId>`), or
-     *   * (`queue:claim-task:<provisionerId>/<workerType>` and `queue:worker-id:<workerGroup>/<workerId>`)
+     *   Any of:
+     *   - All of:
+     *     * queue:claim-task
+     *     * assume:worker-type:<provisionerId>/<workerType>
+     *     * assume:worker-id:<workerGroup>/<workerId>
+     *   - All of:
+     *     * queue:claim-task:<provisionerId>/<workerType>
+     *     * queue:worker-id:<workerGroup>/<workerId>
      *
      * @see "[Claim Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#claimTask)"
      */
@@ -314,11 +327,13 @@ public class Queue extends TaskclusterRequestHandler {
      * or the `task.deadline` have been exceeded. If reclaiming fails, workers
      * should abort the task and forget about the given `runId`. There is no
      * need to resolve the run or upload artifacts.
-     *
+
      * Required scopes:
-     *
-     *   * (`queue:claim-task` and `assume:worker-id:<workerGroup>/<workerId>`), or
-     *   * `queue:reclaim-task:<taskId>/<runId>`
+     *   Any of:
+     *   - All of:
+     *     * queue:claim-task
+     *     * assume:worker-id:<workerGroup>/<workerId>
+     *   - queue:reclaim-task:<taskId>/<runId>
      *
      * @see "[Reclaim task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#reclaimTask)"
      */
@@ -328,11 +343,13 @@ public class Queue extends TaskclusterRequestHandler {
 
     /**
      * Report a task completed, resolving the run as `completed`.
-     *
+
      * Required scopes:
-     *
-     *   * (`queue:resolve-task` and `assume:worker-id:<workerGroup>/<workerId>`), or
-     *   * `queue:resolve-task:<taskId>/<runId>`
+     *   Any of:
+     *   - All of:
+     *     * queue:resolve-task
+     *     * assume:worker-id:<workerGroup>/<workerId>
+     *   - queue:resolve-task:<taskId>/<runId>
      *
      * @see "[Report Run Completed API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#reportCompleted)"
      */
@@ -348,11 +365,13 @@ public class Queue extends TaskclusterRequestHandler {
      * Do not use this if the task couldn't be run because if malformed
      * payload, or other unexpected condition. In these cases we have a task
      * exception, which should be reported with `reportException`.
-     *
+
      * Required scopes:
-     *
-     *   * (`queue:resolve-task` and `assume:worker-id:<workerGroup>/<workerId>`), or
-     *   * `queue:resolve-task:<taskId>/<runId>`
+     *   Any of:
+     *   - All of:
+     *     * queue:resolve-task
+     *     * assume:worker-id:<workerGroup>/<workerId>
+     *   - queue:resolve-task:<taskId>/<runId>
      *
      * @see "[Report Run Failed API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#reportFailed)"
      */
@@ -374,11 +393,13 @@ public class Queue extends TaskclusterRequestHandler {
      * Do not use this to signal that some user-specified code crashed for any
      * reason specific to this code. If user-specific code hits a resource that
      * is temporarily unavailable worker should report task _failed_.
-     *
+
      * Required scopes:
-     *
-     *   * (`queue:resolve-task` and `assume:worker-id:<workerGroup>/<workerId>`), or
-     *   * `queue:resolve-task:<taskId>/<runId>`
+     *   Any of:
+     *   - All of:
+     *     * queue:resolve-task
+     *     * assume:worker-id:<workerGroup>/<workerId>
+     *   - queue:resolve-task:<taskId>/<runId>
      *
      * @see "[Report Task Exception API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#reportException)"
      */
@@ -456,11 +477,13 @@ public class Queue extends TaskclusterRequestHandler {
      * As a special case the `url` property on _reference artifacts_ can be
      * updated. You should only use this to update the `url` property for
      * reference artifacts your process has created.
-     *
+
      * Required scopes:
-     *
-     *   * (`queue:create-artifact:<name>` and `assume:worker-id:<workerGroup>/<workerId>`), or
-     *   * `queue:create-artifact:<taskId>/<runId>`
+     *   Any of:
+     *   - All of:
+     *     * queue:create-artifact:<name>
+     *     * assume:worker-id:<workerGroup>/<workerId>
+     *   - queue:create-artifact:<taskId>/<runId>
      *
      * @see "[Create Artifact API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#createArtifact)"
      */
@@ -478,11 +501,13 @@ public class Queue extends TaskclusterRequestHandler {
      * the `present` entity field will be set to `true` to reflect that the
      * artifact is now present and a message published to pulse.  NOTE: This
      * endpoint *must* be called for all artifacts of storageType 'blob'
-     *
+
      * Required scopes:
-     *
-     *   * (`queue:create-artifact:<name>` and `assume:worker-id:<workerGroup>/<workerId>`), or
-     *   * `queue:create-artifact:<taskId>/<runId>`
+     *   Any of:
+     *   - All of:
+     *     * queue:create-artifact:<name>
+     *     * assume:worker-id:<workerGroup>/<workerId>
+     *   - queue:create-artifact:<taskId>/<runId>
      *
      * @see "[Complete Artifact API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#completeArtifact)"
      */
@@ -509,10 +534,9 @@ public class Queue extends TaskclusterRequestHandler {
      * `x-taskcluster-skip-cache: true`, this should only be used for resources
      * where request volume is known to be low, and caching not useful.
      * (This feature may be disabled in the future, use is sparingly!)
-     *
+
      * Required scopes:
-     *
-     *   * `queue:get-artifact:<name>`
+     *   queue:get-artifact:<name>
      *
      * @see "[Get Artifact from Run API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#getArtifact)"
      */
@@ -536,10 +560,9 @@ public class Queue extends TaskclusterRequestHandler {
      * **Remark**, this end-point is slightly slower than
      * `queue.getArtifact`, so consider that if you already know the `runId` of
      * the latest run. Otherwise, just us the most convenient API end-point.
-     *
+
      * Required scopes:
-     *
-     *   * `queue:get-artifact:<name>`
+     *   queue:get-artifact:<name>
      *
      * @see "[Get Artifact from Latest Run API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#getLatestArtifact)"
      */
@@ -624,10 +647,9 @@ public class Queue extends TaskclusterRequestHandler {
      * The term "provisioner" is taken broadly to mean anything with a provisionerId.
      * This does not necessarily mean there is an associated service performing any
      * provisioning activity.
-     *
+
      * Required scopes:
-     *
-     *   * `queue:declare-provisioner:<provisionerId>#<property>`
+     *   queue:declare-provisioner:<provisionerId>#<property>
      *
      * @see "[Update a provisioner API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#declareProvisioner)"
      */
@@ -680,10 +702,9 @@ public class Queue extends TaskclusterRequestHandler {
      * possessed. For example, a request to update the `gecko-b-1-w2008` worker-type within the `aws-provisioner-v1`
      * provisioner with a body `{description: 'This worker type is great'}` would require you to have the scope
      * `queue:declare-worker-type:aws-provisioner-v1/gecko-b-1-w2008#description`.
-     *
+
      * Required scopes:
-     *
-     *   * `queue:declare-worker-type:<provisionerId>/<workerType>#<property>`
+     *   queue:declare-worker-type:<provisionerId>/<workerType>#<property>
      *
      * @see "[Update a worker-type API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#declareWorkerType)"
      */
@@ -720,10 +741,9 @@ public class Queue extends TaskclusterRequestHandler {
 
     /**
      * Quarantine a worker
-     *
+
      * Required scopes:
-     *
-     *   * `queue:quarantine-worker:<provisionerId>/<workerType>/<workerGroup>/<workerId>`
+     *   queue:quarantine-worker:<provisionerId>/<workerType>/<workerGroup>/<workerId>
      *
      * @see "[Quarantine a worker API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#quarantineWorker)"
      */
@@ -736,10 +756,9 @@ public class Queue extends TaskclusterRequestHandler {
      * 
      * `declareWorker` allows updating one or more properties of a worker as long as the required scopes are
      * possessed.
-     *
+
      * Required scopes:
-     *
-     *   * `queue:declare-worker:<provisionerId>/<workerType>/<workerGroup>/<workerId>#<property>`
+     *   queue:declare-worker:<provisionerId>/<workerType>/<workerGroup>/<workerId>#<property>
      *
      * @see "[Declare a worker API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#declareWorker)"
      */

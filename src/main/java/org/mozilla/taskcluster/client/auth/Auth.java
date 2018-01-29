@@ -113,10 +113,9 @@ public class Auth extends TaskclusterRequestHandler {
      * fail. Use `updateClient` if you wish to update an existing client.
      * 
      * The caller's scopes must satisfy `scopes`.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:create-client:<clientId>`
+     *   auth:create-client:<clientId>
      *
      * @see "[Create Client API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#createClient)"
      */
@@ -131,10 +130,9 @@ public class Auth extends TaskclusterRequestHandler {
      * 
      * There is no way to retrieve an existing `accessToken`, so if you loose it
      * you must reset the accessToken to acquire it again.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:reset-access-token:<clientId>`
+     *   auth:reset-access-token:<clientId>
      *
      * @see "[Reset `accessToken` API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#resetAccessToken)"
      */
@@ -148,10 +146,9 @@ public class Auth extends TaskclusterRequestHandler {
      * satisfy all scopes being added to the client in the update operation.
      * If no scopes are given in the request, the client's scopes remain
      * unchanged
-     *
+
      * Required scopes:
-     *
-     *   * `auth:update-client:<clientId>`
+     *   auth:update-client:<clientId>
      *
      * @see "[Update Client API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#updateClient)"
      */
@@ -165,10 +162,9 @@ public class Auth extends TaskclusterRequestHandler {
      * 
      * This is typically used by identity providers to re-enable clients that
      * had been disabled when the corresponding identity's scopes changed.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:enable-client:<clientId>`
+     *   auth:enable-client:<clientId>
      *
      * @see "[Enable Client API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#enableClient)"
      */
@@ -181,10 +177,9 @@ public class Auth extends TaskclusterRequestHandler {
      * 
      * This is typically used by identity providers to disable clients when the
      * corresponding identity's scopes no longer satisfy the client's scopes.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:disable-client:<clientId>`
+     *   auth:disable-client:<clientId>
      *
      * @see "[Disable Client API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#disableClient)"
      */
@@ -195,10 +190,9 @@ public class Auth extends TaskclusterRequestHandler {
     /**
      * Delete a client, please note that any roles related to this client must
      * be deleted independently.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:delete-client:<clientId>`
+     *   auth:delete-client:<clientId>
      *
      * @see "[Delete Client API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#deleteClient)"
      */
@@ -236,10 +230,9 @@ public class Auth extends TaskclusterRequestHandler {
      * 
      * Creation of a role that will generate an infinite expansion will result
      * in an error response.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:create-role:<roleId>`
+     *   auth:create-role:<roleId>
      *
      * @see "[Create Role API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#createRole)"
      */
@@ -255,10 +248,9 @@ public class Auth extends TaskclusterRequestHandler {
      * 
      * An update of a role that will generate an infinite expansion will result
      * in an error response.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:update-role:<roleId>`
+     *   auth:update-role:<roleId>
      *
      * @see "[Update Role API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#updateRole)"
      */
@@ -269,10 +261,9 @@ public class Auth extends TaskclusterRequestHandler {
     /**
      * Delete a role. This operation will succeed regardless of whether or not
      * the role exists.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:delete-role:<roleId>`
+     *   auth:delete-role:<roleId>
      *
      * @see "[Delete Role API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#deleteRole)"
      */
@@ -367,10 +358,9 @@ public class Auth extends TaskclusterRequestHandler {
      * compatibility for libraries and tools built to auto-refresh credentials.
      * For details on the format returned by EC2 metadata service see:
      * [EC2 User Guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#instance-metadata-security-credentials).
-     *
+
      * Required scopes:
-     *
-     *   * `auth:aws-s3:<level>:<bucket>/<prefix>`
+     *   auth:aws-s3:<level>:<bucket>/<prefix>
      *
      * @see "[Get Temporary Read/Write Credentials S3 API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#awsS3Credentials)"
      */
@@ -380,10 +370,9 @@ public class Auth extends TaskclusterRequestHandler {
 
     /**
      * Retrieve a list of all Azure accounts managed by Taskcluster Auth.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:azure-table:list-accounts`
+     *   auth:azure-table:list-accounts
      *
      * @see "[List Accounts Managed by Auth API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureAccounts)"
      */
@@ -393,10 +382,9 @@ public class Auth extends TaskclusterRequestHandler {
 
     /**
      * Retrieve a list of all tables in an account.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:azure-table:list-tables:<account>`
+     *   auth:azure-table:list-tables:<account>
      *
      * @see "[List Tables in an Account Managed by Auth API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureTables)"
      */
@@ -411,10 +399,9 @@ public class Auth extends TaskclusterRequestHandler {
      * The `level` parameter can be `read-write` or `read-only` and determines
      * which type of credentials are returned.  If level is read-write, it will create the
      * table if it doesn't already exist.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:azure-table:<level>:<account>/<table>`
+     *   auth:azure-table:<level>:<account>/<table>
      *
      * @see "[Get Shared-Access-Signature for Azure Table API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureTableSAS)"
      */
@@ -429,10 +416,9 @@ public class Auth extends TaskclusterRequestHandler {
      * The `level` parameter can be `read-write` or `read-only` and determines
      * which type of credentials are returned.  If level is read-write, it will create the
      * container if it doesn't already exist.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:azure-blob:<level>:<account>/<container>`
+     *   auth:azure-blob:<level>:<account>/<container>
      *
      * @see "[Get Shared-Access-Signature for Azure Blob API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureBlobSAS)"
      */
@@ -448,10 +434,9 @@ public class Auth extends TaskclusterRequestHandler {
      * If the project doesn't exist it will be created, and assigned to the
      * initial team configured for this component. Contact a Sentry admin
      * to have the project transferred to a team you have access to if needed
-     *
+
      * Required scopes:
-     *
-     *   * `auth:sentry:<project>`
+     *   auth:sentry:<project>
      *
      * @see "[Get DSN for Sentry Project API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#sentryDSN)"
      */
@@ -463,10 +448,9 @@ public class Auth extends TaskclusterRequestHandler {
      * Get temporary `token` and `baseUrl` for sending metrics to statsum.
      * 
      * The token is valid for 24 hours, clients should refresh after expiration.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:statsum:<project>`
+     *   auth:statsum:<project>
      *
      * @see "[Get Token for Statsum Project API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#statsumToken)"
      */
@@ -477,10 +461,9 @@ public class Auth extends TaskclusterRequestHandler {
     /**
      * Get temporary `token` and `id` for connecting to webhooktunnel
      * The token is valid for 96 hours, clients should refresh after expiration.
-     *
+
      * Required scopes:
-     *
-     *   * `auth:webhooktunnel`
+     *   auth:webhooktunnel
      *
      * @see "[Get Token for Webhooktunnel Proxy API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#webhooktunnelToken)"
      */

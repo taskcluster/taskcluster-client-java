@@ -183,10 +183,9 @@ public class Index extends TaskclusterRequestHandler {
      * 
      * Please see the introduction above for information
      * about indexing successfully completed tasks automatically using custom routes.
-     *
+
      * Required scopes:
-     *
-     *   * `index:insert-task:<namespace>`
+     *   index:insert-task:<namespace>
      *
      * @see "[Insert Task into Index API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#insertTask)"
      */
@@ -209,10 +208,9 @@ public class Index extends TaskclusterRequestHandler {
      * installer and debug symbols into a single artifact.
      * 
      * If no task exists for the given index path, this API end-point responds with 404.
-     *
+
      * Required scopes:
-     *
-     *   * `queue:get-artifact:<name>`
+     *   queue:get-artifact:<name>
      *
      * @see "[Get Artifact From Indexed Task API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#findArtifactFromTask)"
      */

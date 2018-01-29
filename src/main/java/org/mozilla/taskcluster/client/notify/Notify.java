@@ -50,10 +50,9 @@ public class Notify extends TaskclusterRequestHandler {
      * to HTML, but both the HTML and raw markdown text will be sent in the
      * email. If a link is included, it will be rendered to a nice button in the
      * HTML version of the email
-     *
+
      * Required scopes:
-     *
-     *   * `notify:email:<address>`
+     *   notify:email:<address>
      *
      * @see "[Send an Email API Documentation](https://docs.taskcluster.net/reference/core/notify/api-docs#email)"
      */
@@ -63,10 +62,9 @@ public class Notify extends TaskclusterRequestHandler {
 
     /**
      * Publish a message on pulse with the given `routingKey`.
-     *
+
      * Required scopes:
-     *
-     *   * `notify:pulse:<routingKey>`
+     *   notify:pulse:<routingKey>
      *
      * @see "[Publish a Pulse Message API Documentation](https://docs.taskcluster.net/reference/core/notify/api-docs#pulse)"
      */
@@ -86,11 +84,13 @@ public class Notify extends TaskclusterRequestHandler {
      * However, if the user isn't online the message will be dropped without
      * error. We maybe improve this behavior in the future. For now just keep
      * in mind that IRC is a best-effort service.
-     *
+
      * Required scopes:
-     *
-     *   * `notify:irc-channel:<channel>`, and
-     *   * `notify:irc-user:<user>`
+     *   All of:
+     *   * If channelRequest:
+     *       notify:irc-channel:<channel>
+     *   * If userRequest:
+     *       notify:irc-user:<user>
      *
      * @see "[Post IRC Message API Documentation](https://docs.taskcluster.net/reference/core/notify/api-docs#irc)"
      */
