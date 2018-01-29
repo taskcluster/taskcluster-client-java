@@ -33,7 +33,7 @@ public class CreateWorkerTypeRequest {
         /**
          * Static Secrets unique to this AZ
          *
-         * Default:    map[]
+         * Default:    {}
          *
          * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones/items/properties/secrets
          */
@@ -42,7 +42,7 @@ public class CreateWorkerTypeRequest {
         /**
          * UserData entries unique to this AZ
          *
-         * Default:    map[]
+         * Default:    {}
          *
          * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones/items/properties/userData
          */

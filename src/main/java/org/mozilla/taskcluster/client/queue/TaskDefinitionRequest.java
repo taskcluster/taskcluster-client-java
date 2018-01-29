@@ -57,7 +57,7 @@ public class TaskDefinitionRequest {
      * reusable services. **Warning**, do not stuff large data-sets in here,
      * task definitions should not take-up multiple MiBs.
      *
-     * Default:    map[]
+     * Default:    {}
      *
      * See http://schemas.taskcluster.net/queue/v1/create-task-request.json#/properties/extra
      */
@@ -232,7 +232,7 @@ public class TaskDefinitionRequest {
      * candidates for formal meta-data. Something like
      * `purpose: 'build' || 'test'` is a good example.
      *
-     * Default:    map[]
+     * Default:    {}
      *
      * See http://schemas.taskcluster.net/queue/v1/create-task-request.json#/properties/tags
      */

@@ -18,7 +18,7 @@ public class TaskTemplate {
      * reusable services. **Warning**, do not stuff large data-sets in here,
      * task definitions should not take-up multiple MiBs.
      *
-     * Default:    map[]
+     * Default:    {}
      *
      * See http://schemas.taskcluster.net/hooks/v1/task-template.json#/properties/extra
      */
@@ -169,7 +169,7 @@ public class TaskTemplate {
      * candidates for formal meta-data. Something like
      * `purpose: 'build' || 'test'` is a good example.
      *
-     * Default:    map[]
+     * Default:    {}
      *
      * See http://schemas.taskcluster.net/hooks/v1/task-template.json#/properties/tags
      */

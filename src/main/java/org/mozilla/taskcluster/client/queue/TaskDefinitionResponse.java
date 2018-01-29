@@ -55,7 +55,7 @@ public class TaskDefinitionResponse {
      * reusable services. **Warning**, do not stuff large data-sets in here,
      * task definitions should not take-up multiple MiBs.
      *
-     * Default:    map[]
+     * Default:    {}
      *
      * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/extra
      */

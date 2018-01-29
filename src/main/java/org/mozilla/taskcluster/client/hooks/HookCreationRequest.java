@@ -87,7 +87,10 @@ public class HookCreationRequest {
 
     /**
      *
-     * Default:    map["additionalProperties":%!q(bool=false) "type":"object"]
+     * Default:    {
+     *   "additionalProperties": false,
+     *   "type": "object"
+     * }
      *
      * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/triggerSchema
      */
