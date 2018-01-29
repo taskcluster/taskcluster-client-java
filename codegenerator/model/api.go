@@ -1,9 +1,12 @@
 package model
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
 	"strings"
 
+	"github.com/kr/text"
 	"github.com/taskcluster/taskcluster-client-java/codegenerator/utils"
 )
 
@@ -15,13 +18,7 @@ import (
 
 // API represents the HTTP interface of a Taskcluster service
 type API struct {
-	BaseURL     string      `json:"baseUrl"`
-	Description string      `json:"description"`
-	Entries     []APIEntry  `json:"entries"`
-	Title       string      `json:"title"`
-	Version     interface{} `json:"version"`
-	Schema      string      `json:"$schema"`
-
+	*APIReferenceFile
 	apiDef *APIDefinition
 }
 
@@ -115,19 +112,7 @@ func (api *API) setAPIDefinition(apiDef *APIDefinition) {
 }
 
 type APIEntry struct {
-	Args        []string   `json:"args"`
-	Description string     `json:"description"`
-	Input       string     `json:"input"`
-	Method      string     `json:"method"`
-	Name        string     `json:"name"`
-	Query       []string   `json:"query"`
-	Route       string     `json:"route"`
-	Scopes      [][]string `json:"scopes"`
-	Stability   string     `json:"stability"`
-	Output      string     `json:"output"`
-	Title       string     `json:"title"`
-	Type        string     `json:"type"`
-
+	*Entry
 	MethodName string
 	Parent     *API
 }
@@ -159,7 +144,7 @@ func (entry *APIEntry) String() string {
 			"    Entry Title       = '%v'\n"+
 			"    Entry Description = '%v'\n",
 		entry.Type, entry.Method, entry.Route, entry.Args,
-		entry.Query, entry.Name, entry.Stability, entry.Scopes,
+		entry.Query, entry.Name, entry.Stability, &entry.Scopes,
 		entry.Input, entry.Output, entry.Title, entry.Description,
 	)
 }
@@ -172,7 +157,7 @@ func (entry *APIEntry) generateAPICode(apiName string) string {
 	if len(comment) >= 1 && comment[len(comment)-1:] != "\n" {
 		comment += "\n"
 	}
-	comment += requiredScopesComment(entry.Scopes)
+	comment += requiredScopesComment(&entry.Scopes)
 	comment += "     *\n"
 	comment += fmt.Sprintf("     * @see \"[%v API Documentation](%v#%v)\"\n", entry.Title, entry.Parent.apiDef.DocRoot, entry.Name)
 	comment += "     */\n"
@@ -210,29 +195,159 @@ func (entry *APIEntry) generateAPICode(apiName string) string {
 	return strings.Replace(content, ` + ""`, "", -1)
 }
 
-func requiredScopesComment(scopes [][]string) string {
-	if len(scopes) == 0 {
+func requiredScopesComment(scopes *ScopeExpressionTemplate) string {
+	if scopes.Type == "" {
 		return ""
 	}
-	comment := "     *\n"
-	comment += "     * Required scopes:\n"
-	comment += "     *\n"
-	switch len(scopes) {
-	case 0:
-	case 1:
-		comment += "     *   * `" + strings.Join(scopes[0], "`, and\n     *   * `") + "`\n"
+	comment := "\n"
+	comment += "Required scopes:\n"
+	comment += text.Indent(scopes.String()+"\n", "  ")
+	return text.Indent(comment, "     * ")
+}
+
+func (scopes *ScopeExpressionTemplate) String() string {
+	switch scopes.Type {
+	case "":
+		return ""
+	case "AllOf":
+		return scopes.AllOf.String()
+	case "AnyOf":
+		return scopes.AnyOf.String()
+	case "ForEachIn":
+		return scopes.ForEachIn.String()
+	case "IfThen":
+		return scopes.IfThen.String()
+	case "RequiredScope":
+		return scopes.RequiredScope.String()
 	default:
-		lines := make([]string, len(scopes))
-		for i, j := range scopes {
-			switch len(j) {
-			case 0:
-			case 1:
-				lines[i] = "     *   * `" + j[0] + "`"
-			default:
-				lines[i] = "     *   * (`" + strings.Join(j, "` and `") + "`)"
+		panic(fmt.Sprintf("Internal error - did not recognise scope form '%v'", scopes.Type))
+	}
+}
+
+func (allOf *AllOf) String() string {
+	if allOf == nil {
+		return "WARNING: NIL AllOf"
+	}
+	switch len(allOf.AllOf) {
+	case 0:
+		return ""
+	case 1:
+		return allOf.AllOf[0].String()
+	}
+	var desc string
+	for _, exp := range allOf.AllOf {
+		x := text.Indent(exp.String(), "  ")
+		if len(x) >= 2 {
+			desc += "\n" + "* " + x[2:]
+		}
+	}
+	return "All of:" + desc
+}
+
+func (anyOf *AnyOf) String() string {
+	if len(anyOf.AnyOf) == 0 {
+		return "AnyOf empty set - INVALID"
+	}
+	if len(anyOf.AnyOf) == 1 {
+		return anyOf.AnyOf[0].String()
+	}
+	var desc string
+	for _, exp := range anyOf.AnyOf {
+		x := text.Indent(exp.String(), "  ")
+		if len(x) >= 2 {
+			desc += "\n" + "- " + x[2:]
+		}
+	}
+	return "Any of:" + desc
+}
+
+func (forEachIn *ForEachIn) String() string {
+	return "For " + forEachIn.For + " in " + forEachIn.In + " each " + forEachIn.Each
+}
+
+func (ifThen *IfThen) String() string {
+	return "If " + ifThen.If + ":\n" + text.Indent(ifThen.Then.String(), "  ")
+}
+
+func (rs *RequiredScope) String() string {
+	return string(*rs)
+}
+
+// MarshalJSON calls json.RawMessage method of the same name. Required since
+// ScopeExpressionTemplate is of type json.RawMessage...
+func (this *ScopeExpressionTemplate) MarshalJSON() ([]byte, error) {
+	return (this.RawMessage).MarshalJSON()
+}
+
+// UnmarshalJSON identifies the data structure at runtime, and unmarshals in
+// the appropriate type
+func (this *ScopeExpressionTemplate) UnmarshalJSON(data []byte) error {
+	if this == nil {
+		return errors.New("ScopeExpressionTemplate: UnmarshalJSON on nil pointer")
+	}
+	this.RawMessage = append((this.RawMessage)[0:0], data...)
+	var tempObj interface{}
+	err := json.Unmarshal(this.RawMessage, &tempObj)
+	if err != nil {
+		panic("Internal error: " + err.Error())
+	}
+	switch t := tempObj.(type) {
+	case string:
+		this.Type = "RequiredScope"
+		this.RequiredScope = new(RequiredScope)
+		*(this.RequiredScope) = RequiredScope(t)
+	case map[string]interface{}:
+		j, err := json.Marshal(t)
+		if err != nil {
+			panic("Internal error: " + err.Error())
+		}
+		if _, exists := t["AnyOf"]; exists {
+			this.Type = "AnyOf"
+			this.AnyOf = new(AnyOf)
+			err = json.Unmarshal(j, this.AnyOf)
+		}
+		if _, exists := t["AllOf"]; exists {
+			this.Type = "AllOf"
+			this.AllOf = new(AllOf)
+			err = json.Unmarshal(j, this.AllOf)
+		}
+		if _, exists := t["if"]; exists {
+			this.Type = "IfThen"
+			this.IfThen = new(IfThen)
+			err = json.Unmarshal(j, this.IfThen)
+		}
+		if _, exists := t["for"]; exists {
+			this.Type = "ForEachIn"
+			this.ForEachIn = new(ForEachIn)
+			err = json.Unmarshal(j, this.ForEachIn)
+		}
+		if err != nil {
+			panic("Internal error: " + err.Error())
+		}
+	// for old style scopesets [][]string (normal disjunctive form)
+	case []interface{}:
+		this.Type = "AnyOf"
+		this.AnyOf = &AnyOf{
+			AnyOf: make([]ScopeExpressionTemplate, len(t), len(t)),
+		}
+		for i, j := range t {
+			allOf := j.([]interface{})
+			this.AnyOf.AnyOf[i] = ScopeExpressionTemplate{
+				Type: "AllOf",
+				AllOf: &AllOf{
+					AllOf: make([]ScopeExpressionTemplate, len(allOf), len(allOf)),
+				},
+			}
+			for k, l := range allOf {
+				rs := RequiredScope(l.(string))
+				this.AnyOf.AnyOf[i].AllOf.AllOf[k] = ScopeExpressionTemplate{
+					Type:          "RequiredScope",
+					RequiredScope: &rs,
+				}
 			}
 		}
-		comment += strings.Join(lines, ", or\n") + "\n"
+	default:
+		panic(fmt.Sprintf("Internal error: unrecognised type %T", t))
 	}
-	return comment
+	return nil
 }
