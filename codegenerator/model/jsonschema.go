@@ -1,6 +1,7 @@
 package model
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/url"
@@ -47,7 +48,11 @@ func (jsonSubSchema *JsonSubSchema) TypeDefinition(level int, extraPackages map[
 		case float64:
 			value = strconv.FormatFloat((*def).(float64), 'g', -1, 64)
 		default:
-			value = fmt.Sprintf("%q", *def)
+			v, err := json.MarshalIndent(*def, "", "  ")
+			if err != nil {
+				panic(fmt.Sprintf("couldn't marshal %+v", *def))
+			}
+			value = string(v)
 		}
 		metadata += "Default:    " + value + "\n"
 	}
