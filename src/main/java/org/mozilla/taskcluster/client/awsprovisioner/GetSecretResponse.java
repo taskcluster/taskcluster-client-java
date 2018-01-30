@@ -38,4 +38,9 @@ public class GetSecretResponse {
      * See http://schemas.taskcluster.net/aws-provisioner/v1/get-secret-response.json#/properties/data
      */
     public Object data;
+
+    /**
+     * See http://schemas.taskcluster.net/aws-provisioner/v1/get-secret-response.json#/properties/scopes
+     */
+    public String[] scopes;
 }
