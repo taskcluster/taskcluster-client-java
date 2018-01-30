@@ -274,11 +274,24 @@ public class Auth extends TaskclusterRequestHandler {
     /**
      * Return an expanded copy of the given scopeset, with scopes implied by any
      * roles included.
+     * 
+     * This call uses the GET method with an HTTP body.  It remains only for
+     * backward compatibility.
+     *
+     * @see "[Expand Scopes API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#expandScopesGet)"
+     */
+    public CallSummary<SetOfScopes, SetOfScopes> expandScopesGet(SetOfScopes payload) throws APICallFailure {
+        return apiCall(payload, "GET", "/scopes/expand", SetOfScopes.class);
+    }
+
+    /**
+     * Return an expanded copy of the given scopeset, with scopes implied by any
+     * roles included.
      *
      * @see "[Expand Scopes API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#expandScopes)"
      */
     public CallSummary<SetOfScopes, SetOfScopes> expandScopes(SetOfScopes payload) throws APICallFailure {
-        return apiCall(payload, "GET", "/scopes/expand", SetOfScopes.class);
+        return apiCall(payload, "POST", "/scopes/expand", SetOfScopes.class);
     }
 
     /**
