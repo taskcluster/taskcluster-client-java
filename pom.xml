@@ -5,7 +5,7 @@
 
 	<groupId>org.mozilla.taskcluster</groupId>
 	<artifactId>taskcluster-client</artifactId>
-	<version>1.0.234</version>
+	<version>1.0.235</version>
 	<packaging>jar</packaging>
 
 	<name>Taskcluster Client (java port)</name>
