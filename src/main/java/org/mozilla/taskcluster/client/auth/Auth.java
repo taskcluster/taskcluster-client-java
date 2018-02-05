@@ -401,8 +401,8 @@ public class Auth extends TaskclusterRequestHandler {
      *
      * @see "[List Tables in an Account Managed by Auth API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureTables)"
      */
-    public CallSummary<EmptyPayload, AzureListAccountResponse1> azureTables(String account) throws APICallFailure {
-        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/tables", AzureListAccountResponse1.class);
+    public CallSummary<EmptyPayload, AzureListTableResponse> azureTables(String account) throws APICallFailure {
+        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/tables", AzureListTableResponse.class);
     }
 
     /**

@@ -1276,7 +1276,7 @@ $schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/auth/v1/azure-table-list-response.json#
-TYPE_NAME: AzureListAccountResponse1
+TYPE_NAME: AzureListTableResponse
 additionalProperties:
   Boolean: false
   Properties: null
@@ -1325,7 +1325,7 @@ properties:
   SourceURL: http://schemas.taskcluster.net/auth/v1/azure-table-list-response.json#/properties
 required:
 - tables
-title: Azure List Account Response
+title: Azure List Table Response
 type: object
 
 

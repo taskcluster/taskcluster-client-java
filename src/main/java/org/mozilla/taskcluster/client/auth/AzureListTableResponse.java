@@ -5,7 +5,7 @@ package org.mozilla.taskcluster.client.auth;
  *
  * See http://schemas.taskcluster.net/auth/v1/azure-table-list-response.json#
  */
-public class AzureListAccountResponse1 {
+public class AzureListTableResponse {
 
     /**
      * Opaque `continuationToken` to be given as query-string option to get the
