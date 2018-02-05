@@ -12,7 +12,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
 
 /**
  * The Login service serves as the interface between external authentication
- * systems and TaskCluster credentials.
+ * systems and Taskcluster credentials.
  *
  * @see "[Login API Documentation](https://docs.taskcluster.net/reference/core/login/api-docs)"
  */
@@ -67,7 +67,7 @@ public class Login extends TaskclusterRequestHandler {
      * monitor this expiration and refresh the credentials if necessary, by calling
      * this endpoint again, if they have expired.
      *
-     * @see "[Get TaskCluster credentials given a suitable `access_token` API Documentation](https://docs.taskcluster.net/reference/core/login/api-docs#oidcCredentials)"
+     * @see "[Get Taskcluster credentials given a suitable `access_token` API Documentation](https://docs.taskcluster.net/reference/core/login/api-docs#oidcCredentials)"
      */
     public CallSummary<EmptyPayload, CredentialsResponse> oidcCredentials(String provider) throws APICallFailure {
         return apiCall(null, "GET", "/oidc-credentials/" + uriEncode(provider), CredentialsResponse.class);
