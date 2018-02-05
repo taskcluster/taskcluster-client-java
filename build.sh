@@ -43,6 +43,7 @@ go test -v ./...
 # finally check that generated files have been committed, and that
 # formatting code resulted in no changes...
 git status
+git diff
 [ $(git status --porcelain | wc -l) == 0 ]
 
 mvn -e clean install
