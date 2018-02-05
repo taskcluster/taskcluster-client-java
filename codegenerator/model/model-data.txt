@@ -8926,7 +8926,7 @@ additionalProperties:
   Boolean: false
   Properties: null
 description: |
-  Representation of an a task to be indexed.
+  Representation of the index entry to insert.
 id: http://schemas.taskcluster.net/index/v1/insert-task-request.json#
 properties:
   MemberNames:
