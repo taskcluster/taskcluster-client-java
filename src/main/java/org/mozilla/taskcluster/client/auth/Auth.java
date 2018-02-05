@@ -423,6 +423,18 @@ public class Auth extends TaskclusterRequestHandler {
     }
 
     /**
+     * Retrieve a list of all containers in an account.
+
+     * Required scopes:
+     *   auth:azure-table:list-containers:<account>
+     *
+     * @see "[List containers in an Account Managed by Auth API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureContainers)"
+     */
+    public CallSummary<EmptyPayload, AzureListContainersResponse> azureContainers(String account) throws APICallFailure {
+        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/containers", AzureListContainersResponse.class);
+    }
+
+    /**
      * Get a shared access signature (SAS) string for use with a specific Azure
      * Blob Storage container.
      * 
