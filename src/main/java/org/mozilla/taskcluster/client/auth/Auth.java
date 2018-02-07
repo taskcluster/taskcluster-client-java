@@ -440,7 +440,7 @@ public class Auth extends TaskclusterRequestHandler {
      * Retrieve a list of all containers in an account.
 
      * Required scopes:
-     *   auth:azure-table:list-containers:<account>
+     *   auth:azure-container:list-containers:<account>
      *
      * @see "[List containers in an Account Managed by Auth API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureContainers)"
      */
@@ -459,12 +459,12 @@ public class Auth extends TaskclusterRequestHandler {
      * Required scopes:
      *   If levelIsReadOnly:
      *     Any of:
-     *     - auth:azure-blob:read-only:<account>/<container>
-     *     - auth:azure-blob:read-write:<account>/<container>
+     *     - auth:azure-container:read-only:<account>/<container>
+     *     - auth:azure-container:read-write:<account>/<container>
      *
-     * @see "[Get Shared-Access-Signature for Azure Blob API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureBlobSAS)"
+     * @see "[Get Shared-Access-Signature for Azure Container API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureContainerSAS)"
      */
-    public CallSummary<EmptyPayload, Var1> azureBlobSAS(String account, String container, String level) throws APICallFailure {
+    public CallSummary<EmptyPayload, Var1> azureContainerSAS(String account, String container, String level) throws APICallFailure {
         return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/containers/" + uriEncode(container) + "/" + uriEncode(level), Var1.class);
     }
 
