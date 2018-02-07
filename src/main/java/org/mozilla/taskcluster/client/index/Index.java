@@ -210,7 +210,8 @@ public class Index extends TaskclusterRequestHandler {
      * If no task exists for the given index path, this API end-point responds with 404.
 
      * Required scopes:
-     *   queue:get-artifact:<name>
+     *   If private:
+     *     queue:get-artifact:<name>
      *
      * @see "[Get Artifact From Indexed Task API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#findArtifactFromTask)"
      */
