@@ -86,11 +86,8 @@ public class Notify extends TaskclusterRequestHandler {
      * in mind that IRC is a best-effort service.
 
      * Required scopes:
-     *   All of:
-     *   * If channelRequest:
-     *       notify:irc-channel:<channel>
-     *   * If userRequest:
-     *       notify:irc-user:<user>
+     *   If channelRequest:
+     *     notify:irc-channel:<channel>
      *
      * @see "[Post IRC Message API Documentation](https://docs.taskcluster.net/reference/core/notify/api-docs#irc)"
      */
