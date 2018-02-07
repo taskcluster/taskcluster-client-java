@@ -115,7 +115,9 @@ public class Auth extends TaskclusterRequestHandler {
      * The caller's scopes must satisfy `scopes`.
 
      * Required scopes:
-     *   auth:create-client:<clientId>
+     *   All of:
+     *   * auth:create-client:<clientId>
+     *   * For scope in scopes each <scope>
      *
      * @see "[Create Client API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#createClient)"
      */
@@ -148,7 +150,9 @@ public class Auth extends TaskclusterRequestHandler {
      * unchanged
 
      * Required scopes:
-     *   auth:update-client:<clientId>
+     *   All of:
+     *   * auth:update-client:<clientId>
+     *   * For scope in scopesAdded each <scope>
      *
      * @see "[Update Client API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#updateClient)"
      */
@@ -232,7 +236,9 @@ public class Auth extends TaskclusterRequestHandler {
      * in an error response.
 
      * Required scopes:
-     *   auth:create-role:<roleId>
+     *   All of:
+     *   * auth:create-role:<roleId>
+     *   * For scope in scopes each <scope>
      *
      * @see "[Create Role API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#createRole)"
      */
@@ -250,7 +256,9 @@ public class Auth extends TaskclusterRequestHandler {
      * in an error response.
 
      * Required scopes:
-     *   auth:update-role:<roleId>
+     *   All of:
+     *   * auth:update-role:<roleId>
+     *   * For scope in scopesAdded each <scope>
      *
      * @see "[Update Role API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#updateRole)"
      */
@@ -373,7 +381,10 @@ public class Auth extends TaskclusterRequestHandler {
      * [EC2 User Guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#instance-metadata-security-credentials).
 
      * Required scopes:
-     *   auth:aws-s3:<level>:<bucket>/<prefix>
+     *   If levelIsReadOnly:
+     *     Any of:
+     *     - auth:aws-s3:read-only:<bucket>/<prefix>
+     *     - auth:aws-s3:read-write:<bucket>/<prefix>
      *
      * @see "[Get Temporary Read/Write Credentials S3 API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#awsS3Credentials)"
      */
@@ -414,7 +425,10 @@ public class Auth extends TaskclusterRequestHandler {
      * table if it doesn't already exist.
 
      * Required scopes:
-     *   auth:azure-table:<level>:<account>/<table>
+     *   If levelIsReadOnly:
+     *     Any of:
+     *     - auth:azure-table:read-only:<account>/<table>
+     *     - auth:azure-table:read-write:<account>/<table>
      *
      * @see "[Get Shared-Access-Signature for Azure Table API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureTableSAS)"
      */
@@ -443,7 +457,10 @@ public class Auth extends TaskclusterRequestHandler {
      * container if it doesn't already exist.
 
      * Required scopes:
-     *   auth:azure-blob:<level>:<account>/<container>
+     *   If levelIsReadOnly:
+     *     Any of:
+     *     - auth:azure-blob:read-only:<account>/<container>
+     *     - auth:azure-blob:read-write:<account>/<container>
      *
      * @see "[Get Shared-Access-Signature for Azure Blob API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureBlobSAS)"
      */
