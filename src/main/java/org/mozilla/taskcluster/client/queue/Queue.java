@@ -147,8 +147,19 @@ public class Queue extends TaskclusterRequestHandler {
 
      * Required scopes:
      *   All of:
-     *   * queue:create-task:<priority>:<provisionerId>/<workerType>
-     *   * queue:scheduler-id:<schedulerId>
+     *   * For scope in scopes each <scope>
+     *   * For route in routes each queue:route:<route>
+     *   * Any of:
+     *     - All of:
+     *       * queue:scheduler-id:<schedulerId>
+     *       * For priority in priorities each queue:create-task:<priority>:<provisionerId>/<workerType>
+     *     - If legacyScopes:
+     *         Any of:
+     *         - queue:create-task:<provisionerId>/<workerType>
+     *         - All of:
+     *           * queue:define-task:<provisionerId>/<workerType>
+     *           * queue:task-group-id:<schedulerId>/<taskGroupId>
+     *           * queue:schedule-task:<schedulerId>/<taskGroupId>/<taskId>
      *
      * @see "[Create New Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#createTask)"
      */
@@ -162,8 +173,19 @@ public class Queue extends TaskclusterRequestHandler {
 
      * Required scopes:
      *   All of:
-     *   * queue:create-task:<priority>:<provisionerId>/<workerType>
-     *   * queue:scheduler-id:<schedulerId>
+     *   * For scope in scopes each <scope>
+     *   * For route in routes each queue:route:<route>
+     *   * Any of:
+     *     - All of:
+     *       * queue:scheduler-id:<schedulerId>
+     *       * For priority in priorities each queue:create-task:<priority>:<provisionerId>/<workerType>
+     *     - If legacyScopes:
+     *         Any of:
+     *         - queue:define-task:<provisionerId>/<workerType>
+     *         - queue:create-task:<provisionerId>/<workerType>
+     *         - All of:
+     *           * queue:define-task:<provisionerId>/<workerType>
+     *           * queue:task-group-id:<schedulerId>/<taskGroupId>
      *
      * @see "[Define Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#defineTask)"
      */
@@ -189,10 +211,10 @@ public class Queue extends TaskclusterRequestHandler {
 
      * Required scopes:
      *   Any of:
+     *   - queue:schedule-task:<schedulerId>/<taskGroupId>/<taskId>
      *   - All of:
      *     * queue:schedule-task
      *     * assume:scheduler-id:<schedulerId>/<taskGroupId>
-     *   - queue:schedule-task:<schedulerId>/<taskGroupId>/<taskId>
      *
      * @see "[Schedule Defined Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#scheduleTask)"
      */
@@ -216,10 +238,10 @@ public class Queue extends TaskclusterRequestHandler {
 
      * Required scopes:
      *   Any of:
+     *   - queue:rerun-task:<schedulerId>/<taskGroupId>/<taskId>
      *   - All of:
      *     * queue:rerun-task
      *     * assume:scheduler-id:<schedulerId>/<taskGroupId>
-     *   - queue:rerun-task:<schedulerId>/<taskGroupId>/<taskId>
      *
      * @see "[Rerun a Resolved Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#rerunTask)"
      */
@@ -243,10 +265,10 @@ public class Queue extends TaskclusterRequestHandler {
 
      * Required scopes:
      *   Any of:
+     *   - queue:cancel-task:<schedulerId>/<taskGroupId>/<taskId>
      *   - All of:
      *     * queue:cancel-task
      *     * assume:scheduler-id:<schedulerId>/<taskGroupId>
-     *   - queue:cancel-task:<schedulerId>/<taskGroupId>/<taskId>
      *
      * @see "[Cancel Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#cancelTask)"
      */
@@ -261,10 +283,10 @@ public class Queue extends TaskclusterRequestHandler {
 
      * Required scopes:
      *   Any of:
+     *   - queue:poll-task-urls:<provisionerId>/<workerType>
      *   - All of:
      *     * queue:poll-task-urls
      *     * assume:worker-type:<provisionerId>/<workerType>
-     *   - queue:poll-task-urls:<provisionerId>/<workerType>
      *
      * @see "[Get Urls to Poll Pending Tasks API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#pollTaskUrls)"
      */
@@ -292,12 +314,12 @@ public class Queue extends TaskclusterRequestHandler {
      * Required scopes:
      *   Any of:
      *   - All of:
+     *     * queue:claim-task:<provisionerId>/<workerType>
+     *     * queue:worker-id:<workerGroup>/<workerId>
+     *   - All of:
      *     * queue:claim-task
      *     * assume:worker-type:<provisionerId>/<workerType>
      *     * assume:worker-id:<workerGroup>/<workerId>
-     *   - All of:
-     *     * queue:claim-task:<provisionerId>/<workerType>
-     *     * queue:worker-id:<workerGroup>/<workerId>
      *
      * @see "[Claim Task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#claimTask)"
      */
@@ -330,10 +352,10 @@ public class Queue extends TaskclusterRequestHandler {
 
      * Required scopes:
      *   Any of:
+     *   - queue:reclaim-task:<taskId>/<runId>
      *   - All of:
      *     * queue:claim-task
      *     * assume:worker-id:<workerGroup>/<workerId>
-     *   - queue:reclaim-task:<taskId>/<runId>
      *
      * @see "[Reclaim task API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#reclaimTask)"
      */
@@ -346,10 +368,10 @@ public class Queue extends TaskclusterRequestHandler {
 
      * Required scopes:
      *   Any of:
+     *   - queue:resolve-task:<taskId>/<runId>
      *   - All of:
      *     * queue:resolve-task
      *     * assume:worker-id:<workerGroup>/<workerId>
-     *   - queue:resolve-task:<taskId>/<runId>
      *
      * @see "[Report Run Completed API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#reportCompleted)"
      */
@@ -368,10 +390,10 @@ public class Queue extends TaskclusterRequestHandler {
 
      * Required scopes:
      *   Any of:
+     *   - queue:resolve-task:<taskId>/<runId>
      *   - All of:
      *     * queue:resolve-task
      *     * assume:worker-id:<workerGroup>/<workerId>
-     *   - queue:resolve-task:<taskId>/<runId>
      *
      * @see "[Report Run Failed API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#reportFailed)"
      */
@@ -396,10 +418,10 @@ public class Queue extends TaskclusterRequestHandler {
 
      * Required scopes:
      *   Any of:
+     *   - queue:resolve-task:<taskId>/<runId>
      *   - All of:
      *     * queue:resolve-task
      *     * assume:worker-id:<workerGroup>/<workerId>
-     *   - queue:resolve-task:<taskId>/<runId>
      *
      * @see "[Report Task Exception API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#reportException)"
      */
@@ -480,10 +502,10 @@ public class Queue extends TaskclusterRequestHandler {
 
      * Required scopes:
      *   Any of:
+     *   - queue:create-artifact:<taskId>/<runId>
      *   - All of:
      *     * queue:create-artifact:<name>
      *     * assume:worker-id:<workerGroup>/<workerId>
-     *   - queue:create-artifact:<taskId>/<runId>
      *
      * @see "[Create Artifact API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#createArtifact)"
      */
@@ -504,10 +526,10 @@ public class Queue extends TaskclusterRequestHandler {
 
      * Required scopes:
      *   Any of:
+     *   - queue:create-artifact:<taskId>/<runId>
      *   - All of:
      *     * queue:create-artifact:<name>
      *     * assume:worker-id:<workerGroup>/<workerId>
-     *   - queue:create-artifact:<taskId>/<runId>
      *
      * @see "[Complete Artifact API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#completeArtifact)"
      */
@@ -536,7 +558,8 @@ public class Queue extends TaskclusterRequestHandler {
      * (This feature may be disabled in the future, use is sparingly!)
 
      * Required scopes:
-     *   queue:get-artifact:<name>
+     *   If private:
+     *     queue:get-artifact:<name>
      *
      * @see "[Get Artifact from Run API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#getArtifact)"
      */
@@ -562,7 +585,8 @@ public class Queue extends TaskclusterRequestHandler {
      * the latest run. Otherwise, just us the most convenient API end-point.
 
      * Required scopes:
-     *   queue:get-artifact:<name>
+     *   If private:
+     *     queue:get-artifact:<name>
      *
      * @see "[Get Artifact from Latest Run API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#getLatestArtifact)"
      */
@@ -649,7 +673,7 @@ public class Queue extends TaskclusterRequestHandler {
      * provisioning activity.
 
      * Required scopes:
-     *   queue:declare-provisioner:<provisionerId>#<property>
+     *   For property in properties each queue:declare-provisioner:<provisionerId>#<property>
      *
      * @see "[Update a provisioner API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#declareProvisioner)"
      */
@@ -704,7 +728,7 @@ public class Queue extends TaskclusterRequestHandler {
      * `queue:declare-worker-type:aws-provisioner-v1/gecko-b-1-w2008#description`.
 
      * Required scopes:
-     *   queue:declare-worker-type:<provisionerId>/<workerType>#<property>
+     *   For property in properties each queue:declare-worker-type:<provisionerId>/<workerType>#<property>
      *
      * @see "[Update a worker-type API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#declareWorkerType)"
      */
@@ -758,7 +782,7 @@ public class Queue extends TaskclusterRequestHandler {
      * possessed.
 
      * Required scopes:
-     *   queue:declare-worker:<provisionerId>/<workerType>/<workerGroup>/<workerId>#<property>
+     *   For property in properties each queue:declare-worker:<provisionerId>/<workerType>/<workerGroup>/<workerId>#<property>
      *
      * @see "[Declare a worker API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#declareWorker)"
      */
