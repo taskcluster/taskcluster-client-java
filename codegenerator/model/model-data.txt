@@ -6027,6 +6027,7 @@ properties:
     deadline: deadline
     expires: expires
     metadata: metadata
+    pulseExchanges: pulseExchanges
     schedule: schedule
     task: task
     triggerSchema: triggerSchema
@@ -6113,6 +6114,13 @@ properties:
       - description
       - owner
       type: object
+    pulseExchanges:
+      IS_REQUIRED: false
+      PROPERTY_NAME: pulseExchanges
+      SOURCE_URL: http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/pulseExchanges
+      TYPE_NAME: PulseExchanges
+      default: []
+      type: array
     schedule:
       IS_REQUIRED: false
       PROPERTY_NAME: schedule
@@ -6476,6 +6484,7 @@ properties:
   - deadline
   - expires
   - metadata
+  - pulseExchanges
   - schedule
   - task
   - triggerSchema
@@ -6507,6 +6516,7 @@ properties:
     hookGroupId: hookGroupId
     hookId: hookId
     metadata: metadata
+    pulseExchanges: pulseExchanges
     schedule: schedule
     task: task
     triggerSchema: triggerSchema
@@ -6609,6 +6619,12 @@ properties:
       - description
       - owner
       type: object
+    pulseExchanges:
+      IS_REQUIRED: true
+      PROPERTY_NAME: pulseExchanges
+      SOURCE_URL: http://schemas.taskcluster.net/hooks/v1/hook-definition.json#/properties/pulseExchanges
+      TYPE_NAME: PulseExchanges
+      type: array
     schedule:
       IS_REQUIRED: true
       PROPERTY_NAME: schedule
@@ -6958,6 +6974,7 @@ properties:
   - hookGroupId
   - hookId
   - metadata
+  - pulseExchanges
   - schedule
   - task
   - triggerSchema
@@ -6971,6 +6988,7 @@ required:
 - expires
 - deadline
 - triggerSchema
+- pulseExchanges
 title: Hook definition
 type: object
 
@@ -7449,6 +7467,7 @@ properties:
               hookGroupId: hookGroupId
               hookId: hookId
               metadata: metadata
+              pulseExchanges: pulseExchanges
               schedule: schedule
               task: task
               triggerSchema: triggerSchema
@@ -7553,6 +7572,12 @@ properties:
                 - description
                 - owner
                 type: object
+              pulseExchanges:
+                IS_REQUIRED: true
+                PROPERTY_NAME: pulseExchanges
+                SOURCE_URL: http://schemas.taskcluster.net/hooks/v1/hook-definition.json#/properties/pulseExchanges
+                TYPE_NAME: PulseExchanges
+                type: array
               schedule:
                 IS_REQUIRED: true
                 PROPERTY_NAME: schedule
@@ -7902,6 +7927,7 @@ properties:
             - hookGroupId
             - hookId
             - metadata
+            - pulseExchanges
             - schedule
             - task
             - triggerSchema
@@ -7915,6 +7941,7 @@ properties:
           - expires
           - deadline
           - triggerSchema
+          - pulseExchanges
           title: Hook definition
           type: object
         SOURCE_URL: http://schemas.taskcluster.net/hooks/v1/list-hooks-response.json#/properties/hooks/items
