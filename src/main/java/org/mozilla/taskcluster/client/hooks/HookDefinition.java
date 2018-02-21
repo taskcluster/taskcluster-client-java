@@ -88,6 +88,11 @@ public class HookDefinition {
     public Metadata metadata;
 
     /**
+     * See http://schemas.taskcluster.net/hooks/v1/hook-definition.json#/properties/pulseExchanges
+     */
+    public Object[] pulseExchanges;
+
+    /**
      * Definition of the times at which a hook will result in creation of a task.
      * If several patterns are specified, tasks will be created at any time
      * specified by one or more patterns.  Note that tasks may not be created
