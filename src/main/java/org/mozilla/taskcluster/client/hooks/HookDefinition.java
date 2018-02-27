@@ -8,7 +8,7 @@ package org.mozilla.taskcluster.client.hooks;
 public class HookDefinition {
 
     /**
-     * Use of this field is deprecated; use `deadline: {$fromNow: ..}` in the task template instead.
+     * Deadline of the task, `pending` and `running` runs are resolved as **failed** if not resolved by other means before the deadline. Note, deadline cannot be more than 5 days into the future. Must be specified as `A years B months C days D hours E minutes F seconds`, though you may leave out zeros. For more details see: `taskcluster.fromNow` in [taskcluster-client](https://github.com/taskcluster/taskcluster-client)
      *
      * Default:    "1 day"
      *
@@ -17,7 +17,7 @@ public class HookDefinition {
     public String deadline;
 
     /**
-     * Use of this field is deprecated; use `expires: {$fromNow: ..}` in the task template instead.
+     * Task expiration, time at which task definition and status is deleted. Notice that all artifacts for the must have an expiration that is no later than this. Must be specified as `A years B months C days D hours E minutes F seconds`, though you may leave out zeros. For more details see: `taskcluster.fromNow` in [taskcluster-client](https://github.com/taskcluster/taskcluster-client)
      *
      * Default:    "3 months"
      *
@@ -88,11 +88,6 @@ public class HookDefinition {
     public Metadata metadata;
 
     /**
-     * See http://schemas.taskcluster.net/hooks/v1/hook-definition.json#/properties/pulseExchanges
-     */
-    public Object[] pulseExchanges;
-
-    /**
      * Definition of the times at which a hook will result in creation of a task.
      * If several patterns are specified, tasks will be created at any time
      * specified by one or more patterns.  Note that tasks may not be created
@@ -107,9 +102,4 @@ public class HookDefinition {
      * See http://schemas.taskcluster.net/hooks/v1/hook-definition.json#/properties/task
      */
     public TaskTemplate task;
-
-    /**
-     * See http://schemas.taskcluster.net/hooks/v1/hook-definition.json#/properties/triggerSchema
-     */
-    public Object triggerSchema;
 }

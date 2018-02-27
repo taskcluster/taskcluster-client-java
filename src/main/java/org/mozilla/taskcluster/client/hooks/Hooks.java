@@ -26,10 +26,6 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  * https://www.npmjs.com/package/cron-parser.  For example:
  *  * `['0 0 1 * * *']` -- daily at 1:00 UTC
  *  * `['0 0 9,21 * * 1-5', '0 0 12 * * 0,6']` -- weekdays at 9:00 and 21:00 UTC, weekends at noon
- * 
- * The task definition is used as a JSON-e template, with a context depending on how it is fired.  See
- * https://docs.taskcluster.net/reference/core/taskcluster-hooks/docs/firing-hooks
- * for more information.
  *
  * @see "[Hooks API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs)"
  */
@@ -157,10 +153,6 @@ public class Hooks extends TaskclusterRequestHandler {
 
     /**
      * This endpoint will trigger the creation of a task from a hook definition.
-     * 
-     * The HTTP payload must match the hooks `triggerSchema`.  If it does, it is
-     * provided as the `payload` property of the JSON-e context used to render the
-     * task template.
 
      * Required scopes:
      *   hooks:trigger-hook:<hookGroupId>/<hookId>
@@ -199,10 +191,6 @@ public class Hooks extends TaskclusterRequestHandler {
 
     /**
      * This endpoint triggers a defined hook with a valid token.
-     * 
-     * The HTTP payload must match the hooks `triggerSchema`.  If it does, it is
-     * provided as the `payload` property of the JSON-e context used to render the
-     * task template.
      *
      * @see "[Trigger a hook with a token API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#triggerHookWithToken)"
      */
