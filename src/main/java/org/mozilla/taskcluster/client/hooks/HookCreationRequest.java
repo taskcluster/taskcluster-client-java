@@ -70,14 +70,6 @@ public class HookCreationRequest {
     public Metadata metadata;
 
     /**
-     *
-     * Default:    []
-     *
-     * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/pulseExchanges
-     */
-    public Object[] pulseExchanges;
-
-    /**
      * Definition of the times at which a hook will result in creation of a task.
      * If several patterns are specified, tasks will be created at any time
      * specified by one or more patterns.
@@ -89,9 +81,13 @@ public class HookCreationRequest {
     public String[] schedule;
 
     /**
+     * Template for the task definition.  This is rendered using [JSON-e](https://taskcluster.github.io/json-e/)
+     * as described in https://docs.taskcluster.net/reference/core/taskcluster-hooks/docs/firing-hooks to produce
+     * a task definition that is submitted to the Queue service.
+     *
      * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/task
      */
-    public TaskTemplate task;
+    public Object task;
 
     /**
      *
