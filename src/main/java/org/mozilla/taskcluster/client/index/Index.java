@@ -155,7 +155,22 @@ public class Index extends TaskclusterRequestHandler {
      *
      * @see "[List Namespaces API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#listNamespaces)"
      */
-    public CallSummary<ListNamespacesRequest, ListNamespacesResponse> listNamespaces(String namespace, ListNamespacesRequest payload) throws APICallFailure {
+    public CallSummary<EmptyPayload, ListNamespacesResponse> listNamespaces(String namespace) throws APICallFailure {
+        return apiCall(null, "GET", "/namespaces/" + uriEncode(namespace), ListNamespacesResponse.class);
+    }
+
+    /**
+     * List the namespaces immediately under a given namespace.
+     * 
+     * This endpoint
+     * lists up to 1000 namespaces. If more namespaces are present, a
+     * `continuationToken` will be returned, which can be given in the next
+     * request. For the initial request, the payload should be an empty JSON
+     * object.
+     *
+     * @see "[List Namespaces API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#listNamespacesPost)"
+     */
+    public CallSummary<ListNamespacesRequest, ListNamespacesResponse> listNamespacesPost(String namespace, ListNamespacesRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/namespaces/" + uriEncode(namespace), ListNamespacesResponse.class);
     }
 
