@@ -36,9 +36,6 @@ A java port of taskcluster-client.
 * [Notify](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/notify/Notify.html)  
   The notification service listens for tasks with associated notifications and sends them.
 
-* [Pulse](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/pulse/Pulse.html)  
-  A service to manage Pulse credentials for anything using Taskcluster credentials.
-
 * [Purge Cache](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/purgecache/PurgeCache.html)  
   The purge-cache service is responsible for publishing a pulse message for workers, so they can purge cache upon request.
 
