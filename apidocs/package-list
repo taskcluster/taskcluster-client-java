@@ -3,6 +3,7 @@ org.mozilla.taskcluster.client.auth
 org.mozilla.taskcluster.client.authevents
 org.mozilla.taskcluster.client.awsprovisioner
 org.mozilla.taskcluster.client.awsprovisionerevents
+org.mozilla.taskcluster.client.ec2manager
 org.mozilla.taskcluster.client.github
 org.mozilla.taskcluster.client.githubevents
 org.mozilla.taskcluster.client.hooks
