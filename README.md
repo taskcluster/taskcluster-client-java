@@ -18,6 +18,9 @@ A java port of taskcluster-client.
 * [AWS Provisioner](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/awsprovisioner/AwsProvisioner.html)  
   The AWS Provisioner is responsible for provisioning instances on EC2 for use in TaskCluster.
 
+* [EC2 Manager](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/ec2manager/EC2Manager.html)  
+  A taskcluster service which manages EC2 instances.
+
 * [Github](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/github/Github.html)  
   The Github service is responsible for publishing pulse messages for supported Github events.
 
@@ -32,6 +35,9 @@ A java port of taskcluster-client.
 
 * [Notify](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/notify/Notify.html)  
   The notification service listens for tasks with associated notifications and sends them.
+
+* [Pulse](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/pulse/Pulse.html)  
+  A service to manage Pulse credentials for anything using Taskcluster credentials.
 
 * [Purge Cache](http://taskcluster.github.io/taskcluster-client-java/apidocs/org/mozilla/taskcluster/client/purgecache/PurgeCache.html)  
   The purge-cache service is responsible for publishing a pulse message for workers, so they can purge cache upon request.
