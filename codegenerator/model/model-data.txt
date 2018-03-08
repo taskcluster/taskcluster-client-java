@@ -790,7 +790,7 @@ oneOf:
             may be embedded in the payload.  In any case, this clientId can be used
             for logging, auditing, and identifying the credential but **must** not be
             used for access control.  That's what scopes are for.
-          pattern: ^[A-Za-z0-9@/:.+|_-]+$
+          pattern: ^[A-Za-z0-9!@/:.+|_-]+$
           type: string
         expires:
           IS_REQUIRED: true
@@ -941,7 +941,7 @@ properties:
         may be embedded in the payload.  In any case, this clientId can be used
         for logging, auditing, and identifying the credential but **must** not be
         used for access control.  That's what scopes are for.
-      pattern: ^[A-Za-z0-9@/:.+|_-]+$
+      pattern: ^[A-Za-z0-9!@/:.+|_-]+$
       type: string
     expires:
       IS_REQUIRED: true
@@ -1544,7 +1544,7 @@ properties:
       TYPE_NAME: ClientId
       description: |
         ClientId of the client
-      pattern: ^[A-Za-z0-9@/:.+|_-]+$
+      pattern: ^[A-Za-z0-9!@/:.+|_-]+$
       type: string
     created:
       IS_REQUIRED: true
@@ -1782,7 +1782,7 @@ properties:
       TYPE_NAME: ClientId
       description: |
         ClientId of the client scopes is requested about
-      pattern: ^[A-Za-z0-9@/:.+|_-]+$
+      pattern: ^[A-Za-z0-9!@/:.+|_-]+$
       type: string
     created:
       IS_REQUIRED: true
@@ -2088,7 +2088,7 @@ items:
           TYPE_NAME: ClientId
           description: |
             ClientId of the client scopes is requested about
-          pattern: ^[A-Za-z0-9@/:.+|_-]+$
+          pattern: ^[A-Za-z0-9!@/:.+|_-]+$
           type: string
         created:
           IS_REQUIRED: true
@@ -2669,7 +2669,7 @@ properties:
       TYPE_NAME: ClientId
       description: |
         ClientId from the request as it will be logged
-      pattern: ^[A-Za-z0-9@/:.+|_-]+$
+      pattern: ^[A-Za-z0-9!@/:.+|_-]+$
       type: string
     scopes:
       IS_REQUIRED: false
@@ -2874,7 +2874,7 @@ properties:
       TYPE_NAME: ClientId
       description: |
         `clientId` of the client that was changed
-      pattern: ^[A-Za-z0-9@/:.+|_-]+$
+      pattern: ^[A-Za-z0-9!@/:.+|_-]+$
       type: string
     version:
       IS_REQUIRED: true
