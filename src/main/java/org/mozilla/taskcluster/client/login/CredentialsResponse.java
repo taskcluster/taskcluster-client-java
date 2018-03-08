@@ -26,7 +26,7 @@ public class CredentialsResponse {
 
         /**
          *
-         * Syntax:     ^[A-Za-z0-9@/:._-]+$
+         * Syntax:     ^[A-Za-z0-9!@/:.+|_-]+$
          *
          * See http://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#/properties/credentials/properties/clientId
          */
