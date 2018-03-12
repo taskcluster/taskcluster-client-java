@@ -202,8 +202,8 @@ public class EC2Manager extends TaskclusterRequestHandler {
      * List AMIs and their usage by returning a list of objects in the form:
      * {
      * region: string
-     * 	volumetype: string
-     * 	lastused: timestamp
+     *   volumetype: string
+     *   lastused: timestamp
      * }
 
      * Required scopes:
@@ -216,14 +216,15 @@ public class EC2Manager extends TaskclusterRequestHandler {
     }
 
     /**
-     * Lists current EBS volume usage by returning a list of objects that are uniquely defined by {region, volumetype, state} in the form:
+     * Lists current EBS volume usage by returning a list of objects
+     * that are uniquely defined by {region, volumetype, state} in the form:
      * {
      * region: string,
-     * 	volumetype: string,
-     * 	state: string,
-     * 	totalcount: integer,
-     * 	totalgb: integer,
-     * 	touched: timestamp (last time that information was updated),
+     *   volumetype: string,
+     *   state: string,
+     *   totalcount: integer,
+     *   totalgb: integer,
+     *   touched: timestamp (last time that information was updated),
      * }
 
      * Required scopes:
