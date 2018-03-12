@@ -188,7 +188,25 @@ public class Index extends TaskclusterRequestHandler {
      *
      * @see "[List Tasks API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#listTasks)"
      */
-    public CallSummary<ListTasksRequest, ListTasksResponse> listTasks(String namespace, ListTasksRequest payload) throws APICallFailure {
+    public CallSummary<EmptyPayload, ListTasksResponse> listTasks(String namespace) throws APICallFailure {
+        return apiCall(null, "POST", "/tasks/" + uriEncode(namespace), ListTasksResponse.class);
+    }
+
+    /**
+     * List the tasks immediately under a given namespace.
+     * 
+     * This endpoint
+     * lists up to 1000 tasks. If more tasks are present, a
+     * `continuationToken` will be returned, which can be given in the next
+     * request. For the initial request, the payload should be an empty JSON
+     * object.
+     * 
+     * **Remark**, this end-point is designed for humans browsing for tasks, not
+     * services, as that makes little sense.
+     *
+     * @see "[List Tasks API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#listTasksPost)"
+     */
+    public CallSummary<ListTasksRequest, ListTasksResponse> listTasksPost(String namespace, ListTasksRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/tasks/" + uriEncode(namespace), ListTasksResponse.class);
     }
 
