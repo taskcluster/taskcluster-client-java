@@ -25,6 +25,24 @@ public class HookCreationRequest {
      */
     public String expires;
 
+    /**
+     *
+     * Syntax:     ^([a-zA-Z0-9-_]*)$
+     * Min length: 1
+     * Max length: 22
+     *
+     * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/hookGroupId
+     */
+    public String hookGroupId;
+
+    /**
+     *
+     * Max length: 255
+     *
+     * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/hookId
+     */
+    public String hookId;
+
     public class Metadata {
 
         /**

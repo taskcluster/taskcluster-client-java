@@ -6026,6 +6026,8 @@ properties:
   MemberNames:
     deadline: deadline
     expires: expires
+    hookGroupId: hookGroupId
+    hookId: hookId
     metadata: metadata
     schedule: schedule
     task: task
@@ -6050,6 +6052,22 @@ properties:
       description: |
         Use of this field is deprecated; use `expires: {$fromNow: ..}` in the task template instead.
       title: Expiration
+      type: string
+    hookGroupId:
+      IS_REQUIRED: false
+      PROPERTY_NAME: hookGroupId
+      SOURCE_URL: http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/hookGroupId
+      TYPE_NAME: HookGroupId
+      maxLength: 22
+      minLength: 1
+      pattern: ^([a-zA-Z0-9-_]*)$
+      type: string
+    hookId:
+      IS_REQUIRED: false
+      PROPERTY_NAME: hookId
+      SOURCE_URL: http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/hookId
+      TYPE_NAME: HookId
+      maxLength: 255
       type: string
     metadata:
       IS_REQUIRED: true
@@ -6160,6 +6178,8 @@ properties:
   SortedPropertyNames:
   - deadline
   - expires
+  - hookGroupId
+  - hookId
   - metadata
   - schedule
   - task
