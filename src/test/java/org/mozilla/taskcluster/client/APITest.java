@@ -97,9 +97,18 @@ public class APITest {
      */
     @Test
     public void testDefineTask() {
-        String clientId = System.getenv("TASKCLUSTER_CLIENT_ID");
-        String accessToken = System.getenv("TASKCLUSTER_ACCESS_TOKEN");
-        String certificate = System.getenv("TASKCLUSTER_CERTIFICATE");
+        ProcessBuilder cli = new ProcessBuilder("java", "Env", "TASKCLUSTER_CLIENT_ID");
+        Map<String, String> env = cli.environment();
+        env.put("TASKCLUSTER_CLIENT_ID", "clientId");
+        cli.start();
+        ProcessBuilder access = new ProcessBuilder("java", "Env", "TASKCLUSTER_ACCESS_TOKEN");
+        Map<String, String> env = access.environment();
+        env.put("TASKCLUSTER_ACCESS_TOKEN", "accessToken");
+        access.start();
+        ProcessBuilder certi = new ProcessBuilder("java", "Env", "TASKCLUSTER_CERTIFICATE");
+        Map<String, String> env = certi.environment();
+        env.put("TASKCLUSTER_CERTIFICATE", "certificate");
+        certi.start();
         Assume.assumeFalse(clientId == null || clientId == "" || accessToken == null || accessToken == "");
         Queue queue = new Queue(new Credentials(clientId, accessToken, certificate));
         String taskId = slug();
