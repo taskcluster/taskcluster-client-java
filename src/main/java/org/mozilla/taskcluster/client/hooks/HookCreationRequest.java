@@ -29,7 +29,7 @@ public class HookCreationRequest {
      *
      * Syntax:     ^([a-zA-Z0-9-_]*)$
      * Min length: 1
-     * Max length: 22
+     * Max length: 64
      *
      * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/hookGroupId
      */
@@ -37,7 +37,9 @@ public class HookCreationRequest {
 
     /**
      *
-     * Max length: 255
+     * Syntax:     ^([a-zA-Z0-9-_]*)$
+     * Min length: 1
+     * Max length: 64
      *
      * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/hookId
      */

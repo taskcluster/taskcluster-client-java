@@ -6058,7 +6058,7 @@ properties:
       PROPERTY_NAME: hookGroupId
       SOURCE_URL: http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/hookGroupId
       TYPE_NAME: HookGroupId
-      maxLength: 22
+      maxLength: 64
       minLength: 1
       pattern: ^([a-zA-Z0-9-_]*)$
       type: string
@@ -6067,7 +6067,9 @@ properties:
       PROPERTY_NAME: hookId
       SOURCE_URL: http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/hookId
       TYPE_NAME: HookId
-      maxLength: 255
+      maxLength: 64
+      minLength: 1
+      pattern: ^([a-zA-Z0-9-_]*)$
       type: string
     metadata:
       IS_REQUIRED: true
