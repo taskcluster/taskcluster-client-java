@@ -7,9 +7,9 @@ import java.util.Date;
  *
  * See http://schemas.taskcluster.net/github/v1/build-list.json#
  */
-public class Builds {
+public class BuildsResponse {
 
-    public class BuildsEntry {
+    public class Build {
 
         /**
          * The initial creation time of the build. This is when it became pending.
@@ -99,7 +99,7 @@ public class Builds {
      *
      * See http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds
      */
-    public BuildsEntry[] builds;
+    public Build[] builds;
 
     /**
      * Passed back from Azure to allow us to page through long result sets.

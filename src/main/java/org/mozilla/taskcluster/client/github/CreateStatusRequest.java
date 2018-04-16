@@ -6,7 +6,7 @@ package org.mozilla.taskcluster.client.github;
  *
  * See http://schemas.taskcluster.net/github/v1/create-status.json#
  */
-public class CreateStatus {
+public class CreateStatusRequest {
 
     /**
      * A string label to differentiate this status from the status of other systems.

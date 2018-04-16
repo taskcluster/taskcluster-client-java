@@ -68,8 +68,8 @@ public class Github extends TaskclusterRequestHandler {
      *
      * @see "[List of Builds API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#builds)"
      */
-    public CallSummary<EmptyPayload, Builds> builds() throws APICallFailure {
-        return apiCall(null, "GET", "/builds", Builds.class);
+    public CallSummary<EmptyPayload, BuildsResponse> builds() throws APICallFailure {
+        return apiCall(null, "GET", "/builds", BuildsResponse.class);
     }
 
     /**
@@ -88,8 +88,8 @@ public class Github extends TaskclusterRequestHandler {
      *
      * @see "[Get Repository Info API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#repository)"
      */
-    public CallSummary<EmptyPayload, Repository> repository(String owner, String repo) throws APICallFailure {
-        return apiCall(null, "GET", "/repository/" + uriEncode(owner) + "/" + uriEncode(repo), Repository.class);
+    public CallSummary<EmptyPayload, RepositoryResponse> repository(String owner, String repo) throws APICallFailure {
+        return apiCall(null, "GET", "/repository/" + uriEncode(owner) + "/" + uriEncode(repo), RepositoryResponse.class);
     }
 
     /**
@@ -116,7 +116,7 @@ public class Github extends TaskclusterRequestHandler {
      *
      * @see "[Post a status against a given changeset API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#createStatus)"
      */
-    public CallSummary<CreateStatus, EmptyPayload> createStatus(String owner, String repo, String sha, CreateStatus payload) throws APICallFailure {
+    public CallSummary<CreateStatusRequest, EmptyPayload> createStatus(String owner, String repo, String sha, CreateStatusRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/repository/" + uriEncode(owner) + "/" + uriEncode(repo) + "/statuses/" + uriEncode(sha), EmptyPayload.class);
     }
 
@@ -128,7 +128,7 @@ public class Github extends TaskclusterRequestHandler {
      *
      * @see "[Post a comment on a given GitHub Issue or Pull Request API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#createComment)"
      */
-    public CallSummary<CreateComment, EmptyPayload> createComment(String owner, String repo, String number, CreateComment payload) throws APICallFailure {
+    public CallSummary<CreateCommentRequest, EmptyPayload> createComment(String owner, String repo, String number, CreateCommentRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/repository/" + uriEncode(owner) + "/" + uriEncode(repo) + "/issues/" + uriEncode(number) + "/comments", EmptyPayload.class);
     }
 

@@ -6,7 +6,7 @@ package org.mozilla.taskcluster.client.github;
  *
  * See http://schemas.taskcluster.net/github/v1/create-comment.json#
  */
-public class CreateComment {
+public class CreateCommentRequest {
 
     /**
      * The contents of the comment.

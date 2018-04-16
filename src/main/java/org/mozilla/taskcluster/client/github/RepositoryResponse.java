@@ -5,7 +5,7 @@ package org.mozilla.taskcluster.client.github;
  *
  * See http://schemas.taskcluster.net/github/v1/repository.json#
  */
-public class Repository {
+public class RepositoryResponse {
 
     /**
      * True if integration is installed, False otherwise.

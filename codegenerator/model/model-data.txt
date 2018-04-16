@@ -5044,7 +5044,7 @@ $schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/github/v1/build-list.json#
-TYPE_NAME: Builds
+TYPE_NAME: BuildsResponse
 additionalProperties:
   Boolean: false
   Properties: null
@@ -5067,7 +5067,7 @@ properties:
         IS_REQUIRED: false
         PROPERTY_NAME: builds entry
         SOURCE_URL: http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items
-        TYPE_NAME: BuildsEntry
+        TYPE_NAME: Build
         additionalProperties:
           Boolean: false
           Properties: null
@@ -5104,13 +5104,18 @@ properties:
                 - IS_REQUIRED: false
                   PROPERTY_NAME: ""
                   SOURCE_URL: http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/eventId/oneOf[0]
-                  TYPE_NAME: Object
+                  TYPE_NAME: String
                   pattern: ^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}$
+                  title: Github GUID
+                  type: string
                 - IS_REQUIRED: false
                   PROPERTY_NAME: ""
                   SOURCE_URL: http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/eventId/oneOf[1]
-                  TYPE_NAME: Object
-                  pattern: Unknown
+                  TYPE_NAME: String
+                  enum:
+                  - Unknown
+                  title: Unknown Github GUID
+                  type: string
                 SourceURL: http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/eventId/oneOf
               type: string
             eventType:
@@ -5200,6 +5205,7 @@ properties:
         - eventId
         - created
         - updated
+        title: Build
         type: object
       type: array
     continuationToken:
@@ -5216,7 +5222,7 @@ properties:
   SourceURL: http://schemas.taskcluster.net/github/v1/build-list.json#/properties
 required:
 - builds
-title: Builds
+title: Builds Response
 type: object
 
 
@@ -5225,8 +5231,10 @@ http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/item
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/eventId/oneOf[0]
-TYPE_NAME: Object
+TYPE_NAME: String
 pattern: ^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}$
+title: Github GUID
+type: string
 
 
 http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/eventId/oneOf[1]
@@ -5234,8 +5242,11 @@ http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/item
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/eventId/oneOf[1]
-TYPE_NAME: Object
-pattern: Unknown
+TYPE_NAME: String
+enum:
+- Unknown
+title: Unknown Github GUID
+type: string
 
 
 http://schemas.taskcluster.net/github/v1/create-comment.json#
@@ -5244,7 +5255,7 @@ $schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/github/v1/create-comment.json#
-TYPE_NAME: CreateComment
+TYPE_NAME: CreateCommentRequest
 additionalProperties:
   Boolean: false
   Properties: null
@@ -5268,7 +5279,7 @@ properties:
   SourceURL: http://schemas.taskcluster.net/github/v1/create-comment.json#/properties
 required:
 - body
-title: Create comment
+title: Create Comment Request
 type: object
 
 
@@ -5278,7 +5289,7 @@ $schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/github/v1/create-status.json#
-TYPE_NAME: CreateStatus
+TYPE_NAME: CreateStatusRequest
 additionalProperties:
   Boolean: false
   Properties: null
@@ -5337,7 +5348,7 @@ properties:
   SourceURL: http://schemas.taskcluster.net/github/v1/create-status.json#/properties
 required:
 - state
-title: Create status
+title: Create Status Request
 type: object
 
 
@@ -5347,7 +5358,7 @@ $schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/github/v1/repository.json#
-TYPE_NAME: Repository
+TYPE_NAME: RepositoryResponse
 additionalProperties:
   Boolean: false
   Properties: null
@@ -5371,7 +5382,7 @@ properties:
   SourceURL: http://schemas.taskcluster.net/github/v1/repository.json#/properties
 required:
 - installed
-title: repository
+title: Repository Response
 type: object
 
 
