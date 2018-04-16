@@ -9,17 +9,10 @@ import java.util.Date;
  */
 public class WorkerTypeResponse {
 
-    public class Actions1 {
+    public class Actions {
 
         /**
-         * Actions have a "context" that is one of provisioner, worker-type,
-         * or worker, indicating which it applies to. `context` is used by the front-end to know where to display the action.
-         *
-         * | `context`   | Page displayed        |
-         * |-------------|-----------------------|
-         * | provisioner | Provisioner Explorer  |
-         * | worker-type | Workers Explorer      |
-         * | worker      | Worker Explorer       |
+         * Only actions with the context `worker-type` are included.
          *
          * Possible values:
          *     * "worker-type"
@@ -82,7 +75,7 @@ public class WorkerTypeResponse {
     /**
      * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions
      */
-    public Actions1[] actions;
+    public Actions[] actions;
 
     /**
      * Description of the worker-type.
