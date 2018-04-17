@@ -91,7 +91,7 @@ public class Notify extends TaskclusterRequestHandler {
      *
      * @see "[Post IRC Message API Documentation](https://docs.taskcluster.net/reference/core/notify/api-docs#irc)"
      */
-    public CallSummary<PostIRCMessageRequest, EmptyPayload> irc(PostIRCMessageRequest payload) throws APICallFailure {
+    public CallSummary<Object, EmptyPayload> irc(Object payload) throws APICallFailure {
         return apiCall(payload, "POST", "/irc", EmptyPayload.class);
     }
 
