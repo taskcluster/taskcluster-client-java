@@ -648,13 +648,21 @@ properties:
         - IS_REQUIRED: false
           PROPERTY_NAME: ""
           SOURCE_URL: http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/host/anyOf[0]
-          TYPE_NAME: Object
+          TYPE_NAME: String
+          description: |
+            Host for which the request came in, this is typically the `Host` header
+            excluding the port if any.
           format: hostname
+          type: string
         - IS_REQUIRED: false
           PROPERTY_NAME: ""
           SOURCE_URL: http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/host/anyOf[1]
-          TYPE_NAME: Object
+          TYPE_NAME: String
+          description: |
+            Host for which the request came in, this is typically the `Host` header
+            excluding the port if any.
           format: ipv4
+          type: string
         SourceURL: http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/host/anyOf
       description: |
         Host for which the request came in, this is typically the `Host` header
@@ -738,8 +746,12 @@ http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/propertie
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/host/anyOf[0]
-TYPE_NAME: Object
+TYPE_NAME: String
+description: |
+  Host for which the request came in, this is typically the `Host` header
+  excluding the port if any.
 format: hostname
+type: string
 
 
 http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/host/anyOf[1]
@@ -747,8 +759,12 @@ http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/propertie
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/host/anyOf[1]
-TYPE_NAME: Object
+TYPE_NAME: String
+description: |
+  Host for which the request came in, this is typically the `Host` header
+  excluding the port if any.
 format: ipv4
+type: string
 
 
 http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#
@@ -763,13 +779,16 @@ description: |
 id: http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#
 oneOf:
   Items:
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]
     TYPE_NAME: AuthenticationSuccessfulResponse
     additionalProperties:
       Boolean: false
       Properties: null
+    description: |
+      Response from a request to authenticate a hawk request.
     properties:
       MemberNames:
         clientId: clientId
@@ -869,13 +888,16 @@ oneOf:
     - expires
     title: Authentication Successful Response
     type: object
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[1]
     TYPE_NAME: AuthenticationFailedResponse
     additionalProperties:
       Boolean: false
       Properties: null
+    description: |
+      Response from a request to authenticate a hawk request.
     properties:
       MemberNames:
         message: message
@@ -914,6 +936,7 @@ title: Hawk Signature Authentication Response
 
 http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]
 ================================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]
@@ -921,6 +944,8 @@ TYPE_NAME: AuthenticationSuccessfulResponse
 additionalProperties:
   Boolean: false
   Properties: null
+description: |
+  Response from a request to authenticate a hawk request.
 properties:
   MemberNames:
     clientId: clientId
@@ -1024,6 +1049,7 @@ type: object
 
 http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[1]
 ================================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[1]
@@ -1031,6 +1057,8 @@ TYPE_NAME: AuthenticationFailedResponse
 additionalProperties:
   Boolean: false
   Properties: null
+description: |
+  Response from a request to authenticate a hawk request.
 properties:
   MemberNames:
     message: message
@@ -5105,6 +5133,8 @@ properties:
                   PROPERTY_NAME: ""
                   SOURCE_URL: http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/eventId/oneOf[0]
                   TYPE_NAME: String
+                  description: |
+                    The GitHub webhook deliveryId. Extracted from the header 'X-GitHub-Delivery'
                   pattern: ^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}$
                   title: Github GUID
                   type: string
@@ -5112,6 +5142,8 @@ properties:
                   PROPERTY_NAME: ""
                   SOURCE_URL: http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/eventId/oneOf[1]
                   TYPE_NAME: String
+                  description: |
+                    The GitHub webhook deliveryId. Extracted from the header 'X-GitHub-Delivery'
                   enum:
                   - Unknown
                   title: Unknown Github GUID
@@ -5232,6 +5264,8 @@ IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/eventId/oneOf[0]
 TYPE_NAME: String
+description: |
+  The GitHub webhook deliveryId. Extracted from the header 'X-GitHub-Delivery'
 pattern: ^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}$
 title: Github GUID
 type: string
@@ -5243,6 +5277,8 @@ IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/github/v1/build-list.json#/properties/builds/items/properties/eventId/oneOf[1]
 TYPE_NAME: String
+description: |
+  The GitHub webhook deliveryId. Extracted from the header 'X-GitHub-Delivery'
 enum:
 - Unknown
 title: Unknown Github GUID
@@ -8452,7 +8488,7 @@ definitions:
     message:
       IS_REQUIRED: false
       PROPERTY_NAME: message
-      SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+      SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
       TYPE_NAME: String
       description: |
         IRC message to send as plain text.
@@ -8468,13 +8504,34 @@ description: |
 id: http://schemas.taskcluster.net/notify/v1/irc-request.json#
 oneOf:
   Items:
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[0]
     TYPE_NAME: ChannelMessage
     additionalProperties:
       Boolean: false
       Properties: null
+    definitions:
+      MemberNames:
+        message: message
+      Properties:
+        message:
+          IS_REQUIRED: false
+          PROPERTY_NAME: message
+          SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
+          TYPE_NAME: String
+          description: |
+            IRC message to send as plain text.
+          maxLength: 510
+          minLength: 1
+          title: IRC Message Text
+          type: string
+      SortedPropertyNames:
+      - message
+      SourceURL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[0]/definitions
+    description: |
+      Request to post a message on IRC.
     properties:
       MemberNames:
         channel: channel
@@ -8498,7 +8555,7 @@ oneOf:
           REF_SUBSCHEMA:
             IS_REQUIRED: false
             PROPERTY_NAME: message
-            SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+            SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
             TYPE_NAME: String
             description: |
               IRC message to send as plain text.
@@ -8517,13 +8574,34 @@ oneOf:
     - message
     title: Channel Message
     type: object
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]
     TYPE_NAME: PrivateMessage
     additionalProperties:
       Boolean: false
       Properties: null
+    definitions:
+      MemberNames:
+        message: message
+      Properties:
+        message:
+          IS_REQUIRED: false
+          PROPERTY_NAME: message
+          SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
+          TYPE_NAME: String
+          description: |
+            IRC message to send as plain text.
+          maxLength: 510
+          minLength: 1
+          title: IRC Message Text
+          type: string
+      SortedPropertyNames:
+      - message
+      SourceURL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions
+    description: |
+      Request to post a message on IRC.
     properties:
       MemberNames:
         message: message
@@ -8536,7 +8614,7 @@ oneOf:
           REF_SUBSCHEMA:
             IS_REQUIRED: false
             PROPERTY_NAME: message
-            SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+            SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
             TYPE_NAME: String
             description: |
               IRC message to send as plain text.
@@ -8571,22 +8649,9 @@ oneOf:
 title: Post IRC Message Request
 
 
-http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
-==============================================================================
-IS_REQUIRED: false
-PROPERTY_NAME: message
-SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
-TYPE_NAME: String
-description: |
-  IRC message to send as plain text.
-maxLength: 510
-minLength: 1
-title: IRC Message Text
-type: string
-
-
 http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[0]
 ===================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[0]
@@ -8594,6 +8659,26 @@ TYPE_NAME: ChannelMessage
 additionalProperties:
   Boolean: false
   Properties: null
+definitions:
+  MemberNames:
+    message: message
+  Properties:
+    message:
+      IS_REQUIRED: false
+      PROPERTY_NAME: message
+      SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
+      TYPE_NAME: String
+      description: |
+        IRC message to send as plain text.
+      maxLength: 510
+      minLength: 1
+      title: IRC Message Text
+      type: string
+  SortedPropertyNames:
+  - message
+  SourceURL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[0]/definitions
+description: |
+  Request to post a message on IRC.
 properties:
   MemberNames:
     channel: channel
@@ -8617,7 +8702,7 @@ properties:
       REF_SUBSCHEMA:
         IS_REQUIRED: false
         PROPERTY_NAME: message
-        SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+        SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
         TYPE_NAME: String
         description: |
           IRC message to send as plain text.
@@ -8640,6 +8725,7 @@ type: object
 
 http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]
 ===================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]
@@ -8647,6 +8733,26 @@ TYPE_NAME: PrivateMessage
 additionalProperties:
   Boolean: false
   Properties: null
+definitions:
+  MemberNames:
+    message: message
+  Properties:
+    message:
+      IS_REQUIRED: false
+      PROPERTY_NAME: message
+      SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
+      TYPE_NAME: String
+      description: |
+        IRC message to send as plain text.
+      maxLength: 510
+      minLength: 1
+      title: IRC Message Text
+      type: string
+  SortedPropertyNames:
+  - message
+  SourceURL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions
+description: |
+  Request to post a message on IRC.
 properties:
   MemberNames:
     message: message
@@ -8659,7 +8765,7 @@ properties:
       REF_SUBSCHEMA:
         IS_REQUIRED: false
         PROPERTY_NAME: message
-        SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+        SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
         TYPE_NAME: String
         description: |
           IRC message to send as plain text.
@@ -8690,6 +8796,20 @@ required:
 - message
 title: Private Message
 type: object
+
+
+http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
+=======================================================================================
+IS_REQUIRED: false
+PROPERTY_NAME: message
+SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
+TYPE_NAME: String
+description: |
+  IRC message to send as plain text.
+maxLength: 510
+minLength: 1
+title: IRC Message Text
+type: string
 
 
 http://schemas.taskcluster.net/notify/v1/pulse-request.json#
@@ -14293,7 +14413,8 @@ description: Request a authorization to put and artifact or posting of a URL as 
 id: http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#
 oneOf:
   Items:
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]
     TYPE_NAME: BlobArtifactRequest
@@ -14487,7 +14608,8 @@ oneOf:
     - contentLength
     title: Blob Artifact Request
     type: object
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[1]
     TYPE_NAME: S3ArtifactRequest
@@ -14549,7 +14671,8 @@ oneOf:
     - contentType
     title: S3 Artifact Request
     type: object
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[2]
     TYPE_NAME: AzureArtifactRequest
@@ -14612,7 +14735,8 @@ oneOf:
     - contentType
     title: Azure Artifact Request
     type: object
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]
     TYPE_NAME: RedirectArtifactRequest
@@ -14690,7 +14814,8 @@ oneOf:
     - contentType
     title: Redirect Artifact Request
     type: object
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[4]
     TYPE_NAME: ErrorArtifactRequest
@@ -14769,6 +14894,7 @@ title: Post Artifact Request
 
 http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]
 ============================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]
@@ -14967,6 +15093,7 @@ type: object
 
 http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[1]
 ============================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[1]
@@ -15033,6 +15160,7 @@ type: object
 
 http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[2]
 ============================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[2]
@@ -15100,6 +15228,7 @@ type: object
 
 http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]
 ============================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]
@@ -15182,6 +15311,7 @@ type: object
 
 http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[4]
 ============================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[4]
@@ -15270,7 +15400,8 @@ description: |
 id: http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#
 oneOf:
   Items:
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]
     TYPE_NAME: Object
@@ -15377,7 +15508,8 @@ oneOf:
     - storageType
     - expires
     title: Blob Artifact Response
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[1]
     TYPE_NAME: S3ArtifactResponse
@@ -15447,7 +15579,8 @@ oneOf:
     - contentType
     title: S3 Artifact Response
     type: object
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[2]
     TYPE_NAME: AzureArtifactResponse
@@ -15520,7 +15653,8 @@ oneOf:
     - putUrl
     title: Azure Artifact Response
     type: object
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[3]
     TYPE_NAME: RedirectArtifactResponse
@@ -15551,7 +15685,8 @@ oneOf:
     - storageType
     title: Redirect Artifact Response
     type: object
-  - IS_REQUIRED: false
+  - $schema: http://json-schema.org/draft-06/schema#
+    IS_REQUIRED: false
     PROPERTY_NAME: ""
     SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[4]
     TYPE_NAME: ErrorArtifactResponse
@@ -15588,6 +15723,7 @@ title: Post Artifact Response
 
 http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]
 =============================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]
@@ -15699,6 +15835,7 @@ title: Blob Artifact Response
 
 http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[1]
 =============================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[1]
@@ -15773,6 +15910,7 @@ type: object
 
 http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[2]
 =============================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[2]
@@ -15850,6 +15988,7 @@ type: object
 
 http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[3]
 =============================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[3]
@@ -15885,6 +16024,7 @@ type: object
 
 http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[4]
 =============================================================================
+$schema: http://json-schema.org/draft-06/schema#
 IS_REQUIRED: false
 PROPERTY_NAME: ""
 SOURCE_URL: http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[4]

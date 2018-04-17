@@ -1,6 +1,8 @@
 package org.mozilla.taskcluster.client.notify;
 
 /**
+ * Request to post a message on IRC.
+ *
  * See http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]
  */
 public class PrivateMessage {

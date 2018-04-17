@@ -3,6 +3,8 @@ package org.mozilla.taskcluster.client.auth;
 import java.util.Date;
 
 /**
+ * Response from a request to authenticate a hawk request.
+ *
  * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]
  */
 public class AuthenticationSuccessfulResponse {
