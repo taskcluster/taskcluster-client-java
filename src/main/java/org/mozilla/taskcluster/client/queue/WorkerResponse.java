@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class WorkerResponse {
 
-    public class Actions {
+    public class WorkerAction {
 
         /**
          * Only actions with the context `worker` are included.
@@ -75,7 +75,7 @@ public class WorkerResponse {
     /**
      * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions
      */
-    public Actions[] actions;
+    public WorkerAction[] actions;
 
     /**
      * Date and time after which the worker will be automatically

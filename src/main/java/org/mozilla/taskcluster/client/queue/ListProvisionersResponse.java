@@ -25,7 +25,7 @@ public class ListProvisionersResponse {
         /**
          * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/actions
          */
-        public Actions1[] actions;
+        public Action[] actions;
 
         /**
          * Description of the provisioner.

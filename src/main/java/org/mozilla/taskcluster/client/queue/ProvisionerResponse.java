@@ -12,7 +12,7 @@ public class ProvisionerResponse {
     /**
      * See http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/actions
      */
-    public Actions1[] actions;
+    public Action[] actions;
 
     /**
      * Description of the provisioner.

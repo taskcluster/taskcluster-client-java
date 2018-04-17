@@ -5,7 +5,7 @@ package org.mozilla.taskcluster.client.queue;
  *
  * See http://schemas.taskcluster.net/queue/v1/actions.json#
  */
-public class Actions1 {
+public class Action {
 
     /**
      * Actions have a "context" that is one of provisioner, worker-type, or worker, indicating

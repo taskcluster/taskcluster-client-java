@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class WorkerTypeResponse {
 
-    public class Actions {
+    public class WorkerTypeAction {
 
         /**
          * Only actions with the context `worker-type` are included.
@@ -75,7 +75,7 @@ public class WorkerTypeResponse {
     /**
      * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions
      */
-    public Actions[] actions;
+    public WorkerTypeAction[] actions;
 
     /**
      * Description of the worker-type.
