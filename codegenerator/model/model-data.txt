@@ -8488,7 +8488,7 @@ definitions:
     message:
       IS_REQUIRED: false
       PROPERTY_NAME: message
-      SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+      SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
       TYPE_NAME: String
       description: |
         IRC message to send as plain text.
@@ -8519,7 +8519,7 @@ oneOf:
         message:
           IS_REQUIRED: false
           PROPERTY_NAME: message
-          SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+          SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
           TYPE_NAME: String
           description: |
             IRC message to send as plain text.
@@ -8555,7 +8555,7 @@ oneOf:
           REF_SUBSCHEMA:
             IS_REQUIRED: false
             PROPERTY_NAME: message
-            SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+            SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
             TYPE_NAME: String
             description: |
               IRC message to send as plain text.
@@ -8589,7 +8589,7 @@ oneOf:
         message:
           IS_REQUIRED: false
           PROPERTY_NAME: message
-          SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+          SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
           TYPE_NAME: String
           description: |
             IRC message to send as plain text.
@@ -8614,7 +8614,7 @@ oneOf:
           REF_SUBSCHEMA:
             IS_REQUIRED: false
             PROPERTY_NAME: message
-            SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+            SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
             TYPE_NAME: String
             description: |
               IRC message to send as plain text.
@@ -8649,20 +8649,6 @@ oneOf:
 title: Post IRC Message Request
 
 
-http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
-==============================================================================
-IS_REQUIRED: false
-PROPERTY_NAME: message
-SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
-TYPE_NAME: String
-description: |
-  IRC message to send as plain text.
-maxLength: 510
-minLength: 1
-title: IRC Message Text
-type: string
-
-
 http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[0]
 ===================================================================
 $schema: http://json-schema.org/draft-06/schema#
@@ -8680,7 +8666,7 @@ definitions:
     message:
       IS_REQUIRED: false
       PROPERTY_NAME: message
-      SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+      SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
       TYPE_NAME: String
       description: |
         IRC message to send as plain text.
@@ -8716,7 +8702,7 @@ properties:
       REF_SUBSCHEMA:
         IS_REQUIRED: false
         PROPERTY_NAME: message
-        SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+        SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
         TYPE_NAME: String
         description: |
           IRC message to send as plain text.
@@ -8754,7 +8740,7 @@ definitions:
     message:
       IS_REQUIRED: false
       PROPERTY_NAME: message
-      SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+      SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
       TYPE_NAME: String
       description: |
         IRC message to send as plain text.
@@ -8779,7 +8765,7 @@ properties:
       REF_SUBSCHEMA:
         IS_REQUIRED: false
         PROPERTY_NAME: message
-        SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/definitions/message
+        SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
         TYPE_NAME: String
         description: |
           IRC message to send as plain text.
@@ -8810,6 +8796,20 @@ required:
 - message
 title: Private Message
 type: object
+
+
+http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
+=======================================================================================
+IS_REQUIRED: false
+PROPERTY_NAME: message
+SOURCE_URL: http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/definitions/message
+TYPE_NAME: String
+description: |
+  IRC message to send as plain text.
+maxLength: 510
+minLength: 1
+title: IRC Message Text
+type: string
 
 
 http://schemas.taskcluster.net/notify/v1/pulse-request.json#
