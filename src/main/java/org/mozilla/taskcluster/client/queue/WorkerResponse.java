@@ -112,36 +112,12 @@ public class WorkerResponse {
      */
     public Date quarantineUntil;
 
-    public class RecentTasksEntry {
-
-        /**
-         * Id of this task run, `run-id`s always starts from `0`
-         *
-         * Mininum:    0
-         * Maximum:    1000
-         *
-         * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/recentTasks/items/properties/runId
-         */
-        public int runId;
-
-        /**
-         * Unique task identifier, this is UUID encoded as
-         * [URL-safe base64](http://tools.ietf.org/html/rfc4648#section-5) and
-         * stripped of `=` padding.
-         *
-         * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
-         *
-         * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/recentTasks/items/properties/taskId
-         */
-        public String taskId;
-    }
-
     /**
      * List of 20 most recent tasks claimed by the worker.
      *
      * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/recentTasks
      */
-    public RecentTasksEntry[] recentTasks;
+    public TaskRun[] recentTasks;
 
     /**
      * Identifier for group that worker who executes this run is a part of,

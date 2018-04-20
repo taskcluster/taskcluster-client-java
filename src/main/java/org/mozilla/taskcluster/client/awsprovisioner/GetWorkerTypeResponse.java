@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class GetWorkerTypeResponse {
 
-    public class AvailabilityZonesEntry {
+    public class AvailabilityZoneConfiguration1 {
 
         /**
          * The AWS availability zone being configured.  Example: eu-central-1b
@@ -54,7 +54,7 @@ public class GetWorkerTypeResponse {
     /**
      * See http://schemas.taskcluster.net/aws-provisioner/v1/get-worker-type-response.json#/properties/availabilityZones
      */
-    public AvailabilityZonesEntry[] availabilityZones;
+    public AvailabilityZoneConfiguration1[] availabilityZones;
 
     /**
      * True if this worker type is allowed on demand instances.  Currently
@@ -79,7 +79,7 @@ public class GetWorkerTypeResponse {
      */
     public String description;
 
-    public class InstanceTypesEntry {
+    public class InstanceTypeConfiguration1 {
 
         /**
          * This number represents the number of tasks that this instance type
@@ -140,7 +140,7 @@ public class GetWorkerTypeResponse {
     /**
      * See http://schemas.taskcluster.net/aws-provisioner/v1/get-worker-type-response.json#/properties/instanceTypes
      */
-    public InstanceTypesEntry[] instanceTypes;
+    public InstanceTypeConfiguration1[] instanceTypes;
 
     /**
      * ISO Date string (e.g. new Date().toISOString()) which represents the time
@@ -200,9 +200,9 @@ public class GetWorkerTypeResponse {
      */
     public String owner;
 
-    public class RegionsEntry {
+    public class RegionConfiguration1 {
 
-        public class LaunchSpec {
+        public class LaunchSpec1 {
 
             /**
              * Per-region AMI ImageId
@@ -217,7 +217,7 @@ public class GetWorkerTypeResponse {
          *
          * See http://schemas.taskcluster.net/aws-provisioner/v1/get-worker-type-response.json#/properties/regions/items/properties/launchSpec
          */
-        public LaunchSpec launchSpec;
+        public LaunchSpec1 launchSpec;
 
         /**
          * The Amazon AWS Region being configured.  Example: us-west-1
@@ -252,7 +252,7 @@ public class GetWorkerTypeResponse {
     /**
      * See http://schemas.taskcluster.net/aws-provisioner/v1/get-worker-type-response.json#/properties/regions
      */
-    public RegionsEntry[] regions;
+    public RegionConfiguration1[] regions;
 
     /**
      * A scaling ratio of `0.2` means that the provisioner will attempt to keep

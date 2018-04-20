@@ -45,49 +45,10 @@ public class HookCreationRequest {
      */
     public String hookId;
 
-    public class Metadata {
-
-        /**
-         * Long-form of the hook's purpose and behavior
-         *
-         * Max length: 32768
-         *
-         * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/metadata/properties/description
-         */
-        public String description;
-
-        /**
-         * Whether to email the owner on an error creating the task.
-         *
-         * Default:    true
-         *
-         * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/metadata/properties/emailOnError
-         */
-        public boolean emailOnError;
-
-        /**
-         * Human readable name of the hook
-         *
-         * Max length: 255
-         *
-         * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/metadata/properties/name
-         */
-        public String name;
-
-        /**
-         * Email of the person or group responsible for this hook.
-         *
-         * Max length: 255
-         *
-         * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/metadata/properties/owner
-         */
-        public String owner;
-    }
-
     /**
      * See http://schemas.taskcluster.net/hooks/v1/create-hook-request.json#/properties/metadata
      */
-    public Metadata metadata;
+    public HookMetadata metadata;
 
     /**
      * Definition of the times at which a hook will result in creation of a task.

@@ -3,17 +3,17 @@ package org.mozilla.taskcluster.client.auth;
 import java.util.Date;
 
 /**
- * Response to a request for an Shared-Access-Signature to access and Azure
- * Table Storage table.
+ * Response to a request for an Shared-Access-Signature to access an Azure
+ * Blob Storage container.
  *
- * See http://schemas.taskcluster.net/auth/v1/azure-table-access-response.json#
+ * See http://schemas.taskcluster.net/auth/v1/azure-container-response.json#
  */
-public class Var {
+public class AzureBlobSharedAccessSignature {
 
     /**
      * Date and time of when the Shared-Access-Signature expires.
      *
-     * See http://schemas.taskcluster.net/auth/v1/azure-table-access-response.json#/properties/expiry
+     * See http://schemas.taskcluster.net/auth/v1/azure-container-response.json#/properties/expiry
      */
     public Date expiry;
 
@@ -22,7 +22,7 @@ public class Var {
      * be appened after `?` or `&` depending on whether or not a querystring is
      * already present in the URL.
      *
-     * See http://schemas.taskcluster.net/auth/v1/azure-table-access-response.json#/properties/sas
+     * See http://schemas.taskcluster.net/auth/v1/azure-container-response.json#/properties/sas
      */
     public String sas;
 }

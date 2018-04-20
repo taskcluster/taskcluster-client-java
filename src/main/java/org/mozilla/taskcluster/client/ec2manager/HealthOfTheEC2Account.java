@@ -9,7 +9,7 @@ package org.mozilla.taskcluster.client.ec2manager;
  */
 public class HealthOfTheEC2Account {
 
-    public class RequestHealthEntry {
+    public class Var1 {
 
         /**
          * See http://schemas.taskcluster.net/ec2-manager/v1/health.json#/properties/requestHealth/items/properties/az
@@ -80,9 +80,9 @@ public class HealthOfTheEC2Account {
     /**
      * See http://schemas.taskcluster.net/ec2-manager/v1/health.json#/properties/requestHealth
      */
-    public RequestHealthEntry[] requestHealth;
+    public Var1[] requestHealth;
 
-    public class RunningEntry {
+    public class Var2 {
 
         /**
          * See http://schemas.taskcluster.net/ec2-manager/v1/health.json#/properties/running/items/properties/az
@@ -112,9 +112,9 @@ public class HealthOfTheEC2Account {
      *
      * See http://schemas.taskcluster.net/ec2-manager/v1/health.json#/properties/running
      */
-    public RunningEntry[] running;
+    public Var2[] running;
 
-    public class TerminationHealthEntry {
+    public class Var3 {
 
         /**
          * See http://schemas.taskcluster.net/ec2-manager/v1/health.json#/properties/terminationHealth/items/properties/az
@@ -206,5 +206,5 @@ public class HealthOfTheEC2Account {
     /**
      * See http://schemas.taskcluster.net/ec2-manager/v1/health.json#/properties/terminationHealth
      */
-    public TerminationHealthEntry[] terminationHealth;
+    public Var3[] terminationHealth;
 }

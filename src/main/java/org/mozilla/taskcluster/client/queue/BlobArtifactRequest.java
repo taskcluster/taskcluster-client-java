@@ -71,7 +71,7 @@ public class BlobArtifactRequest {
      */
     public Date expires;
 
-    public class PartsEntry {
+    public class MultipartPart {
 
         /**
          * The sha256 hash of the part.
@@ -113,7 +113,7 @@ public class BlobArtifactRequest {
      *
      * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/parts
      */
-    public PartsEntry[] parts;
+    public MultipartPart[] parts;
 
     /**
      * Artifact storage type, in this case `'blob'`

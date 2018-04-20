@@ -112,7 +112,7 @@ public class JobDefinition {
 
     public class JobInfo {
 
-        public class LinksEntry {
+        public class Var {
 
             /**
              *
@@ -144,7 +144,7 @@ public class JobDefinition {
         /**
          * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links
          */
-        public LinksEntry[] links;
+        public Var[] links;
 
         /**
          * Plain text description of the job and its state.  Submitted with
@@ -196,7 +196,7 @@ public class JobDefinition {
      */
     public String[] labels;
 
-    public class LogsEntry {
+    public class Var3 {
 
         /**
          * If true, indicates that the number of errors in the log was too
@@ -215,9 +215,9 @@ public class JobDefinition {
          */
         public String name;
 
-        public class StepsEntry {
+        public class Var2 {
 
-            public class ErrorsEntry {
+            public class Var1 {
 
                 /**
                  *
@@ -240,7 +240,7 @@ public class JobDefinition {
             /**
              * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors
              */
-            public ErrorsEntry[] errors;
+            public Var1[] errors;
 
             /**
              *
@@ -300,7 +300,7 @@ public class JobDefinition {
          *
          * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps
          */
-        public StepsEntry[] steps;
+        public Var2[] steps;
 
         /**
          *
@@ -315,7 +315,7 @@ public class JobDefinition {
     /**
      * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs
      */
-    public LogsEntry[] logs;
+    public Var3[] logs;
 
     /**
      * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin

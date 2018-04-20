@@ -22,7 +22,7 @@ public class ListWorkerTypesResponse {
      */
     public String continuationToken;
 
-    public class WorkerTypesEntry {
+    public class WorkerType {
 
         /**
          * Description of the worker-type.
@@ -88,5 +88,5 @@ public class ListWorkerTypesResponse {
      *
      * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes
      */
-    public WorkerTypesEntry[] workerTypes;
+    public WorkerType[] workerTypes;
 }

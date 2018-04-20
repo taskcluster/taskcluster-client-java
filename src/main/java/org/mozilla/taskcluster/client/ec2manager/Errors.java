@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class Errors {
 
-    public class ErrorsEntry {
+    public class Var4 {
 
         /**
          * See http://schemas.taskcluster.net/ec2-manager/v1/errors.json#/properties/errors/items/properties/az
@@ -63,5 +63,5 @@ public class Errors {
     /**
      * See http://schemas.taskcluster.net/ec2-manager/v1/errors.json#/properties/errors
      */
-    public ErrorsEntry[] errors;
+    public Var4[] errors;
 }

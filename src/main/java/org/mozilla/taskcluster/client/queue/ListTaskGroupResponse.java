@@ -29,19 +29,6 @@ public class ListTaskGroupResponse {
      */
     public String taskGroupId;
 
-    public class TaskDefinitionAndStatus {
-
-        /**
-         * See http://schemas.taskcluster.net/queue/v1/list-task-group-response.json#/properties/tasks/items/properties/status
-         */
-        public TaskStatusStructure status;
-
-        /**
-         * See http://schemas.taskcluster.net/queue/v1/list-task-group-response.json#/properties/tasks/items/properties/task
-         */
-        public TaskDefinitionResponse task;
-    }
-
     /**
      * List of tasks in this task-group.
      *

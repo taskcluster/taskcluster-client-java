@@ -7,7 +7,7 @@ package org.mozilla.taskcluster.client.awsprovisioner;
  */
 public class CreateWorkerTypeRequest {
 
-    public class AvailabilityZonesEntry {
+    public class AvailabilityZoneConfiguration {
 
         /**
          * The AWS availability zone being configured.  Example: eu-central-1b
@@ -52,7 +52,7 @@ public class CreateWorkerTypeRequest {
     /**
      * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones
      */
-    public AvailabilityZonesEntry[] availabilityZones;
+    public AvailabilityZoneConfiguration[] availabilityZones;
 
     /**
      * True if this worker type is allowed on demand instances.  Currently
@@ -77,7 +77,7 @@ public class CreateWorkerTypeRequest {
      */
     public String description;
 
-    public class InstanceTypesEntry {
+    public class InstanceTypeConfiguration {
 
         /**
          * This number represents the number of tasks that this instance type
@@ -138,7 +138,7 @@ public class CreateWorkerTypeRequest {
     /**
      * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/instanceTypes
      */
-    public InstanceTypesEntry[] instanceTypes;
+    public InstanceTypeConfiguration[] instanceTypes;
 
     /**
      * Launch Specification entries which are used in all regions and all instance types
@@ -190,7 +190,7 @@ public class CreateWorkerTypeRequest {
      */
     public String owner;
 
-    public class RegionsEntry {
+    public class RegionConfiguration {
 
         public class LaunchSpec {
 
@@ -249,7 +249,7 @@ public class CreateWorkerTypeRequest {
     /**
      * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/regions
      */
-    public RegionsEntry[] regions;
+    public RegionConfiguration[] regions;
 
     /**
      * A scaling ratio of `0.2` means that the provisioner will attempt to keep

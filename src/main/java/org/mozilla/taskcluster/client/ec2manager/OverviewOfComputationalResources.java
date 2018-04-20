@@ -7,7 +7,7 @@ package org.mozilla.taskcluster.client.ec2manager;
  */
 public class OverviewOfComputationalResources {
 
-    public class PendingEntry {
+    public class Var {
 
         /**
          * See http://schemas.taskcluster.net/ec2-manager/v1/worker-type-resources.json#/properties/pending/items/properties/count
@@ -32,7 +32,7 @@ public class OverviewOfComputationalResources {
     /**
      * See http://schemas.taskcluster.net/ec2-manager/v1/worker-type-resources.json#/properties/pending
      */
-    public PendingEntry[] pending;
+    public Var[] pending;
 
     /**
      * See http://schemas.taskcluster.net/ec2-manager/v1/worker-type-resources.json#/properties/running

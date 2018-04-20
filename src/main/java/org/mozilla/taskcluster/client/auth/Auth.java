@@ -84,11 +84,18 @@ public class Auth extends TaskclusterRequestHandler {
     /**
      * Get a list of all clients.  With `prefix`, only clients for which
      * it is a prefix of the clientId are returned.
+     * 
+     * By default this end-point will try to return up to 1000 clients in one
+     * request. But it **may return less, even none**.
+     * It may also return a `continuationToken` even though there are no more
+     * results. However, you can only be sure to have seen all results if you
+     * keep calling `listClients` with the last `continuationToken` until you
+     * get a result without a `continuationToken`.
      *
      * @see "[List Clients API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#listClients)"
      */
-    public CallSummary<EmptyPayload, GetClientResponse[]> listClients() throws APICallFailure {
-        return apiCall(null, "GET", "/clients/", GetClientResponse[].class);
+    public CallSummary<EmptyPayload, ListClientResponse> listClients() throws APICallFailure {
+        return apiCall(null, "GET", "/clients/", ListClientResponse.class);
     }
 
     /**
@@ -432,8 +439,8 @@ public class Auth extends TaskclusterRequestHandler {
      *
      * @see "[Get Shared-Access-Signature for Azure Table API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureTableSAS)"
      */
-    public CallSummary<EmptyPayload, Var> azureTableSAS(String account, String table, String level) throws APICallFailure {
-        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/table/" + uriEncode(table) + "/" + uriEncode(level), Var.class);
+    public CallSummary<EmptyPayload, AzureTableSharedAccessSignature> azureTableSAS(String account, String table, String level) throws APICallFailure {
+        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/table/" + uriEncode(table) + "/" + uriEncode(level), AzureTableSharedAccessSignature.class);
     }
 
     /**
@@ -464,8 +471,8 @@ public class Auth extends TaskclusterRequestHandler {
      *
      * @see "[Get Shared-Access-Signature for Azure Container API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#azureContainerSAS)"
      */
-    public CallSummary<EmptyPayload, Var1> azureContainerSAS(String account, String container, String level) throws APICallFailure {
-        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/containers/" + uriEncode(container) + "/" + uriEncode(level), Var1.class);
+    public CallSummary<EmptyPayload, AzureBlobSharedAccessSignature> azureContainerSAS(String account, String container, String level) throws APICallFailure {
+        return apiCall(null, "GET", "/azure/" + uriEncode(account) + "/containers/" + uriEncode(container) + "/" + uriEncode(level), AzureBlobSharedAccessSignature.class);
     }
 
     /**

@@ -1,11 +1,9 @@
 package org.mozilla.taskcluster.client.ec2manager;
 
 /**
- * A list of prices for EC2
- *
- * See http://schemas.taskcluster.net/ec2-manager/v1/prices-request.json#
+ * See http://schemas.taskcluster.net/ec2-manager/v1/prices-request.json#/items
  */
-public class Entry3 {
+public class Var9 {
 
     /**
      *

@@ -29,19 +29,6 @@ public class ListDependentTasksResponse {
      */
     public String taskId;
 
-    public class TaskDefinitionAndStatus {
-
-        /**
-         * See http://schemas.taskcluster.net/queue/v1/list-dependent-tasks-response.json#/properties/tasks/items/properties/status
-         */
-        public TaskStatusStructure status;
-
-        /**
-         * See http://schemas.taskcluster.net/queue/v1/list-dependent-tasks-response.json#/properties/tasks/items/properties/task
-         */
-        public TaskDefinitionResponse task;
-    }
-
     /**
      * List of tasks that have `taskId` in the `task.dependencies` property.
      *

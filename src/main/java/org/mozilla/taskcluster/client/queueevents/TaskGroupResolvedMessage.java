@@ -7,7 +7,7 @@ package org.mozilla.taskcluster.client.queueevents;
  *
  * See http://schemas.taskcluster.net/queue/v1/task-group-resolved.json#
  */
-public class TaskGroupResolved {
+public class TaskGroupResolvedMessage {
 
     /**
      * Identifier for the scheduler that created this task-group.
