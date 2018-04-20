@@ -26,6 +26,7 @@ import org.mozilla.taskcluster.client.InvalidOptionsException;
 import org.mozilla.taskcluster.client.index.Index;
 import org.mozilla.taskcluster.client.queue.Queue;
 import org.mozilla.taskcluster.client.queue.TaskDefinitionRequest;
+import org.mozilla.taskcluster.client.queue.TaskMetadata;
 import org.mozilla.taskcluster.client.queue.TaskStatusResponse;
 
 import com.google.gson.Gson;
@@ -115,7 +116,7 @@ public class APITest {
         Map<String, Object> extra = new HashMap<String, Object>();
         extra.put("index", index);
         td.extra = extra;
-        td.metadata = td.new MetaData();
+        td.metadata = new TaskMetadata();
         td.metadata.description = "Stuff";
         td.metadata.name = "[TC] Pete";
         td.metadata.owner = "pmoore@mozilla.com";

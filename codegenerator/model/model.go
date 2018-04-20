@@ -219,6 +219,7 @@ func generatePayloadTypes(apiDef *APIDefinition) {
 		MemberNameGenerator: func(name string, exported bool, blacklist map[string]bool) (identifier string) {
 			return utils.NormaliseLower(name, blacklist)
 		},
+		DisableNestedStructs: true,
 	}
 	result, err := job.Execute()
 	utils.ExitOnFail(err)
