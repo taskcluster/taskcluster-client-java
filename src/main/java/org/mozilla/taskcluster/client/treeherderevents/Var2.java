@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class Var2 {
 
-    public class Var1 {
+    public class Var3 {
 
         /**
          *
@@ -30,7 +30,7 @@ public class Var2 {
     /**
      * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors
      */
-    public Var1[] errors;
+    public Var3[] errors;
 
     /**
      *

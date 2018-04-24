@@ -196,7 +196,7 @@ public class JobDefinition {
      */
     public String[] labels;
 
-    public class Var3 {
+    public class Var1 {
 
         /**
          * If true, indicates that the number of errors in the log was too
@@ -217,7 +217,7 @@ public class JobDefinition {
 
         public class Var2 {
 
-            public class Var1 {
+            public class Var3 {
 
                 /**
                  *
@@ -240,7 +240,7 @@ public class JobDefinition {
             /**
              * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors
              */
-            public Var1[] errors;
+            public Var3[] errors;
 
             /**
              *
@@ -315,7 +315,7 @@ public class JobDefinition {
     /**
      * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs
      */
-    public Var3[] logs;
+    public Var1[] logs;
 
     /**
      * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin

@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.ec2manager;
 /**
  * See http://schemas.taskcluster.net/ec2-manager/v1/prices-request.json#/items
  */
-public class Var9 {
+public class Entry2 {
 
     /**
      *

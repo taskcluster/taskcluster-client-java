@@ -155,8 +155,8 @@ public class EC2Manager extends TaskclusterRequestHandler {
      *
      * @see "[Request prices for EC2 API Documentation](https://docs.taskcluster.net/reference/core/ec2-manager/api-docs#getPrices)"
      */
-    public CallSummary<EmptyPayload, Var5[]> getPrices() throws APICallFailure {
-        return apiCall(null, "GET", "/prices", Var5[].class);
+    public CallSummary<EmptyPayload, Entry1[]> getPrices() throws APICallFailure {
+        return apiCall(null, "GET", "/prices", Entry1[].class);
     }
 
     /**
@@ -164,8 +164,8 @@ public class EC2Manager extends TaskclusterRequestHandler {
      *
      * @see "[Request prices for EC2 API Documentation](https://docs.taskcluster.net/reference/core/ec2-manager/api-docs#getSpecificPrices)"
      */
-    public CallSummary<Var9[], Var5[]> getSpecificPrices(Var9[] payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/prices", Var5[].class);
+    public CallSummary<Entry2[], Entry1[]> getSpecificPrices(Entry2[] payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/prices", Entry1[].class);
     }
 
     /**

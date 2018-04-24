@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.ec2manager;
 /**
  * See http://schemas.taskcluster.net/ec2-manager/v1/prices.json#/items
  */
-public class Var5 {
+public class Entry1 {
 
     /**
      * EC2 instance type
