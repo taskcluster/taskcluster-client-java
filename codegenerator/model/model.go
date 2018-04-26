@@ -15,7 +15,11 @@ import (
 
 	"github.com/taskcluster/jsonschema2go"
 	"github.com/taskcluster/taskcluster-client-java/codegenerator/utils"
-	"github.com/xeipuuv/gojsonschema"
+	// Canonical source is
+	// "github.com/xeipuuv/gojsonschema"
+	// but we require https://github.com/xeipuuv/gojsonschema/pull/196
+	// to land, so as a temporary workaround, i've forked until this lands
+	"github.com/petemoore/gojsonschema"
 )
 
 var (
