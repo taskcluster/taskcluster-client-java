@@ -1,7 +1,7 @@
 // The following code is AUTO-GENERATED. Please DO NOT edit.
 //
 // This package was generated from the schema defined at
-// http://references.taskcluster.net/hooks/v1/api.json
+// https://references.taskcluster.net/hooks/v1/api.json
 package org.mozilla.taskcluster.client.hooks;
 
 import org.mozilla.taskcluster.client.APICallFailure;
