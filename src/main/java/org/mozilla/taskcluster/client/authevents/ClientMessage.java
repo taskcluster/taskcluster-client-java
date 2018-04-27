@@ -24,5 +24,5 @@ public class ClientMessage {
      *
      * See http://schemas.taskcluster.net/auth/v1/client-message.json#/properties/version
      */
-    public Object version;
+    public int version;
 }

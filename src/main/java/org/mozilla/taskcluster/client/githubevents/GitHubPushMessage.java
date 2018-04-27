@@ -63,5 +63,5 @@ public class GitHubPushMessage {
      *
      * See http://schemas.taskcluster.net/github/v1/github-push-message.json#/properties/version
      */
-    public Object version;
+    public int version;
 }

@@ -25,7 +25,7 @@ public class GitHubPullRequestMessage {
      *
      * See http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/action
      */
-    public Object action;
+    public String action;
 
     /**
      * Metadata describing the pull request.
@@ -83,5 +83,5 @@ public class GitHubPullRequestMessage {
      *
      * See http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/version
      */
-    public Object version;
+    public int version;
 }

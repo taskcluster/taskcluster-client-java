@@ -63,5 +63,5 @@ public class GitHubReleaseMessage {
      *
      * See http://schemas.taskcluster.net/github/v1/github-release-message.json#/properties/version
      */
-    public Object version;
+    public int version;
 }
