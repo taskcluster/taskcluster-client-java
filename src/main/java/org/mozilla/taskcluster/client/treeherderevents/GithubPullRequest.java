@@ -1,7 +1,7 @@
 package org.mozilla.taskcluster.client.treeherderevents;
 
 /**
- * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[2]
+ * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[1]
  */
 public class GithubPullRequest {
 
@@ -10,7 +10,7 @@ public class GithubPullRequest {
      * Possible values:
      *     * "github.com"
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[2]/properties/kind
+     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[1]/properties/kind
      */
     public String kind;
 
@@ -22,7 +22,7 @@ public class GithubPullRequest {
      * Min length: 1
      * Max length: 50
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[2]/properties/owner
+     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[1]/properties/owner
      */
     public String owner;
 
@@ -32,12 +32,12 @@ public class GithubPullRequest {
      * Min length: 1
      * Max length: 50
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[2]/properties/project
+     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[1]/properties/project
      */
     public String project;
 
     /**
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[2]/properties/pullRequestID
+     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[1]/properties/pullRequestID
      */
     public int pullRequestID;
 
@@ -46,7 +46,7 @@ public class GithubPullRequest {
      * Min length: 40
      * Max length: 40
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[2]/properties/revision
+     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[1]/properties/revision
      */
     public String revision;
 }

@@ -5,9 +5,9 @@ import java.util.Date;
 /**
  * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items
  */
-public class Var2 {
+public class Step {
 
-    public class Var3 {
+    public class Error {
 
         /**
          *
@@ -30,7 +30,7 @@ public class Var2 {
     /**
      * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors
      */
-    public Var3[] errors;
+    public Error[] errors;
 
     /**
      *

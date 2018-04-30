@@ -6,7 +6,7 @@ package org.mozilla.taskcluster.client.treeherderevents;
  *
  * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links/items
  */
-public class Var {
+public class Link {
 
     /**
      *

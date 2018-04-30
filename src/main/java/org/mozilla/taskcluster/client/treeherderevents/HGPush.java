@@ -1,6 +1,9 @@
 package org.mozilla.taskcluster.client.treeherderevents;
 
 /**
+ * PREFERRED: An HG job that only has a revision.  This is for all
+ * jobs going forward.
+ *
  * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin/oneOf[0]
  */
 public class HGPush {

@@ -112,7 +112,7 @@ public class JobDefinition {
 
     public class JobInfo {
 
-        public class Var {
+        public class Link {
 
             /**
              *
@@ -144,7 +144,7 @@ public class JobDefinition {
         /**
          * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links
          */
-        public Var[] links;
+        public Link[] links;
 
         /**
          * Plain text description of the job and its state.  Submitted with
@@ -196,7 +196,7 @@ public class JobDefinition {
      */
     public String[] labels;
 
-    public class Var1 {
+    public class Log {
 
         /**
          * If true, indicates that the number of errors in the log was too
@@ -215,9 +215,9 @@ public class JobDefinition {
          */
         public String name;
 
-        public class Var2 {
+        public class Step {
 
-            public class Var3 {
+            public class Error {
 
                 /**
                  *
@@ -240,7 +240,7 @@ public class JobDefinition {
             /**
              * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors
              */
-            public Var3[] errors;
+            public Error[] errors;
 
             /**
              *
@@ -300,7 +300,7 @@ public class JobDefinition {
          *
          * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps
          */
-        public Var2[] steps;
+        public Step[] steps;
 
         /**
          *
@@ -315,7 +315,7 @@ public class JobDefinition {
     /**
      * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs
      */
-    public Var1[] logs;
+    public Log[] logs;
 
     /**
      * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin
@@ -375,8 +375,8 @@ public class JobDefinition {
      *     * "fail"
      *     * "exception"
      *     * "canceled"
-     *     * "unknown"
      *     * "superseded"
+     *     * "unknown"
      *
      * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/result
      */
@@ -454,6 +454,9 @@ public class JobDefinition {
 
     /**
      * Message version
+     *
+     * Possible values:
+     *     * 1
      *
      * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/version
      */

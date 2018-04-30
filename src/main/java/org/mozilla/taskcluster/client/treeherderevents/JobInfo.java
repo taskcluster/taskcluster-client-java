@@ -9,7 +9,7 @@ package org.mozilla.taskcluster.client.treeherderevents;
  */
 public class JobInfo {
 
-    public class Var {
+    public class Link {
 
         /**
          *
@@ -41,7 +41,7 @@ public class JobInfo {
     /**
      * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links
      */
-    public Var[] links;
+    public Link[] links;
 
     /**
      * Plain text description of the job and its state.  Submitted with

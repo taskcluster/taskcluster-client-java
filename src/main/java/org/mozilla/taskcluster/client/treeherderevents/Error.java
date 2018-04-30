@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.treeherderevents;
 /**
  * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items
  */
-public class Var3 {
+public class Error {
 
     /**
      *

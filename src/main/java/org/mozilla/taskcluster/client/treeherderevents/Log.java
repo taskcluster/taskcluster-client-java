@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items
  */
-public class Var1 {
+public class Log {
 
     /**
      * If true, indicates that the number of errors in the log was too
@@ -24,9 +24,9 @@ public class Var1 {
      */
     public String name;
 
-    public class Var2 {
+    public class Step {
 
-        public class Var3 {
+        public class Error {
 
             /**
              *
@@ -49,7 +49,7 @@ public class Var1 {
         /**
          * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors
          */
-        public Var3[] errors;
+        public Error[] errors;
 
         /**
          *
@@ -109,7 +109,7 @@ public class Var1 {
      *
      * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps
      */
-    public Var2[] steps;
+    public Step[] steps;
 
     /**
      *
