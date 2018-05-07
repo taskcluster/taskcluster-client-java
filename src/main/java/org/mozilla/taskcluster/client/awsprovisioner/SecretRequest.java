@@ -7,7 +7,7 @@ import java.util.Date;
  *
  * See http://schemas.taskcluster.net/aws-provisioner/v1/create-secret-request.json#
  */
-public class GetSecretRequest {
+public class SecretRequest {
 
     /**
      * The date at which the secret is no longer guaranteed to exist

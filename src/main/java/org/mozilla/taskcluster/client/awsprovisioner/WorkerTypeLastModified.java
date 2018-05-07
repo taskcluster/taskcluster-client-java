@@ -3,11 +3,11 @@ package org.mozilla.taskcluster.client.awsprovisioner;
 import java.util.Date;
 
 /**
- * Get the last modified date of a workerType
+ * The last modified date of a workerType
  *
  * See http://schemas.taskcluster.net/aws-provisioner/v1/get-worker-type-last-modified.json#
  */
-public class GetWorkerTypeResponse1 {
+public class WorkerTypeLastModified {
 
     /**
      * ISO Date string (e.g. new Date().toISOString()) which represents the time

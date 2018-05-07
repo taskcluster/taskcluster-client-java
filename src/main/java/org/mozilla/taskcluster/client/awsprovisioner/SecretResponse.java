@@ -5,7 +5,7 @@ package org.mozilla.taskcluster.client.awsprovisioner;
  *
  * See http://schemas.taskcluster.net/aws-provisioner/v1/get-secret-response.json#
  */
-public class GetSecretResponse {
+public class SecretResponse {
 
     public class Credentials {
 

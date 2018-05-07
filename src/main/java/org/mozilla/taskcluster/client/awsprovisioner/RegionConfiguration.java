@@ -3,26 +3,14 @@ package org.mozilla.taskcluster.client.awsprovisioner;
 /**
  * Region configuration
  *
- * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/regions/items
+ * See http://schemas.taskcluster.net/aws-provisioner/v1/region-configuration.json#
  */
 public class RegionConfiguration {
 
-    public class LaunchSpec {
-
-        /**
-         * Per-region AMI ImageId
-         *
-         * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/regions/items/properties/launchSpec/properties/ImageId
-         */
-        public String ImageId;
-    }
-
     /**
-     * LaunchSpecification entries unique to this Region
-     *
-     * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/regions/items/properties/launchSpec
+     * See http://schemas.taskcluster.net/aws-provisioner/v1/region-configuration.json#/properties/launchSpec
      */
-    public LaunchSpec launchSpec;
+    public RegionLaunchSpec launchSpec;
 
     /**
      * The Amazon AWS Region being configured.  Example: us-west-1
@@ -34,7 +22,7 @@ public class RegionConfiguration {
      *     * "us-west-1"
      *     * "eu-central-1"
      *
-     * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/regions/items/properties/region
+     * See http://schemas.taskcluster.net/aws-provisioner/v1/region-configuration.json#/properties/region
      */
     public String region;
 
@@ -42,21 +30,21 @@ public class RegionConfiguration {
      * Scopes which should be included for this Region.  Scopes must be
      * composed of printable ASCII characters and spaces.
      *
-     * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/regions/items/properties/scopes
+     * See http://schemas.taskcluster.net/aws-provisioner/v1/region-configuration.json#/properties/scopes
      */
     public String[] scopes;
 
     /**
      * Static Secrets unique to this Region
      *
-     * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/regions/items/properties/secrets
+     * See http://schemas.taskcluster.net/aws-provisioner/v1/region-configuration.json#/properties/secrets
      */
     public Object secrets;
 
     /**
      * UserData entries unique to this Region
      *
-     * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/regions/items/properties/userData
+     * See http://schemas.taskcluster.net/aws-provisioner/v1/region-configuration.json#/properties/userData
      */
     public Object userData;
 }

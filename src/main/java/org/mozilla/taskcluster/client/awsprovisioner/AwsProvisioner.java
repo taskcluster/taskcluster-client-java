@@ -111,8 +111,8 @@ public class AwsProvisioner extends TaskclusterRequestHandler {
      *
      * @see "[Create new Worker Type API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#createWorkerType)"
      */
-    public CallSummary<CreateWorkerTypeRequest, GetWorkerTypeResponse> createWorkerType(String workerType, CreateWorkerTypeRequest payload) throws APICallFailure {
-        return apiCall(payload, "PUT", "/worker-type/" + uriEncode(workerType), GetWorkerTypeResponse.class);
+    public CallSummary<CreateWorkerTypeRequest, WorkerTypeResponse> createWorkerType(String workerType, CreateWorkerTypeRequest payload) throws APICallFailure {
+        return apiCall(payload, "PUT", "/worker-type/" + uriEncode(workerType), WorkerTypeResponse.class);
     }
 
     /**
@@ -133,8 +133,8 @@ public class AwsProvisioner extends TaskclusterRequestHandler {
      *
      * @see "[Update Worker Type API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#updateWorkerType)"
      */
-    public CallSummary<CreateWorkerTypeRequest, GetWorkerTypeResponse> updateWorkerType(String workerType, CreateWorkerTypeRequest payload) throws APICallFailure {
-        return apiCall(payload, "POST", "/worker-type/" + uriEncode(workerType) + "/update", GetWorkerTypeResponse.class);
+    public CallSummary<CreateWorkerTypeRequest, WorkerTypeResponse> updateWorkerType(String workerType, CreateWorkerTypeRequest payload) throws APICallFailure {
+        return apiCall(payload, "POST", "/worker-type/" + uriEncode(workerType) + "/update", WorkerTypeResponse.class);
     }
 
     /**
@@ -146,8 +146,8 @@ public class AwsProvisioner extends TaskclusterRequestHandler {
      *
      * @see "[Get Worker Type Last Modified Time API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#workerTypeLastModified)"
      */
-    public CallSummary<EmptyPayload, GetWorkerTypeResponse1> workerTypeLastModified(String workerType) throws APICallFailure {
-        return apiCall(null, "GET", "/worker-type-last-modified/" + uriEncode(workerType), GetWorkerTypeResponse1.class);
+    public CallSummary<EmptyPayload, WorkerTypeLastModified> workerTypeLastModified(String workerType) throws APICallFailure {
+        return apiCall(null, "GET", "/worker-type-last-modified/" + uriEncode(workerType), WorkerTypeLastModified.class);
     }
 
     /**
@@ -164,8 +164,8 @@ public class AwsProvisioner extends TaskclusterRequestHandler {
      *
      * @see "[Get Worker Type API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#workerType)"
      */
-    public CallSummary<EmptyPayload, GetWorkerTypeResponse> workerType(String workerType) throws APICallFailure {
-        return apiCall(null, "GET", "/worker-type/" + uriEncode(workerType), GetWorkerTypeResponse.class);
+    public CallSummary<EmptyPayload, WorkerTypeResponse> workerType(String workerType) throws APICallFailure {
+        return apiCall(null, "GET", "/worker-type/" + uriEncode(workerType), WorkerTypeResponse.class);
     }
 
     /**
@@ -214,7 +214,7 @@ public class AwsProvisioner extends TaskclusterRequestHandler {
      *
      * @see "[Create new Secret API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#createSecret)"
      */
-    public CallSummary<GetSecretRequest, EmptyPayload> createSecret(String token, GetSecretRequest payload) throws APICallFailure {
+    public CallSummary<SecretRequest, EmptyPayload> createSecret(String token, SecretRequest payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/secret/" + uriEncode(token), EmptyPayload.class);
     }
 
@@ -229,8 +229,8 @@ public class AwsProvisioner extends TaskclusterRequestHandler {
      *
      * @see "[Get a Secret API Documentation](https://docs.taskcluster.net/reference/core/aws-provisioner/api-docs#getSecret)"
      */
-    public CallSummary<EmptyPayload, GetSecretResponse> getSecret(String token) throws APICallFailure {
-        return apiCall(null, "GET", "/secret/" + uriEncode(token), GetSecretResponse.class);
+    public CallSummary<EmptyPayload, SecretResponse> getSecret(String token) throws APICallFailure {
+        return apiCall(null, "GET", "/secret/" + uriEncode(token), SecretResponse.class);
     }
 
     /**

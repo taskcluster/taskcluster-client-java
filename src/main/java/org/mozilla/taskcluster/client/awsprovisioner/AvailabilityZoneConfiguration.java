@@ -3,28 +3,28 @@ package org.mozilla.taskcluster.client.awsprovisioner;
 /**
  * Availability zone configuration
  *
- * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones/items
+ * See http://schemas.taskcluster.net/aws-provisioner/v1/availability-zone-configuration.json#
  */
 public class AvailabilityZoneConfiguration {
 
     /**
      * The AWS availability zone being configured.  Example: eu-central-1b
      *
-     * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones/items/properties/availabilityZone
+     * See http://schemas.taskcluster.net/aws-provisioner/v1/availability-zone-configuration.json#/properties/availabilityZone
      */
     public String availabilityZone;
 
     /**
      * LaunchSpecification entries unique to this AZ
      *
-     * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones/items/properties/launchSpec
+     * See http://schemas.taskcluster.net/aws-provisioner/v1/availability-zone-configuration.json#/properties/launchSpec
      */
     public Object launchSpec;
 
     /**
      * The AWS region containing this availability zone.  Example: eu-central-1
      *
-     * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones/items/properties/region
+     * See http://schemas.taskcluster.net/aws-provisioner/v1/availability-zone-configuration.json#/properties/region
      */
     public String region;
 
@@ -33,7 +33,7 @@ public class AvailabilityZoneConfiguration {
      *
      * Default:    {}
      *
-     * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones/items/properties/secrets
+     * See http://schemas.taskcluster.net/aws-provisioner/v1/availability-zone-configuration.json#/properties/secrets
      */
     public Object secrets;
 
@@ -42,7 +42,7 @@ public class AvailabilityZoneConfiguration {
      *
      * Default:    {}
      *
-     * See http://schemas.taskcluster.net/aws-provisioner/v1/create-worker-type-request.json#/properties/availabilityZones/items/properties/userData
+     * See http://schemas.taskcluster.net/aws-provisioner/v1/availability-zone-configuration.json#/properties/userData
      */
     public Object userData;
 }
