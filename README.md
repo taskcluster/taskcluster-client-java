@@ -131,7 +131,7 @@ import org.mozilla.taskcluster.client.queue.*;
 
 You can generate temporary credentials from permanent credentials using the
 java client. This may be useful if you wish to issue credentials to a third
-party. See https://docs.taskcluster.net/manual/apis/temporary-credentials for
+party. See [temporary-credentials](/docs/manual/apis/temporary-credentials) for
 more information. Both named and unnamed temporary credentials are supported,
 although named credentials are preferred if you are not sure which type to use.
 
