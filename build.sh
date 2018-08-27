@@ -27,6 +27,10 @@ done
 
 cd "$(dirname "${0}")"
 rm -rf src/main/java/org/mozilla/taskcluster/client/*/*.java
+git checkout -f src/main/java/org/mozilla/taskcluster/client/awsprovisioner/
+git checkout -f src/main/java/org/mozilla/taskcluster/client/awsprovisionerevents/
+git checkout -f src/main/java/org/mozilla/taskcluster/client/ec2manager/
+git checkout -f src/main/java/org/mozilla/taskcluster/client/treeherderevents/
 
 rm -rf "${GOPATH}/bin/generatemodel"
 rm -rf "${GOPATH}"/pkg/*/github.com/*/taskcluster-client-java

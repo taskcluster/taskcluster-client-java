@@ -15,6 +15,7 @@ import (
 
 	"github.com/taskcluster/jsonschema2go"
 	"github.com/taskcluster/taskcluster-client-java/codegenerator/utils"
+
 	// Canonical source is
 	// "github.com/xeipuuv/gojsonschema"
 	// but we require https://github.com/xeipuuv/gojsonschema/pull/196
@@ -128,7 +129,7 @@ func LoadAPIs(apiManifestUrl, supplementaryDataFile string) []APIDefinition {
 			fmt.Printf(
 				"\nFATAL: Manifest from url '%v' contains key '%v' with url '%v', but this url does not exist in supplementary data file '%v', therefore exiting...\n\n",
 				apiManifestUrl, i, apiMan[i], supplementaryDataFile)
-			os.Exit(64)
+			// os.Exit(64)
 		}
 	}
 	for i := range apiDefs {

@@ -8,6 +8,7 @@ import (
 
 	"github.com/kr/text"
 	"github.com/taskcluster/taskcluster-client-java/codegenerator/utils"
+	tcurls "github.com/taskcluster/taskcluster-lib-urls"
 )
 
 //////////////////////////////////////////////////////////////////
@@ -115,17 +116,19 @@ type APIEntry struct {
 	*Entry
 	MethodName string
 	Parent     *API
+	InputURL   string
+	OutputURL  string
 }
 
 // Add entry.Input and entry.Output to schemaURLs, if they are set
 func (entry *APIEntry) postPopulate(apiDef *APIDefinition) {
-	for _, v := range []string{
-		entry.Input,
-		entry.Output,
-	} {
-		if x := &entry.Parent.apiDef.schemaURLs; v != "" {
-			*x = append(*x, v)
-		}
+	if x := &entry.Parent.apiDef.schemaURLs; entry.Input != "" {
+		entry.InputURL = tcurls.Schema("https://taskcluster.net", entry.Parent.ServiceName, entry.Input)
+		*x = append(*x, entry.InputURL)
+	}
+	if x := &entry.Parent.apiDef.schemaURLs; entry.Output != "" {
+		entry.OutputURL = tcurls.Schema("https://taskcluster.net", entry.Parent.ServiceName, entry.Output)
+		*x = append(*x, entry.OutputURL)
 	}
 }
 
@@ -140,12 +143,15 @@ func (entry *APIEntry) String() string {
 			"    Entry Stability   = '%v'\n"+
 			"    Entry Scopes      = '%v'\n"+
 			"    Entry Input       = '%v'\n"+
+			"    Entry InputURL    = '%v'\n"+
 			"    Entry Output      = '%v'\n"+
+			"    Entry OutputURL   = '%v'\n"+
 			"    Entry Title       = '%v'\n"+
 			"    Entry Description = '%v'\n",
 		entry.Type, entry.Method, entry.Route, entry.Args,
 		entry.Query, entry.Name, entry.Stability, &entry.Scopes,
-		entry.Input, entry.Output, entry.Title, entry.Description,
+		entry.Input, entry.InputURL, entry.Output, entry.OutputURL,
+		entry.Title, entry.Description,
 	)
 }
 
@@ -167,9 +173,9 @@ func (entry *APIEntry) generateAPICode(apiName string) string {
 	}
 
 	apiArgsPayload := "null"
-	if entry.Input != "" {
+	if entry.InputURL != "" {
 		apiArgsPayload = "payload"
-		p := entry.Parent.apiDef.schemas.SubSchema(entry.Input).TypeName + " payload"
+		p := entry.Parent.apiDef.schemas.SubSchema(entry.InputURL).TypeName + " payload"
 		if inputParams == "" {
 			inputParams = p
 		} else {
@@ -178,12 +184,12 @@ func (entry *APIEntry) generateAPICode(apiName string) string {
 	}
 
 	requestType := "EmptyPayload"
-	if entry.Input != "" {
-		requestType = entry.Parent.apiDef.schemas.SubSchema(entry.Input).TypeName
+	if entry.InputURL != "" {
+		requestType = entry.Parent.apiDef.schemas.SubSchema(entry.InputURL).TypeName
 	}
 	responseType := "EmptyPayload"
-	if entry.Output != "" {
-		responseType = entry.Parent.apiDef.schemas.SubSchema(entry.Output).TypeName
+	if entry.OutputURL != "" {
+		responseType = entry.Parent.apiDef.schemas.SubSchema(entry.OutputURL).TypeName
 	}
 	returnType := "CallSummary<" + requestType + ", " + responseType + ">"
 

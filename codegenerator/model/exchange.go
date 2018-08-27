@@ -1,6 +1,10 @@
 package model
 
-import "fmt"
+import (
+	"fmt"
+
+	tcurls "github.com/taskcluster/taskcluster-lib-urls"
+)
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -14,6 +18,7 @@ type Exchange struct {
 	Description    string          `json:"description"`
 	ExchangePrefix string          `json:"exchangePrefix"`
 	Entries        []ExchangeEntry `json:"entries"`
+	ServiceName    string          `json:"serviceName"`
 
 	apiDef *APIDefinition
 }
@@ -52,12 +57,14 @@ type ExchangeEntry struct {
 	RoutingKey  []RouteElement `json:"routingKey"`
 	Schema      string         `json:"schema"`
 
-	Parent  *Exchange
-	Payload *JsonSubSchema
+	Parent    *Exchange
+	Payload   *JsonSubSchema
+	schemaURL string
 }
 
 func (entry *ExchangeEntry) postPopulate(apiDef *APIDefinition) {
-	entry.Parent.apiDef.schemaURLs = append(entry.Parent.apiDef.schemaURLs, entry.Schema)
+	entry.schemaURL = tcurls.Schema("https://taskcluster.net", entry.Parent.ServiceName, entry.Schema)
+	entry.Parent.apiDef.schemaURLs = append(entry.Parent.apiDef.schemaURLs, entry.schemaURL)
 }
 
 func (entry *ExchangeEntry) String() string {
@@ -73,6 +80,7 @@ func (entry *ExchangeEntry) String() string {
 		result += fmt.Sprintf("    Routing Key Element %-6v= \n%v", i, element.String())
 	}
 	result += fmt.Sprintf("    Entry Schema      = '%v'\n", entry.Schema)
+	result += fmt.Sprintf("    Entry SchemaURL   = '%v'\n", entry.schemaURL)
 	return result
 }
 

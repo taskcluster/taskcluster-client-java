@@ -5,57 +5,21 @@ package model
 import "encoding/json"
 
 type (
-	// Reference of methods implemented by API
-	//
-	// See http://schemas.taskcluster.net/base/v1/api-reference.json#
-	APIReferenceFile struct {
-
-		// Link to schema for this reference. That is a link to this very document. Typically used to identify what kind of reference this file is.
-		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/$schema
-		Schema string `json:"$schema"`
-
-		// BaseUrl for all _routes_ described in this document
-		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/baseUrl
-		BaseURL string `json:"baseUrl"`
-
-		// API description in markdown
-		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/description
-		Description string `json:"description"`
-
-		// Array of methods in this reference
-		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries
-		Entries []APIEntry `json:"entries"`
-
-		// API title in markdown
-		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/title
-		Title string `json:"title"`
-
-		// API reference version
-		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/version
-		Version json.RawMessage `json:"version"`
-	}
-
 	Entry struct {
 
 		// Arguments from `route` that must be replaced, they'll appear wrapped in brackets inside `route`.
 		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/args
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/args
 		Args []string `json:"args"`
 
 		// Description (ie. documentation) for the API entry
 		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/description
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/description
 		Description string `json:"description"`
 
-		// JSON schema for input, if input is taken otherwise not present.
+		// JSON schema for input, if input is validated, otherwise not present. The value must be a relative URI, based on the service's schema location; that is, based at `<rootUrl>/schemas/<serviceName`.
 		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/input
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/input
 		Input string `json:"input,omitempty"`
 
 		// HTTP method (verb) used to access the function
@@ -87,30 +51,40 @@ type (
 		//   * "patch"
 		//   * "search"
 		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/method
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/method
 		Method string `json:"method"`
 
 		// Name of the `function` this is a stable identifier for use in auto-generated client libraries
 		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/name
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/name
 		Name string `json:"name"`
 
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/output
+		// One of:
+		//   * OutputSchema
+		//   * Blob
+		//
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/output
 		Output string `json:"output,omitempty"`
 
 		// List of accepted query-string parameters, these are always optional.
 		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/query
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/query
 		Query []string `json:"query,omitempty"`
 
 		// Route for the call, note that arguments wrapped with brackets, like `/v1/user/<userId>/` must be replaced. And the route must be appended to the `baseUrl`
 		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/route
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/route
 		Route string `json:"route"`
 
 		// Scope expression template specifying required scopes for a method. Not provided if authentication isn't required.
 		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/scopes
+		// One of:
+		//   * RequiredScope
+		//   * Disjunction
+		//   * Conjunction
+		//   * Conditional
+		//
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/scopes
 		Scopes ScopeExpressionTemplate `json:"scopes,omitempty"`
 
 		// Stability level of the API
@@ -120,23 +94,74 @@ type (
 		//   * "experimental"
 		//   * "stable"
 		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/stability
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/stability
 		Stability string `json:"stability"`
 
 		// Title of API entry
 		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/title
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/title
 		Title string `json:"title"`
 
 		// Type of entry, currently only `function`.
 		//
-		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/type
+		// Possible values:
+		//   * "function"
+		//
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries/items/properties/type
 		Type string `json:"type"`
+	}
+
+	// Reference of methods implemented by API
+	//
+	// See https://schemas.taskcluster.net/base/v1/api-reference.json#
+	APIReferenceFile struct {
+
+		// Link to schema for this reference. That is a link to this very document. Typically used to identify what kind of reference this file is.
+		//
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/$schema
+		Schema string `json:"$schema"`
+
+		// BaseUrl for all _routes_ described in this document
+		//
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/baseUrl
+		BaseURL string `json:"baseUrl"`
+
+		// API description in markdown
+		//
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/description
+		Description string `json:"description"`
+
+		// Array of methods in this reference
+		//
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/entries
+		Entries []APIEntry `json:"entries"`
+
+		// Name of service for automation. Will be consumed by client generators to produce URLs
+		//
+		// Syntax:     ^[a-z][a-z0-9_-]*$
+		// Min length: 1
+		// Max length: 22
+		//
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/serviceName
+		ServiceName string `json:"serviceName"`
+
+		// API title in markdown
+		//
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/title
+		Title string `json:"title"`
+
+		// API reference version
+		//
+		// Possible values:
+		//   * 0
+		//
+		// See https://schemas.taskcluster.net/base/v1/api-reference.json#/properties/version
+		Version json.RawMessage `json:"version"`
 	}
 
 	// AllOf objects will evaluate to true if all subexpressions are true
 	//
-	// See http://schemas.taskcluster.net/base/v1/api-reference.json#/definitions/scopeExpressionTemplate/oneOf[2]
+	// See https://schemas.taskcluster.net/base/v1/api-reference.json#/definitions/scopeExpressionTemplate/oneOf[2]
 	AllOf struct {
 
 		// See http://schemas.taskcluster.net/base/v1/api-reference.json#/definitions/scopeExpressionTemplate/oneOf[2]/properties/AllOf
@@ -175,7 +200,7 @@ type (
 
 	// if/then objects will replace themselves with the contents of then if the `if` is true
 	//
-	// See http://schemas.taskcluster.net/base/v1/api-reference.json#/definitions/scopeExpressionTemplate/oneOf[3]
+	// See https://schemas.taskcluster.net/base/v1/api-reference.json#/definitions/scopeExpressionTemplate/oneOf[3]
 	IfThen struct {
 
 		// Syntax:     ^[\x20-\x7e]*$
@@ -191,7 +216,7 @@ type (
 	//
 	// Syntax:     ^[\x20-\x7e]*$
 	//
-	// See http://schemas.taskcluster.net/base/v1/api-reference.json#/definitions/scopeExpressionTemplate/oneOf[0]
+	// See https://schemas.taskcluster.net/base/v1/api-reference.json#/definitions/scopeExpressionTemplate/oneOf[0]
 	RequiredScope string
 
 	// See http://schemas.taskcluster.net/base/v1/api-reference.json#/definitions/scopeExpressionTemplate
