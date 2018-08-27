@@ -18,7 +18,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class Login extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://login.taskcluster.net/v1/";
+    protected static final String defaultBaseURL = "https://login.taskcluster.net/v1";
 
     public Login(Credentials credentials) {
         super(credentials, defaultBaseURL);
