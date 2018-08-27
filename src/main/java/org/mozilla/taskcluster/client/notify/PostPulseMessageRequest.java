@@ -3,14 +3,14 @@ package org.mozilla.taskcluster.client.notify;
 /**
  * Request to post a message on pulse.
  *
- * See http://schemas.taskcluster.net/notify/v1/pulse-request.json#
+ * See https://schemas.taskcluster.net/notify/v1/pulse-request.json#
  */
 public class PostPulseMessageRequest {
 
     /**
      * IRC message to send as plain text.
      *
-     * See http://schemas.taskcluster.net/notify/v1/pulse-request.json#/properties/message
+     * See https://schemas.taskcluster.net/notify/v1/pulse-request.json#/properties/message
      */
     public Object message;
 
@@ -19,7 +19,7 @@ public class PostPulseMessageRequest {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/notify/v1/pulse-request.json#/properties/routingKey
+     * See https://schemas.taskcluster.net/notify/v1/pulse-request.json#/properties/routingKey
      */
     public String routingKey;
 }

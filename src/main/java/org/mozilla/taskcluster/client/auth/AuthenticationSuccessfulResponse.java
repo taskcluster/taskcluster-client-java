@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Response from a request to authenticate a hawk request.
  *
- * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]
+ * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]
  */
 public class AuthenticationSuccessfulResponse {
 
@@ -18,7 +18,7 @@ public class AuthenticationSuccessfulResponse {
      *
      * Syntax:     ^[A-Za-z0-9!@/:.+|_-]+$
      *
-     * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]/properties/clientId
+     * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]/properties/clientId
      */
     public String clientId;
 
@@ -29,7 +29,7 @@ public class AuthenticationSuccessfulResponse {
      * immediately, this field can be ignored, as the value will always be
      * in the future if the status is `auth-success`.
      *
-     * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]/properties/expires
+     * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]/properties/expires
      */
     public Date expires;
 
@@ -39,7 +39,7 @@ public class AuthenticationSuccessfulResponse {
      * this hash, but if you do, please check `scheme` to ensure that it's
      * on a scheme you support.
      *
-     * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]/properties/hash
+     * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]/properties/hash
      */
     public Object hash;
 
@@ -51,7 +51,7 @@ public class AuthenticationSuccessfulResponse {
      * Possible values:
      *     * "hawk"
      *
-     * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]/properties/scheme
+     * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]/properties/scheme
      */
     public String scheme;
 
@@ -59,7 +59,7 @@ public class AuthenticationSuccessfulResponse {
      * List of scopes the client is authorized to access.  Scopes must be
      * composed of printable ASCII characters and spaces.
      *
-     * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]/properties/scopes
+     * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]/properties/scopes
      */
     public String[] scopes;
 
@@ -69,7 +69,7 @@ public class AuthenticationSuccessfulResponse {
      * Possible values:
      *     * "auth-success"
      *
-     * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]/properties/status
+     * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-response.json#/oneOf[0]/properties/status
      */
     public String status;
 }

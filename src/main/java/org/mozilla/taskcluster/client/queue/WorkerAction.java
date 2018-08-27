@@ -28,10 +28,10 @@ package org.mozilla.taskcluster.client.queue;
  * | worker-type | Workers Explorer               |
  * | worker      | Worker Explorer                |
  *
- * See [actions docs](https://docs.taskcluster.net/reference/platform/taskcluster-queue/docs/actions)
+ * See [actions docs](/docs/reference/platform/taskcluster-queue/docs/actions)
  * for more information.
  *
- * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items
+ * See https://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items
  */
 public class WorkerAction {
 
@@ -41,14 +41,14 @@ public class WorkerAction {
      * Possible values:
      *     * "worker"
      *
-     * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items/properties/context
+     * See https://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items/properties/context
      */
     public String context;
 
     /**
      * Description of the provisioner.
      *
-     * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items/properties/description
+     * See https://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items/properties/description
      */
     public String description;
 
@@ -61,21 +61,21 @@ public class WorkerAction {
      *     * "DELETE"
      *     * "PATCH"
      *
-     * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items/properties/method
+     * See https://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items/properties/method
      */
     public String method;
 
     /**
      * Short names for things like logging/error messages.
      *
-     * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items/properties/name
+     * See https://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items/properties/name
      */
     public String name;
 
     /**
      * Appropriate title for any sort of Modal prompt.
      *
-     * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items/properties/title
+     * See https://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items/properties/title
      */
     public Object title;
 
@@ -91,7 +91,7 @@ public class WorkerAction {
      *
      * _Note: The request needs to be signed with the user's Taskcluster credentials._
      *
-     * See http://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items/properties/url
+     * See https://schemas.taskcluster.net/queue/v1/worker-response.json#/properties/actions/items/properties/url
      */
     public String url;
 }

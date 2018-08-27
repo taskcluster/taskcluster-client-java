@@ -3,21 +3,21 @@ package org.mozilla.taskcluster.client.queue;
 import java.util.Date;
 
 /**
- * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items
+ * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items
  */
 public class Worker {
 
     /**
      * Date of the first time this worker claimed a task.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/firstClaim
+     * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/firstClaim
      */
     public Date firstClaim;
 
     /**
      * The most recent claimed task
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/latestTask
+     * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/latestTask
      */
     public TaskRun latestTask;
 
@@ -27,7 +27,7 @@ public class Worker {
      * Note that a quarantine can be lifted by setting `quarantineUntil` to the present time (or
      * somewhere in the past).
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/quarantineUntil
+     * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/quarantineUntil
      */
     public Date quarantineUntil;
 
@@ -38,7 +38,7 @@ public class Worker {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/workerGroup
+     * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/workerGroup
      */
     public String workerGroup;
 
@@ -49,7 +49,7 @@ public class Worker {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/workerId
+     * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/workerId
      */
     public String workerId;
 }

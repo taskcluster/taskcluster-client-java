@@ -5,7 +5,7 @@ package org.mozilla.taskcluster.client.queueevents;
  * possible for a task group to later have another task added, in which
  * case this message will be sent again once it finishes.
  *
- * See http://schemas.taskcluster.net/queue/v1/task-group-resolved.json#
+ * See https://schemas.taskcluster.net/queue/v1/task-group-resolved.json#
  */
 public class TaskGroupResolvedMessage {
 
@@ -16,7 +16,7 @@ public class TaskGroupResolvedMessage {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-group-resolved.json#/properties/schedulerId
+     * See https://schemas.taskcluster.net/queue/v1/task-group-resolved.json#/properties/schedulerId
      */
     public String schedulerId;
 
@@ -25,7 +25,7 @@ public class TaskGroupResolvedMessage {
      *
      * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-group-resolved.json#/properties/taskGroupId
+     * See https://schemas.taskcluster.net/queue/v1/task-group-resolved.json#/properties/taskGroupId
      */
     public String taskGroupId;
 
@@ -35,7 +35,7 @@ public class TaskGroupResolvedMessage {
      * Possible values:
      *     * 1
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-group-resolved.json#/properties/version
+     * See https://schemas.taskcluster.net/queue/v1/task-group-resolved.json#/properties/version
      */
     public int version;
 }

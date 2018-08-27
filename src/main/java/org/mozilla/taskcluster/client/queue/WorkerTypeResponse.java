@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Response to a worker-type request from a provisioner.
  *
- * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#
+ * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#
  */
 public class WorkerTypeResponse {
 
@@ -17,14 +17,14 @@ public class WorkerTypeResponse {
          * Possible values:
          *     * "worker-type"
          *
-         * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/context
+         * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/context
          */
         public String context;
 
         /**
          * Description of the provisioner.
          *
-         * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/description
+         * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/description
          */
         public String description;
 
@@ -37,21 +37,21 @@ public class WorkerTypeResponse {
          *     * "DELETE"
          *     * "PATCH"
          *
-         * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/method
+         * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/method
          */
         public String method;
 
         /**
          * Short names for things like logging/error messages.
          *
-         * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/name
+         * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/name
          */
         public String name;
 
         /**
          * Appropriate title for any sort of Modal prompt.
          *
-         * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/title
+         * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/title
          */
         public Object title;
 
@@ -67,20 +67,20 @@ public class WorkerTypeResponse {
          *
          * _Note: The request needs to be signed with the user's Taskcluster credentials._
          *
-         * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/url
+         * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions/items/properties/url
          */
         public String url;
     }
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions
+     * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/actions
      */
     public WorkerTypeAction[] actions;
 
     /**
      * Description of the worker-type.
      *
-     * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/description
+     * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/description
      */
     public String description;
 
@@ -88,7 +88,7 @@ public class WorkerTypeResponse {
      * Date and time after which the worker-type will be automatically
      * deleted by the queue.
      *
-     * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/expires
      */
     public Date expires;
 
@@ -97,7 +97,7 @@ public class WorkerTypeResponse {
      * but may be off by up-to 6 hours. Nonetheless, `lastDateActive` is a good indicator
      * of when the worker-type was last seen active.
      *
-     * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/lastDateActive
+     * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/lastDateActive
      */
     public Date lastDateActive;
 
@@ -107,7 +107,7 @@ public class WorkerTypeResponse {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/provisionerId
+     * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/provisionerId
      */
     public String provisionerId;
 
@@ -122,7 +122,7 @@ public class WorkerTypeResponse {
      *     * "stable"
      *     * "deprecated"
      *
-     * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/stability
+     * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/stability
      */
     public String stability;
 
@@ -133,7 +133,7 @@ public class WorkerTypeResponse {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/workerType
+     * See https://schemas.taskcluster.net/queue/v1/workertype-response.json#/properties/workerType
      */
     public String workerType;
 }

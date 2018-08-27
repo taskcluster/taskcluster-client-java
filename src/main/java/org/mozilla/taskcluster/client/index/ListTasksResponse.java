@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Representation of an indexed task.
  *
- * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#
+ * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#
  */
 public class ListTasksResponse {
 
@@ -14,7 +14,7 @@ public class ListTasksResponse {
      * here. You can optionally provide the token in the request payload to
      * load the additional results.
      *
-     * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/continuationToken
+     * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/continuationToken
      */
     public String continuationToken;
 
@@ -24,14 +24,14 @@ public class ListTasksResponse {
          * Data that was reported with the task. This is an arbitrary JSON
          * object.
          *
-         * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/data
+         * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/data
          */
         public Object data;
 
         /**
          * Date at which this entry expires from the task index.
          *
-         * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/expires
+         * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/expires
          */
         public Date expires;
 
@@ -40,7 +40,7 @@ public class ListTasksResponse {
          *
          * Max length: 255
          *
-         * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/namespace
+         * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/namespace
          */
         public String namespace;
 
@@ -50,7 +50,7 @@ public class ListTasksResponse {
          * requests. If two tasks has the same `rank` the latest task will be
          * stored.
          *
-         * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/rank
+         * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/rank
          */
         public int rank;
 
@@ -59,7 +59,7 @@ public class ListTasksResponse {
          *
          * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
          *
-         * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/taskId
+         * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/taskId
          */
         public String taskId;
     }
@@ -67,7 +67,7 @@ public class ListTasksResponse {
     /**
      * List of tasks.
      *
-     * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks
+     * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks
      */
     public Task[] tasks;
 }

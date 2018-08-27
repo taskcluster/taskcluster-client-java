@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Information about the artifact that was created
  *
- * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact
+ * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact
  */
 public class Artifact {
 
@@ -14,7 +14,7 @@ public class Artifact {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/contentType
+     * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/contentType
      */
     public String contentType;
 
@@ -22,7 +22,7 @@ public class Artifact {
      * Date and time after which the artifact created will be automatically
      * deleted by the queue.
      *
-     * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/expires
      */
     public Date expires;
 
@@ -33,7 +33,7 @@ public class Artifact {
      *
      * Max length: 1024
      *
-     * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/name
+     * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/name
      */
     public String name;
 
@@ -46,7 +46,7 @@ public class Artifact {
      *     * "reference"
      *     * "error"
      *
-     * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/storageType
+     * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/storageType
      */
     public String storageType;
 }

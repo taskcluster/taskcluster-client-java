@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.queue;
 /**
  * A run of a task.
  *
- * See http://schemas.taskcluster.net/queue/v1/task-run.json#
+ * See https://schemas.taskcluster.net/queue/v1/task-run.json#
  */
 public class TaskRun {
 
@@ -13,7 +13,7 @@ public class TaskRun {
      * Mininum:    0
      * Maximum:    1000
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-run.json#/properties/runId
+     * See https://schemas.taskcluster.net/queue/v1/task-run.json#/properties/runId
      */
     public int runId;
 
@@ -24,7 +24,7 @@ public class TaskRun {
      *
      * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-run.json#/properties/taskId
+     * See https://schemas.taskcluster.net/queue/v1/task-run.json#/properties/taskId
      */
     public String taskId;
 }

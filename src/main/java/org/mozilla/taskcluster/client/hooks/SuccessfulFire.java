@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Information about a successful firing of the hook
  *
- * See http://schemas.taskcluster.net/hooks/v1/hook-status.json#/properties/lastFire/oneOf[0]
+ * See https://schemas.taskcluster.net/hooks/v1/hook-status.json#/properties/lastFire/oneOf[0]
  */
 public class SuccessfulFire {
 
@@ -14,7 +14,7 @@ public class SuccessfulFire {
      * Possible values:
      *     * "success"
      *
-     * See http://schemas.taskcluster.net/hooks/v1/hook-status.json#/properties/lastFire/oneOf[0]/properties/result
+     * See https://schemas.taskcluster.net/hooks/v1/hook-status.json#/properties/lastFire/oneOf[0]/properties/result
      */
     public String result;
 
@@ -23,14 +23,14 @@ public class SuccessfulFire {
      *
      * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
      *
-     * See http://schemas.taskcluster.net/hooks/v1/hook-status.json#/properties/lastFire/oneOf[0]/properties/taskId
+     * See https://schemas.taskcluster.net/hooks/v1/hook-status.json#/properties/lastFire/oneOf[0]/properties/taskId
      */
     public String taskId;
 
     /**
      * The time the task was created.  This will not necessarily match `task.created`.
      *
-     * See http://schemas.taskcluster.net/hooks/v1/hook-status.json#/properties/lastFire/oneOf[0]/properties/time
+     * See https://schemas.taskcluster.net/hooks/v1/hook-status.json#/properties/lastFire/oneOf[0]/properties/time
      */
     public Date time;
 }

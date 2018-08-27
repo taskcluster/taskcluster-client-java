@@ -1,7 +1,7 @@
 package org.mozilla.taskcluster.client.queue;
 
 /**
- * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/parts/items
+ * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/parts/items
  */
 public class MultipartPart {
 
@@ -12,7 +12,7 @@ public class MultipartPart {
      * Min length: 64
      * Max length: 64
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/parts/items/properties/sha256
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/parts/items/properties/sha256
      */
     public String sha256;
 
@@ -23,7 +23,7 @@ public class MultipartPart {
      *
      * Mininum:    0
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/parts/items/properties/size
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/parts/items/properties/size
      */
     public int size;
 }

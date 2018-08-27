@@ -108,7 +108,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class Index extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://index.taskcluster.net/v1";
+    protected static final String defaultBaseURL = "https://index.taskcluster.net/v1/";
 
     public Index(Credentials credentials) {
         super(credentials, defaultBaseURL);
@@ -132,6 +132,16 @@ public class Index extends TaskclusterRequestHandler {
 
     public Index() {
         super(defaultBaseURL);
+    }
+
+    /**
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
+     *
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#ping)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
+        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 
     /**
@@ -217,15 +227,5 @@ public class Index extends TaskclusterRequestHandler {
      */
     public CallSummary<EmptyPayload, EmptyPayload> findArtifactFromTask(String indexPath, String name) throws APICallFailure {
         return apiCall(null, "GET", "/task/" + uriEncode(indexPath) + "/artifacts/" + uriEncode(name), EmptyPayload.class);
-    }
-
-    /**
-     * Respond without doing anything.
-     * This endpoint is used to check that the service is up.
-     *
-     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/index/api-docs#ping)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
-        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }

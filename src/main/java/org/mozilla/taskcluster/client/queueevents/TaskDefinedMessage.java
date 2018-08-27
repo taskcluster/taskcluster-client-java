@@ -4,12 +4,12 @@ package org.mozilla.taskcluster.client.queueevents;
  * Message reporting that a task has been defined. The task may or may not be
  * _scheduled_ too.
  *
- * See http://schemas.taskcluster.net/queue/v1/task-defined-message.json#
+ * See https://schemas.taskcluster.net/queue/v1/task-defined-message.json#
  */
 public class TaskDefinedMessage {
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/task-defined-message.json#/properties/status
+     * See https://schemas.taskcluster.net/queue/v1/task-defined-message.json#/properties/status
      */
     public TaskStatusStructure status;
 
@@ -19,7 +19,7 @@ public class TaskDefinedMessage {
      * Possible values:
      *     * 1
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-defined-message.json#/properties/version
+     * See https://schemas.taskcluster.net/queue/v1/task-defined-message.json#/properties/version
      */
     public int version;
 }

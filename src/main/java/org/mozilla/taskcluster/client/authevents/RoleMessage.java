@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.authevents;
 /**
  * Message reporting that a role has changed
  *
- * See http://schemas.taskcluster.net/auth/v1/role-message.json#
+ * See https://schemas.taskcluster.net/auth/v1/role-message.json#
  */
 public class RoleMessage {
 
@@ -12,7 +12,7 @@ public class RoleMessage {
      *
      * Syntax:     ^[\x20-\x7e]+$
      *
-     * See http://schemas.taskcluster.net/auth/v1/role-message.json#/properties/roleId
+     * See https://schemas.taskcluster.net/auth/v1/role-message.json#/properties/roleId
      */
     public String roleId;
 
@@ -22,7 +22,7 @@ public class RoleMessage {
      * Possible values:
      *     * 1
      *
-     * See http://schemas.taskcluster.net/auth/v1/role-message.json#/properties/version
+     * See https://schemas.taskcluster.net/auth/v1/role-message.json#/properties/version
      */
     public int version;
 }

@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.queue;
 /**
  * Request for a run of a task to be resolved with an exception
  *
- * See http://schemas.taskcluster.net/queue/v1/task-exception-request.json#
+ * See https://schemas.taskcluster.net/queue/v1/task-exception-request.json#
  */
 public class TaskExceptionRequest {
 
@@ -52,7 +52,7 @@ public class TaskExceptionRequest {
      *     * "superseded"
      *     * "intermittent-task"
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-exception-request.json#/properties/reason
+     * See https://schemas.taskcluster.net/queue/v1/task-exception-request.json#/properties/reason
      */
     public String reason;
 }

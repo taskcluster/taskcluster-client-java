@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * JSON object with information about a run
  *
- * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items
+ * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items
  */
 public class RunInformation {
 
@@ -20,7 +20,7 @@ public class RunInformation {
      *     * "rerun"
      *     * "exception"
      *
-     * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/reasonCreated
+     * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/reasonCreated
      */
     public String reasonCreated;
 
@@ -43,7 +43,7 @@ public class RunInformation {
      *     * "internal-error"
      *     * "intermittent-task"
      *
-     * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/reasonResolved
+     * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/reasonResolved
      */
     public String reasonResolved;
 
@@ -52,7 +52,7 @@ public class RunInformation {
      * state from `running` to either `completed`, `failed` or `exception`.
      * This property is only present after the run as been resolved.
      *
-     * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/resolved
+     * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/resolved
      */
     public Date resolved;
 
@@ -62,7 +62,7 @@ public class RunInformation {
      * Mininum:    0
      * Maximum:    1000
      *
-     * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/runId
+     * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/runId
      */
     public int runId;
 
@@ -70,7 +70,7 @@ public class RunInformation {
      * Date-time at which this run was scheduled, ie. when the run was
      * created in state `pending`.
      *
-     * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/scheduled
+     * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/scheduled
      */
     public Date scheduled;
 
@@ -79,7 +79,7 @@ public class RunInformation {
      * state from `pending` to `running`. This property is only present
      * after the run has been claimed.
      *
-     * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/started
+     * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/started
      */
     public Date started;
 
@@ -93,7 +93,7 @@ public class RunInformation {
      *     * "failed"
      *     * "exception"
      *
-     * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/state
+     * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/state
      */
     public String state;
 
@@ -102,7 +102,7 @@ public class RunInformation {
      * run isn't reclaimed. Note, only present after the run has been
      * claimed.
      *
-     * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/takenUntil
+     * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/takenUntil
      */
     public Date takenUntil;
 
@@ -115,7 +115,7 @@ public class RunInformation {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/workerGroup
+     * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/workerGroup
      */
     public String workerGroup;
 
@@ -128,7 +128,7 @@ public class RunInformation {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/workerId
+     * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/workerId
      */
     public String workerId;
 }

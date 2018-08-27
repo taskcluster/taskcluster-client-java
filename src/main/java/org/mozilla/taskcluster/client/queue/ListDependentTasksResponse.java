@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.queue;
 /**
  * Response from a `listDependentTasks` request.
  *
- * See http://schemas.taskcluster.net/queue/v1/list-dependent-tasks-response.json#
+ * See https://schemas.taskcluster.net/queue/v1/list-dependent-tasks-response.json#
  */
 public class ListDependentTasksResponse {
 
@@ -16,7 +16,7 @@ public class ListDependentTasksResponse {
      * all the results if you've called `listDependentTasks` with
      * `continuationToken` until you get a result without a `continuationToken`.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-dependent-tasks-response.json#/properties/continuationToken
+     * See https://schemas.taskcluster.net/queue/v1/list-dependent-tasks-response.json#/properties/continuationToken
      */
     public String continuationToken;
 
@@ -25,14 +25,14 @@ public class ListDependentTasksResponse {
      *
      * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-dependent-tasks-response.json#/properties/taskId
+     * See https://schemas.taskcluster.net/queue/v1/list-dependent-tasks-response.json#/properties/taskId
      */
     public String taskId;
 
     /**
      * List of tasks that have `taskId` in the `task.dependencies` property.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-dependent-tasks-response.json#/properties/tasks
+     * See https://schemas.taskcluster.net/queue/v1/list-dependent-tasks-response.json#/properties/tasks
      */
     public TaskDefinitionAndStatus[] tasks;
 }

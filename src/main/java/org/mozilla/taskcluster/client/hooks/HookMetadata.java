@@ -1,7 +1,7 @@
 package org.mozilla.taskcluster.client.hooks;
 
 /**
- * See http://schemas.taskcluster.net/hooks/v1/hook-metadata.json#
+ * See https://schemas.taskcluster.net/hooks/v1/hook-metadata.json#
  */
 public class HookMetadata {
 
@@ -10,7 +10,7 @@ public class HookMetadata {
      *
      * Max length: 32768
      *
-     * See http://schemas.taskcluster.net/hooks/v1/hook-metadata.json#/properties/description
+     * See https://schemas.taskcluster.net/hooks/v1/hook-metadata.json#/properties/description
      */
     public String description;
 
@@ -19,7 +19,7 @@ public class HookMetadata {
      *
      * Default:    true
      *
-     * See http://schemas.taskcluster.net/hooks/v1/hook-metadata.json#/properties/emailOnError
+     * See https://schemas.taskcluster.net/hooks/v1/hook-metadata.json#/properties/emailOnError
      */
     public boolean emailOnError;
 
@@ -28,7 +28,7 @@ public class HookMetadata {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/hooks/v1/hook-metadata.json#/properties/name
+     * See https://schemas.taskcluster.net/hooks/v1/hook-metadata.json#/properties/name
      */
     public String name;
 
@@ -37,7 +37,7 @@ public class HookMetadata {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/hooks/v1/hook-metadata.json#/properties/owner
+     * See https://schemas.taskcluster.net/hooks/v1/hook-metadata.json#/properties/owner
      */
     public String owner;
 }

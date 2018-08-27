@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.queue;
 /**
  * Request to claim (or reclaim) a task
  *
- * See http://schemas.taskcluster.net/queue/v1/task-claim-request.json#
+ * See https://schemas.taskcluster.net/queue/v1/task-claim-request.json#
  */
 public class TaskClaimRequest {
 
@@ -14,7 +14,7 @@ public class TaskClaimRequest {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-claim-request.json#/properties/workerGroup
+     * See https://schemas.taskcluster.net/queue/v1/task-claim-request.json#/properties/workerGroup
      */
     public String workerGroup;
 
@@ -25,7 +25,7 @@ public class TaskClaimRequest {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-claim-request.json#/properties/workerId
+     * See https://schemas.taskcluster.net/queue/v1/task-claim-request.json#/properties/workerId
      */
     public String workerId;
 }

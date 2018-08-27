@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Information about an artifact for the given `taskId` and `runId`.
  *
- * See http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items
+ * See https://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items
  */
 public class Artifact {
 
@@ -14,7 +14,7 @@ public class Artifact {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/contentType
+     * See https://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/contentType
      */
     public String contentType;
 
@@ -22,7 +22,7 @@ public class Artifact {
      * Date and time after which the artifact created will be automatically
      * deleted by the queue.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/expires
      */
     public Date expires;
 
@@ -32,7 +32,7 @@ public class Artifact {
      *
      * Max length: 1024
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/name
+     * See https://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/name
      */
     public String name;
 
@@ -47,7 +47,7 @@ public class Artifact {
      *     * "reference"
      *     * "error"
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/storageType
+     * See https://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/storageType
      */
     public String storageType;
 }

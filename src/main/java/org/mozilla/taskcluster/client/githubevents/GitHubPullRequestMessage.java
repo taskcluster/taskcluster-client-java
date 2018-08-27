@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.githubevents;
 /**
  * Message reporting that a GitHub pull request has occurred
  *
- * See http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#
+ * See https://schemas.taskcluster.net/github/v1/github-pull-request-message.json#
  */
 public class GitHubPullRequestMessage {
 
@@ -23,14 +23,28 @@ public class GitHubPullRequestMessage {
      *     * "review_requested"
      *     * "review_request_removed"
      *
-     * See http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/action
+     * See https://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/action
      */
     public String action;
 
     /**
-     * Metadata describing the pull request.
+     * The raw body of github event (for version 1)
      *
-     * See http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/details
+     * See https://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/body
+     */
+    public Object body;
+
+    /**
+     * The head ref of the event (for version 1)
+     *
+     * See https://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/branch
+     */
+    public String branch;
+
+    /**
+     * Metadata describing the pull request (for version 0)
+     *
+     * See https://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/details
      */
     public Object details;
 
@@ -39,7 +53,7 @@ public class GitHubPullRequestMessage {
      *
      * Syntax:     ^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}$
      *
-     * See http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/eventId
+     * See https://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/eventId
      */
     public String eventId;
 
@@ -49,7 +63,7 @@ public class GitHubPullRequestMessage {
      * Mininum:    0
      * Maximum:    10000000000
      *
-     * See http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/installationId
+     * See https://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/installationId
      */
     public int installationId;
 
@@ -60,7 +74,7 @@ public class GitHubPullRequestMessage {
      * Min length: 1
      * Max length: 100
      *
-     * See http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/organization
+     * See https://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/organization
      */
     public String organization;
 
@@ -71,9 +85,16 @@ public class GitHubPullRequestMessage {
      * Min length: 1
      * Max length: 100
      *
-     * See http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/repository
+     * See https://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/repository
      */
     public String repository;
+
+    /**
+     * The type of the event (for version 1)
+     *
+     * See https://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/tasks_for
+     */
+    public String tasks_for;
 
     /**
      * Message version
@@ -81,7 +102,7 @@ public class GitHubPullRequestMessage {
      * Possible values:
      *     * 1
      *
-     * See http://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/version
+     * See https://schemas.taskcluster.net/github/v1/github-pull-request-message.json#/properties/version
      */
     public int version;
 }

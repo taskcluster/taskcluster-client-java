@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.queue;
 import java.util.Date;
 
 /**
- * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#
+ * See https://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#
  */
 public class ListProvisionersResponse {
 
@@ -16,21 +16,21 @@ public class ListProvisionersResponse {
      * all the results if you've called with `continuationToken` until you get a
      * result without a `continuationToken`.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/continuationToken
+     * See https://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/continuationToken
      */
     public String continuationToken;
 
     public class ProvisionerInformation {
 
         /**
-         * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/actions
+         * See https://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/actions
          */
         public Action[] actions;
 
         /**
          * Description of the provisioner.
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/description
+         * See https://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/description
          */
         public String description;
 
@@ -38,14 +38,14 @@ public class ListProvisionersResponse {
          * Date and time after which the provisioner created will be automatically
          * deleted by the queue.
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/expires
+         * See https://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/expires
          */
         public Date expires;
 
         /**
          * Date and time where the provisioner was last seen active
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/lastDateActive
+         * See https://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/lastDateActive
          */
         public Date lastDateActive;
 
@@ -55,7 +55,7 @@ public class ListProvisionersResponse {
          * Min length: 1
          * Max length: 22
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/provisionerId
+         * See https://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/provisionerId
          */
         public String provisionerId;
 
@@ -70,13 +70,13 @@ public class ListProvisionersResponse {
          *     * "stable"
          *     * "deprecated"
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/stability
+         * See https://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners/items/properties/stability
          */
         public String stability;
     }
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners
+     * See https://schemas.taskcluster.net/queue/v1/list-provisioners-response.json#/properties/provisioners
      */
     public ProvisionerInformation[] provisioners;
 }

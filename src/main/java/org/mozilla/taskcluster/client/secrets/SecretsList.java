@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.secrets;
 /**
  * Message containing a list of secret names
  *
- * See http://schemas.taskcluster.net/secrets/v1/secret-list.json#
+ * See https://schemas.taskcluster.net/secrets/v1/secret-list.json#
  */
 public class SecretsList {
 
@@ -16,14 +16,14 @@ public class SecretsList {
      * all the results if you've called with `continuationToken` until you get a
      * result without a `continuationToken`.
      *
-     * See http://schemas.taskcluster.net/secrets/v1/secret-list.json#/properties/continuationToken
+     * See https://schemas.taskcluster.net/secrets/v1/secret-list.json#/properties/continuationToken
      */
     public String continuationToken;
 
     /**
      * Secret names
      *
-     * See http://schemas.taskcluster.net/secrets/v1/secret-list.json#/properties/secrets
+     * See https://schemas.taskcluster.net/secrets/v1/secret-list.json#/properties/secrets
      */
     public String[] secrets;
 }

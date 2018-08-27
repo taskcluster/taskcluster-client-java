@@ -6,7 +6,7 @@ import java.util.Date;
  * Request a list of requests in a generalized format which can be run to
  * upload an artifact to storage managed by the queue.
  *
- * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]
+ * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]
  */
 public class BlobArtifactRequest {
 
@@ -16,7 +16,7 @@ public class BlobArtifactRequest {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/contentEncoding
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/contentEncoding
      */
     public String contentEncoding;
 
@@ -32,7 +32,7 @@ public class BlobArtifactRequest {
      *
      * Mininum:    0
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/contentLength
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/contentLength
      */
     public int contentLength;
 
@@ -44,7 +44,7 @@ public class BlobArtifactRequest {
      *
      * Syntax:     ^[a-fA-F0-9]{64}$
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/contentSha256
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/contentSha256
      */
     public String contentSha256;
 
@@ -57,7 +57,7 @@ public class BlobArtifactRequest {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/contentType
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/contentType
      */
     public String contentType;
 
@@ -67,7 +67,7 @@ public class BlobArtifactRequest {
      * available after expiration. S3 based artifacts are identified in
      * azure table storage and explicitly deleted on S3 after expiration.
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/expires
      */
     public Date expires;
 
@@ -80,7 +80,7 @@ public class BlobArtifactRequest {
          * Min length: 64
          * Max length: 64
          *
-         * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/parts/items/properties/sha256
+         * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/parts/items/properties/sha256
          */
         public String sha256;
 
@@ -91,7 +91,7 @@ public class BlobArtifactRequest {
          *
          * Mininum:    0
          *
-         * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/parts/items/properties/size
+         * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/parts/items/properties/size
          */
         public int size;
     }
@@ -111,7 +111,7 @@ public class BlobArtifactRequest {
      *
      * Min length: 1
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/parts
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/parts
      */
     public MultipartPart[] parts;
 
@@ -121,7 +121,7 @@ public class BlobArtifactRequest {
      * Possible values:
      *     * "blob"
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/storageType
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/storageType
      */
     public String storageType;
 
@@ -132,7 +132,7 @@ public class BlobArtifactRequest {
      *
      * Mininum:    0
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/transferLength
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/transferLength
      */
     public int transferLength;
 
@@ -143,7 +143,7 @@ public class BlobArtifactRequest {
      *
      * Syntax:     ^[a-fA-F0-9]{64}$
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/transferSha256
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[0]/properties/transferSha256
      */
     public String transferSha256;
 }

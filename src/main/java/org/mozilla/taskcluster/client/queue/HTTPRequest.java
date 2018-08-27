@@ -1,14 +1,14 @@
 package org.mozilla.taskcluster.client.queue;
 
 /**
- * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items
+ * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items
  */
 public class HTTPRequest {
 
     /**
      * Headers of request
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/headers
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/headers
      */
     public Object headers;
 
@@ -24,14 +24,14 @@ public class HTTPRequest {
      *     * "HEAD"
      *     * "PATCH"
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/method
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/method
      */
     public String method;
 
     /**
      * URL of request
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/url
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/url
      */
     public String url;
 }

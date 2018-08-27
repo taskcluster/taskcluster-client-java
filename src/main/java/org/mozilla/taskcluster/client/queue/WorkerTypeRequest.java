@@ -5,14 +5,14 @@ import java.util.Date;
 /**
  * Request to update a worker-type.
  *
- * See http://schemas.taskcluster.net/queue/v1/update-workertype-request.json#
+ * See https://schemas.taskcluster.net/queue/v1/update-workertype-request.json#
  */
 public class WorkerTypeRequest {
 
     /**
      * Description of the provisioner.
      *
-     * See http://schemas.taskcluster.net/queue/v1/update-workertype-request.json#/properties/description
+     * See https://schemas.taskcluster.net/queue/v1/update-workertype-request.json#/properties/description
      */
     public String description;
 
@@ -20,7 +20,7 @@ public class WorkerTypeRequest {
      * Date and time after which the worker-type will be automatically
      * deleted by the queue.
      *
-     * See http://schemas.taskcluster.net/queue/v1/update-workertype-request.json#/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/update-workertype-request.json#/properties/expires
      */
     public Date expires;
 
@@ -35,7 +35,7 @@ public class WorkerTypeRequest {
      *     * "stable"
      *     * "deprecated"
      *
-     * See http://schemas.taskcluster.net/queue/v1/update-workertype-request.json#/properties/stability
+     * See https://schemas.taskcluster.net/queue/v1/update-workertype-request.json#/properties/stability
      */
     public String stability;
 }

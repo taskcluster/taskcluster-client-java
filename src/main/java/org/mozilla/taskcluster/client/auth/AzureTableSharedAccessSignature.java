@@ -6,14 +6,14 @@ import java.util.Date;
  * Response to a request for an Shared-Access-Signature to access and Azure
  * Table Storage table.
  *
- * See http://schemas.taskcluster.net/auth/v1/azure-table-access-response.json#
+ * See https://schemas.taskcluster.net/auth/v1/azure-table-access-response.json#
  */
 public class AzureTableSharedAccessSignature {
 
     /**
      * Date and time of when the Shared-Access-Signature expires.
      *
-     * See http://schemas.taskcluster.net/auth/v1/azure-table-access-response.json#/properties/expiry
+     * See https://schemas.taskcluster.net/auth/v1/azure-table-access-response.json#/properties/expiry
      */
     public Date expiry;
 
@@ -22,7 +22,7 @@ public class AzureTableSharedAccessSignature {
      * be appened after `?` or `&` depending on whether or not a querystring is
      * already present in the URL.
      *
-     * See http://schemas.taskcluster.net/auth/v1/azure-table-access-response.json#/properties/sas
+     * See https://schemas.taskcluster.net/auth/v1/azure-table-access-response.json#/properties/sas
      */
     public String sas;
 }

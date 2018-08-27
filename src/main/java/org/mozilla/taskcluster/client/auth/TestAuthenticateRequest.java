@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.auth;
 /**
  * Details on how the test request should be authenticated.
  *
- * See http://schemas.taskcluster.net/auth/v1/test-authenticate-request.json#
+ * See https://schemas.taskcluster.net/auth/v1/test-authenticate-request.json#
  */
 public class TestAuthenticateRequest {
 
@@ -12,7 +12,7 @@ public class TestAuthenticateRequest {
      *
      * Default:    []
      *
-     * See http://schemas.taskcluster.net/auth/v1/test-authenticate-request.json#/properties/clientScopes
+     * See https://schemas.taskcluster.net/auth/v1/test-authenticate-request.json#/properties/clientScopes
      */
     public String[] clientScopes;
 
@@ -21,7 +21,7 @@ public class TestAuthenticateRequest {
      *
      * Default:    []
      *
-     * See http://schemas.taskcluster.net/auth/v1/test-authenticate-request.json#/properties/requiredScopes
+     * See https://schemas.taskcluster.net/auth/v1/test-authenticate-request.json#/properties/requiredScopes
      */
     public String[] requiredScopes;
 }

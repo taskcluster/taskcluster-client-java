@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.auth;
 /**
  * A list of Azure containers in an account
  *
- * See http://schemas.taskcluster.net/auth/v1/azure-container-list-response.json#
+ * See https://schemas.taskcluster.net/auth/v1/azure-container-list-response.json#
  */
 public class AzureListContainersResponse {
 
@@ -11,7 +11,7 @@ public class AzureListContainersResponse {
      * A list of containers that are in an account.  Credentials are available for
      * these containers from the `azureBlobSAS` method.
      *
-     * See http://schemas.taskcluster.net/auth/v1/azure-container-list-response.json#/properties/containers
+     * See https://schemas.taskcluster.net/auth/v1/azure-container-list-response.json#/properties/containers
      */
     public String[] containers;
 
@@ -24,7 +24,7 @@ public class AzureListContainersResponse {
      * all the results if you've called this method with `continuationToken`
      * until you get a result without a `continuationToken`.
      *
-     * See http://schemas.taskcluster.net/auth/v1/azure-container-list-response.json#/properties/continuationToken
+     * See https://schemas.taskcluster.net/auth/v1/azure-container-list-response.json#/properties/continuationToken
      */
     public String continuationToken;
 }

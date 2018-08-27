@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Request to update a worker's quarantineUntil property.
  *
- * See http://schemas.taskcluster.net/queue/v1/quarantine-worker-request.json#
+ * See https://schemas.taskcluster.net/queue/v1/quarantine-worker-request.json#
  */
 public class QuarantineWorkerRequest {
 
@@ -15,7 +15,7 @@ public class QuarantineWorkerRequest {
      * Note that a quarantine can be lifted by setting `quarantineUntil` to the present time (or
      * somewhere in the past).
      *
-     * See http://schemas.taskcluster.net/queue/v1/quarantine-worker-request.json#/properties/quarantineUntil
+     * See https://schemas.taskcluster.net/queue/v1/quarantine-worker-request.json#/properties/quarantineUntil
      */
     public Date quarantineUntil;
 }

@@ -22,7 +22,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class PurgeCache extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://purge-cache.taskcluster.net/v1";
+    protected static final String defaultBaseURL = "https://purge-cache.taskcluster.net/v1/";
 
     public PurgeCache(Credentials credentials) {
         super(credentials, defaultBaseURL);
@@ -46,6 +46,16 @@ public class PurgeCache extends TaskclusterRequestHandler {
 
     public PurgeCache() {
         super(defaultBaseURL);
+    }
+
+    /**
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
+     *
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/purge-cache/api-docs#ping)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
+        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 
     /**
@@ -84,15 +94,5 @@ public class PurgeCache extends TaskclusterRequestHandler {
      */
     public CallSummary<EmptyPayload, OpenPurgeRequestList> purgeRequests(String provisionerId, String workerType) throws APICallFailure {
         return apiCall(null, "GET", "/purge-cache/" + uriEncode(provisionerId) + "/" + uriEncode(workerType), OpenPurgeRequestList.class);
-    }
-
-    /**
-     * Respond without doing anything.
-     * This endpoint is used to check that the service is up.
-     *
-     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/purge-cache/api-docs#ping)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
-        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }

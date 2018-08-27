@@ -4,7 +4,7 @@ package org.mozilla.taskcluster.client.queue;
  * Response to a request for the number of pending tasks for a given
  * `provisionerId` and `workerType`.
  *
- * See http://schemas.taskcluster.net/queue/v1/pending-tasks-response.json#
+ * See https://schemas.taskcluster.net/queue/v1/pending-tasks-response.json#
  */
 public class CountPendingTasksResponse {
 
@@ -17,7 +17,7 @@ public class CountPendingTasksResponse {
      *
      * Mininum:    0
      *
-     * See http://schemas.taskcluster.net/queue/v1/pending-tasks-response.json#/properties/pendingTasks
+     * See https://schemas.taskcluster.net/queue/v1/pending-tasks-response.json#/properties/pendingTasks
      */
     public int pendingTasks;
 
@@ -28,7 +28,7 @@ public class CountPendingTasksResponse {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/pending-tasks-response.json#/properties/provisionerId
+     * See https://schemas.taskcluster.net/queue/v1/pending-tasks-response.json#/properties/provisionerId
      */
     public String provisionerId;
 
@@ -39,7 +39,7 @@ public class CountPendingTasksResponse {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/pending-tasks-response.json#/properties/workerType
+     * See https://schemas.taskcluster.net/queue/v1/pending-tasks-response.json#/properties/workerType
      */
     public String workerType;
 }

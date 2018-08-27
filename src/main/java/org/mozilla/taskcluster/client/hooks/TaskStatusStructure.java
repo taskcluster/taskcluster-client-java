@@ -5,29 +5,30 @@ import java.util.Date;
 /**
  * A representation of **task status** as known by the queue
  *
- * See http://schemas.taskcluster.net/hooks/v1/task-status.json#
+ * See https://schemas.taskcluster.net/hooks/v1/task-status.json#
  */
 public class TaskStatusStructure {
 
     public class Status {
 
         /**
-         * Use of this field is deprecated; use `deadline: {$fromNow: ..}` in the task template instead.
+         * Deadline of the task, `pending` and `running` runs are
+         * resolved as **exception** if not resolved by other means
+         * before the deadline. Note, deadline cannot be more than
+         * 5 days into the future
          *
-         * Default:    "1 day"
-         *
-         * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/deadline
+         * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/deadline
          */
-        public String deadline;
+        public Date deadline;
 
         /**
-         * Use of this field is deprecated; use `expires: {$fromNow: ..}` in the task template instead.
+         * Task expiration, time at which task definition and
+         * status is deleted. Notice that all artifacts for the task
+         * must have an expiration that is no later than this.
          *
-         * Default:    "3 months"
-         *
-         * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/expires
+         * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/expires
          */
-        public String expires;
+        public Date expires;
 
         /**
          * Unique identifier for the provisioner that this task must be scheduled on
@@ -36,7 +37,7 @@ public class TaskStatusStructure {
          * Min length: 1
          * Max length: 22
          *
-         * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/provisionerId
+         * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/provisionerId
          */
         public String provisionerId;
 
@@ -46,7 +47,7 @@ public class TaskStatusStructure {
          * Mininum:    0
          * Maximum:    999
          *
-         * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/retriesLeft
+         * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/retriesLeft
          */
         public int retriesLeft;
 
@@ -63,7 +64,7 @@ public class TaskStatusStructure {
              *     * "rerun"
              *     * "exception"
              *
-             * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/reasonCreated
+             * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/reasonCreated
              */
             public String reasonCreated;
 
@@ -86,7 +87,7 @@ public class TaskStatusStructure {
              *     * "internal-error"
              *     * "intermittent-task"
              *
-             * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/reasonResolved
+             * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/reasonResolved
              */
             public String reasonResolved;
 
@@ -95,7 +96,7 @@ public class TaskStatusStructure {
              * state from `running` to either `completed`, `failed` or `exception`.
              * This property is only present after the run as been resolved.
              *
-             * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/resolved
+             * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/resolved
              */
             public Date resolved;
 
@@ -105,7 +106,7 @@ public class TaskStatusStructure {
              * Mininum:    0
              * Maximum:    1000
              *
-             * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/runId
+             * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/runId
              */
             public int runId;
 
@@ -113,7 +114,7 @@ public class TaskStatusStructure {
              * Date-time at which this run was scheduled, ie. when the run was
              * created in state `pending`.
              *
-             * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/scheduled
+             * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/scheduled
              */
             public Date scheduled;
 
@@ -122,7 +123,7 @@ public class TaskStatusStructure {
              * state from `pending` to `running`. This property is only present
              * after the run has been claimed.
              *
-             * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/started
+             * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/started
              */
             public Date started;
 
@@ -136,7 +137,7 @@ public class TaskStatusStructure {
              *     * "failed"
              *     * "exception"
              *
-             * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/state
+             * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/state
              */
             public String state;
 
@@ -145,7 +146,7 @@ public class TaskStatusStructure {
              * run isn't reclaimed. Note, only present after the run has been
              * claimed.
              *
-             * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/takenUntil
+             * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/takenUntil
              */
             public Date takenUntil;
 
@@ -158,7 +159,7 @@ public class TaskStatusStructure {
              * Min length: 1
              * Max length: 22
              *
-             * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/workerGroup
+             * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/workerGroup
              */
             public String workerGroup;
 
@@ -171,7 +172,7 @@ public class TaskStatusStructure {
              * Min length: 1
              * Max length: 22
              *
-             * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/workerId
+             * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs/items/properties/workerId
              */
             public String workerId;
         }
@@ -179,7 +180,7 @@ public class TaskStatusStructure {
         /**
          * List of runs, ordered so that index `i` has `runId == i`
          *
-         * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs
+         * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/runs
          */
         public RunInformation[] runs;
 
@@ -190,7 +191,7 @@ public class TaskStatusStructure {
          * Min length: 1
          * Max length: 22
          *
-         * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/schedulerId
+         * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/schedulerId
          */
         public String schedulerId;
 
@@ -206,7 +207,7 @@ public class TaskStatusStructure {
          *     * "failed"
          *     * "exception"
          *
-         * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/state
+         * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/state
          */
         public String state;
 
@@ -217,7 +218,7 @@ public class TaskStatusStructure {
          *
          * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
          *
-         * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/taskGroupId
+         * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/taskGroupId
          */
         public String taskGroupId;
 
@@ -228,7 +229,7 @@ public class TaskStatusStructure {
          *
          * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
          *
-         * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/taskId
+         * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/taskId
          */
         public String taskId;
 
@@ -239,13 +240,13 @@ public class TaskStatusStructure {
          * Min length: 1
          * Max length: 22
          *
-         * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/workerType
+         * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status/properties/workerType
          */
         public String workerType;
     }
 
     /**
-     * See http://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status
+     * See https://schemas.taskcluster.net/hooks/v1/task-status.json#/properties/status
      */
     public Status status;
 }

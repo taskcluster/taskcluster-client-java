@@ -3,14 +3,14 @@ package org.mozilla.taskcluster.client.notify;
 /**
  * Request to send an email
  *
- * See http://schemas.taskcluster.net/notify/v1/email-request.json#
+ * See https://schemas.taskcluster.net/notify/v1/email-request.json#
  */
 public class SendEmailRequest {
 
     /**
      * E-mail address to which the message should be sent
      *
-     * See http://schemas.taskcluster.net/notify/v1/email-request.json#/properties/address
+     * See https://schemas.taskcluster.net/notify/v1/email-request.json#/properties/address
      */
     public String address;
 
@@ -22,7 +22,7 @@ public class SendEmailRequest {
      * Min length: 1
      * Max length: 102400
      *
-     * See http://schemas.taskcluster.net/notify/v1/email-request.json#/properties/content
+     * See https://schemas.taskcluster.net/notify/v1/email-request.json#/properties/content
      */
     public String content;
 
@@ -34,7 +34,7 @@ public class SendEmailRequest {
          * Min length: 1
          * Max length: 1024
          *
-         * See http://schemas.taskcluster.net/notify/v1/email-request.json#/properties/link/properties/href
+         * See https://schemas.taskcluster.net/notify/v1/email-request.json#/properties/link/properties/href
          */
         public String href;
 
@@ -44,7 +44,7 @@ public class SendEmailRequest {
          * Min length: 1
          * Max length: 40
          *
-         * See http://schemas.taskcluster.net/notify/v1/email-request.json#/properties/link/properties/text
+         * See https://schemas.taskcluster.net/notify/v1/email-request.json#/properties/link/properties/text
          */
         public String text;
     }
@@ -52,14 +52,14 @@ public class SendEmailRequest {
     /**
      * Optional link that can be added as a button to the email.
      *
-     * See http://schemas.taskcluster.net/notify/v1/email-request.json#/properties/link
+     * See https://schemas.taskcluster.net/notify/v1/email-request.json#/properties/link
      */
     public Link link;
 
     /**
      * Reply-to e-mail (this property is optional)
      *
-     * See http://schemas.taskcluster.net/notify/v1/email-request.json#/properties/replyTo
+     * See https://schemas.taskcluster.net/notify/v1/email-request.json#/properties/replyTo
      */
     public String replyTo;
 
@@ -69,7 +69,7 @@ public class SendEmailRequest {
      * Min length: 1
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/notify/v1/email-request.json#/properties/subject
+     * See https://schemas.taskcluster.net/notify/v1/email-request.json#/properties/subject
      */
     public String subject;
 
@@ -81,7 +81,7 @@ public class SendEmailRequest {
      *     * "fullscreen"
      * Default:    "simple"
      *
-     * See http://schemas.taskcluster.net/notify/v1/email-request.json#/properties/template
+     * See https://schemas.taskcluster.net/notify/v1/email-request.json#/properties/template
      */
     public String template;
 }

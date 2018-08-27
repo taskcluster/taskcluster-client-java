@@ -3,14 +3,14 @@ package org.mozilla.taskcluster.client.queue;
 import java.util.Date;
 
 /**
- * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items
+ * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items
  */
 public class WorkerType {
 
     /**
      * Description of the worker-type.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/description
+     * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/description
      */
     public String description;
 
@@ -18,14 +18,14 @@ public class WorkerType {
      * Date and time after which the worker-type will be automatically
      * deleted by the queue.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/expires
      */
     public Date expires;
 
     /**
      * Date and time where the worker-type was last seen active
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/lastDateActive
+     * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/lastDateActive
      */
     public Date lastDateActive;
 
@@ -35,7 +35,7 @@ public class WorkerType {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/provisionerId
+     * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/provisionerId
      */
     public String provisionerId;
 
@@ -50,7 +50,7 @@ public class WorkerType {
      *     * "stable"
      *     * "deprecated"
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/stability
+     * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/stability
      */
     public String stability;
 
@@ -61,7 +61,7 @@ public class WorkerType {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/workerType
+     * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/workerType
      */
     public String workerType;
 }

@@ -28,14 +28,14 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  *  * `['0 0 9,21 * * 1-5', '0 0 12 * * 0,6']` -- weekdays at 9:00 and 21:00 UTC, weekends at noon
  * 
  * The task definition is used as a JSON-e template, with a context depending on how it is fired.  See
- * https://docs.taskcluster.net/reference/core/taskcluster-hooks/docs/firing-hooks
+ * [/docs/reference/core/taskcluster-hooks/docs/firing-hooks](firing-hooks)
  * for more information.
  *
  * @see "[Hooks API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs)"
  */
 public class Hooks extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://hooks.taskcluster.net/v1";
+    protected static final String defaultBaseURL = "https://hooks.taskcluster.net/v1/";
 
     public Hooks(Credentials credentials) {
         super(credentials, defaultBaseURL);
@@ -59,6 +59,16 @@ public class Hooks extends TaskclusterRequestHandler {
 
     public Hooks() {
         super(defaultBaseURL);
+    }
+
+    /**
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
+     *
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#ping)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
+        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 
     /**
@@ -98,16 +108,6 @@ public class Hooks extends TaskclusterRequestHandler {
      */
     public CallSummary<EmptyPayload, HookStatusResponse> getHookStatus(String hookGroupId, String hookId) throws APICallFailure {
         return apiCall(null, "GET", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/status", HookStatusResponse.class);
-    }
-
-    /**
-     * This endpoint will return the schedule and next scheduled creation time
-     * for the given hook.
-     *
-     * @see "[Get hook schedule API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#getHookSchedule)"
-     */
-    public CallSummary<EmptyPayload, HookScheduleResponse> getHookSchedule(String hookGroupId, String hookId) throws APICallFailure {
-        return apiCall(null, "GET", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/schedule", HookScheduleResponse.class);
     }
 
     /**
@@ -208,15 +208,5 @@ public class Hooks extends TaskclusterRequestHandler {
      */
     public CallSummary<Object, TaskStatusStructure> triggerHookWithToken(String hookGroupId, String hookId, String token, Object payload) throws APICallFailure {
         return apiCall(payload, "POST", "/hooks/" + uriEncode(hookGroupId) + "/" + uriEncode(hookId) + "/trigger/" + uriEncode(token), TaskStatusStructure.class);
-    }
-
-    /**
-     * Respond without doing anything.
-     * This endpoint is used to check that the service is up.
-     *
-     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/hooks/api-docs#ping)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
-        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }

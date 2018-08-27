@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.queue;
 /**
  * Response from a `listTaskGroup` request.
  *
- * See http://schemas.taskcluster.net/queue/v1/list-task-group-response.json#
+ * See https://schemas.taskcluster.net/queue/v1/list-task-group-response.json#
  */
 public class ListTaskGroupResponse {
 
@@ -16,7 +16,7 @@ public class ListTaskGroupResponse {
      * all the results if you've called `listTaskGroup` with `continuationToken`
      * until you get a result without a `continuationToken`.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-task-group-response.json#/properties/continuationToken
+     * See https://schemas.taskcluster.net/queue/v1/list-task-group-response.json#/properties/continuationToken
      */
     public String continuationToken;
 
@@ -25,14 +25,14 @@ public class ListTaskGroupResponse {
      *
      * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-task-group-response.json#/properties/taskGroupId
+     * See https://schemas.taskcluster.net/queue/v1/list-task-group-response.json#/properties/taskGroupId
      */
     public String taskGroupId;
 
     /**
      * List of tasks in this task-group.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-task-group-response.json#/properties/tasks
+     * See https://schemas.taskcluster.net/queue/v1/list-task-group-response.json#/properties/tasks
      */
     public TaskDefinitionAndStatus[] tasks;
 }

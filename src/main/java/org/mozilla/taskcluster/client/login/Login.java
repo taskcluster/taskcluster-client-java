@@ -18,7 +18,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class Login extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://login.taskcluster.net/v1";
+    protected static final String defaultBaseURL = "https://login.taskcluster.net/v1/";
 
     public Login(Credentials credentials) {
         super(credentials, defaultBaseURL);
@@ -45,6 +45,16 @@ public class Login extends TaskclusterRequestHandler {
     }
 
     /**
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
+     *
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/login/api-docs#ping)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
+        return apiCall(null, "GET", "/ping", EmptyPayload.class);
+    }
+
+    /**
      * Given an OIDC `access_token` from a trusted OpenID provider, return a
      * set of Taskcluster credentials for use on behalf of the identified
      * user.
@@ -57,7 +67,7 @@ public class Login extends TaskclusterRequestHandler {
      * ```
      * 
      * The `access_token` is first verified against the named
-     * :provider, then passed to the provider's API to retrieve a user
+     * :provider, then passed to the provider's APIBuilder to retrieve a user
      * profile. That profile is then used to generate Taskcluster credentials
      * appropriate to the user. Note that the resulting credentials may or may
      * not include a `certificate` property. Callers should be prepared for either
@@ -71,15 +81,5 @@ public class Login extends TaskclusterRequestHandler {
      */
     public CallSummary<EmptyPayload, CredentialsResponse> oidcCredentials(String provider) throws APICallFailure {
         return apiCall(null, "GET", "/oidc-credentials/" + uriEncode(provider), CredentialsResponse.class);
-    }
-
-    /**
-     * Respond without doing anything.
-     * This endpoint is used to check that the service is up.
-     *
-     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/login/api-docs#ping)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
-        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }

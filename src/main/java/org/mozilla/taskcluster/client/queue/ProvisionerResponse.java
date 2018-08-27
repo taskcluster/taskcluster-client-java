@@ -5,19 +5,19 @@ import java.util.Date;
 /**
  * Response containing information about a provisioner.
  *
- * See http://schemas.taskcluster.net/queue/v1/provisioner-response.json#
+ * See https://schemas.taskcluster.net/queue/v1/provisioner-response.json#
  */
 public class ProvisionerResponse {
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/actions
+     * See https://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/actions
      */
     public Action[] actions;
 
     /**
      * Description of the provisioner.
      *
-     * See http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/description
+     * See https://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/description
      */
     public String description;
 
@@ -25,7 +25,7 @@ public class ProvisionerResponse {
      * Date and time after which the provisioner will be automatically
      * deleted by the queue.
      *
-     * See http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/expires
      */
     public Date expires;
 
@@ -34,7 +34,7 @@ public class ProvisionerResponse {
      * but may be off by up-to 6 hours. Nonetheless, `lastDateActive` is a good indicator
      * of when the provisioner was last seen active.
      *
-     * See http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/lastDateActive
+     * See https://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/lastDateActive
      */
     public Date lastDateActive;
 
@@ -44,7 +44,7 @@ public class ProvisionerResponse {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/provisionerId
+     * See https://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/provisionerId
      */
     public String provisionerId;
 
@@ -59,7 +59,7 @@ public class ProvisionerResponse {
      *     * "stable"
      *     * "deprecated"
      *
-     * See http://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/stability
+     * See https://schemas.taskcluster.net/queue/v1/provisioner-response.json#/properties/stability
      */
     public String stability;
 }

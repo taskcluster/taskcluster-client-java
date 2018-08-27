@@ -23,7 +23,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class Secrets extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://secrets.taskcluster.net/v1";
+    protected static final String defaultBaseURL = "https://secrets.taskcluster.net/v1/";
 
     public Secrets(Credentials credentials) {
         super(credentials, defaultBaseURL);
@@ -47,6 +47,16 @@ public class Secrets extends TaskclusterRequestHandler {
 
     public Secrets() {
         super(defaultBaseURL);
+    }
+
+    /**
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
+     *
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/secrets/api-docs#ping)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
+        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 
     /**
@@ -106,15 +116,5 @@ public class Secrets extends TaskclusterRequestHandler {
      */
     public CallSummary<EmptyPayload, SecretsList> list() throws APICallFailure {
         return apiCall(null, "GET", "/secrets", SecretsList.class);
-    }
-
-    /**
-     * Respond without doing anything.
-     * This endpoint is used to check that the service is up.
-     *
-     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/secrets/api-docs#ping)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
-        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }

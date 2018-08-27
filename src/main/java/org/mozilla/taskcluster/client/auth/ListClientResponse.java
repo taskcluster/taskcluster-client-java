@@ -3,12 +3,12 @@ package org.mozilla.taskcluster.client.auth;
 /**
  * List of clients
  *
- * See http://schemas.taskcluster.net/auth/v1/list-clients-response.json#
+ * See https://schemas.taskcluster.net/auth/v1/list-clients-response.json#
  */
 public class ListClientResponse {
 
     /**
-     * See http://schemas.taskcluster.net/auth/v1/list-clients-response.json#/properties/clients
+     * See https://schemas.taskcluster.net/auth/v1/list-clients-response.json#/properties/clients
      */
     public GetClientResponse[] clients;
 
@@ -17,7 +17,7 @@ public class ListClientResponse {
      * here. You can optionally provide the token in the request payload to
      * load the additional results.
      *
-     * See http://schemas.taskcluster.net/auth/v1/list-clients-response.json#/properties/continuationToken
+     * See https://schemas.taskcluster.net/auth/v1/list-clients-response.json#/properties/continuationToken
      */
     public String continuationToken;
 }

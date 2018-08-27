@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Response from a `listWorkerTypes` request.
  *
- * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#
+ * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#
  */
 public class ListWorkerTypesResponse {
 
@@ -18,7 +18,7 @@ public class ListWorkerTypesResponse {
      * all the results if you've called `listWorkerTypes` with `continuationToken`
      * until you get a result without a `continuationToken`.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/continuationToken
+     * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/continuationToken
      */
     public String continuationToken;
 
@@ -27,7 +27,7 @@ public class ListWorkerTypesResponse {
         /**
          * Description of the worker-type.
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/description
+         * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/description
          */
         public String description;
 
@@ -35,14 +35,14 @@ public class ListWorkerTypesResponse {
          * Date and time after which the worker-type will be automatically
          * deleted by the queue.
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/expires
+         * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/expires
          */
         public Date expires;
 
         /**
          * Date and time where the worker-type was last seen active
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/lastDateActive
+         * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/lastDateActive
          */
         public Date lastDateActive;
 
@@ -52,7 +52,7 @@ public class ListWorkerTypesResponse {
          * Min length: 1
          * Max length: 22
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/provisionerId
+         * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/provisionerId
          */
         public String provisionerId;
 
@@ -67,7 +67,7 @@ public class ListWorkerTypesResponse {
          *     * "stable"
          *     * "deprecated"
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/stability
+         * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/stability
          */
         public String stability;
 
@@ -78,7 +78,7 @@ public class ListWorkerTypesResponse {
          * Min length: 1
          * Max length: 22
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/workerType
+         * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes/items/properties/workerType
          */
         public String workerType;
     }
@@ -86,7 +86,7 @@ public class ListWorkerTypesResponse {
     /**
      * List of worker-types in this provisioner.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes
+     * See https://schemas.taskcluster.net/queue/v1/list-workertypes-response.json#/properties/workerTypes
      */
     public WorkerType[] workerTypes;
 }

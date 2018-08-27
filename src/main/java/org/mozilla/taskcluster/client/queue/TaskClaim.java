@@ -3,12 +3,12 @@ package org.mozilla.taskcluster.client.queue;
 import java.util.Date;
 
 /**
- * See http://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items
+ * See https://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items
  */
 public class TaskClaim {
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/credentials
+     * See https://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/credentials
      */
     public TaskCredentials credentials;
 
@@ -18,12 +18,12 @@ public class TaskClaim {
      * Mininum:    0
      * Maximum:    1000
      *
-     * See http://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/runId
+     * See https://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/runId
      */
     public int runId;
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/status
+     * See https://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/status
      */
     public TaskStatusStructure status;
 
@@ -31,12 +31,12 @@ public class TaskClaim {
      * Time at which the run expires and is resolved as `exception`,
      * with reason `claim-expired` if the run haven't been reclaimed.
      *
-     * See http://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/takenUntil
+     * See https://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/takenUntil
      */
     public Date takenUntil;
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/task
+     * See https://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/task
      */
     public TaskDefinitionResponse task;
 
@@ -47,7 +47,7 @@ public class TaskClaim {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/workerGroup
+     * See https://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/workerGroup
      */
     public String workerGroup;
 
@@ -58,7 +58,7 @@ public class TaskClaim {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/workerId
+     * See https://schemas.taskcluster.net/queue/v1/claim-work-response.json#/properties/tasks/items/properties/workerId
      */
     public String workerId;
 }

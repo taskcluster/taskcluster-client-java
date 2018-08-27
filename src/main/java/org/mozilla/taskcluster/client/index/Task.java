@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Representation of a task.
  *
- * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items
+ * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items
  */
 public class Task {
 
@@ -13,14 +13,14 @@ public class Task {
      * Data that was reported with the task. This is an arbitrary JSON
      * object.
      *
-     * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/data
+     * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/data
      */
     public Object data;
 
     /**
      * Date at which this entry expires from the task index.
      *
-     * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/expires
+     * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/expires
      */
     public Date expires;
 
@@ -29,7 +29,7 @@ public class Task {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/namespace
+     * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/namespace
      */
     public String namespace;
 
@@ -39,7 +39,7 @@ public class Task {
      * requests. If two tasks has the same `rank` the latest task will be
      * stored.
      *
-     * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/rank
+     * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/rank
      */
     public int rank;
 
@@ -48,7 +48,7 @@ public class Task {
      *
      * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
      *
-     * See http://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/taskId
+     * See https://schemas.taskcluster.net/index/v1/list-tasks-response.json#/properties/tasks/items/properties/taskId
      */
     public String taskId;
 }

@@ -5,21 +5,21 @@ import java.util.Date;
 /**
  * Representation of an indexed task.
  *
- * See http://schemas.taskcluster.net/index/v1/indexed-task-response.json#
+ * See https://schemas.taskcluster.net/index/v1/indexed-task-response.json#
  */
 public class IndexedTaskResponse {
 
     /**
      * Data that was reported with the task. This is an arbitrary JSON object.
      *
-     * See http://schemas.taskcluster.net/index/v1/indexed-task-response.json#/properties/data
+     * See https://schemas.taskcluster.net/index/v1/indexed-task-response.json#/properties/data
      */
     public Object data;
 
     /**
      * Date at which this entry expires from the task index.
      *
-     * See http://schemas.taskcluster.net/index/v1/indexed-task-response.json#/properties/expires
+     * See https://schemas.taskcluster.net/index/v1/indexed-task-response.json#/properties/expires
      */
     public Date expires;
 
@@ -28,7 +28,7 @@ public class IndexedTaskResponse {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/index/v1/indexed-task-response.json#/properties/namespace
+     * See https://schemas.taskcluster.net/index/v1/indexed-task-response.json#/properties/namespace
      */
     public String namespace;
 
@@ -37,7 +37,7 @@ public class IndexedTaskResponse {
      * highest `rank` will be stored and returned in later requests. If two tasks
      * has the same `rank` the latest task will be stored.
      *
-     * See http://schemas.taskcluster.net/index/v1/indexed-task-response.json#/properties/rank
+     * See https://schemas.taskcluster.net/index/v1/indexed-task-response.json#/properties/rank
      */
     public int rank;
 
@@ -48,7 +48,7 @@ public class IndexedTaskResponse {
      *
      * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
      *
-     * See http://schemas.taskcluster.net/index/v1/indexed-task-response.json#/properties/taskId
+     * See https://schemas.taskcluster.net/index/v1/indexed-task-response.json#/properties/taskId
      */
     public String taskId;
 }

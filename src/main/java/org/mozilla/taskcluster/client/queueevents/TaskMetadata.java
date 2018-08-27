@@ -1,4 +1,4 @@
-package org.mozilla.taskcluster.client.queue;
+package org.mozilla.taskcluster.client.queueevents;
 
 /**
  * Required task metadata

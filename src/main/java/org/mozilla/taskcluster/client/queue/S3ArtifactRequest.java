@@ -6,7 +6,7 @@ import java.util.Date;
  * Request for a signed PUT URL that will allow you to upload an artifact
  * to an S3 bucket managed by the queue.
  *
- * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[1]
+ * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[1]
  */
 public class S3ArtifactRequest {
 
@@ -19,7 +19,7 @@ public class S3ArtifactRequest {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[1]/properties/contentType
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[1]/properties/contentType
      */
     public String contentType;
 
@@ -29,7 +29,7 @@ public class S3ArtifactRequest {
      * available after expiration. S3 based artifacts are identified in
      * azure table storage and explicitly deleted on S3 after expiration.
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[1]/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[1]/properties/expires
      */
     public Date expires;
 
@@ -39,7 +39,7 @@ public class S3ArtifactRequest {
      * Possible values:
      *     * "s3"
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[1]/properties/storageType
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[1]/properties/storageType
      */
     public String storageType;
 }

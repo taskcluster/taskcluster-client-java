@@ -5,7 +5,7 @@ package org.mozilla.taskcluster.client.auth;
  * Credentials will expire in 24-48 hours, you should refresh them within
  * 24 hours.
  *
- * See http://schemas.taskcluster.net/auth/v1/sentry-dsn-response.json#/properties/dsn
+ * See https://schemas.taskcluster.net/auth/v1/sentry-dsn-response.json#/properties/dsn
  */
 public class Dsn {
 
@@ -14,7 +14,7 @@ public class Dsn {
      * These credentials can be used for up-to 24 hours.
      * This is for use in client-side applications only.
      *
-     * See http://schemas.taskcluster.net/auth/v1/sentry-dsn-response.json#/properties/dsn/properties/public
+     * See https://schemas.taskcluster.net/auth/v1/sentry-dsn-response.json#/properties/dsn/properties/public
      */
     public String public1;
 
@@ -24,7 +24,7 @@ public class Dsn {
      * This is for use in serser-side applications and should **not** be
      * leaked.
      *
-     * See http://schemas.taskcluster.net/auth/v1/sentry-dsn-response.json#/properties/dsn/properties/secret
+     * See https://schemas.taskcluster.net/auth/v1/sentry-dsn-response.json#/properties/dsn/properties/secret
      */
     public String secret;
 }

@@ -5,12 +5,12 @@ import java.util.Date;
 /**
  * Response to a successful task claim
  *
- * See http://schemas.taskcluster.net/queue/v1/task-claim-response.json#
+ * See https://schemas.taskcluster.net/queue/v1/task-claim-response.json#
  */
 public class TaskClaimResponse {
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/credentials
+     * See https://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/credentials
      */
     public TaskCredentials credentials;
 
@@ -20,12 +20,12 @@ public class TaskClaimResponse {
      * Mininum:    0
      * Maximum:    1000
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/runId
+     * See https://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/runId
      */
     public int runId;
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/status
+     * See https://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/status
      */
     public TaskStatusStructure status;
 
@@ -33,12 +33,12 @@ public class TaskClaimResponse {
      * Time at which the run expires and is resolved as `exception`,
      * with reason `claim-expired` if the run haven't been reclaimed.
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/takenUntil
+     * See https://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/takenUntil
      */
     public Date takenUntil;
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/task
+     * See https://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/task
      */
     public TaskDefinitionResponse task;
 
@@ -49,7 +49,7 @@ public class TaskClaimResponse {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/workerGroup
+     * See https://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/workerGroup
      */
     public String workerGroup;
 
@@ -60,7 +60,7 @@ public class TaskClaimResponse {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/workerId
+     * See https://schemas.taskcluster.net/queue/v1/task-claim-response.json#/properties/workerId
      */
     public String workerId;
 }

@@ -5,14 +5,14 @@ import java.util.Date;
 /**
  * Get all details about a role
  *
- * See http://schemas.taskcluster.net/auth/v1/get-role-response.json#
+ * See https://schemas.taskcluster.net/auth/v1/get-role-response.json#
  */
 public class GetRoleResponse {
 
     /**
      * Date and time when this role was created
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-role-response.json#/properties/created
+     * See https://schemas.taskcluster.net/auth/v1/get-role-response.json#/properties/created
      */
     public Date created;
 
@@ -22,7 +22,7 @@ public class GetRoleResponse {
      *
      * Max length: 10240
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-role-response.json#/properties/description
+     * See https://schemas.taskcluster.net/auth/v1/get-role-response.json#/properties/description
      */
     public String description;
 
@@ -31,14 +31,14 @@ public class GetRoleResponse {
      * granted by roles that can be assumed when you have this role.
      * Hence, this includes any scopes in-directly granted as well.
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-role-response.json#/properties/expandedScopes
+     * See https://schemas.taskcluster.net/auth/v1/get-role-response.json#/properties/expandedScopes
      */
     public String[] expandedScopes;
 
     /**
      * Date and time of last modification
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-role-response.json#/properties/lastModified
+     * See https://schemas.taskcluster.net/auth/v1/get-role-response.json#/properties/lastModified
      */
     public Date lastModified;
 
@@ -47,7 +47,7 @@ public class GetRoleResponse {
      *
      * Syntax:     ^[\x20-\x7e]+$
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-role-response.json#/properties/roleId
+     * See https://schemas.taskcluster.net/auth/v1/get-role-response.json#/properties/roleId
      */
     public String roleId;
 
@@ -55,7 +55,7 @@ public class GetRoleResponse {
      * List of scopes the role grants access to.  Scopes must be composed of
      * printable ASCII characters and spaces.
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-role-response.json#/properties/scopes
+     * See https://schemas.taskcluster.net/auth/v1/get-role-response.json#/properties/scopes
      */
     public String[] scopes;
 }

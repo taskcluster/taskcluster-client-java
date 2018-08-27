@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.purgecacheevents;
 /**
  * Message reporting that a specific cache should be purged
  *
- * See http://schemas.taskcluster.net/purge-cache/v1/purge-cache-message.json#
+ * See https://schemas.taskcluster.net/purge-cache/v1/purge-cache-message.json#
  */
 public class PurgeCacheMessage {
 
@@ -12,7 +12,7 @@ public class PurgeCacheMessage {
      * of caches (with independent names), it should purge all caches identified
      * by `cacheName` regardless of cache type.
      *
-     * See http://schemas.taskcluster.net/purge-cache/v1/purge-cache-message.json#/properties/cacheName
+     * See https://schemas.taskcluster.net/purge-cache/v1/purge-cache-message.json#/properties/cacheName
      */
     public String cacheName;
 
@@ -23,7 +23,7 @@ public class PurgeCacheMessage {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/purge-cache/v1/purge-cache-message.json#/properties/provisionerId
+     * See https://schemas.taskcluster.net/purge-cache/v1/purge-cache-message.json#/properties/provisionerId
      */
     public String provisionerId;
 
@@ -33,7 +33,7 @@ public class PurgeCacheMessage {
      * Possible values:
      *     * 1
      *
-     * See http://schemas.taskcluster.net/purge-cache/v1/purge-cache-message.json#/properties/version
+     * See https://schemas.taskcluster.net/purge-cache/v1/purge-cache-message.json#/properties/version
      */
     public int version;
 
@@ -44,7 +44,7 @@ public class PurgeCacheMessage {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/purge-cache/v1/purge-cache-message.json#/properties/workerType
+     * See https://schemas.taskcluster.net/purge-cache/v1/purge-cache-message.json#/properties/workerType
      */
     public String workerType;
 }

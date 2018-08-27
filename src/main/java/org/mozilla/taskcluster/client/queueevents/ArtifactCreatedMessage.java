@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Message reporting a new artifact has been created for a given task.
  *
- * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#
+ * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#
  */
 public class ArtifactCreatedMessage {
 
@@ -16,7 +16,7 @@ public class ArtifactCreatedMessage {
          *
          * Max length: 255
          *
-         * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/contentType
+         * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/contentType
          */
         public String contentType;
 
@@ -24,7 +24,7 @@ public class ArtifactCreatedMessage {
          * Date and time after which the artifact created will be automatically
          * deleted by the queue.
          *
-         * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/expires
+         * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/expires
          */
         public Date expires;
 
@@ -35,7 +35,7 @@ public class ArtifactCreatedMessage {
          *
          * Max length: 1024
          *
-         * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/name
+         * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/name
          */
         public String name;
 
@@ -48,7 +48,7 @@ public class ArtifactCreatedMessage {
          *     * "reference"
          *     * "error"
          *
-         * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/storageType
+         * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact/properties/storageType
          */
         public String storageType;
     }
@@ -56,7 +56,7 @@ public class ArtifactCreatedMessage {
     /**
      * Information about the artifact that was created
      *
-     * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact
+     * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/artifact
      */
     public Artifact artifact;
 
@@ -66,12 +66,12 @@ public class ArtifactCreatedMessage {
      * Mininum:    0
      * Maximum:    1000
      *
-     * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/runId
+     * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/runId
      */
     public int runId;
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/status
+     * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/status
      */
     public TaskStatusStructure status;
 
@@ -81,7 +81,7 @@ public class ArtifactCreatedMessage {
      * Possible values:
      *     * 1
      *
-     * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/version
+     * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/version
      */
     public int version;
 
@@ -93,7 +93,7 @@ public class ArtifactCreatedMessage {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/workerGroup
+     * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/workerGroup
      */
     public String workerGroup;
 
@@ -105,7 +105,7 @@ public class ArtifactCreatedMessage {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/workerId
+     * See https://schemas.taskcluster.net/queue/v1/artifact-created-message.json#/properties/workerId
      */
     public String workerId;
 }

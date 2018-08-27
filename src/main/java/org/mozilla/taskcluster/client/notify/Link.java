@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.notify;
 /**
  * Optional link that can be added as a button to the email.
  *
- * See http://schemas.taskcluster.net/notify/v1/email-request.json#/properties/link
+ * See https://schemas.taskcluster.net/notify/v1/email-request.json#/properties/link
  */
 public class Link {
 
@@ -13,7 +13,7 @@ public class Link {
      * Min length: 1
      * Max length: 1024
      *
-     * See http://schemas.taskcluster.net/notify/v1/email-request.json#/properties/link/properties/href
+     * See https://schemas.taskcluster.net/notify/v1/email-request.json#/properties/link/properties/href
      */
     public String href;
 
@@ -23,7 +23,7 @@ public class Link {
      * Min length: 1
      * Max length: 40
      *
-     * See http://schemas.taskcluster.net/notify/v1/email-request.json#/properties/link/properties/text
+     * See https://schemas.taskcluster.net/notify/v1/email-request.json#/properties/link/properties/text
      */
     public String text;
 }

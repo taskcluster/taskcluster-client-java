@@ -19,7 +19,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class Notify extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://notify.taskcluster.net/v1";
+    protected static final String defaultBaseURL = "https://notify.taskcluster.net/v1/";
 
     public Notify(Credentials credentials) {
         super(credentials, defaultBaseURL);
@@ -43,6 +43,16 @@ public class Notify extends TaskclusterRequestHandler {
 
     public Notify() {
         super(defaultBaseURL);
+    }
+
+    /**
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
+     *
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/notify/api-docs#ping)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
+        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 
     /**
@@ -93,15 +103,5 @@ public class Notify extends TaskclusterRequestHandler {
      */
     public CallSummary<Object, EmptyPayload> irc(Object payload) throws APICallFailure {
         return apiCall(payload, "POST", "/irc", EmptyPayload.class);
-    }
-
-    /**
-     * Respond without doing anything.
-     * This endpoint is used to check that the service is up.
-     *
-     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/notify/api-docs#ping)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
-        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }

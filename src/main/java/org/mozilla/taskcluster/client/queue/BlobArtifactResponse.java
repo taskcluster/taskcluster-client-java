@@ -5,14 +5,14 @@ import java.util.Date;
 /**
  * Response to a request for creating a new blob artifact
  *
- * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]
+ * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]
  */
 public class BlobArtifactResponse {
 
     /**
      * Date-time after which the signed `requests` no longer work
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/expires
      */
     public Date expires;
 
@@ -21,7 +21,7 @@ public class BlobArtifactResponse {
         /**
          * Headers of request
          *
-         * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/headers
+         * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/headers
          */
         public Object headers;
 
@@ -37,14 +37,14 @@ public class BlobArtifactResponse {
          *     * "HEAD"
          *     * "PATCH"
          *
-         * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/method
+         * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/method
          */
         public String method;
 
         /**
          * URL of request
          *
-         * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/url
+         * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/url
          */
         public String url;
     }
@@ -53,7 +53,7 @@ public class BlobArtifactResponse {
      * A list of generalized HTTP requests which must be run to upload the
      * artifact.
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests
      */
     public HTTPRequest[] requests;
 
@@ -63,7 +63,7 @@ public class BlobArtifactResponse {
      * Possible values:
      *     * "blob"
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/storageType
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/storageType
      */
     public String storageType;
 }

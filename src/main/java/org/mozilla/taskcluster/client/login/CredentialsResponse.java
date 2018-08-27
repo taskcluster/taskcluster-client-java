@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * A response containing credentials corresponding to a supplied OIDC `access_token`.
  *
- * See http://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#
+ * See https://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#
  */
 public class CredentialsResponse {
 
@@ -15,12 +15,12 @@ public class CredentialsResponse {
          *
          * Syntax:     ^[a-zA-Z0-9_-]{22,66}$
          *
-         * See http://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#/properties/credentials/properties/accessToken
+         * See https://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#/properties/credentials/properties/accessToken
          */
         public String accessToken;
 
         /**
-         * See http://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#/properties/credentials/properties/certificate
+         * See https://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#/properties/credentials/properties/certificate
          */
         public String certificate;
 
@@ -28,7 +28,7 @@ public class CredentialsResponse {
          *
          * Syntax:     ^[A-Za-z0-9!@/:.+|_-]+$
          *
-         * See http://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#/properties/credentials/properties/clientId
+         * See https://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#/properties/credentials/properties/clientId
          */
         public String clientId;
     }
@@ -36,7 +36,7 @@ public class CredentialsResponse {
     /**
      * Taskcluster credentials. Note that the credentials may not contain a certificate!
      *
-     * See http://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#/properties/credentials
+     * See https://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#/properties/credentials
      */
     public TaskclusterCredentials credentials;
 
@@ -44,7 +44,7 @@ public class CredentialsResponse {
      * Time after which the credentials are no longer valid.  Callers should
      * call `oidcCredentials` again to get fresh credentials before this time.
      *
-     * See http://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#/properties/expires
+     * See https://schemas.taskcluster.net/login/v1/oidc-credentials-response.json#/properties/expires
      */
     public Date expires;
 }

@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.auth;
 /**
  * Details on how the test request was authenticated.
  *
- * See http://schemas.taskcluster.net/auth/v1/test-authenticate-response.json#
+ * See https://schemas.taskcluster.net/auth/v1/test-authenticate-response.json#
  */
 public class TestAuthenticateResponse {
 
@@ -12,7 +12,7 @@ public class TestAuthenticateResponse {
      *
      * Syntax:     ^[A-Za-z0-9!@/:.+|_-]+$
      *
-     * See http://schemas.taskcluster.net/auth/v1/test-authenticate-response.json#/properties/clientId
+     * See https://schemas.taskcluster.net/auth/v1/test-authenticate-response.json#/properties/clientId
      */
     public String clientId;
 
@@ -21,7 +21,7 @@ public class TestAuthenticateResponse {
      *
      * Default:    []
      *
-     * See http://schemas.taskcluster.net/auth/v1/test-authenticate-response.json#/properties/scopes
+     * See https://schemas.taskcluster.net/auth/v1/test-authenticate-response.json#/properties/scopes
      */
     public String[] scopes;
 }

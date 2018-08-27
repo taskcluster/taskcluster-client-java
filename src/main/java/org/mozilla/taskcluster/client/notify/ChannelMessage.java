@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.notify;
 /**
  * Request to post a message on IRC.
  *
- * See http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[0]
+ * See https://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[0]
  */
 public class ChannelMessage {
 
@@ -13,12 +13,12 @@ public class ChannelMessage {
      * Syntax:     ^[#&][^ ,\u0007]{1,199}$
      * Min length: 1
      *
-     * See http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[0]/properties/channel
+     * See https://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[0]/properties/channel
      */
     public String channel;
 
     /**
-     * See http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[0]/properties/message
+     * See https://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[0]/properties/message
      */
     public String message;
 }

@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.queueevents;
 /**
  * Message reporting that a task has complete successfully.
  *
- * See http://schemas.taskcluster.net/queue/v1/task-completed-message.json#
+ * See https://schemas.taskcluster.net/queue/v1/task-completed-message.json#
  */
 public class TaskCompletedMessage {
 
@@ -13,12 +13,12 @@ public class TaskCompletedMessage {
      * Mininum:    0
      * Maximum:    1000
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-completed-message.json#/properties/runId
+     * See https://schemas.taskcluster.net/queue/v1/task-completed-message.json#/properties/runId
      */
     public int runId;
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/task-completed-message.json#/properties/status
+     * See https://schemas.taskcluster.net/queue/v1/task-completed-message.json#/properties/status
      */
     public TaskStatusStructure status;
 
@@ -28,7 +28,7 @@ public class TaskCompletedMessage {
      * Possible values:
      *     * 1
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-completed-message.json#/properties/version
+     * See https://schemas.taskcluster.net/queue/v1/task-completed-message.json#/properties/version
      */
     public int version;
 
@@ -39,7 +39,7 @@ public class TaskCompletedMessage {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-completed-message.json#/properties/workerGroup
+     * See https://schemas.taskcluster.net/queue/v1/task-completed-message.json#/properties/workerGroup
      */
     public String workerGroup;
 
@@ -50,7 +50,7 @@ public class TaskCompletedMessage {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-completed-message.json#/properties/workerId
+     * See https://schemas.taskcluster.net/queue/v1/task-completed-message.json#/properties/workerId
      */
     public String workerId;
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Representation of the index entry to insert.
  *
- * See http://schemas.taskcluster.net/index/v1/insert-task-request.json#
+ * See https://schemas.taskcluster.net/index/v1/insert-task-request.json#
  */
 public class InsertTaskRequest {
 
@@ -14,14 +14,14 @@ public class InsertTaskRequest {
      * here, but do limit it, you'll get errors if you store more than 32KB.
      * So stay well, below that limit.
      *
-     * See http://schemas.taskcluster.net/index/v1/insert-task-request.json#/properties/data
+     * See https://schemas.taskcluster.net/index/v1/insert-task-request.json#/properties/data
      */
     public Object data;
 
     /**
      * Date at which this entry expires from the task index.
      *
-     * See http://schemas.taskcluster.net/index/v1/insert-task-request.json#/properties/expires
+     * See https://schemas.taskcluster.net/index/v1/insert-task-request.json#/properties/expires
      */
     public Date expires;
 
@@ -30,7 +30,7 @@ public class InsertTaskRequest {
      * highest `rank` will be stored and returned in later requests. If two tasks
      * has the same `rank` the latest task will be stored.
      *
-     * See http://schemas.taskcluster.net/index/v1/insert-task-request.json#/properties/rank
+     * See https://schemas.taskcluster.net/index/v1/insert-task-request.json#/properties/rank
      */
     public int rank;
 
@@ -41,7 +41,7 @@ public class InsertTaskRequest {
      *
      * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
      *
-     * See http://schemas.taskcluster.net/index/v1/insert-task-request.json#/properties/taskId
+     * See https://schemas.taskcluster.net/index/v1/insert-task-request.json#/properties/taskId
      */
     public String taskId;
 }

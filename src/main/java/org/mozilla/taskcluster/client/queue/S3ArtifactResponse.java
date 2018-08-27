@@ -6,7 +6,7 @@ import java.util.Date;
  * Response to a request for a signed PUT URL that will allow you to
  * upload an artifact to an S3 bucket managed by the queue.
  *
- * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[1]
+ * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[1]
  */
 public class S3ArtifactResponse {
 
@@ -16,14 +16,14 @@ public class S3ArtifactResponse {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[1]/properties/contentType
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[1]/properties/contentType
      */
     public String contentType;
 
     /**
      * Date-time after which the signed `putUrl` no longer works
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[1]/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[1]/properties/expires
      */
     public Date expires;
 
@@ -32,7 +32,7 @@ public class S3ArtifactResponse {
      * requested. Note, the `Content-Length` must be specified correctly,
      * and the `ContentType` header must be set the value specified below.
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[1]/properties/putUrl
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[1]/properties/putUrl
      */
     public String putUrl;
 
@@ -42,7 +42,7 @@ public class S3ArtifactResponse {
      * Possible values:
      *     * "s3"
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[1]/properties/storageType
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[1]/properties/storageType
      */
     public String storageType;
 }

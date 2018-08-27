@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.auth;
 /**
  * Request to authenticate a hawk request.
  *
- * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#
+ * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#
  */
 public class HawkSignatureAuthenticationRequest {
 
@@ -11,7 +11,7 @@ public class HawkSignatureAuthenticationRequest {
      * Authorization header, **must** only be specified if request being
      * authenticated has a `Authorization` header.
      *
-     * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/authorization
+     * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/authorization
      */
     public String authorization;
 
@@ -19,7 +19,7 @@ public class HawkSignatureAuthenticationRequest {
      * Host for which the request came in, this is typically the `Host` header
      * excluding the port if any.
      *
-     * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/host
+     * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/host
      */
     public String host;
 
@@ -54,7 +54,7 @@ public class HawkSignatureAuthenticationRequest {
      *     * "search"
      *     * "connect"
      *
-     * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/method
+     * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/method
      */
     public String method;
 
@@ -66,7 +66,7 @@ public class HawkSignatureAuthenticationRequest {
      * Mininum:    0
      * Maximum:    65535
      *
-     * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/port
+     * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/port
      */
     public int port;
 
@@ -75,7 +75,7 @@ public class HawkSignatureAuthenticationRequest {
      * string that follows the HTTP method.
      * **Note,** order of querystring elements is important.
      *
-     * See http://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/resource
+     * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/resource
      */
     public String resource;
 }

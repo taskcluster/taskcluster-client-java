@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.queueevents;
 /**
  * Message reporting that Taskcluster have failed to run a task.
  *
- * See http://schemas.taskcluster.net/queue/v1/task-exception-message.json#
+ * See https://schemas.taskcluster.net/queue/v1/task-exception-message.json#
  */
 public class TaskExceptionMessage {
 
@@ -14,12 +14,12 @@ public class TaskExceptionMessage {
      * Mininum:    0
      * Maximum:    1000
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-exception-message.json#/properties/runId
+     * See https://schemas.taskcluster.net/queue/v1/task-exception-message.json#/properties/runId
      */
     public int runId;
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/task-exception-message.json#/properties/status
+     * See https://schemas.taskcluster.net/queue/v1/task-exception-message.json#/properties/status
      */
     public TaskStatusStructure status;
 
@@ -29,7 +29,7 @@ public class TaskExceptionMessage {
      * Possible values:
      *     * 1
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-exception-message.json#/properties/version
+     * See https://schemas.taskcluster.net/queue/v1/task-exception-message.json#/properties/version
      */
     public int version;
 
@@ -41,7 +41,7 @@ public class TaskExceptionMessage {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-exception-message.json#/properties/workerGroup
+     * See https://schemas.taskcluster.net/queue/v1/task-exception-message.json#/properties/workerGroup
      */
     public String workerGroup;
 
@@ -54,7 +54,7 @@ public class TaskExceptionMessage {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-exception-message.json#/properties/workerId
+     * See https://schemas.taskcluster.net/queue/v1/task-exception-message.json#/properties/workerId
      */
     public String workerId;
 }

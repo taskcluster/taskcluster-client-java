@@ -7,7 +7,7 @@ import java.util.Date;
  * that will allow you to upload an artifact to an Azure blob storage
  * container managed by the queue.
  *
- * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[2]
+ * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[2]
  */
 public class AzureArtifactResponse {
 
@@ -17,7 +17,7 @@ public class AzureArtifactResponse {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[2]/properties/contentType
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[2]/properties/contentType
      */
     public String contentType;
 
@@ -25,7 +25,7 @@ public class AzureArtifactResponse {
      * Date-time after which Shared Access Signature (SAS) will
      * seize to work.
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[2]/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[2]/properties/expires
      */
     public Date expires;
 
@@ -35,7 +35,7 @@ public class AzureArtifactResponse {
      * (http://msdn.microsoft.com/en-US/library/azure/dn140256.aspx)
      * reference for details on how to use this.
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[2]/properties/putUrl
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[2]/properties/putUrl
      */
     public String putUrl;
 
@@ -45,7 +45,7 @@ public class AzureArtifactResponse {
      * Possible values:
      *     * "azure"
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[2]/properties/storageType
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[2]/properties/storageType
      */
     public String storageType;
 }

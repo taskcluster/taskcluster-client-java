@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * List of artifacts for a given `taskId` and `runId`.
  *
- * See http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#
+ * See https://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#
  */
 public class ListArtifactsResponse {
 
@@ -16,7 +16,7 @@ public class ListArtifactsResponse {
          *
          * Max length: 255
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/contentType
+         * See https://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/contentType
          */
         public String contentType;
 
@@ -24,7 +24,7 @@ public class ListArtifactsResponse {
          * Date and time after which the artifact created will be automatically
          * deleted by the queue.
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/expires
+         * See https://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/expires
          */
         public Date expires;
 
@@ -34,7 +34,7 @@ public class ListArtifactsResponse {
          *
          * Max length: 1024
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/name
+         * See https://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/name
          */
         public String name;
 
@@ -49,7 +49,7 @@ public class ListArtifactsResponse {
          *     * "reference"
          *     * "error"
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/storageType
+         * See https://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts/items/properties/storageType
          */
         public String storageType;
     }
@@ -57,7 +57,7 @@ public class ListArtifactsResponse {
     /**
      * List of artifacts for given `taskId` and `runId`.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts
+     * See https://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/artifacts
      */
     public Artifact[] artifacts;
 
@@ -70,7 +70,7 @@ public class ListArtifactsResponse {
      * all the results if you've called with `continuationToken` until you get a
      * result without a `continuationToken`.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/continuationToken
+     * See https://schemas.taskcluster.net/queue/v1/list-artifacts-response.json#/properties/continuationToken
      */
     public String continuationToken;
 }

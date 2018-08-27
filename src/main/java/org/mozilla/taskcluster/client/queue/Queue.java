@@ -25,7 +25,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class Queue extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://queue.taskcluster.net/v1";
+    protected static final String defaultBaseURL = "https://queue.taskcluster.net/v1/";
 
     public Queue(Credentials credentials) {
         super(credentials, defaultBaseURL);
@@ -49,6 +49,16 @@ public class Queue extends TaskclusterRequestHandler {
 
     public Queue() {
         super(defaultBaseURL);
+    }
+
+    /**
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
+     *
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#ping)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
+        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 
     /**
@@ -123,15 +133,15 @@ public class Queue extends TaskclusterRequestHandler {
      * Create a new task, this is an **idempotent** operation, so repeat it if
      * you get an internal server error or network connection is dropped.
      * 
-     * **Task `deadline´**, the deadline property can be no more than 5 days
+     * **Task `deadline`**: the deadline property can be no more than 5 days
      * into the future. This is to limit the amount of pending tasks not being
      * taken care of. Ideally, you should use a much shorter deadline.
      * 
-     * **Task expiration**, the `expires` property must be greater than the
+     * **Task expiration**: the `expires` property must be greater than the
      * task `deadline`. If not provided it will default to `deadline` + one
      * year. Notice, that artifacts created by task must expire before the task.
      * 
-     * **Task specific routing-keys**, using the `task.routes` property you may
+     * **Task specific routing-keys**: using the `task.routes` property you may
      * define task specific routing-keys. If a task has a task specific 
      * routing-key: `<route>`, then when the AMQP message about the task is
      * published, the message will be CC'ed with the routing-key: 
@@ -139,11 +149,17 @@ public class Queue extends TaskclusterRequestHandler {
      * for completed tasks you have posted.  The caller must have scope
      * `queue:route:<route>` for each route.
      * 
-     * **Dependencies**, any tasks referenced in `task.dependencies` must have
+     * **Dependencies**: any tasks referenced in `task.dependencies` must have
      * already been created at the time of this call.
      * 
-     * **Important** Any scopes the task requires are also required for creating
-     * the task. Please see the Request Payload (Task Definition) for details.
+     * **Scopes**: Note that the scopes required to complete this API call depend
+     * on the content of the `scopes`, `routes`, `schedulerId`, `priority`,
+     * `provisionerId`, and `workerType` properties of the task definition.
+     * 
+     * **Legacy Scopes**: The `queue:create-task:..` scope without a priority and
+     * the `queue:define-task:..` and `queue:task-group-id:..` scopes are considered
+     * legacy and should not be used. Note that the new, non-legacy scopes require
+     * a `queue:scheduler-id:..` scope as well as scopes for the proper priority.
 
      * Required scopes:
      *   All of:
@@ -277,25 +293,14 @@ public class Queue extends TaskclusterRequestHandler {
     }
 
     /**
-     * Get a signed URLs to get and delete messages from azure queue.
-     * Once messages are polled from here, you can claim the referenced task
-     * with `claimTask`, and afterwards you should always delete the message.
-
-     * Required scopes:
-     *   Any of:
-     *   - queue:poll-task-urls:<provisionerId>/<workerType>
-     *   - All of:
-     *     * queue:poll-task-urls
-     *     * assume:worker-type:<provisionerId>/<workerType>
-     *
-     * @see "[Get Urls to Poll Pending Tasks API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#pollTaskUrls)"
-     */
-    public CallSummary<EmptyPayload, PollTaskUrlsResponse> pollTaskUrls(String provisionerId, String workerType) throws APICallFailure {
-        return apiCall(null, "GET", "/poll-task-url/" + uriEncode(provisionerId) + "/" + uriEncode(workerType), PollTaskUrlsResponse.class);
-    }
-
-    /**
-     * Claim any task, more to be added later... long polling up to 20s.
+     * Claim pending task(s) for the given `provisionerId`/`workerType` queue.
+     * 
+     * If any work is available (even if fewer than the requested number of
+     * tasks, this will return immediately. Otherwise, it will block for tens of
+     * seconds waiting for work.  If no work appears, it will return an emtpy
+     * list of tasks.  Callers should sleep a short while (to avoid denial of
+     * service in an error condition) and call the endpoint again.  This is a
+     * simple implementation of "long polling".
 
      * Required scopes:
      *   All of:
@@ -309,7 +314,7 @@ public class Queue extends TaskclusterRequestHandler {
     }
 
     /**
-     * claim a task, more to be added later...
+     * claim a task - never documented
 
      * Required scopes:
      *   Any of:
@@ -485,9 +490,9 @@ public class Queue extends TaskclusterRequestHandler {
      * would otherwise have uploaded. For example docker-worker will upload an
      * error artifact, if the file it was supposed to upload doesn't exists or
      * turns out to be a directory. Clients requesting an error artifact will
-     * get a `403` (Forbidden) response. This is mainly designed to ensure that
-     * dependent tasks can distinguish between artifacts that were suppose to
-     * be generated and artifacts for which the name is misspelled.
+     * get a `424` (Failed Dependency) response. This is mainly designed to
+     * ensure that dependent tasks can distinguish between artifacts that were
+     * suppose to be generated and artifacts for which the name is misspelled.
      * 
      * **Artifact immutability**, generally speaking you cannot overwrite an
      * artifact when created. But if you repeat the request with the same
@@ -848,15 +853,5 @@ public class Queue extends TaskclusterRequestHandler {
      */
     public CallSummary<WorkerRequest, WorkerResponse> declareWorker(String provisionerId, String workerType, String workerGroup, String workerId, WorkerRequest payload) throws APICallFailure {
         return apiCall(payload, "PUT", "/provisioners/" + uriEncode(provisionerId) + "/worker-types/" + uriEncode(workerType) + "/" + uriEncode(workerGroup) + "/" + uriEncode(workerId), WorkerResponse.class);
-    }
-
-    /**
-     * Respond without doing anything.
-     * This endpoint is used to check that the service is up.
-     *
-     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/platform/queue/api-docs#ping)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
-        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }

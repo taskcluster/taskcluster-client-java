@@ -5,14 +5,14 @@ import java.util.Date;
 /**
  * Definition of a task that can be scheduled
  *
- * See http://schemas.taskcluster.net/queue/v1/task.json#
+ * See https://schemas.taskcluster.net/queue/v1/task.json#
  */
 public class TaskDefinitionResponse {
 
     /**
      * Creation time of task
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/created
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/created
      */
     public Date created;
 
@@ -22,7 +22,7 @@ public class TaskDefinitionResponse {
      * before the deadline. Note, deadline cannot be more than
      * 5 days into the future
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/deadline
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/deadline
      */
     public Date deadline;
 
@@ -30,7 +30,9 @@ public class TaskDefinitionResponse {
      * List of dependent tasks. These must either be _completed_ or _resolved_
      * before this task is scheduled. See `requires` for semantics.
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/dependencies
+     * Default:    []
+     *
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/dependencies
      */
     public String[] dependencies;
 
@@ -38,9 +40,9 @@ public class TaskDefinitionResponse {
      * Task expiration, time at which task definition and status is deleted.
      * Notice that all artifacts for the task must have an expiration that is no
      * later than this. If this property isn't it will be set to `deadline`
-     * plus one year (this default may subject to change).
+     * plus one year (this default may change).
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/expires
      */
     public Date expires;
 
@@ -52,33 +54,34 @@ public class TaskDefinitionResponse {
      * display on _treeherder_, or information for indexing the task. Please, try
      * to put all related information under one property, so `extra` data keys
      * for treeherder reporting and task indexing don't conflict, hence, we have
-     * reusable services. **Warning**, do not stuff large data-sets in here,
+     * reusable services. **Warning**, do not stuff large data-sets in here --
      * task definitions should not take-up multiple MiBs.
      *
      * Default:    {}
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/extra
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/extra
      */
     public Object extra;
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/metadata
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/metadata
      */
     public TaskMetadata metadata;
 
     /**
-     * Task-specific payload following worker-specific format. For example the
-     * `docker-worker` requires keys like: `image`, `commands` and
-     * `features`. Refer to the documentation of `docker-worker` for details.
+     * Task-specific payload following worker-specific format.
+     * Refer to the documentation for the worker implementing
+     * `<provisionerId>/<workerType>` for details.
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/payload
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/payload
      */
     public Object payload;
 
     /**
-     * Priority of task, this defaults to `lowest` and the scope
+     * Priority of task. This defaults to `lowest` and the scope
      * `queue:create-task:<priority>/<provisionerId>/<workerType>` is required
-     * to define a task with `<priority>`.
+     * to define a task with `<priority>`. The `normal` priority is treated as
+     * `lowest`.
      *
      * Possible values:
      *     * "highest"
@@ -88,8 +91,10 @@ public class TaskDefinitionResponse {
      *     * "low"
      *     * "very-low"
      *     * "lowest"
+     *     * "normal"
+     * Default:    "lowest"
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/priority
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/priority
      */
     public String priority;
 
@@ -101,7 +106,7 @@ public class TaskDefinitionResponse {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/provisionerId
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/provisionerId
      */
     public String provisionerId;
 
@@ -116,8 +121,9 @@ public class TaskDefinitionResponse {
      * Possible values:
      *     * "all-completed"
      *     * "all-resolved"
+     * Default:    "all-completed"
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/requires
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/requires
      */
     public String requires;
 
@@ -126,40 +132,48 @@ public class TaskDefinitionResponse {
      * An _infrastructure issue_ is a worker node that crashes or is shutdown,
      * these events are to be expected.
      *
+     * Default:    5
      * Mininum:    0
      * Maximum:    49
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/retries
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/retries
      */
     public int retries;
 
     /**
-     * List of task specific routes, AMQP messages will be CC'ed to these routes.
+     * List of task-specific routes. Pulse messages about the task will be CC'ed to
+     * `route.<value>` for each `<value>` in this array.
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/routes
+     * Default:    []
+     *
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/routes
      */
     public String[] routes;
 
     /**
-     * Identifier for the scheduler that _defined_ this task, this can be an
-     * identifier for a user or a service like the `"task-graph-scheduler"`.
-     * Along with the `taskGroupId` this is used to form the permission scope
-     * `queue:assume:scheduler-id:<schedulerId>/<taskGroupId>`,
-     * this scope is necessary to _schedule_ a defined task, or _rerun_ a task.
+     * All tasks in a task group must have the same `schedulerId`. This is used for several purposes:
      *
+     * * it can represent the entity that created the task;
+     * * it can limit addition of new tasks to a task group: the caller of
+     *     `createTask` must have a scope related to the `schedulerId` of the task
+     *     group;
+     * * it controls who can manipulate tasks, again by requiring
+     *     `schedulerId`-related scopes; and
+     * * it appears in the routing key for Pulse messages about the task.
+     *
+     * Default:    "-"
      * Syntax:     ^([a-zA-Z0-9-_]*)$
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/schedulerId
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/schedulerId
      */
     public String schedulerId;
 
     /**
-     * List of scopes (or scope-patterns) that the task is
-     * authorized to use.
+     * List of scopes that the task is authorized to use during its execution.
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/scopes
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/scopes
      */
     public String[] scopes;
 
@@ -170,19 +184,23 @@ public class TaskDefinitionResponse {
      * candidates for formal metadata. Something like
      * `purpose: 'build' || 'test'` is a good example.
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/tags
+     * Default:    {}
+     *
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/tags
      */
     public Object tags;
 
     /**
-     * Identifier for a group of tasks scheduled together with this task, by
-     * scheduler identified by `schedulerId`. For tasks scheduled by the
-     * task-graph scheduler, this is the `taskGraphId`.  Defaults to `taskId` if
-     * property isn't specified.
+     * Identifier for a group of tasks scheduled together with this task.
+     * Generally, all tasks related to a single event such as a version-control
+     * push or a nightly build have the same `taskGroupId`.  This property
+     * defaults to `taskId` if it isn't specified.  Tasks with `taskId` equal to
+     * the `taskGroupId` are, [by convention](/docs/manual/using/task-graph),
+     * decision tasks.
      *
      * Syntax:     ^[A-Za-z0-9_-]{8}[Q-T][A-Za-z0-9_-][CGKOSWaeimquy26-][A-Za-z0-9_-]{10}[AQgw]$
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/taskGroupId
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/taskGroupId
      */
     public String taskGroupId;
 
@@ -193,7 +211,7 @@ public class TaskDefinitionResponse {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task.json#/properties/workerType
+     * See https://schemas.taskcluster.net/queue/v1/task.json#/properties/workerType
      */
     public String workerType;
 }

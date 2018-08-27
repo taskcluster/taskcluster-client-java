@@ -5,12 +5,12 @@ import java.util.Date;
 /**
  * Response to a successful task claim
  *
- * See http://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#
+ * See https://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#
  */
 public class TaskReclaimResponse {
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#/properties/credentials
+     * See https://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#/properties/credentials
      */
     public TaskCredentials credentials;
 
@@ -20,12 +20,12 @@ public class TaskReclaimResponse {
      * Mininum:    0
      * Maximum:    1000
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#/properties/runId
+     * See https://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#/properties/runId
      */
     public int runId;
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#/properties/status
+     * See https://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#/properties/status
      */
     public TaskStatusStructure status;
 
@@ -33,7 +33,7 @@ public class TaskReclaimResponse {
      * Time at which the run expires and is resolved as `exception`,
      * with reason `claim-expired` if the run haven't been reclaimed.
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#/properties/takenUntil
+     * See https://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#/properties/takenUntil
      */
     public Date takenUntil;
 
@@ -44,7 +44,7 @@ public class TaskReclaimResponse {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#/properties/workerGroup
+     * See https://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#/properties/workerGroup
      */
     public String workerGroup;
 
@@ -55,7 +55,7 @@ public class TaskReclaimResponse {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#/properties/workerId
+     * See https://schemas.taskcluster.net/queue/v1/task-reclaim-response.json#/properties/workerId
      */
     public String workerId;
 }

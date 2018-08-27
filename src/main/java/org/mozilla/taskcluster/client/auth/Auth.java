@@ -55,7 +55,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class Auth extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://auth.taskcluster.net/v1";
+    protected static final String defaultBaseURL = "https://auth.taskcluster.net/v1/";
 
     public Auth(Credentials credentials) {
         super(credentials, defaultBaseURL);
@@ -79,6 +79,16 @@ public class Auth extends TaskclusterRequestHandler {
 
     public Auth() {
         super(defaultBaseURL);
+    }
+
+    /**
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
+     *
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#ping)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
+        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 
     /**
@@ -574,15 +584,5 @@ public class Auth extends TaskclusterRequestHandler {
      */
     public CallSummary<EmptyPayload, TestAuthenticateResponse> testAuthenticateGet() throws APICallFailure {
         return apiCall(null, "GET", "/test-authenticate-get/", TestAuthenticateResponse.class);
-    }
-
-    /**
-     * Respond without doing anything.
-     * This endpoint is used to check that the service is up.
-     *
-     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/platform/auth/api-docs#ping)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
-        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }

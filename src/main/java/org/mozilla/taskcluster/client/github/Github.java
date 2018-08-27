@@ -25,7 +25,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class Github extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://github.taskcluster.net/v1";
+    protected static final String defaultBaseURL = "https://github.taskcluster.net/v1/";
 
     public Github(Credentials credentials) {
         super(credentials, defaultBaseURL);
@@ -49,6 +49,16 @@ public class Github extends TaskclusterRequestHandler {
 
     public Github() {
         super(defaultBaseURL);
+    }
+
+    /**
+     * Respond without doing anything.
+     * This endpoint is used to check that the service is up.
+     *
+     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#ping)"
+     */
+    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
+        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 
     /**
@@ -130,15 +140,5 @@ public class Github extends TaskclusterRequestHandler {
      */
     public CallSummary<CreateCommentRequest, EmptyPayload> createComment(String owner, String repo, String number, CreateCommentRequest payload) throws APICallFailure {
         return apiCall(payload, "POST", "/repository/" + uriEncode(owner) + "/" + uriEncode(repo) + "/issues/" + uriEncode(number) + "/comments", EmptyPayload.class);
-    }
-
-    /**
-     * Respond without doing anything.
-     * This endpoint is used to check that the service is up.
-     *
-     * @see "[Ping Server API Documentation](https://docs.taskcluster.net/reference/core/github/api-docs#ping)"
-     */
-    public CallSummary<EmptyPayload, EmptyPayload> ping() throws APICallFailure {
-        return apiCall(null, "GET", "/ping", EmptyPayload.class);
     }
 }

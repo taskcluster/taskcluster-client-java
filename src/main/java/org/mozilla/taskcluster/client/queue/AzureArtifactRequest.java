@@ -7,7 +7,7 @@ import java.util.Date;
  * you to upload an artifact to an Azure blob storage container managed
  * by the queue.
  *
- * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[2]
+ * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[2]
  */
 public class AzureArtifactRequest {
 
@@ -19,7 +19,7 @@ public class AzureArtifactRequest {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[2]/properties/contentType
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[2]/properties/contentType
      */
     public String contentType;
 
@@ -30,7 +30,7 @@ public class AzureArtifactRequest {
      * identified in azure table storage and explicitly deleted in the
      * azure storage container after expiration.
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[2]/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[2]/properties/expires
      */
     public Date expires;
 
@@ -40,7 +40,7 @@ public class AzureArtifactRequest {
      * Possible values:
      *     * "azure"
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[2]/properties/storageType
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[2]/properties/storageType
      */
     public String storageType;
 }

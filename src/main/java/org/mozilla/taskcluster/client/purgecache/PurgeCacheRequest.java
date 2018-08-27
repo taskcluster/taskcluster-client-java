@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.purgecache;
 /**
  * Request that a message be published to purge a specific cache.
  *
- * See http://schemas.taskcluster.net/purge-cache/v1/purge-cache-request.json#
+ * See https://schemas.taskcluster.net/purge-cache/v1/purge-cache-request.json#
  */
 public class PurgeCacheRequest {
 
@@ -12,7 +12,7 @@ public class PurgeCacheRequest {
      * of caches (with independent names), it should purge all caches identified
      * by `cacheName` regardless of cache type.
      *
-     * See http://schemas.taskcluster.net/purge-cache/v1/purge-cache-request.json#/properties/cacheName
+     * See https://schemas.taskcluster.net/purge-cache/v1/purge-cache-request.json#/properties/cacheName
      */
     public String cacheName;
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Get all details about a client, useful for tools modifying a client
  *
- * See http://schemas.taskcluster.net/auth/v1/get-client-response.json#
+ * See https://schemas.taskcluster.net/auth/v1/get-client-response.json#
  */
 public class GetClientResponse {
 
@@ -14,14 +14,14 @@ public class GetClientResponse {
      *
      * Syntax:     ^[A-Za-z0-9!@/:.+|_-]+$
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/clientId
+     * See https://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/clientId
      */
     public String clientId;
 
     /**
      * Date and time when this client was created
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/created
+     * See https://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/created
      */
     public Date created;
 
@@ -30,7 +30,7 @@ public class GetClientResponse {
      * `false`, the client will remain after expiration, although it cannot be
      * used for authentication in that state.
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/deleteOnExpiration
+     * See https://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/deleteOnExpiration
      */
     public boolean deleteOnExpiration;
 
@@ -40,7 +40,7 @@ public class GetClientResponse {
      *
      * Max length: 10240
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/description
+     * See https://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/description
      */
     public String description;
 
@@ -48,7 +48,7 @@ public class GetClientResponse {
      * If true, this client is disabled and cannot be used.  This usually occurs when the
      * scopes available to the user owning the client no longer satisfy the client.
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/disabled
+     * See https://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/disabled
      */
     public boolean disabled;
 
@@ -56,14 +56,14 @@ public class GetClientResponse {
      * List of scopes granted to this client by matching roles.  Scopes must be
      * composed of printable ASCII characters and spaces.
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/expandedScopes
+     * See https://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/expandedScopes
      */
     public String[] expandedScopes;
 
     /**
      * Date and time where the clients access is set to expire
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/expires
+     * See https://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/expires
      */
     public Date expires;
 
@@ -72,21 +72,21 @@ public class GetClientResponse {
      * or so this may be off by up-to 6 hours. But it still gives a solid hint
      * as to whether or not this client is in use.
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/lastDateUsed
+     * See https://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/lastDateUsed
      */
     public Date lastDateUsed;
 
     /**
      * Date and time of last modification
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/lastModified
+     * See https://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/lastModified
      */
     public Date lastModified;
 
     /**
      * Date and time of when the `accessToken` was reset last time.
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/lastRotated
+     * See https://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/lastRotated
      */
     public Date lastRotated;
 
@@ -96,7 +96,7 @@ public class GetClientResponse {
      *
      * Default:    []
      *
-     * See http://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/scopes
+     * See https://schemas.taskcluster.net/auth/v1/get-client-response.json#/properties/scopes
      */
     public String[] scopes;
 }

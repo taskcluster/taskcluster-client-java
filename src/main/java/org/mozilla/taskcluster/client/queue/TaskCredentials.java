@@ -17,7 +17,7 @@ package org.mozilla.taskcluster.client.queue;
  * Note, a new set of temporary credentials is issued when the worker
  * reclaims the task.
  *
- * See http://schemas.taskcluster.net/queue/v1/task-credentials.json#
+ * See https://schemas.taskcluster.net/queue/v1/task-credentials.json#
  */
 public class TaskCredentials {
 
@@ -26,7 +26,7 @@ public class TaskCredentials {
      *
      * Min length: 1
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-credentials.json#/properties/accessToken
+     * See https://schemas.taskcluster.net/queue/v1/task-credentials.json#/properties/accessToken
      */
     public String accessToken;
 
@@ -36,7 +36,7 @@ public class TaskCredentials {
      *
      * Min length: 1
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-credentials.json#/properties/certificate
+     * See https://schemas.taskcluster.net/queue/v1/task-credentials.json#/properties/certificate
      */
     public String certificate;
 
@@ -45,7 +45,7 @@ public class TaskCredentials {
      *
      * Min length: 1
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-credentials.json#/properties/clientId
+     * See https://schemas.taskcluster.net/queue/v1/task-credentials.json#/properties/clientId
      */
     public String clientId;
 }

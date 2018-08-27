@@ -11,7 +11,7 @@ import java.util.Date;
  * stored on the worker host and only available there for a specific
  * amount of time.
  *
- * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]
+ * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]
  */
 public class RedirectArtifactRequest {
 
@@ -23,7 +23,7 @@ public class RedirectArtifactRequest {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]/properties/contentType
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]/properties/contentType
      */
     public String contentType;
 
@@ -32,7 +32,7 @@ public class RedirectArtifactRequest {
      * Note, that the queue will and cannot delete the resource your URL
      * references, you are responsible for doing that yourself.
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]/properties/expires
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]/properties/expires
      */
     public Date expires;
 
@@ -42,7 +42,7 @@ public class RedirectArtifactRequest {
      * Possible values:
      *     * "reference"
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]/properties/storageType
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]/properties/storageType
      */
     public String storageType;
 
@@ -50,7 +50,7 @@ public class RedirectArtifactRequest {
      * URL to which the queue should redirect using a `303` (See other)
      * redirect.
      *
-     * See http://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]/properties/url
+     * See https://schemas.taskcluster.net/queue/v1/post-artifact-request.json#/oneOf[3]/properties/url
      */
     public String url;
 }

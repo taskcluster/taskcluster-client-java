@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Representation of a namespace that contains indexed tasks.
  *
- * See http://schemas.taskcluster.net/index/v1/list-namespaces-response.json#/properties/namespaces/items
+ * See https://schemas.taskcluster.net/index/v1/list-namespaces-response.json#/properties/namespaces/items
  */
 public class Namespace {
 
@@ -13,14 +13,14 @@ public class Namespace {
      * Date at which this entry, and by implication all entries below it,
      * expires from the task index.
      *
-     * See http://schemas.taskcluster.net/index/v1/list-namespaces-response.json#/properties/namespaces/items/properties/expires
+     * See https://schemas.taskcluster.net/index/v1/list-namespaces-response.json#/properties/namespaces/items/properties/expires
      */
     public Date expires;
 
     /**
      * Name of namespace within it's parent namespace.
      *
-     * See http://schemas.taskcluster.net/index/v1/list-namespaces-response.json#/properties/namespaces/items/properties/name
+     * See https://schemas.taskcluster.net/index/v1/list-namespaces-response.json#/properties/namespaces/items/properties/name
      */
     public String name;
 
@@ -30,7 +30,7 @@ public class Namespace {
      *
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/index/v1/list-namespaces-response.json#/properties/namespaces/items/properties/namespace
+     * See https://schemas.taskcluster.net/index/v1/list-namespaces-response.json#/properties/namespaces/items/properties/namespace
      */
     public String namespace;
 }

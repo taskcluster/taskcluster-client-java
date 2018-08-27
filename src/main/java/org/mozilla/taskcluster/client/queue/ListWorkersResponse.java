@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Response from a `listWorkers` request.
  *
- * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#
+ * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#
  */
 public class ListWorkersResponse {
 
@@ -18,7 +18,7 @@ public class ListWorkersResponse {
      * all the results if you've called `listWorkerTypes` with `continuationToken`
      * until you get a result without a `continuationToken`.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/continuationToken
+     * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/continuationToken
      */
     public String continuationToken;
 
@@ -27,14 +27,14 @@ public class ListWorkersResponse {
         /**
          * Date of the first time this worker claimed a task.
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/firstClaim
+         * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/firstClaim
          */
         public Date firstClaim;
 
         /**
          * The most recent claimed task
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/latestTask
+         * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/latestTask
          */
         public TaskRun latestTask;
 
@@ -44,7 +44,7 @@ public class ListWorkersResponse {
          * Note that a quarantine can be lifted by setting `quarantineUntil` to the present time (or
          * somewhere in the past).
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/quarantineUntil
+         * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/quarantineUntil
          */
         public Date quarantineUntil;
 
@@ -55,7 +55,7 @@ public class ListWorkersResponse {
          * Min length: 1
          * Max length: 22
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/workerGroup
+         * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/workerGroup
          */
         public String workerGroup;
 
@@ -66,7 +66,7 @@ public class ListWorkersResponse {
          * Min length: 1
          * Max length: 22
          *
-         * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/workerId
+         * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers/items/properties/workerId
          */
         public String workerId;
     }
@@ -74,7 +74,7 @@ public class ListWorkersResponse {
     /**
      * List of workers in this worker-type.
      *
-     * See http://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers
+     * See https://schemas.taskcluster.net/queue/v1/list-workers-response.json#/properties/workers
      */
     public Worker[] workers;
 }

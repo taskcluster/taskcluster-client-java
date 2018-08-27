@@ -3,12 +3,12 @@ package org.mozilla.taskcluster.client.notify;
 /**
  * Request to post a message on IRC.
  *
- * See http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]
+ * See https://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]
  */
 public class PrivateMessage {
 
     /**
-     * See http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/properties/message
+     * See https://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/properties/message
      */
     public String message;
 
@@ -19,7 +19,7 @@ public class PrivateMessage {
      * Min length: 1
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/properties/user
+     * See https://schemas.taskcluster.net/notify/v1/irc-request.json#/oneOf[1]/properties/user
      */
     public String user;
 }

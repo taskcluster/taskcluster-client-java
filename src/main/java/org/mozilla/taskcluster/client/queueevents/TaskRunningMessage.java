@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Message reporting that a given run of a task have started
  *
- * See http://schemas.taskcluster.net/queue/v1/task-running-message.json#
+ * See https://schemas.taskcluster.net/queue/v1/task-running-message.json#
  */
 public class TaskRunningMessage {
 
@@ -15,12 +15,12 @@ public class TaskRunningMessage {
      * Mininum:    0
      * Maximum:    1000
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-running-message.json#/properties/runId
+     * See https://schemas.taskcluster.net/queue/v1/task-running-message.json#/properties/runId
      */
     public int runId;
 
     /**
-     * See http://schemas.taskcluster.net/queue/v1/task-running-message.json#/properties/status
+     * See https://schemas.taskcluster.net/queue/v1/task-running-message.json#/properties/status
      */
     public TaskStatusStructure status;
 
@@ -28,7 +28,7 @@ public class TaskRunningMessage {
      * Time at which the run expires and is resolved as `failed`, if the run
      * isn't reclaimed.
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-running-message.json#/properties/takenUntil
+     * See https://schemas.taskcluster.net/queue/v1/task-running-message.json#/properties/takenUntil
      */
     public Date takenUntil;
 
@@ -38,7 +38,7 @@ public class TaskRunningMessage {
      * Possible values:
      *     * 1
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-running-message.json#/properties/version
+     * See https://schemas.taskcluster.net/queue/v1/task-running-message.json#/properties/version
      */
     public int version;
 
@@ -49,7 +49,7 @@ public class TaskRunningMessage {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-running-message.json#/properties/workerGroup
+     * See https://schemas.taskcluster.net/queue/v1/task-running-message.json#/properties/workerGroup
      */
     public String workerGroup;
 
@@ -60,7 +60,7 @@ public class TaskRunningMessage {
      * Min length: 1
      * Max length: 22
      *
-     * See http://schemas.taskcluster.net/queue/v1/task-running-message.json#/properties/workerId
+     * See https://schemas.taskcluster.net/queue/v1/task-running-message.json#/properties/workerId
      */
     public String workerId;
 }
