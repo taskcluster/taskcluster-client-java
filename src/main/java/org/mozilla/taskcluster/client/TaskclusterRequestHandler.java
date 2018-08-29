@@ -113,7 +113,13 @@ public abstract class TaskclusterRequestHandler {
                 // Base64.encodeBytes(messageDigest.digest());
                 String hash = null;
 
-                URI uri = new URI(baseURL + route);
+                // Avoid double / between baseURL and route
+                String url = baseURL;
+                if (!url.endsWith("/")) {
+                    url += "/";
+                }
+                url += route;
+                URI uri = new URI(url);
                 if (credentials != null && authenticate) {
                     String authorizationHeader = credentials.generateAuthorizationHeader(uri, method, hash);
                     HttpHeaders headers = new HttpHeaders();
