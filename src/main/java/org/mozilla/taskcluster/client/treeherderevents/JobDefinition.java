@@ -6,12 +6,12 @@ import java.util.Date;
  * Definition of a single job that can be added to Treeherder
  * Project is determined by the routing key, so we don't need to specify it here.
  *
- * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#
+ * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#
  */
 public class JobDefinition {
 
     /**
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/buildMachine
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/buildMachine
      */
     public Machine buildMachine;
 
@@ -25,14 +25,14 @@ public class JobDefinition {
      * Min length: 1
      * Max length: 25
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/buildSystem
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/buildSystem
      */
     public String buildSystem;
 
     /**
      * The job guids that were coalesced to this job.
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/coalesced
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/coalesced
      */
     public String[] coalesced;
 
@@ -42,7 +42,7 @@ public class JobDefinition {
          *
          * Mininum:    1
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display/properties/chunkCount
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display/properties/chunkCount
          */
         public int chunkCount;
 
@@ -50,7 +50,7 @@ public class JobDefinition {
          *
          * Mininum:    1
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display/properties/chunkId
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display/properties/chunkId
          */
         public int chunkId;
 
@@ -59,7 +59,7 @@ public class JobDefinition {
          * Min length: 1
          * Max length: 100
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display/properties/groupName
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display/properties/groupName
          */
         public String groupName;
 
@@ -68,7 +68,7 @@ public class JobDefinition {
          * Min length: 1
          * Max length: 25
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display/properties/groupSymbol
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display/properties/groupSymbol
          */
         public String groupSymbol;
 
@@ -77,7 +77,7 @@ public class JobDefinition {
          * Min length: 1
          * Max length: 100
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display/properties/jobName
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display/properties/jobName
          */
         public String jobName;
 
@@ -86,27 +86,27 @@ public class JobDefinition {
          * Min length: 0
          * Max length: 25
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display/properties/jobSymbol
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display/properties/jobSymbol
          */
         public String jobSymbol;
     }
 
     /**
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display
      */
     public Display display;
 
     /**
      * Extra information that Treeherder reads on a best-effort basis
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/extra
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/extra
      */
     public Object extra;
 
     /**
      * True indicates this job has been retried.
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/isRetried
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/isRetried
      */
     public boolean isRetried;
 
@@ -119,7 +119,7 @@ public class JobDefinition {
              * Min length: 1
              * Max length: 70
              *
-             * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links/items/properties/label
+             * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links/items/properties/label
              */
             public String label;
 
@@ -128,7 +128,7 @@ public class JobDefinition {
              * Min length: 1
              * Max length: 125
              *
-             * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links/items/properties/linkText
+             * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links/items/properties/linkText
              */
             public String linkText;
 
@@ -136,13 +136,13 @@ public class JobDefinition {
              *
              * Max length: 512
              *
-             * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links/items/properties/url
+             * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links/items/properties/url
              */
             public String url;
         }
 
         /**
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links
          */
         public Link[] links;
 
@@ -150,7 +150,7 @@ public class JobDefinition {
          * Plain text description of the job and its state.  Submitted with
          * the final message about a task.
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/summary
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/jobInfo/properties/summary
          */
         public String summary;
     }
@@ -160,7 +160,7 @@ public class JobDefinition {
      * fields that go along with a job that will be displayed in
      * the details panel within Treeherder.
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/jobInfo
      */
     public JobInfo jobInfo;
 
@@ -172,7 +172,7 @@ public class JobDefinition {
      *     * "other"
      * Default:    "other"
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobKind
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/jobKind
      */
     public String jobKind;
 
@@ -192,7 +192,7 @@ public class JobDefinition {
      *   asan   Address Sanitizer
      *   tsan   Thread Sanitizer Build
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/labels
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/labels
      */
     public String[] labels;
 
@@ -202,7 +202,7 @@ public class JobDefinition {
          * If true, indicates that the number of errors in the log was too
          * large and not all of those lines are indicated here.
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/errorsTruncated
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/errorsTruncated
          */
         public boolean errorsTruncated;
 
@@ -211,7 +211,7 @@ public class JobDefinition {
          * Min length: 1
          * Max length: 50
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/name
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/name
          */
         public String name;
 
@@ -224,7 +224,7 @@ public class JobDefinition {
                  * Min length: 1
                  * Max length: 255
                  *
-                 * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items/properties/line
+                 * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items/properties/line
                  */
                 public String line;
 
@@ -232,13 +232,13 @@ public class JobDefinition {
                  *
                  * Mininum:    0
                  *
-                 * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items/properties/linenumber
+                 * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items/properties/linenumber
                  */
                 public int linenumber;
             }
 
             /**
-             * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors
+             * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors
              */
             public Error[] errors;
 
@@ -246,7 +246,7 @@ public class JobDefinition {
              *
              * Mininum:    0
              *
-             * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/lineFinished
+             * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/lineFinished
              */
             public int lineFinished;
 
@@ -254,7 +254,7 @@ public class JobDefinition {
              *
              * Mininum:    0
              *
-             * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/lineStarted
+             * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/lineStarted
              */
             public int lineStarted;
 
@@ -263,7 +263,7 @@ public class JobDefinition {
              * Min length: 1
              * Max length: 255
              *
-             * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/name
+             * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/name
              */
             public String name;
 
@@ -276,17 +276,17 @@ public class JobDefinition {
              *     * "canceled"
              *     * "unknown"
              *
-             * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/result
+             * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/result
              */
             public String result;
 
             /**
-             * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/timeFinished
+             * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/timeFinished
              */
             public Date timeFinished;
 
             /**
-             * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/timeStarted
+             * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/timeStarted
              */
             public Date timeStarted;
         }
@@ -298,7 +298,7 @@ public class JobDefinition {
          * submitted log.  If this value is submitted, Treeherder will
          * consider the log already parsed and skip parsing.
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps
          */
         public Step[] steps;
 
@@ -307,18 +307,18 @@ public class JobDefinition {
          * Min length: 1
          * Max length: 255
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/url
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/url
          */
         public String url;
     }
 
     /**
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs
      */
     public Log[] logs;
 
     /**
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/origin
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/origin
      */
     public Object origin;
 
@@ -328,7 +328,7 @@ public class JobDefinition {
      * Min length: 1
      * Max length: 50
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/owner
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/owner
      */
     public String owner;
 
@@ -342,7 +342,7 @@ public class JobDefinition {
      * Min length: 1
      * Max length: 125
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/productName
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/productName
      */
     public String productName;
 
@@ -358,7 +358,7 @@ public class JobDefinition {
      * Min length: 1
      * Max length: 125
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/reason
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/reason
      */
     public String reason;
 
@@ -378,7 +378,7 @@ public class JobDefinition {
      *     * "superseded"
      *     * "unknown"
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/result
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/result
      */
     public String result;
 
@@ -391,12 +391,12 @@ public class JobDefinition {
      * Default:    0
      * Mininum:    0
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/retryId
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/retryId
      */
     public int retryId;
 
     /**
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/runMachine
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/runMachine
      */
     public Machine runMachine;
 
@@ -412,7 +412,7 @@ public class JobDefinition {
      *     * "running"
      *     * "completed"
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/state
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/state
      */
     public String state;
 
@@ -424,7 +424,7 @@ public class JobDefinition {
      * Min length: 1
      * Max length: 50
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/taskId
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/taskId
      */
     public String taskId;
 
@@ -433,22 +433,22 @@ public class JobDefinition {
      * Mininum:    1
      * Maximum:    3
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/tier
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/tier
      */
     public int tier;
 
     /**
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/timeCompleted
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/timeCompleted
      */
     public Date timeCompleted;
 
     /**
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/timeScheduled
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/timeScheduled
      */
     public Date timeScheduled;
 
     /**
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/timeStarted
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/timeStarted
      */
     public Date timeStarted;
 
@@ -458,7 +458,7 @@ public class JobDefinition {
      * Possible values:
      *     * 1
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/version
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/version
      */
     public int version;
 }

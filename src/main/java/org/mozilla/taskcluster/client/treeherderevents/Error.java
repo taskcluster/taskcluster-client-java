@@ -1,7 +1,7 @@
 package org.mozilla.taskcluster.client.treeherderevents;
 
 /**
- * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items
+ * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items
  */
 public class Error {
 
@@ -10,7 +10,7 @@ public class Error {
      * Min length: 1
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items/properties/line
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items/properties/line
      */
     public String line;
 
@@ -18,7 +18,7 @@ public class Error {
      *
      * Mininum:    0
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items/properties/linenumber
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items/properties/linenumber
      */
     public int linenumber;
 }
