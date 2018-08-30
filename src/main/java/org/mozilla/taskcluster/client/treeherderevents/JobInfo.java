@@ -5,7 +5,7 @@ package org.mozilla.taskcluster.client.treeherderevents;
  * fields that go along with a job that will be displayed in
  * the details panel within Treeherder.
  *
- * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo
+ * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/jobInfo
  */
 public class JobInfo {
 
@@ -16,7 +16,7 @@ public class JobInfo {
          * Min length: 1
          * Max length: 70
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links/items/properties/label
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links/items/properties/label
          */
         public String label;
 
@@ -25,7 +25,7 @@ public class JobInfo {
          * Min length: 1
          * Max length: 125
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links/items/properties/linkText
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links/items/properties/linkText
          */
         public String linkText;
 
@@ -33,13 +33,13 @@ public class JobInfo {
          *
          * Max length: 512
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links/items/properties/url
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links/items/properties/url
          */
         public String url;
     }
 
     /**
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/jobInfo/properties/links
      */
     public Link[] links;
 
@@ -47,7 +47,7 @@ public class JobInfo {
      * Plain text description of the job and its state.  Submitted with
      * the final message about a task.
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/jobInfo/properties/summary
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/jobInfo/properties/summary
      */
     public String summary;
 }

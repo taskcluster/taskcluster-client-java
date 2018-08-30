@@ -1,7 +1,7 @@
 package org.mozilla.taskcluster.client.treeherderevents;
 
 /**
- * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display
+ * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display
  */
 public class Display {
 
@@ -9,7 +9,7 @@ public class Display {
      *
      * Mininum:    1
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display/properties/chunkCount
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display/properties/chunkCount
      */
     public int chunkCount;
 
@@ -17,7 +17,7 @@ public class Display {
      *
      * Mininum:    1
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display/properties/chunkId
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display/properties/chunkId
      */
     public int chunkId;
 
@@ -26,7 +26,7 @@ public class Display {
      * Min length: 1
      * Max length: 100
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display/properties/groupName
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display/properties/groupName
      */
     public String groupName;
 
@@ -35,7 +35,7 @@ public class Display {
      * Min length: 1
      * Max length: 25
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display/properties/groupSymbol
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display/properties/groupSymbol
      */
     public String groupSymbol;
 
@@ -44,7 +44,7 @@ public class Display {
      * Min length: 1
      * Max length: 100
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display/properties/jobName
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display/properties/jobName
      */
     public String jobName;
 
@@ -53,7 +53,7 @@ public class Display {
      * Min length: 0
      * Max length: 25
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/display/properties/jobSymbol
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/display/properties/jobSymbol
      */
     public String jobSymbol;
 }

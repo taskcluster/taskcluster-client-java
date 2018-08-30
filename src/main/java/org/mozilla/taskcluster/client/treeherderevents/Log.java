@@ -3,7 +3,7 @@ package org.mozilla.taskcluster.client.treeherderevents;
 import java.util.Date;
 
 /**
- * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items
+ * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items
  */
 public class Log {
 
@@ -11,7 +11,7 @@ public class Log {
      * If true, indicates that the number of errors in the log was too
      * large and not all of those lines are indicated here.
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/errorsTruncated
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/errorsTruncated
      */
     public boolean errorsTruncated;
 
@@ -20,7 +20,7 @@ public class Log {
      * Min length: 1
      * Max length: 50
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/name
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/name
      */
     public String name;
 
@@ -33,7 +33,7 @@ public class Log {
              * Min length: 1
              * Max length: 255
              *
-             * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items/properties/line
+             * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items/properties/line
              */
             public String line;
 
@@ -41,13 +41,13 @@ public class Log {
              *
              * Mininum:    0
              *
-             * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items/properties/linenumber
+             * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors/items/properties/linenumber
              */
             public int linenumber;
         }
 
         /**
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/errors
          */
         public Error[] errors;
 
@@ -55,7 +55,7 @@ public class Log {
          *
          * Mininum:    0
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/lineFinished
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/lineFinished
          */
         public int lineFinished;
 
@@ -63,7 +63,7 @@ public class Log {
          *
          * Mininum:    0
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/lineStarted
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/lineStarted
          */
         public int lineStarted;
 
@@ -72,7 +72,7 @@ public class Log {
          * Min length: 1
          * Max length: 255
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/name
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/name
          */
         public String name;
 
@@ -85,17 +85,17 @@ public class Log {
          *     * "canceled"
          *     * "unknown"
          *
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/result
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/result
          */
         public String result;
 
         /**
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/timeFinished
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/timeFinished
          */
         public Date timeFinished;
 
         /**
-         * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/timeStarted
+         * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps/items/properties/timeStarted
          */
         public Date timeStarted;
     }
@@ -107,7 +107,7 @@ public class Log {
      * submitted log.  If this value is submitted, Treeherder will
      * consider the log already parsed and skip parsing.
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/steps
      */
     public Step[] steps;
 
@@ -116,7 +116,7 @@ public class Log {
      * Min length: 1
      * Max length: 255
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/properties/logs/items/properties/url
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/properties/logs/items/properties/url
      */
     public String url;
 }

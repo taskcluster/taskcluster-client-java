@@ -1,7 +1,7 @@
 package org.mozilla.taskcluster.client.treeherderevents;
 
 /**
- * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/definitions/machine
+ * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/definitions/machine
  */
 public class Machine {
 
@@ -11,7 +11,7 @@ public class Machine {
      * Min length: 1
      * Max length: 25
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/definitions/machine/properties/architecture
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/definitions/machine/properties/architecture
      */
     public String architecture;
 
@@ -21,7 +21,7 @@ public class Machine {
      * Min length: 1
      * Max length: 50
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/definitions/machine/properties/name
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/definitions/machine/properties/name
      */
     public String name;
 
@@ -31,7 +31,7 @@ public class Machine {
      * Min length: 1
      * Max length: 25
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/definitions/machine/properties/os
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/definitions/machine/properties/os
      */
     public String os;
 
@@ -41,7 +41,7 @@ public class Machine {
      * Min length: 1
      * Max length: 100
      *
-     * See http://schemas.taskcluster.net/taskcluster-treeherder/v1/pulse-job.json#/definitions/machine/properties/platform
+     * See https://schemas.taskcluster.net/treeherder/v1/pulse-job.json#/definitions/machine/properties/platform
      */
     public String platform;
 }
