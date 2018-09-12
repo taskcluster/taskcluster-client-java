@@ -78,4 +78,12 @@ public class HawkSignatureAuthenticationRequest {
      * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/resource
      */
     public String resource;
+
+    /**
+     * Source IP of the authentication request or request that requires
+     * authentication. This is only used for audit logging.
+     *
+     * See https://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/sourceIp
+     */
+    public String sourceIp;
 }

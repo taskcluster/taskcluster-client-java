@@ -693,6 +693,7 @@ properties:
     method: method
     port: port
     resource: resource
+    sourceIp: sourceIp
   Properties:
     authorization:
       IS_REQUIRED: false
@@ -771,12 +772,24 @@ properties:
         string that follows the HTTP method.
         **Note,** order of querystring elements is important.
       type: string
+    sourceIp:
+      IS_REQUIRED: false
+      PROPERTY_NAME: sourceIp
+      SOURCE_URL: https://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties/sourceIp
+      TYPE_NAME: ""
+      description: |
+        Source IP of the authentication request or request that requires
+        authentication. This is only used for audit logging.
+      format: ipv4
+      title: Source IP
+      type: string
   SortedPropertyNames:
   - authorization
   - host
   - method
   - port
   - resource
+  - sourceIp
   SourceURL: https://schemas.taskcluster.net/auth/v1/authenticate-hawk-request.json#/properties
 required:
 - method
