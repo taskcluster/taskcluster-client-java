@@ -10699,7 +10699,7 @@ properties:
                         Properties:
                           IS_REQUIRED: false
                           PROPERTY_NAME: ""
-                          SOURCE_URL: ""
+                          SOURCE_URL: https://schemas.taskcluster.net/queue/v1/task.json#/properties/tags/additionalProperties
                           TYPE_NAME: ""
                           maxLength: 4096
                           type: string
@@ -11707,7 +11707,7 @@ properties:
                 Properties:
                   IS_REQUIRED: false
                   PROPERTY_NAME: ""
-                  SOURCE_URL: ""
+                  SOURCE_URL: https://schemas.taskcluster.net/queue/v1/task.json#/properties/tags/additionalProperties
                   TYPE_NAME: ""
                   maxLength: 4096
                   type: string
@@ -12271,7 +12271,7 @@ properties:
           Properties:
             IS_REQUIRED: false
             PROPERTY_NAME: ""
-            SOURCE_URL: ""
+            SOURCE_URL: https://schemas.taskcluster.net/queue/v1/task.json#/properties/tags/additionalProperties
             TYPE_NAME: ""
             maxLength: 4096
             type: string
@@ -13402,7 +13402,7 @@ properties:
                           Properties:
                             IS_REQUIRED: false
                             PROPERTY_NAME: ""
-                            SOURCE_URL: ""
+                            SOURCE_URL: https://schemas.taskcluster.net/queue/v1/task.json#/properties/tags/additionalProperties
                             TYPE_NAME: ""
                             maxLength: 4096
                             type: string
@@ -14890,7 +14890,7 @@ properties:
                           Properties:
                             IS_REQUIRED: false
                             PROPERTY_NAME: ""
-                            SOURCE_URL: ""
+                            SOURCE_URL: https://schemas.taskcluster.net/queue/v1/task.json#/properties/tags/additionalProperties
                             TYPE_NAME: ""
                             maxLength: 4096
                             type: string
@@ -16733,7 +16733,7 @@ oneOf:
                     Properties:
                       IS_REQUIRED: false
                       PROPERTY_NAME: ""
-                      SOURCE_URL: ""
+                      SOURCE_URL: https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/headers/additionalProperties
                       TYPE_NAME: ""
                       type: string
                   description: Headers of request
@@ -17066,7 +17066,7 @@ properties:
                 Properties:
                   IS_REQUIRED: false
                   PROPERTY_NAME: ""
-                  SOURCE_URL: ""
+                  SOURCE_URL: https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/headers/additionalProperties
                   TYPE_NAME: ""
                   type: string
               description: Headers of request
@@ -17153,7 +17153,7 @@ properties:
         Properties:
           IS_REQUIRED: false
           PROPERTY_NAME: ""
-          SOURCE_URL: ""
+          SOURCE_URL: https://schemas.taskcluster.net/queue/v1/post-artifact-response.json#/oneOf[0]/properties/requests/items/properties/headers/additionalProperties
           TYPE_NAME: ""
           type: string
       description: Headers of request
@@ -18686,7 +18686,7 @@ properties:
                 Properties:
                   IS_REQUIRED: false
                   PROPERTY_NAME: ""
-                  SOURCE_URL: ""
+                  SOURCE_URL: https://schemas.taskcluster.net/queue/v1/task.json#/properties/tags/additionalProperties
                   TYPE_NAME: ""
                   maxLength: 4096
                   type: string
@@ -19661,7 +19661,7 @@ properties:
                 Properties:
                   IS_REQUIRED: false
                   PROPERTY_NAME: ""
-                  SOURCE_URL: ""
+                  SOURCE_URL: https://schemas.taskcluster.net/queue/v1/task.json#/properties/tags/additionalProperties
                   TYPE_NAME: ""
                   maxLength: 4096
                   type: string
@@ -21901,7 +21901,7 @@ properties:
         Properties:
           IS_REQUIRED: false
           PROPERTY_NAME: ""
-          SOURCE_URL: ""
+          SOURCE_URL: https://schemas.taskcluster.net/queue/v1/task.json#/properties/tags/additionalProperties
           TYPE_NAME: ""
           maxLength: 4096
           type: string
