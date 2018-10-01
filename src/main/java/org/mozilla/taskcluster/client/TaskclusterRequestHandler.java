@@ -113,10 +113,12 @@ public abstract class TaskclusterRequestHandler {
                 // Base64.encodeBytes(messageDigest.digest());
                 String hash = null;
 
-                // Avoid double / between baseURL and route
+                // See https://bugzil.la/1484702
+                // Avoid double separator; routes must start with `/`, so
+                // baseURL shouldn't end with `/`.
                 String url = baseURL;
-                if (!url.endsWith("/")) {
-                    url += "/";
+                if (url.endsWith("/")) {
+                    url = url.substring(0, url.length() - 1);
                 }
                 url += route;
                 URI uri = new URI(url);
