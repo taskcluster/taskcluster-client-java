@@ -55,7 +55,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class Auth extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://auth.taskcluster.net/v1/";
+    protected static final String defaultBaseURL = "https://auth.taskcluster.net/v1";
 
     public Auth(Credentials credentials) {
         super(credentials, defaultBaseURL);

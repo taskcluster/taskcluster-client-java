@@ -25,7 +25,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class Queue extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://queue.taskcluster.net/v1/";
+    protected static final String defaultBaseURL = "https://queue.taskcluster.net/v1";
 
     public Queue(Credentials credentials) {
         super(credentials, defaultBaseURL);
