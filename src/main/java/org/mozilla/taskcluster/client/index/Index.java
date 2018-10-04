@@ -108,7 +108,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class Index extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://index.taskcluster.net/v1/";
+    protected static final String defaultBaseURL = "https://index.taskcluster.net/v1";
 
     public Index(Credentials credentials) {
         super(credentials, defaultBaseURL);

@@ -35,7 +35,7 @@ import org.mozilla.taskcluster.client.TaskclusterRequestHandler;
  */
 public class Hooks extends TaskclusterRequestHandler {
 
-    protected static final String defaultBaseURL = "https://hooks.taskcluster.net/v1/";
+    protected static final String defaultBaseURL = "https://hooks.taskcluster.net/v1";
 
     public Hooks(Credentials credentials) {
         super(credentials, defaultBaseURL);
