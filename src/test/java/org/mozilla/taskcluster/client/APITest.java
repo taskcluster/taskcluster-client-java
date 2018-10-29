@@ -128,8 +128,7 @@ public class APITest {
         td.payload = payload;
         td.provisionerId = "win-provisioner";
         td.retries = 5;
-        td.routes = new String[] { "tc-treeherder.mozilla-inbound.bcf29c305519d6e120b2e4d3b8aa33baaf5f0163",
-                "tc-treeherder-stage.mozilla-inbound.bcf29c305519d6e120b2e4d3b8aa33baaf5f0163" };
+        td.routes = new String[] { "garbage.tc-client-java.test" };
         td.schedulerId = "junit-test-scheduler";
         td.scopes = new String[] {};
 
