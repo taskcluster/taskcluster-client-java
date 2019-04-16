@@ -1,6 +1,6 @@
-# taskcluster-client-java
+<img align="right" src="http://media.taskcluster.net/logo/logo-96x120.png" />
 
-[![logo](https://media.taskcluster.net/logo/logo-96x120.png)](https://media.taskcluster.net/logo/logo-96x120.png)
+# taskcluster-client-java
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.mozilla.taskcluster/taskcluster-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.mozilla.taskcluster/taskcluster-client/)
 [![Build Status](https://travis-ci.org/taskcluster/taskcluster-client-java.svg?branch=master)](http://travis-ci.org/taskcluster/taskcluster-client-java)
